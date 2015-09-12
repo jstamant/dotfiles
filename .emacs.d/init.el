@@ -7,3 +7,8 @@
       `((".*" . ,temporary-file-directory)))
 (setq auto-save-file-name-transforms
       `((".*" ,temporary-file-directory t)))
+
+;; Load additional major-modes
+;; I store all my major-modes in ~/.emacs.d/major-mode-name/
+(add-to-list 'load-path "~/.emacs.d/web-mode/")
+(load-library "web-mode")
