@@ -30,10 +30,6 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'vim-fugitive'        " Git integration
 Plugin 'openscad.vim'        " .scad ftplugin
 
-" Plugins required for vim-orgmode
-Plugin 'jceb/vim-orgmode'
-Plugin 'speeddating.vim'
-
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -66,10 +62,6 @@ set nu!
 
 " No text wrap by default
 set nowrap
-
-" Set leader keys for use with vim-orgmode
-let mapleader=","
-let maplocalleader=","
 
 " Allow saving of files as sudo 
 cmap w!! w !sudo tee > /dev/null %
