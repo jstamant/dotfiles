@@ -1,3 +1,7 @@
+! URXVT SETTINGS
+URxvt.scrollBar: false
+
+! TERMINAL COLOR SCHEME
 ! Base16 Eighties
 ! Scheme: Chris Kempson (http://chriskempson.com)
 
