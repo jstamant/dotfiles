@@ -2,5 +2,5 @@
 	path = .emacs.d/web-mode
 	url = https://github.com/fxbois/web-mode.git
 [submodule ".emacs.d/pkgbuild-mode"]
-	path = pkgbuild-mode
+	path = .emacs.d/pkgbuild-mode
 	url = https://github.com/juergenhoetzel/pkgbuild-mode.git
