@@ -41,12 +41,18 @@
 (global-set-key "\C-cc" 'org-capture)
 (global-set-key "\C-cb" 'org-iswitchb)
 
+(setq org-directory "~/drive")
+(setq org-agenda-files '("~/drive/tinman.org"))
+
+(setq org-mobile-directory "~/Dropbox/MobileOrg")
+(setq org-mobile-inbox-for-pull "~/drive/inbox.org")
+(setq org-mobile-force-id-on-agenda-items nil)
+
 (add-hook 'org-mode-hook
           (lambda ()
             (linum-mode 0) ; disable line numbering for org-mode
             )
           )
-
 
 ; add "WAITING" to org's todo keywords
 (setq org-todo-keywords
