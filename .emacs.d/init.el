@@ -54,9 +54,8 @@
             )
           )
 
-; add "WAITING" to org's todo keywords
 (setq org-todo-keywords
-      '((sequence "TODO" "WAITING" "|" "DONE")))
+      '((sequence "TODO" "STARTED" "WAITING" "|" "DONE")))
 
 ;; web-mode
 
