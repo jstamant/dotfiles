@@ -23,10 +23,6 @@
 (setq-default indent-tabs-mode nil) ; do not use tabs for indentation
 (setq tab-width 4)
 
-;; Theme settings
-(add-to-list 'custom-theme-load-path
-             (expand-file-name "themes" user-emacs-directory))
-
 ;;;;
 ;;;; S2 - MAJOR MODES
 ;;;;
@@ -40,8 +36,21 @@
 
 ;; org-agenda settings
 (global-set-key "\C-ca" 'org-agenda)
+(put 'org-agenda-file-to-front 'disabled
+     "Agenda files are determined at startup through the init file!\n")
+(put 'org-remove-file 'disabled
+     "Agenda files are determined at startup through the init file!\n")
 (setq org-directory "~/drive")
-(setq org-agenda-files '("~/drive/tinman.org"))
+;; Set org-agenda-files according to my location
+(setq org-agenda-files '())
+;; Agenda files at home
+(if (file-exists-p "~/drive/tinman.org")
+    (add-to-list 'org-agenda-files
+                 "~/drive/tinman.org"))
+;; Agenda files at work
+(if (file-exists-p "c:/Users/jstamant/Google Drive/work.org")
+    (add-to-list 'org-agenda-files
+                 "c:/Users/jstamant/Google Drive/work.org"))
 
 (setq org-mobile-directory "~/Dropbox/MobileOrg")
 (setq org-mobile-inbox-for-pull "~/drive/inbox.org")
