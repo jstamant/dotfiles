@@ -111,9 +111,6 @@
  '(cursor-in-non-selected-windows t)
  '(cursor-type (quote box))
  '(custom-enabled-themes nil)
- '(custom-safe-themes
-   (quote
-    ("e7ebd15131a75a551e84cf7168e2d01d576f4905c3008d230ca5a8e981405a44" "3539b3cc5cbba41609117830a79f71309a89782f23c740d4a5b569935f9b7726" "8b30636c9a903a9fa38c7dcf779da0724a37959967b6e4c714fdc3b3fe0b8653" "8db4b03b9ae654d4a57804286eb3e332725c84d7cdab38463cb6b97d5762ad26" "72ac74b21322d3b51235f3b709c43c0721012e493ea844a358c7cd4d57857f1f" "38d25871e95642ee1a13013bdb988e8c8fcb4ced3832d3e927c7296a0cdf5f59" "12b4427ae6e0eef8b870b450e59e75122d5080016a9061c9696959e50d578057" "ad950f1b1bf65682e390f3547d479fd35d8c66cafa2b8aa28179d78122faa947" "4f5bb895d88b6fe6a983e63429f154b8d939b4a8c581956493783b2515e22d6d" "c335adbb7d7cb79bc34de77a16e12d28e6b927115b992bccc109fb752a365c72" "a81bc918eceaee124247648fc9682caddd713897d7fd1398856a5b61a592cb62" default)))
  '(fci-rule-color "#14151E")
  '(vc-annotate-background nil)
  '(vc-annotate-color-map
@@ -142,4 +139,5 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :stipple nil :background "#2d2d2d" :foreground "#d3d0c8" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 112 :width normal :foundry "unknown" :family "DejaVu Sans Mono")))))
+ '(default ((t (:background "#2d2d2d" :foreground "#d3d0c8"))))
+ '(cursor ((t (:background "#d3d0c8")))))
