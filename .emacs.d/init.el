@@ -51,6 +51,9 @@
 (if (file-exists-p "c:/Users/jstamant/Google Drive/work.org")
     (add-to-list 'org-agenda-files
                  "c:/Users/jstamant/Google Drive/work.org"))
+(if (file-exists-p "c:/Users/jstamant/Google Drive/tinman.org")
+    (add-to-list 'org-agenda-files
+                 "c:/Users/jstamant/Google Drive/tinman.org"))
 
 (setq org-mobile-directory "~/Dropbox/MobileOrg")
 (setq org-mobile-inbox-for-pull "~/drive/inbox.org")
