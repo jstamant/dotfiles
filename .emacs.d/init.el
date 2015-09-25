@@ -16,6 +16,9 @@
 (setq auto-save-file-name-transforms
       `((".*" ,temporary-file-directory t)))
 
+;; Dvorak compatibility
+;;(global-set-key (kbd "C-z") ctl-x-map)
+
 ;; Disable the GNU Emacs splash screen
 (setq inhibit-splash-screen t)
 
