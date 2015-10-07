@@ -17,17 +17,17 @@
 (require 'package)
 (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/"))
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
+(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
 ;; Add managed packages to the load-path
 (let ((default-directory "~/.emacs.d/elpa/"))
   (normal-top-level-add-subdirs-to-load-path))
-
 ;; Set backup and auto-save file location
 (setq backup-directory-alist
       `((".*" . ,temporary-file-directory)))
 (setq auto-save-file-name-transforms
       `((".*" ,temporary-file-directory t)))
 
-;; Disable the GNU Emacs splash screen
+;; Disable startup messages
 (setq inhibit-splash-screen t)
 
 ;; Indentation settings
