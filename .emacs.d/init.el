@@ -17,7 +17,6 @@
 (require 'package)
 (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/"))
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
-(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
 ;; Add managed packages to the load-path
 (let ((default-directory "~/.emacs.d/elpa/"))
   (normal-top-level-add-subdirs-to-load-path))
@@ -59,6 +58,8 @@
 
 (setq org-todo-keywords
       '((sequence "TODO" "STARTED" "WAITING" "|" "DONE")))
+
+(setq org-deadline-warning-days 7)
 
 ;; org-agenda settings
 (global-set-key "\C-ca" 'org-agenda)
