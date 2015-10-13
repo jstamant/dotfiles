@@ -17,9 +17,9 @@
 (require 'package)
 (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/"))
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
-;; Add managed packages to the load-path
-(let ((default-directory "~/.emacs.d/elpa/"))
-  (normal-top-level-add-subdirs-to-load-path))
+(package-initialize)
+(require 'use-package)
+
 ;; Set backup and auto-save file location
 (setq backup-directory-alist
       `((".*" . ,temporary-file-directory)))
@@ -47,7 +47,8 @@
 
 ;;;; MARKDOWN-MODE SETTINGS
 
-(require 'markdown-mode)
+(use-package markdown-mode
+  :ensure t)
 
 (add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
@@ -91,14 +92,17 @@
 
 ;;;; PKGBUILD-MODE SETTINGS
 
-(require 'pkgbuild-mode)
+(use-package pkgbuild-mode
+  :ensure t)
 
 (add-to-list 'auto-mode-alist '("/PKGBUILD$" . pkgbuild-mode))
 
 ;;;; SCAD-MODE SETTINGS
 
-(require 'scad "scad-mode")
-(require 'scad-preview)
+(use-package scad
+  :ensure scad-mode)
+(use-package scad-preview
+  :ensure t)
 
 ;;(add-to-list 'auto-mode-alist '("\\.scad\\'" . scad-mode))
 
@@ -123,7 +127,8 @@
 
 ;;;; WEB-MODE SETTINGS
 
-(require 'web-mode)
+(use-package web-mode
+  :ensure t)
 
 (add-to-list 'auto-mode-alist '("\\.css\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
