@@ -39,6 +39,8 @@
 (setq sml/theme 'dark)
 (sml/setup)
 
+;; General auto-mode settings
+(add-to-list 'auto-mode-alist '("\\.htaccess\\'" . conf-mode))
 
 ;;;;
 ;;;; S2 - MAJOR MODES
@@ -91,6 +93,13 @@
 (require 'pkgbuild-mode)
 
 (add-to-list 'auto-mode-alist '("/PKGBUILD$" . pkgbuild-mode))
+
+;;;; SCAD-MODE SETTINGS
+
+(require 'scad "scad-mode")
+(require 'scad-preview)
+
+;;(add-to-list 'auto-mode-alist '("\\.scad\\'" . scad-mode))
 
 ;;;; TERM-MODE SETTINGS
 
