@@ -1,6 +1,10 @@
 
 (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
 
+(defvar using-windows
+  (equal window-system 'w32)
+  "t if emacs is running in windows")
+
 ;; Load my customizations
 (setq custom-file "~/.emacs.d/custom.el")
 (load custom-file)
@@ -25,40 +29,11 @@
 (setq-default indent-tabs-mode nil) ; do not use tabs for indentation
 (setq tab-width 4)
 
-;; Mode line settings
-(use-package smart-mode-line
-  :ensure t)
-(setq sml/theme 'dark)
-(sml/setup)
-
-;; General auto-mode settings
-(add-to-list 'auto-mode-alist '("\\.htaccess\\'" . conf-mode))
-
-;; Major mode settings
-(use-package markdown-mode
-  :ensure t)
+;; Mode settings
+(require 'init-magit)
+(require 'init-markdown)
+(require 'init-mode-line)
 (require 'init-org)
-(use-package pkgbuild-mode
-  :ensure t)
-(use-package scad
-  :ensure scad-mode)
-(use-package scad-preview
-  :ensure t)
-;;;; TERM-MODE SETTINGS
-;; Set color scheme
-;;(custom-set-variables
-;; )
-;;(custom-set-faces
-;; '(term-color-blue ((t (:background "red" :foreground "red")))))
-;;term              
-;;term-bold         
-;;term-color-black  
-;;term-color-blue   
-;;term-color-cyan   
-;;term-color-green  
-;;term-color-magenta
-;;term-color-red    
-;;term-color-white  
-;;term-color-yellow 
-;;term-underline
+(require 'init-pkgbuild)
+(require 'init-scad)
 (require 'init-web)

@@ -12,19 +12,19 @@
 (put 'org-remove-file 'disabled
      "Agenda files are determined at startup through the init file!\n")
 (setq org-directory "~/drive")
-;; Set org-agenda-files according to my location
+;; Agenda files
 (setq org-agenda-files '())
-;; Agenda files at home
-(if (file-exists-p "~/drive/tinman.org")
-    (add-to-list 'org-agenda-files
-                 "~/drive/tinman.org"))
-;; Agenda files at work
-(if (file-exists-p "c:/Users/jstamant/Google Drive/work.org")
-    (add-to-list 'org-agenda-files
-                 "c:/Users/jstamant/Google Drive/work.org"))
-(if (file-exists-p "c:/Users/jstamant/Google Drive/tinman.org")
-    (add-to-list 'org-agenda-files
-                 "c:/Users/jstamant/Google Drive/tinman.org"))
+(when using-windows
+  (if (file-exists-p "c:/Users/jstamant/Google Drive/work.org")
+      (add-to-list 'org-agenda-files
+                   "c:/Users/jstamant/Google Drive/work.org"))
+  (if (file-exists-p "c:/Users/jstamant/Google Drive/tinman.org")
+      (add-to-list 'org-agenda-files
+                   "c:/Users/jstamant/Google Drive/tinman.org")))
+(if (not using-windows)
+    (if (file-exists-p "~/drive/tinman.org")
+        (add-to-list 'org-agenda-files
+                     "~/drive/tinman.org")))
 
 (setq org-mobile-directory "~/Dropbox/MobileOrg")
 (setq org-mobile-inbox-for-pull "~/drive/inbox.org")
