@@ -30,6 +30,7 @@
 (setq tab-width 4)
 
 ;; Mode settings
+(require 'init-auctex)
 (require 'init-magit)
 (require 'init-markdown)
 (require 'init-mode-line)
