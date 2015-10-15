@@ -8,6 +8,7 @@
 PS1='[\u@\h \W]\$ '
 
 
+# Aliases
 alias ls='ls --color=auto'
 alias l='ls -CF'
 alias ll='ls -l'
