@@ -1,6 +1,5 @@
 [user]
 	name = Justin R. St-Amant
 	email = jstamant24@gmail.com
-	editor = nano
 [core]
-	editor = vim
+	editor = nano
