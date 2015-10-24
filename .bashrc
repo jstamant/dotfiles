@@ -5,8 +5,8 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-PS1='[\u@\h \W]\$ '
-
+# Standard Arch Linux PS1 in blue
+PS1='\[\e[1;34m\][\u@\h \W]\$\[\e[0m\] '
 
 # Aliases
 alias ls='ls --color=auto'
