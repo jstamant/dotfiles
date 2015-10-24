@@ -36,5 +36,5 @@
 (require 'init-mode-line)
 (require 'init-org)
 (require 'init-pkgbuild)
-(require 'init-scad)
+;;(require 'init-scad)
 (require 'init-web)
