@@ -27,7 +27,7 @@
 
 ;; Indentation settings
 (setq-default indent-tabs-mode nil) ; do not use tabs for indentation
-(setq tab-width 4)
+(setq-default tab-width 4)
 
 ;; Mode settings
 (require 'init-auctex)
@@ -38,3 +38,6 @@
 (require 'init-pkgbuild)
 ;;(require 'init-scad)
 (require 'init-web)
+;; While I test lilypond-mode
+(add-to-list 'load-path (expand-file-name "lilypond-mode" user-emacs-directory))
+(require 'lilypond-mode)
