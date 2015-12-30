@@ -15,12 +15,14 @@
 ;; Agenda files
 (setq org-agenda-files '())
 (when using-windows
-  (if (file-exists-p "c:/Users/jstamant/Google Drive/work.org")
+  (let ((userprofile
+         (replace-regexp-in-string "\\\\" "/" (getenv "USERPROFILE"))))
+  (if (file-exists-p (concat userprofile "/Google Drive/work.org"))
       (add-to-list 'org-agenda-files
-                   "c:/Users/jstamant/Google Drive/work.org"))
-  (if (file-exists-p "c:/Users/jstamant/Google Drive/tinman.org")
+                   (concat userprofile "/Google Drive/work.org")))
+  (if (file-exists-p (concat userprofile "/Google Drive/tinman.org"))
       (add-to-list 'org-agenda-files
-                   "c:/Users/jstamant/Google Drive/tinman.org")))
+                   (concat userprofile "/Google Drive/tinman.org")))))
 (if (not using-windows)
     (if (file-exists-p "~/drive/tinman.org")
         (add-to-list 'org-agenda-files
