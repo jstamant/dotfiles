@@ -7,11 +7,27 @@
 
 ;; org-agenda settings
 (global-set-key "\C-ca" 'org-agenda)
+
 (put 'org-agenda-file-to-front 'disabled
      "Agenda files are determined at startup through the init file!\n")
 (put 'org-remove-file 'disabled
      "Agenda files are determined at startup through the init file!\n")
 (setq org-directory "~/drive")
+
+(setq org-agenda-custom-commands
+      '(("h" "Home-view of all next actions"
+         ((agenda "")
+          (tags-todo "home")
+          (tags-todo "work")
+          (tags-todo "computer")
+          (tags-todo "phone")
+          (tags-todo "shopping")))
+        ("D" "Daily next-actions list"
+         ((agenda "" ((org-agenda-ndays 1)
+                      (org-agenda-sorting-strategy
+                       '((agenda time-up priority-down tag-up)))
+                      (org-deadline-warning-days 0)))))))
+
 ;; Agenda files
 (setq org-agenda-files '())
 (when using-windows
@@ -34,5 +50,10 @@
 
 ;; org-capture settings
 (global-set-key "\C-cc" 'org-capture)
+
+(setq org-capture-templates
+      '(("t" "TODO" entry
+         (file+headline "C:/Users/jstamant/Google Drive/tinman.org" "Tasks")
+         "* TODO %^{Brief description} %^g\n%?\nAdded: %U")))
 
 (provide 'init-org)
