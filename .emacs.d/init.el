@@ -30,8 +30,8 @@
 (setq-default tab-width 4)
 
 ;; Mode line setting
-(line-number-mode t)
-(column-number-mode t)
+(setq line-number-mode t)
+(setq column-number-mode t)
 
 ;; Mode settings
 (require 'init-auctex)
