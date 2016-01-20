@@ -29,6 +29,10 @@
 (setq-default indent-tabs-mode nil) ; do not use tabs for indentation
 (setq-default tab-width 4)
 
+;; Mode line setting
+(line-number-mode t)
+(column-number-mode t)
+
 ;; Mode settings
 (require 'init-auctex)
 (require 'init-magit)
@@ -39,5 +43,5 @@
 ;;(require 'init-scad)
 (require 'init-web)
 ;; While I test lilypond-mode
-(add-to-list 'load-path (expand-file-name "lilypond-mode" user-emacs-directory))
-(require 'lilypond-mode)
+;;(add-to-list 'load-path (expand-file-name "lilypond-mode" user-emacs-directory))
+;;(require 'lilypond-mode)
