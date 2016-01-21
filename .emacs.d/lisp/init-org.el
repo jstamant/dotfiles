@@ -14,8 +14,8 @@
 ;; Set directory where Org files are located
 (when using-windows
   (let ((userprofile
-         (replace-regexp-in-string "\\\\" "/" (getenv "USERPROFILE"))
-         (setq org-directory (concat userprofile "/Google Drive/"))))))
+         (replace-regexp-in-string "\\\\" "/" (getenv "USERPROFILE"))))
+    (setq org-directory (concat userprofile "/Google Drive/"))))
 (if (not using-windows)
     (setq org-directory "~/drive/"))
 
