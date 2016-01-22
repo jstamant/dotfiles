@@ -37,17 +37,46 @@
 (setq org-agenda-custom-commands
       '(("H" "Home-view of all next-actions"
          ((agenda "")
-          (tags-todo "home")
-          (tags-todo "computer")
-          (tags-todo "shopping")
-          (tags-todo "spence")
-          (tags-todo "phone")
-          (tags-todo "work")))
-        ("D" "Daily next-actions list"
-         ((agenda "" ((org-agenda-ndays 1)
-                      (org-agenda-sorting-strategy
-                       '((agenda time-up priority-down tag-up)))
-                      (org-deadline-warning-days 0)))))))
+          (todo "WAITING")
+          (todo "TODO")
+          ;; (tags-todo "home")
+          ;; (tags-todo "computer")
+          ;; (tags-todo "shopping")
+          ;; (tags-todo "spence")
+          ;; (tags-todo "phone")
+          ;; (tags-todo "work"))
+         ((org-agenda-sorting-strategy
+           '((agenda time-up tag-up)
+             (todo tag-up))))))
+         ;; ((agenda "")
+         ;;  (alltodo ""))
+         ;; ((org-agenda-sorting-strategy
+         ;;   '((todo tag-up)))))
+        ;; ("D" "Daily schedule"
+        ;;  ((agenda ""))
+        ;;  ((org-agenda-ndays 1)
+        ;;   (org-agenda-sorting-strategy
+        ;;    '((agenda time-up priority-down tag-up)))
+        ;;   (org-deadline-warning-days 0)))
+        ("D" "Daily GTD review"
+         ((agenda "")
+          (todo "WAITING")
+          (todo "TODO")
+          ;; (tags-todo "home")
+          ;; (tags-todo "computer")
+          ;; (tags-todo "shopping")
+          ;; (tags-todo "spence")
+          ;; (tags-todo "phone")
+          ;; (tags-todo "work"))
+         ((org-agenda-sorting-strategy
+           '((agenda time-up tag-up)
+             (todo tag-up))))))
+        ("W" "Weekly GTD review"
+         ((agenda "")
+          (tags-todo "project")
+          (tags-todo "someday")))
+        ("C" "Calendar"
+         ((agenda "")))))
 
 ;; org-capture settings
 (global-set-key "\C-cc" 'org-capture)
