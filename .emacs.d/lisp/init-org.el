@@ -3,8 +3,8 @@
 ;; Some Org preferences that I want applied to more than just my
 ;; common Org files
 (setq org-todo-keywords
-      '((sequence "TODO(t)" "STARTED(s)" "WAITING(w)" "APPT(a)" "|"
-                  "DONE(d)" "DEFERRED(f)")))
+      '((sequence "TODO(t)" "STARTED(s)" "WAITING(w)" "DEFERRED(f)" "APPT(a)"
+                  "|" "DONE(d)")))
 
 ;; Set Org files
 (defvar org-files
@@ -35,48 +35,25 @@
      "Agenda files are determined at startup through the init file!\n")
 
 (setq org-agenda-custom-commands
-      '(("H" "Home-view of all next-actions"
+      '(("D" "Daily GTD review"
          ((agenda "")
           (todo "WAITING")
-          (todo "TODO")
-          ;; (tags-todo "home")
-          ;; (tags-todo "computer")
-          ;; (tags-todo "shopping")
-          ;; (tags-todo "spence")
-          ;; (tags-todo "phone")
-          ;; (tags-todo "work"))
+          (todo "TODO"))
          ((org-agenda-sorting-strategy
            '((agenda time-up tag-up)
-             (todo tag-up))))))
-         ;; ((agenda "")
-         ;;  (alltodo ""))
-         ;; ((org-agenda-sorting-strategy
-         ;;   '((todo tag-up)))))
-        ;; ("D" "Daily schedule"
-        ;;  ((agenda ""))
-        ;;  ((org-agenda-ndays 1)
-        ;;   (org-agenda-sorting-strategy
-        ;;    '((agenda time-up priority-down tag-up)))
-        ;;   (org-deadline-warning-days 0)))
-        ("D" "Daily GTD review"
+             (todo tag-up)))))
+        ("H" "Home-view of all next-actions"
          ((agenda "")
           (todo "WAITING")
-          (todo "TODO")
-          ;; (tags-todo "home")
-          ;; (tags-todo "computer")
-          ;; (tags-todo "shopping")
-          ;; (tags-todo "spence")
-          ;; (tags-todo "phone")
-          ;; (tags-todo "work"))
+          (todo "TODO"))
          ((org-agenda-sorting-strategy
            '((agenda time-up tag-up)
-             (todo tag-up))))))
+             (todo tag-up)))))
         ("W" "Weekly GTD review"
          ((agenda "")
           (tags-todo "project")
-          (tags-todo "someday")))
-        ("C" "Calendar"
-         ((agenda "")))))
+          (todo "DEFERRED")
+          (tags-todo "someday")))))
 
 ;; org-capture settings
 (global-set-key "\C-cc" 'org-capture)
