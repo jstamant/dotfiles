@@ -38,14 +38,7 @@
       '(("D" "Daily GTD review"
          ((agenda "")
           (todo "WAITING")
-          (todo "TODO"))
-         ((org-agenda-sorting-strategy
-           '((agenda time-up tag-up)
-             (todo tag-up)))))
-        ("H" "Home-view of all next-actions"
-         ((agenda "")
-          (todo "WAITING")
-          (todo "TODO"))
+          (tags "TODO=\"TODO\"-CATEGORY=\"Calendar\"-someday"))
          ((org-agenda-sorting-strategy
            '((agenda time-up tag-up)
              (todo tag-up)))))
