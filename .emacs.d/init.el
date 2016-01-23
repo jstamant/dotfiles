@@ -29,10 +29,6 @@
 (setq-default indent-tabs-mode nil) ; do not use tabs for indentation
 (setq-default tab-width 4)
 
-;; Mode line setting
-(setq line-number-mode t)
-(setq column-number-mode t)
-
 ;; Mode settings
 (require 'init-auctex)
 (require 'init-magit)
