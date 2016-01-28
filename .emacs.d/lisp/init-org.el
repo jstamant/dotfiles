@@ -1,17 +1,19 @@
 ;;;; ORG-MODE SETTINGS
 
-;; Some Org preferences that I want applied to more than just my
-;; common Org files
+;; Some general org-mode preferences and global options
 (setq org-todo-keywords
       '((sequence "TODO(t)" "STARTED(s)" "WAITING(w)" "DEFERRED(f)" "APPT(a)"
-                  "|" "DONE(d)")))
+                  "|" "DONE(d)" "CANCELLED(c)")))
+(put 'org-toggle-time-stamp-overlays 'disabled
+     (concat "I don't use timestamp overlays.\n"
+             "This command is usually invoked as an accident.\n"))
 
 ;; Set Org files
 (defvar org-files
-  '("tinman.org" "work.org")
+  '("gtd.org" "work.org")
   "List of org-mode files for use with Emacs.")
 
-;; Set directory where Org files are located
+;; Dynamically set directory where Org files are located
 (when using-windows
   (let ((userprofile
          (replace-regexp-in-string "\\\\" "/" (getenv "USERPROFILE"))))
@@ -34,30 +36,42 @@
 (put 'org-remove-file 'disabled
      "Agenda files are determined at startup through the init file!\n")
 
+;; Disable tag inheritance, because I don't make use of it
+(setq org-use-tag-inheritance nil)
+
 (setq org-agenda-custom-commands
       '(("D" "Daily GTD review"
          ((agenda "")
           (todo "WAITING")
-          (tags "TODO=\"TODO\"-CATEGORY=\"Calendar\"-someday"))
+          (tags-todo "home")
+          (tags-todo "computer")
+          (tags-todo "spence")
+          (tags-todo "shopping")
+          (tags-todo "work"))
          ((org-agenda-sorting-strategy
            '((agenda time-up tag-up)
-             (todo tag-up)))))
-        ("W" "Weekly GTD review"
-         ((agenda "")
-          (tags-todo "project")
-          (todo "DEFERRED")
-          (tags-todo "someday")))))
+             (tags todo-state-up alpha-up)))))
+        ("N" "List of next-actions by context"
+         ((tags-todo "home")
+          (tags-todo "computer")
+          (tags-todo "spence")
+          (tags-todo "shopping")
+          (tags-todo "work"))
+         ((org-agenda-sorting-strategy
+           '((tags todo-state-up alpha-up)))))
+        ("W" "WAITING state items" todo "WAITING")
+        ("P" "List of active projects" tags "project")))
 
 ;; org-capture settings
 (global-set-key "\C-cc" 'org-capture)
 
 (setq org-capture-templates
       '(("t" "TODO" entry
-         (file+headline "tinman.org" "Tasks")
-         "* TODO %^{Brief description} %^g\n%?\nAdded: %U")
+         (file+headline "gtd.org" "Tasks")
+         "* TODO %^{Next-action description} %^g\n%?\n")
         ("c" "Collect" entry
-         (file+headline "tinman.org" "In")
-         "* %^{Brief description}\n%?\nAdded: %U")))
+         (file+headline "gtd.org" "In")
+         "* %^{Brief description}\n%?\n")))
 
 ;; org-mobile settings
 (setq org-mobile-directory "~/Dropbox/MobileOrg")
