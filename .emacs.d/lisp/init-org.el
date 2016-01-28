@@ -30,7 +30,7 @@
 ;; Org-agenda settings
 (global-set-key "\C-ca" 'org-agenda)
 (setq org-deadline-warning-days 7)
-;;(setq org-agenda-skip-deadline-prewarning-if-scheduled t)
+(setq org-agenda-skip-deadline-prewarning-if-scheduled t)
 (put 'org-agenda-file-to-front 'disabled
      "Agenda files are determined at startup through the init file!\n")
 (put 'org-remove-file 'disabled
