@@ -7,6 +7,9 @@
 (put 'org-toggle-time-stamp-overlays 'disabled
      (concat "I don't use timestamp overlays.\n"
              "This command is usually invoked as an accident.\n"))
+(setq org-refile-targets
+      '((nil . (:level . 1))
+        (nil . (:tag . "project"))))
 
 ;; Set Org files
 (defvar org-files
@@ -31,6 +34,7 @@
 (global-set-key "\C-ca" 'org-agenda)
 (setq org-deadline-warning-days 7)
 (setq org-agenda-skip-deadline-prewarning-if-scheduled t)
+(setq org-agenda-scheduled-leaders '("" ""))
 (put 'org-agenda-file-to-front 'disabled
      "Agenda files are determined at startup through the init file!\n")
 (put 'org-remove-file 'disabled
@@ -43,24 +47,37 @@
       '(("D" "Daily GTD review"
          ((agenda "")
           (todo "WAITING")
+          (todo "STARTED")
           (tags-todo "home")
+          (tags-todo "anywhere")
           (tags-todo "computer")
-          (tags-todo "spence")
-          (tags-todo "shopping")
+          (tags-todo "linux")
+          (tags-todo "out")
           (tags-todo "work"))
          ((org-agenda-sorting-strategy
            '((agenda time-up tag-up)
              (tags todo-state-up alpha-up)))))
         ("N" "List of next-actions by context"
          ((tags-todo "home")
+          (tags-todo "anywhere")
           (tags-todo "computer")
-          (tags-todo "spence")
-          (tags-todo "shopping")
+          (tags-todo "linux")
+          (tags-todo "out")
           (tags-todo "work"))
          ((org-agenda-sorting-strategy
            '((tags todo-state-up alpha-up)))))
-        ("W" "WAITING state items" todo "WAITING")
-        ("P" "List of active projects" tags "project")))
+        ("W" "WAITING state items" todo "WAITING"
+         ((org-agenda-sorting-strategy
+          '((todo tag-up)))))
+        ("I" "Incomplete items" todo "STARTED"
+         ((org-agenda-sorting-strategy
+          '((todo tag-up)))))
+        ("P" "List of active projects" tags "project"
+         ((org-agenda-sorting-strategy
+           '((tags alpha-up)))))
+        ("Z" "Test agenda view" tags-todo "TODO=\"TODO\"|TODO=\"STARTED\""
+         ((org-agenda-sorting-strategy
+           '((tags tag-up alpha-up)))))))
 
 ;; org-capture settings
 (global-set-key "\C-cc" 'org-capture)
