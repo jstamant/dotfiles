@@ -10,6 +10,7 @@
 (setq org-refile-targets
       '((nil . (:level . 1))
         (nil . (:tag . "project"))))
+(setq org-src-fontify-natively t) ; Fontify source blocks
 
 ;; Set Org files
 (defvar org-files
@@ -39,6 +40,8 @@
      "Agenda files are determined at startup through the init file!\n")
 (put 'org-remove-file 'disabled
      "Agenda files are determined at startup through the init file!\n")
+(setq org-stuck-projects
+      '("+project/-DONE" ("TODO" "STARTED") nil ""))
 
 ;; Disable tag inheritance, because I don't make use of it
 (setq org-use-tag-inheritance nil)
