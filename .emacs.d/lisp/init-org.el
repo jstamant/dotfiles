@@ -5,19 +5,27 @@
       '((sequence "TODO(t)" "STARTED(s)" "WAITING(w)" "DEFERRED(f)" "APPT(a)"
                   "|" "DONE(d)" "CANCELLED(c)")))
 (put 'org-toggle-time-stamp-overlays 'disabled
-     (concat "I don't use timestamp overlays.\n"
-             "This command is usually invoked as an accident.\n"))
+     "I don't use timestamp overlays.\n
+This command is usually invoked as an accident.\n")
 (setq org-refile-targets
       '((nil . (:level . 1))
         (nil . (:tag . "project"))))
 (setq org-src-fontify-natively t) ; Fontify source blocks
+(defun gtd ()
+  "Shortcut for finding your GTD file.
+This function visits the first file in the `org-files'
+variable. It searches your `org-directory'."
+  (interactive)
+  (find-file (concat org-directory (car org-files))))
 
 ;; Set Org files
 (defvar org-files
-  '("gtd.org" "work.org")
-  "List of org-mode files for use with Emacs.")
+  '("gtd.org")
+  "List of your org-mode files for use with Emacs.
+When setting this variable in your .emacs, sort them by priority.
+i.e. Have your most visited file listed first.")
 
-;; Dynamically set directory where Org files are located
+;; Dynamically set org-directory depending on the OS
 (when using-windows
   (let ((userprofile
          (replace-regexp-in-string "\\\\" "/" (getenv "USERPROFILE"))))
@@ -74,13 +82,13 @@
           '((todo tag-up)))))
         ("I" "Incomplete items" todo "STARTED"
          ((org-agenda-sorting-strategy
-          '((todo tag-up)))))
+           '((todo tag-up)))))
+        ("A" "Agenda context" tags-todo "agenda"
+         ((org-agenda-sorting-strategy
+           '((todo tag-up)))))
         ("P" "List of active projects" tags "project"
          ((org-agenda-sorting-strategy
-           '((tags alpha-up)))))
-        ("Z" "Test agenda view" tags-todo "TODO=\"TODO\"|TODO=\"STARTED\""
-         ((org-agenda-sorting-strategy
-           '((tags tag-up alpha-up)))))))
+           '((tags alpha-up)))))))
 
 ;; org-capture settings
 (global-set-key "\C-cc" 'org-capture)
@@ -88,10 +96,10 @@
 (setq org-capture-templates
       '(("t" "TODO" entry
          (file+headline "gtd.org" "Tasks")
-         "* TODO %^{Next-action description} %^g\n%?\n")
+         "* TODO %^{Next-action description} %^g\n%U%?")
         ("c" "Collect" entry
          (file+headline "gtd.org" "In")
-         "* %^{Brief description}\n%?\n")))
+         "* %^{Brief description}\n%U%?")))
 
 ;; org-mobile settings
 (setq org-mobile-directory "~/Dropbox/MobileOrg")
