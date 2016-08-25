@@ -6,7 +6,9 @@
 [[ $- != *i* ]] && return
 
 # Standard Arch Linux PS1 in blue
-PS1='\[\e[1;34m\][\u@\h \W]\$\[\e[0m\] '
+#export PS1='\[\e[1;34m\][\u@\h \W]\$\[\e[0m\] '
+export PS1='\[\e[1;34m\][\u@\h \W]\$\[\e[0m\] '
+export PS2='> '
 
 # Aliases
 alias ls='ls --color=auto'
@@ -19,6 +21,8 @@ alias grep='grep --color=auto'
 # Also evaluate aliases preceded by 'sudo'
 alias sudo='sudo '
 
-# emacs as primary editor
+# Emacs over terminal
 alias emc='emacsclient -t'
-EDITOR='emacsclient -t'
+
+# Set vim as primary editor
+EDITOR='vim'

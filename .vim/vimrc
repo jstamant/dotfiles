@@ -1,4 +1,42 @@
-" Set tab and indent behaviour
+" Set some requirements for Vundle
+set nocompatible
+filetype off
+set rtp+=~/.vim/bundle/Vundle.vim
+
+" Declare all the desired plugins
+call vundle#begin()
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'tpope/vim-fugitive'
+Plugin 'vim-airline/vim-airline'
+Plugin 'majutsushi/tagbar'
+Plugin 'scrooloose/syntastic'
+Plugin 'scrooloose/nerdtree'
+call vundle#end()
+
+filetype plugin indent on
+
+" Configure vim-airline
+set laststatus=2
+set ttimeoutlen=10
+if !exists('g:airline_symbols')
+  let g:airline_symbols = {}
+endif
+let g:airline_left_sep = ''
+let g:airline_right_sep = ''
+let g:airline_symbols.linenr = '¶'
+"let g:airline_symbols.branch = '⎇'
+let g:airline_symbols.branch = 'b'
+
+" Configure syntastic
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+" Configure tab and indent settings
 set expandtab
 set tabstop=4
 set softtabstop=4
@@ -10,7 +48,11 @@ set autoindent
 syntax on
 
 " Set colorscheme
+set background=dark
 colorscheme desert
+set colorcolumn=80
+highlight ColorColumn ctermbg=darkgray
+
 
 " Enable line numbering
 set nu!
@@ -18,5 +60,12 @@ set nu!
 " No text wrap by default
 set nowrap
 
-" Allow saving of files as sudo 
+" Allow saving of files as sudo
 cmap w!! w !sudo tee > /dev/null %
+
+" Configure keybinds
+nnoremap <F4> :make!<cr>
+nnoremap <F5> :make run!<cr>
+nnoremap <F8> :TagbarToggle<cr>
+nnoremap <F1> :NERDTreeToggle<cr>
+
