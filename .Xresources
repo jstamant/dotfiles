@@ -1,6 +1,9 @@
-URxvt.geometry:             100x60
+URxvt.geometry:             100x20
 URxvt.intensityStyles:      false
 URxvt.scrollBar:            false
+
+! Configure terminal font
+URxvt.font: xft:DejaVu Sans Mono:size=10:antialias=true
 
 ! Base16 Eighties
 ! Scheme: Chris Kempson (http://chriskempson.com)
