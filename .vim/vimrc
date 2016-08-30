@@ -48,6 +48,7 @@ set autoindent
 syntax on
 
 " Set colorscheme
+set t_Co=256
 set background=dark
 colorscheme desert
 set colorcolumn=80
