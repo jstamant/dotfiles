@@ -1,9 +1,0 @@
-[Desktop Entry]
-Version=1.0
-Name=st
-Comment=Simple (suckless) terminal
-Exec=st
-Icon=utilities-terminal
-Terminal=false
-Type=Application
-Categories=System;TerminalEmulator;
