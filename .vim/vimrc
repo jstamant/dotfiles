@@ -54,6 +54,8 @@ colorscheme desert
 set colorcolumn=80
 highlight ColorColumn ctermbg=darkgray
 
+" Move .viminfo file
+set viminfo+=n~/.vim/viminfo
 
 " Enable line numbering
 set nu!
