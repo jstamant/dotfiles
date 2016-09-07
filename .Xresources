@@ -1,9 +1,9 @@
 URxvt.geometry:        100x20
 URxvt.intensityStyles: false
-!Consider disabling scrolling, and letting tmux handle it
+!Scrolling disabled in URxvt, as it is a function of the terminal multiplexer
+URxvt.saveLines:       0
 URxvt.scrollBar:       false
 !URxvt.scrollstyle:     plain ! My preferred scroll bar type
-URxvt.saveLines:       1000
 
 ! Configure terminal font
 URxvt.font: xft:DejaVu Sans Mono:size=10:antialias=true
