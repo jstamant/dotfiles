@@ -1,0 +1,117 @@
+## ~/.nanorc
+##
+## Please note that you must have configured nano with --enable-nanorc
+## for this file to be read!  Also note that this file should not be in
+## DOS or Mac format, and that characters specially interpreted by the
+## shell should not be escaped here.
+##
+## To make sure an option is disabled, use "unset <option>".
+##
+## For the options that take parameters, the default value is given.
+## Other options are unset by default.
+##
+## Quotes inside string parameters don't have to be escaped with
+## backslashes.  The last double quote in the string will be treated as
+## its end.  For example, for the "brackets" option, ""')>]}" will match
+## ", ', ), >, ], and }.
+
+## Use auto-indentation.
+# set autoindent
+
+## Back up files to the current filename plus a tilde.
+# set backup
+
+## The directory to put unique backup files in.
+# set backupdir ""
+
+## Constantly display the cursor position in the statusbar.
+# set constantshow
+
+## Use the Emacs-style of text killing.
+## i.e. cut-to-end-of-line.
+set cut
+
+## Set the line length for wrapping text and justifying paragraphs.
+## If the value is 0 or less, the wrapping point will be the screen
+## width less this number.
+set fill 80
+
+## Display line numbers.
+set linenumbers
+
+## Enable vim-style lock-files.  This is just to let a vim user know you
+## are editing a file [s]he is trying to edit and vice versa.
+# set locking
+
+## Use the blank line below the titlebar as extra editing space.
+set morespace
+
+## Use this tab size instead of the default; it must be greater than 0.
+# set tabsize 8
+
+## Convert typed tabs to spaces.
+# set tabstospaces
+
+## Paint the interface elements of nano.
+## These are examples; by default there are no colors.
+# set titlecolor brightwhite,blue
+# set numbercolor cyan
+# set statuscolor brightwhite,green
+# set keycolor green
+# set functioncolor yellow
+
+## Setup of syntax coloring.
+##
+## Format:
+##
+## syntax "short description" ["filename regex" ...]
+##
+## The "none" syntax is reserved; specifying it on the command line is
+## the same as not having a syntax at all.  The "default" syntax is
+## special: it takes no filename regexes, and applies to files that
+## don't match any other syntax's filename regexes.
+##
+## color foreground,background "regex" ["regex"...]
+## or
+## icolor foreground,background "regex" ["regex"...]
+##
+## "color" will do case-sensitive matches, while "icolor" will do
+## case-insensitive matches.
+##
+## Valid colors: white, black, red, blue, green, yellow, magenta, cyan.
+## For foreground colors, you may use the prefix "bright" to get a
+## stronger highlight.
+##
+## To use multi-line regexes, use the start="regex" end="regex"
+## [start="regex" end="regex"...] format.
+##
+## If your system supports transparency, not specifying a background
+## color will use a transparent color.  If you don't want this, be sure
+## to set the background color to black or white.
+##
+## All regexes should be extended regular expressions.
+##
+## If you wish, you may put your syntax definitions in separate files.
+## You can make use of such files as follows:
+##
+## include "/path/to/syntax_file.nanorc"
+##
+## Unless otherwise noted, the name of the syntax file (without the
+## ".nanorc" extension) should be the same as the "short description"
+## name inside that file.  These names are kept fairly short to make
+## them easier to remember and faster to type using nano's -Y option.
+##
+## To include all existing syntax definitions, you can do:
+include "/usr/share/nano/*.nanorc"
+
+
+## Key bindings.
+## See nanorc(5) (section REBINDING KEYS) for more details on this.
+##
+## The following five functions are not bound to any key by default.
+## You may wish to choose different keys than the ones suggested here.
+# bind ^S savefile main
+# bind M-Q findprevious main
+# bind M-W findnext main
+# bind M-B cutwordleft main
+# bind M-N cutwordright main
