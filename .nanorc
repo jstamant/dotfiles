@@ -46,11 +46,9 @@ set linenumbers
 ## Use the blank line below the titlebar as extra editing space.
 set morespace
 
-## Use this tab size instead of the default; it must be greater than 0.
-# set tabsize 8
-
-## Convert typed tabs to spaces.
-# set tabstospaces
+## Tab settings
+set tabsize 4
+set tabstospaces
 
 ## Paint the interface elements of nano.
 ## These are examples; by default there are no colors.
