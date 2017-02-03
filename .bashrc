@@ -20,6 +20,6 @@ alias sudo='sudo '
 # Emacs over terminal
 alias emc='emacsclient -t'
 
-# Set nano as primary editor
-EDITOR='nano'
+# Set vim as primary editor
+EDITOR='vim'
 

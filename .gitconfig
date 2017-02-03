@@ -2,4 +2,4 @@
 	name = Justin R. St-Amant
 	email = jstamant24@gmail.com
 [core]
-	editor = nano
+	editor = vim
