@@ -62,13 +62,13 @@ Plugin {
       id=menu://applications/Internet/firefox.desktop
     }
     Button {
-      id=menu://applications/Internet/google-chrome.desktop
-    }
-    Button {
       id=menu://applications/System/urxvt.desktop
     }
     Button {
-      id=menu://applications/Development/emacsclient.desktop
+      id=menu://applications/Internet/google-chrome.desktop
+    }
+    Button {
+      id=emacsclient.desktop
     }
   }
 }

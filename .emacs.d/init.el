@@ -1,3 +1,4 @@
+;; init.el
 
 (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
 
@@ -8,6 +9,11 @@
 ;; Load my customizations
 (setq custom-file "~/.emacs.d/custom.el")
 (load custom-file)
+
+;; Disable GUI elements
+(menu-bar-mode -1)
+;;(toggle-scroll-bar -1)
+(tool-bar-mode -1)
 
 ;; Setup Emacs package manager
 (require 'package)
@@ -29,8 +35,13 @@
 (setq-default indent-tabs-mode nil) ; do not use tabs for indentation
 (setq-default tab-width 4)
 
-;; Mode settings
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; MODE SETTINGS
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 (require 'init-auctex)
+;;(require 'init-evil)
+(require 'init-ledger)
 (require 'init-magit)
 (require 'init-markdown)
 (require 'init-mode-line)
@@ -38,6 +49,3 @@
 (require 'init-pkgbuild)
 ;;(require 'init-scad)
 (require 'init-web)
-;; While I test lilypond-mode
-;;(add-to-list 'load-path (expand-file-name "lilypond-mode" user-emacs-directory))
-;;(require 'lilypond-mode)

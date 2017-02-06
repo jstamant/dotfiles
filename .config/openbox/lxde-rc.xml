@@ -111,9 +111,7 @@
   </dock>
   <keyboard>
     <chainQuitKey>C-g</chainQuitKey>
-
     <!-- Keybindings for desktop switching -->
-
     <keybind key="S-A-1">
       <action name="SendToDesktop">
         <to>1</to>
@@ -168,9 +166,7 @@
     <keybind key="C-A-d">
       <action name="ToggleShowDesktop"/>
     </keybind>
-
     <!-- Keybindings for windows -->
-
     <keybind key="A-F4">
       <action name="Close"/>
     </keybind>
@@ -190,9 +186,7 @@
         <menu>client-menu</menu>
       </action>
     </keybind>
-
     <!-- Keybindings for window switching -->
-
     <keybind key="A-Tab">
       <action name="NextWindow"/>
     </keybind>
@@ -205,9 +199,7 @@
         <desktop>yes</desktop>
       </action>
     </keybind>
-
     <!-- Keybindings for running applications -->
-
     <keybind key="W-e">
       <action name="Execute">
         <command>pcmanfm</command>
@@ -246,9 +238,7 @@
         <command>lxde-logout</command>
       </action>
     </keybind>
-
     <!-- Launch Task Manager with Ctrl+Alt+Del -->
-
     <keybind key="A-C-Delete">
       <action name="Execute">
         <command>lxtask</command>
@@ -264,6 +254,12 @@
     <keybind key="A-Print">
       <action name="Execute">
         <command>shutter --active</command>
+      </action>
+    </keybind>
+    <!-- Shortcuts for opening a terminal window -->
+    <keybind key="A-C-t">
+      <action name="Execute">
+        <command>urxvt</command>
       </action>
     </keybind>
   </keyboard>
