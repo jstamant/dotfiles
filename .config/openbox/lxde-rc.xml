@@ -112,6 +112,7 @@
   <keyboard>
     <chainQuitKey>C-g</chainQuitKey>
     <!-- Keybindings for desktop switching -->
+    <!--
     <keybind key="S-A-1">
       <action name="SendToDesktop">
         <to>1</to>
@@ -140,6 +141,7 @@
         <follow>no</follow>
       </action>
     </keybind>
+    -->
     <keybind key="A-1">
       <action name="Desktop">
         <desktop>1</desktop>
