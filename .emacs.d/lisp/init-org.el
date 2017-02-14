@@ -7,9 +7,8 @@
 (put 'org-toggle-time-stamp-overlays 'disabled
      "I don't use timestamp overlays.\n
 This command is usually invoked as an accident.\n")
-(setq org-refile-targets
-      '((nil . (:level . 1))
-        (nil . (:tag . "project"))))
+(setq org-refile-targets '((nil . (:level . 1))
+                           (nil . (:tag . "project"))))
 (setq org-src-fontify-natively t) ; Fontify source blocks
 (defun gtd ()
   "Shortcut for finding your GTD file.

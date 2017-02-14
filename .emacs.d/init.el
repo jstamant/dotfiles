@@ -19,6 +19,10 @@
 ;; Disable startup messages
 (setq inhibit-splash-screen t)
 
+;; Font settings
+(set-face-attribute `default nil :height 100)
+;;(set-face-attribute `term-bold nil :foreground "#00ff00")
+
 ;; Set backup and auto-save file location
 (setq backup-directory-alist
       `((".*" . ,temporary-file-directory)))

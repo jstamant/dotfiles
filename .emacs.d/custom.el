@@ -3,12 +3,6 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(ansi-color-faces-vector
-   [default bold shadow italic underline bold bold-italic bold])
- '(ansi-color-names-vector
-   ["#504545" "#ad8572" "#a9df90" "#aaca86" "#91a0b3" "#ab85a3" "#ddbc91" "#bdbdb3"])
- '(ansi-term-color-vector
-   [unspecified "#151718" "#CE4045" "#9FCA56" "#DCCD69" "#55B5DB" "#A074C4" "#55B5DB" "#D4D7D6"] t)
  '(cursor-in-non-selected-windows t)
  '(cursor-type (quote box))
  '(custom-enabled-themes nil)
@@ -26,7 +20,7 @@
      ("account" "%(binary) -f %(ledger-file) reg %(account)"))))
  '(package-selected-packages
    (quote
-    (ledger ledger-mode evil-visual-mark-mode evil web-mode use-package smart-mode-line scad-preview pkgbuild-mode markdown-mode magit auctex)))
+    (use-package-chords ledger ledger-mode evil-visual-mark-mode evil web-mode use-package smart-mode-line scad-preview pkgbuild-mode markdown-mode magit auctex)))
  '(vc-annotate-background nil)
  '(vc-annotate-color-map
    (quote
@@ -49,9 +43,3 @@
      (340 . "#e7c547")
      (360 . "DarkOliveGreen3"))))
  '(vc-annotate-very-old-color nil))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(default ((t (:background "#2d2d2d" :foreground "#d3d0c8")))))
