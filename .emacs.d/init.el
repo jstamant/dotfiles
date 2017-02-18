@@ -8,20 +8,24 @@
   (equal window-system 'w32)
   "t if emacs is running in windows")
 
+(defun init ()
+  "Shortcut for finding your Emacs configuration file."
+  (interactive)
+  (find-file "~/.emacs.d/init.el"))
+
 ;; Load my customizations
 (setq custom-file "~/.emacs.d/custom.el")
 (load custom-file)
 
 ;; Disable GUI elements
 (menu-bar-mode -1)
-;;(toggle-scroll-bar -1)
+(toggle-scroll-bar -1) ; Is this working?
 (tool-bar-mode -1)
-;; Disable startup messages
-(setq inhibit-splash-screen t)
+(setq inhibit-splash-screen t) ; Disable startup messages
 
-;; Font settings
-(set-face-attribute `default nil :height 100)
-;;(set-face-attribute `term-bold nil :foreground "#00ff00")
+;; General font settings
+(require 'init-faces)
+;;(load-theme tinman-base16)
 
 ;; Set backup and auto-save file location
 (setq backup-directory-alist
@@ -33,12 +37,16 @@
 (setq-default indent-tabs-mode nil)
 (setq-default tab-width 4)
 
-;; Setup Emacs package manager
+;; Initialize Emacs package manager
 (require 'package)
 (add-to-list 'package-archives '("gnu"   . "http://elpa.gnu.org/packages/"))
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
 (package-initialize)
-(require 'use-package)
+
+;; Require use-package, and install it if necessary
+(if (not (require 'use-package "use-package" t))
+    (progn (package-refresh-contents)
+           (package-install 'use-package)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; MODE SETTINGS
@@ -48,42 +56,48 @@
 (use-package tex-site
   :ensure auctex)
 
-;;;; EVIL SETTINGS
-;;(require 'init-evil)
-
 ;;;; LEDGER SETTINGS
 (use-package ledger-mode
-  :ensure t)
-(add-to-list 'auto-mode-alist '("\\.ledger$" . ledger-mode))
-;; Use ISO-8601 date formats, for sh*t's sake
-(setq ledger-use-iso-dates t)
+  :ensure t
+  :mode "\\.ledger$"
+  :config
+  (setq ledger-use-iso-dates t)) ; Specify ISO-8601 date format
+
+(defun ledger ()
+  "Shortcut for finding your ledger file."
+  (interactive)
+  (find-file "~/drive/reference/budget/2017-test.ledger"))
 
 ;;;; MAGIT SETTINGS
-(when using-windows
-  (setq magit-git-executable "c:/Program Files/Git/bin/git.exe"))
 (use-package magit
-  :ensure t)
+  :ensure t
+  :init
+  (when using-windows
+    (setq magit-git-executable "c:/Program Files/Git/bin/git.exe")))
 
 ;;;; MARKDOWN SETTINGS
 (use-package markdown-mode
   :ensure t)
 
-;;;; MODE-LINE SETTINGS
+;;;; SMART MODE-LINE SETTINGS
 (use-package smart-mode-line
-  :ensure t)
-(setq sml/theme 'dark)
-(sml/setup)
-;; Enable line numbering and column numbering
-(setq line-number-mode t)
-(setq column-number-mode t)
+  :ensure t
+  :config
+  (setq sml/theme 'dark)
+  ;; Enable line numbering and column numbering
+  (setq line-number-mode t)
+  (setq column-number-mode t)
+  ;; Enable smart mode-line (required)
+  (sml/setup))
 
 ;;;; ORG SETTINGS
 (require 'init-org)
 
 ;;;; PKGBUILD SETTINGS
 (use-package pkgbuild-mode
-  :ensure t)
-(setq pkgbuild-update-sums-on-save nil)
+  :ensure t
+  :config
+  (setq pkgbuild-update-sums-on-save nil))
 
 ;;;; SCAD SETTINGS
 (use-package scad
@@ -91,19 +105,26 @@
 (use-package scad-preview
   :ensure t)
 
-;;;; WEB-MODE SETTINGS
+;;;; TERM SETTINGS
+(use-package term
+  :config
+  (add-hook 'term-mode-hook
+            (lambda () (set-face-attribute `term-color-blue nil :foreground "#6699cc"))))
+
+;;;; WEB SETTINGS
 (use-package web-mode
-  :ensure t)
-(add-to-list 'auto-mode-alist '("\\.css\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.htaccess\\'" . conf-mode))
-(add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.twig\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.php\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.xml\\'" . web-mode))
-;; No reason to use plain HTML unless it's for a template engine!
-(setq web-mode-engines-alist '(("twig" . "\\.html\\'")))
-(add-hook 'web-mode-hook
-          (lambda ()
-            (setq web-mode-markup-indent-offset 2)
-            (setq web-mode-css-indent-offset 2)
-            (setq web-mode-code-indent-offset 2)))
+  :ensure t
+  :mode
+  "\\.css$"
+  "\\.htaccess$"
+  "\\.html?$"
+  "\\.twig$"
+  "\\.php$"
+  "\\.xml$"
+  :config
+  ;; Make .html files recognize Twig templates by default
+  (setq web-mode-engines-alist '(("twig" . "\\.html$")))
+  ;; web-mode indentation settings
+  (setq web-mode-markup-indent-offset 2)
+  (setq web-mode-css-indent-offset 2)
+  (setq web-mode-code-indent-offset 2))

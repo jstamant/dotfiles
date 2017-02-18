@@ -1,16 +1,34 @@
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!! .Xresources
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
 URxvt.geometry:        100x20
 URxvt.intensityStyles: false
-!Scrolling disabled in URxvt, as it is a function of the terminal multiplexer
-URxvt.saveLines:       0
-URxvt.scrollBar:       false
-!URxvt.scrollstyle:     plain ! My preferred scroll bar type
+URxvt.saveLines:       0      ! This function belongs to tmux
+URxvt.scrollBar:       false  ! This function belongs to tmux
+URxvt.font:            xft:DejaVu Sans Mono:size=10:antialias=true
 
-! Configure terminal font
-URxvt.font: xft:DejaVu Sans Mono:size=10:antialias=true
-
-! Base16 Eighties
-! Scheme: Chris Kempson (http://chriskempson.com)
-
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!! TERMINAL COLOR SCHEME
+!! Base16 Eighties, by Chris Kempson
+!! http://chriskempson.com/projects/base16/
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! Dark grey    (grey18)
+! Medium-dark  (grey22)
+! Medium grey  (grey32)
+! Light grey   (grey45)
+! Lighter grey (grey62)
+! Cream white  (grey82)
+! White        (grey90)
+! Pure white   (grey94)
+! Pastel red
+! Pastel orange?
+! Pastel yellow
+! Pastel green
+! Pastel cyan
+! Pastel blue    (SkyBlue3?)
+! Pastel magenta
+! Pastel orange?
 #define base00 #2d2d2d
 #define base01 #393939
 #define base02 #515151
@@ -49,4 +67,3 @@ URxvt.font: xft:DejaVu Sans Mono:size=10:antialias=true
 *.color13:      base06
 *.color14:      base0F
 *.color15:      base07
-
