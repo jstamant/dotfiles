@@ -1,5 +1,4 @@
 <?xml version="1.0"?>
-<!-- Use the `obconf` tool to modify a lot of these settings -->
 <openbox_config xmlns="http://openbox.org/3.4/rc">
   <resistance>
     <strength>10</strength>
@@ -22,16 +21,6 @@
   <theme>
     <name>tinman-afterpiece</name>
     <titleLayout>NLIMC</titleLayout>
-    <!--
-      available characters are NDSLIMC, each can occur at most once.
-      N: window icon
-      L: window label (AKA title).
-      I: iconify
-      M: maximize
-      C: close
-      S: shade (roll up/down)
-      D: omnipresent (on all desktops).
-  -->
     <keepBorder>yes</keepBorder>
     <animateIconify>yes</animateIconify>
     <font place="ActiveWindow">
@@ -332,16 +321,6 @@
         <action name="Lower"/>
         <action name="FocusToBottom"/>
         <action name="Unfocus"/>
-      </mousebind>
-      <mousebind action="Click" button="Up">
-        <action name="Shade"/>
-        <action name="FocusToBottom"/>
-        <action name="Unfocus"/>
-        <action name="Lower"/>
-      </mousebind>
-      <mousebind action="Click" button="Down">
-        <action name="Unshade"/>
-        <action name="Raise"/>
       </mousebind>
       <mousebind action="Press" button="Right">
         <action name="Focus"/>
