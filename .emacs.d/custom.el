@@ -12,17 +12,16 @@
  '(fci-rule-color "#14151E")
  '(ledger-reports
    (quote
-    (("file" "ledger -f ~/drive/reference/budget/2017-test.ledger")
-     ("test-report" "ledger bal")
-     ("Test" "ledger bal -f ~/drive/reference/budget/2017-test.ledger")
-     ("testreport" "ledger bal")
-     ("bal" "%(binary) -f %(ledger-file) bal")
+    (("bal" "%(binary) -f %(ledger-file) bal")
      ("reg" "%(binary) -f %(ledger-file) reg")
      ("payee" "%(binary) -f %(ledger-file) reg @%(payee)")
      ("account" "%(binary) -f %(ledger-file) reg %(account)"))))
  '(package-selected-packages
    (quote
-    (scad-mode "use-package" use-package-chords ledger ledger-mode evil-visual-mark-mode evil web-mode use-package smart-mode-line scad-preview pkgbuild-mode markdown-mode magit auctex)))
+    (wanderlust scad-mode "use-package" use-package-chords ledger ledger-mode evil-visual-mark-mode evil web-mode use-package smart-mode-line scad-preview pkgbuild-mode markdown-mode magit auctex)))
+ '(send-mail-function (quote smtpmail-send-it))
+ '(smtpmail-smtp-server "smtp.gmail.com")
+ '(smtpmail-smtp-service 587)
  '(vc-annotate-background nil)
  '(vc-annotate-color-map
    (quote
@@ -50,4 +49,21 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(default ((((min-colors 256)) (:foreground "gainsboro" :background "grey18" :height 100)) (t (:foreground "gainsboro" :background "grey18" :height 100))))
+ '(font-lock-comment-face ((((min-colors 256)) (:foreground "CadetBlue3")) (t (:foreground "CadetBlue3"))))
+ '(font-lock-constant-face ((((min-colors 256)) (:foreground "salmon1")) (t (:foreground "salmon1"))))
+ '(font-lock-keyword-face ((((min-colors 256)) (:foreground "plum3")) (t (:foreground "plum3"))))
+ '(font-lock-string-face ((((min-colors 256)) (:foreground "DarkSeaGreen3")) (t (:foreground "DarkSeaGreen3"))))
+ '(link ((((min-colors 256)) (:foreground "CadetBlue3")) (t (:foreground "CadetBlue3"))))
+ '(org-done ((((min-colors 256)) (:foreground "DarkSeaGreen3")) (t (:foreground "DarkSeaGreen3"))))
+ '(org-todo ((((min-colors 256)) (:foreground "tomato")) (t (:foreground "tomato"))))
+ '(outline-1 ((((min-colors 256)) (:foreground "CornflowerBlue")) (t (:foreground "CornflowerBlue"))))
+ '(outline-2 ((((min-colors 256)) (:foreground "gold")) (t (:foreground "gold"))))
+ '(term-color-black ((((min-colors 256)) (:foreground "grey18")) (t (:foreground "grey18"))))
+ '(term-color-blue ((((min-colors 256)) (:foreground "CornflowerBlue")) (t (:foreground "CornflowerBlue"))))
+ '(term-color-cyan ((((min-colors 256)) (:foreground "CadetBlue3")) (t (:foreground "CadetBlue3"))))
+ '(term-color-green ((((min-colors 256)) (:foreground "DarkSeaGreen3")) (t (:foreground "DarkSeaGreen3"))))
+ '(term-color-magenta ((((min-colors 256)) (:foreground "plum3")) (t (:foreground "plum3"))))
+ '(term-color-red ((((min-colors 256)) (:foreground "tomato")) (t (:foreground "tomato"))))
+ '(term-color-white ((((min-colors 256)) (:foreground "gainsboro")) (t (:foreground "gainsboro"))))
+ '(term-color-yellow ((((min-colors 256)) (:foreground "gold")) (t (:foreground "gold")))))

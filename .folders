@@ -1,0 +1,41 @@
+#
+# Folder definition file
+# This file is generated automatically by Wanderlust/2.15.9 (Almost Unreal).
+#
+# If you edit this file by hand, be sure that comment lines
+# will be washed out by wl-fldmgr.
+#
+
+%INBOX
+%[Gmail]/Spam
+%[Gmail]/Sent Mail
+%[Gmail]/Queue
+%[Gmail]/Drafts
+%[Gmail]/Bin
+%[Gmail]/All Mail
+%[Gmail]/01-Tasks
+%[Gmail]/02-Waiting
+Reference{
+	%[Gmail]/05-Reference
+	%[Gmail]/05-Reference/TE
+	%[Gmail]/05-Reference/Spence
+	%[Gmail]/05-Reference/Slot cars
+	%[Gmail]/05-Reference/Shipping
+	%[Gmail]/05-Reference/Recipes
+	%[Gmail]/05-Reference/Receipts
+	%[Gmail]/05-Reference/Personal
+	%[Gmail]/05-Reference/GitHub
+	%[Gmail]/05-Reference/Employement
+	%[Gmail]/05-Reference/EFRR
+	%[Gmail]/05-Reference/Danika
+	%[Gmail]/05-Reference/Cam
+	%[Gmail]/05-Reference/Ca Claque
+	%[Gmail]/05-Reference/Benefits
+	%[Gmail]/05-Reference/Arch Linux/Forum
+	%[Gmail]/05-Reference/Arch Linux/AUR
+	%[Gmail]/05-Reference/Arch Linux
+}
+
+# petname definition (access group, folder in access group)
+
+# end of file.

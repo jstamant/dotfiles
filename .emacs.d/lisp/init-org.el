@@ -38,6 +38,9 @@ i.e. Have your most visited file listed first.")
   (if (file-exists-p (concat org-directory file))
       (add-to-list 'org-agenda-files (concat org-directory file))))
 
+;; Disable tag inheritance, because I don't make use of it
+(setq org-use-tag-inheritance nil)
+
 ;; Org-agenda settings
 (global-set-key "\C-ca" 'org-agenda)
 (setq org-deadline-warning-days 7)
@@ -49,9 +52,6 @@ i.e. Have your most visited file listed first.")
      "Agenda files are determined at startup through the init file!\n")
 (setq org-stuck-projects
       '("+project/-DONE" ("TODO" "STARTED") nil ""))
-
-;; Disable tag inheritance, because I don't make use of it
-(setq org-use-tag-inheritance nil)
 
 (setq org-agenda-custom-commands
       '(("D" "Daily GTD review"

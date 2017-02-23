@@ -27,73 +27,90 @@
 
 (set-face-attribute 'default nil :height 100)
 
+;; Do not inherit any colors or settings from X resources
+(setq inhibit-x-resources t)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Variables / Color sets / Faces
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defvar tinman-base16-colors
-  '(:base00 "#2d2d2d"  ; grey18
-    :base01 "#393939"  ; grey22
-    :base02 "#515151"  ; grey32
-    :base03 "#747369"  ; grey45
-    :base04 "#a09f93"  ; grey62
-    :base05 "#d3d0c8"  ; grey82
-    :base06 "#e8e6df"  ; grey92
-    :base07 "#f2f0ec"  ; grey94
-    :base08 "#f2777a"  ; Pastel red
-    :base09 "#f99157"  ; Pastel orange
-    :base0A "#ffcc66"  ; Pastel yellow
-    :base0B "#99cc99"  ; Pastel green
-    :base0C "#66cccc"  ; Pastel cyan
-    :base0D "#6699cc"  ; Pastel blue
-    :base0E "#cc99cc"  ; Pastel magenta
-    :base0F "#d27b53") ; Pastel brown
+  '(:base00  "#2d2d2d"  ; grey18
+    :base01  "#393939"  ; grey22
+    :base02  "#515151"  ; grey32
+    :base03  "#747369"  ; grey45
+    :base04  "#a09f93"  ; grey62
+    :base05  "#d3d0c8"  ; grey82
+    :base06  "#e8e6df"  ; grey92
+    :base07  "#f2f0ec"  ; grey94
+    
+    :black   "grey18"
+    :red     "tomato"   ;"#f2777a" or "light coral"
+    :green   "DarkSeaGreen3" ;"#99cc99" or "PaleGreen3" or "LimeGreen" or "LightGreen"
+    :yellow  "gold"  ; "#ffcc66" or "gold" or "goldenrod1"
+    :blue    "CornflowerBlue" ; "#6699cc" or "SkyBlue3" or "SteelBlue3"
+    :magenta "plum3" ; "#cc99cc" or "orchid"
+    :cyan    "CadetBlue3" ; "#66cccc" or "MediumTurquoise" or "DarkSlateGray3"
+    :white   "gainsboro"
+    
+    :orange  "salmon1"  ; "#f99157" or "SandyBrown" or "DarkOrange1"
+    :brown   "LightSalmon3") ; "#d27b53" or "peru" or "LightSalmon3" or tan3
   "Color palette for Justin St-Amant's Base16-inspired theme.
 
 All colors are currently set to the Base16 Eighties colors.
 i.e. soft-grey background with pastel foreground colors.")
 
 (defvar base16-shell-colors
-  '(:base00 "black"
-    :base01 "brightgreen"
+  '(:base01 "brightgreen"
     :base02 "brightyellow"
     :base03 "brightblack"
     :base04 "brightblue"
     :base05 "white"
     :base06 "brightmagenta"
     :base07 "brightwhite"
-    :base08 "red"
-    :base09 "brightred"
-    :base0A "yellow"
-    :base0B "green"
-    :base0C "cyan"
-    :base0D "blue"
-    :base0E "magenta"
-    :base0F "brightcyan")
+
+    :black   "black"
+    :red     "red"
+    :green   "green"
+    :yellow  "yellow"
+    :blue    "blue"
+    :magenta "magenta"
+    :cyan    "cyan"
+    :white   "white"
+
+    :orange  "yellow"
+    :brown   "red")
   "Base16 colors for use in a terminal.
-i.e. with a limited color palette.")
+i.e. with a limited color palette.
+
+UNIMPLEMENTED YET")
 
 (defvar custom-faces
-  '((default
-      :foreground base05
-      :height 100))
-    ;; (link :foreground base0C)
-    ;; (link-visited :foreground base0E)
-    ;; (font-lock-comment-face  :foreground base03)
-    ;; (font-lock-constant-face :foreground base09)
-    ;; (font-lock-keyword-face  :foreground base0E)
-    ;; (font-lock-string-face   :foreground base0B)
-    ;; (outline-1 :foreground base0D)
-    ;; (outline-2 :foreground base0A)
-    ;; (org-todo :foreground base08)
-    ;; (org-done :foreground base0B)
+  '((default :foreground white :background black)
+    (link :foreground cyan)
+    (font-lock-comment-face  :foreground cyan)
+    (font-lock-constant-face :foreground orange)
+    (font-lock-keyword-face  :foreground magenta)
+    (font-lock-string-face   :foreground green)
+    (outline-1 :foreground blue)
+    (outline-2 :foreground yellow)
+    (org-todo :foreground red)
+    (org-done :foreground green)
     ;; (org-agenda-structure :foreground base0D)
     ;; (org-special-keyword :foreground base0C)
     ;; (org-link :foreground base0C)
+    (term-color-black :foreground black)
+    (term-color-red :foreground red)
+    (term-color-green :foreground green)
+    (term-color-yellow :foreground yellow)
+    (term-color-blue :foreground blue)
+    (term-color-magenta :foreground magenta)
+    (term-color-cyan :foreground cyan)
+    (term-color-white :foreground white))
     ;; (highlight :background base03)
     ;; (ledger-font-payee-uncleared-face :foreground base08)
     ;; (ledger-font-other-face :foreground base04)
-    ;; (ledger-font-pending-face :foreground base09))
+  ;; (ledger-font-pending-face :foreground base09))
   "A list of faces, and the attributes to apply to them.
 
 The format of this list is as follows:
@@ -110,15 +127,17 @@ Example:
 (:foreground \"#00ff00\" :background \"#000000\")
 
 See macro `defface', and look into \"face specs\" or \"face
-attributes\" for more info.")
+attributes\" for more info.
+
+Possible attributes can be found in Info node `(elisp)Face Attributes'.")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Theme-generation functions
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(defun initialize-theme (theme faces)
+(defun initialize-theme (faces)
   "DOCUMENTATION INCOMPLETE"
-  (apply 'custom-theme-set-faces theme (mapcar 'apply-face-spec faces)))
+  (apply 'custom-set-faces (mapcar 'apply-face-spec faces)))
 
 (defun apply-face-spec (face)
   "DOCUMENTATION INCOMPLETE Applies a face spec to a `FACE' for
@@ -131,24 +150,28 @@ list containing the face symbol, and a plist of attributes."
 
 (defun sub-color-keys (attributes)
   "DOCUMENTATION INCOMPLETE Substitutes custom color names to
-color strings. Also does not work with constants yet."
-  (let* ((key   (car attributes))
-         (value (cadr attributes))
-         (color-key (if (symbolp value) (intern (concat ":" (symbol-name value)) nil)))
-         (color (plist-get tinman-base16-colors color-key))
-         (output (list key color)))
-    output))
+color strings. Also does not work with constants or muliple
+attributes yet. Potentially does not work with :box or :underline
+attributes."
+  (let ((output))
+    (while attributes
+      (let* ((key   (car attributes))
+             (value (cadr attributes))
+             (color-key (if (symbolp value) (intern (concat ":" (symbol-name value)) nil)))
+             (color (plist-get tinman-base16-colors color-key)))
+        (cond (color
+               (setq output (append output (list key color))))
+              (t
+               (setq output (append output (list key value)))))
+        ;; Proceed to the next set of attributes
+        (setq attributes (cddr attributes))))
+      output))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Define an empty custom theme
-;;(deftheme tinman-base16
-;;  "Justin St-Amant's custom Base16-inspired theme.")
+;;(sub-color-keys '(:foreground "#ffffff" :background "#000000" :height 100))
 
 ;; Add all the faces to the theme
-;;(initialize-theme 'tinman-base16 custom-faces)
-
-;; Mark the theme as provided
-;;(provide-theme 'tinman-base16)
+(initialize-theme custom-faces)
 
 (provide 'init-faces)

@@ -19,13 +19,12 @@
 
 ;; Disable GUI elements
 (menu-bar-mode -1)
-(toggle-scroll-bar -1) ; Is this working?
+(scroll-bar-mode -1)
 (tool-bar-mode -1)
 (setq inhibit-splash-screen t) ; Disable startup messages
 
 ;; General font settings
 (require 'init-faces)
-;;(load-theme tinman-base16)
 
 ;; Set backup and auto-save file location
 (setq backup-directory-alist
@@ -47,6 +46,19 @@
 (if (not (require 'use-package "use-package" t))
     (progn (package-refresh-contents)
            (package-install 'use-package)))
+
+;; ;; Mail settings (temporary location, to be moved)
+;; (setq message-signature
+;;       "Justin R. St-Amant
+;; Engineering Technologist\n
+;; 204-451-7111 (phone)
+;; jstamant24@gmail.com")
+;; ;;(setq message-from-style "angles") ; TEST THIS OUT, make sure it works!
+;; (setenv "MAIL" "~/mail")
+;; (setq rmail-preserve-inbox nil) ; delete mail from the mail file after retrieving
+;; (setq rmail-primary-inbox-list '("~/mail"))
+;; (setq rmail-remote-password-required nil)
+;; (setq mail-host-address "gmail.com")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; MODE SETTINGS
@@ -106,10 +118,17 @@
   :ensure t)
 
 ;;;; TERM SETTINGS
-(use-package term
-  :config
-  (add-hook 'term-mode-hook
-            (lambda () (set-face-attribute `term-color-blue nil :foreground "#6699cc"))))
+(use-package term)
+  ;; :config
+  ;; (add-hook 'term-mode-hook
+  ;;           (lambda () (set-face-attribute 'term-color-blue nil :foreground "#6699cc"))))
+
+;; ;;;; WANDERLUST SETTINGS
+;; (use-package wanderlust
+;;   :ensure t
+;;   :mode
+;;   ("\\.wl$"      . emacs-lisp-mode)
+;;   ("\\.folders$" . conf-unix-mode))
 
 ;;;; WEB SETTINGS
 (use-package web-mode
