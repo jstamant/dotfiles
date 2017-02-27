@@ -18,7 +18,7 @@
      ("account" "%(binary) -f %(ledger-file) reg %(account)"))))
  '(package-selected-packages
    (quote
-    (wanderlust scad-mode "use-package" use-package-chords ledger ledger-mode evil-visual-mark-mode evil web-mode use-package smart-mode-line scad-preview pkgbuild-mode markdown-mode magit auctex)))
+    (systemd wanderlust scad-mode "use-package" use-package-chords ledger ledger-mode evil-visual-mark-mode evil web-mode use-package smart-mode-line scad-preview pkgbuild-mode markdown-mode magit auctex)))
  '(send-mail-function (quote smtpmail-send-it))
  '(smtpmail-smtp-server "smtp.gmail.com")
  '(smtpmail-smtp-service 587)
