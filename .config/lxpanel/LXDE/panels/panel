@@ -102,12 +102,17 @@ Plugin {
 Plugin {
   type=netstatus
   Config {
-    iface=wlp4s6
+    iface=wlan0
     configtool=network-admin --configure %i
   }
 }
 Plugin {
   type=cpu
+  Config {
+  }
+}
+Plugin {
+  type=batt
   Config {
   }
 }
