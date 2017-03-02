@@ -16,6 +16,7 @@ This function visits the first file in the `org-files'
 variable. It searches your `org-directory'."
   (interactive)
   (find-file (concat org-directory (car org-files))))
+(add-hook 'org-mode-hook 'org-indent-mode) ; Clean view by default
 
 ;; Set Org files
 (defvar org-files
@@ -95,7 +96,7 @@ i.e. Have your most visited file listed first.")
 (setq org-capture-templates
       '(("t" "TODO" entry
          (file+headline "gtd.org" "Tasks")
-         "* TODO %^{Next-action description} %^g\n%U%?")
+         "* TODO %^{Next-action description}\n%u%?")
         ("c" "Collect" entry
          (file+headline "gtd.org" "In")
          "* %^{Brief description}\n%U%?")))
