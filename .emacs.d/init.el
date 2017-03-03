@@ -8,6 +8,9 @@
   (equal window-system 'w32)
   "t if emacs is running in windows")
 
+(if using-windows
+    (setenv "HOME" "c:/Users/jstamant/"))
+
 (defun init ()
   "Shortcut for finding your Emacs configuration file."
   (interactive)
