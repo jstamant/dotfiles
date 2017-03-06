@@ -99,12 +99,7 @@ i.e. Have your most visited file listed first.")
          "* TODO %^{Next-action description}\n%u%?")
         ("c" "Collect" entry
          (file+headline "gtd.org" "In")
-         "* %^{Brief description}\n%U%?")))
-
-;; org-mobile settings
-(setq org-mobile-directory "~/Dropbox/MobileOrg")
-(setq org-mobile-inbox-for-pull "~/drive/inbox.org")
-(setq org-mobile-force-id-on-agenda-items nil)
+         "* %^{Brief description}\n%u%?")))
 
 
 (provide 'init-org)
