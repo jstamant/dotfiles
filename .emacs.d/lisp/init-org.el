@@ -75,20 +75,34 @@ i.e. Have your most visited file listed first.")
           (tags-todo "linux")
           (tags-todo "out")
           (tags-todo "work"))
-         ((org-agenda-sorting-strategy
-           '((tags todo-state-up alpha-up)))))
+         ((org-agenda-sorting-strategy '((tags todo-state-up alpha-up)))))
         ("W" "WAITING state items" todo "WAITING"
-         ((org-agenda-sorting-strategy
-          '((todo tag-up)))))
+         ((org-agenda-sorting-strategy '((todo tag-up)))))
         ("I" "Incomplete items" todo "STARTED"
-         ((org-agenda-sorting-strategy
-           '((todo tag-up)))))
+         ((org-agenda-sorting-strategy '((todo tag-up)))))
         ("A" "Agenda context" tags-todo "agenda"
-         ((org-agenda-sorting-strategy
-           '((todo tag-up)))))
+         ((org-agenda-sorting-strategy '((todo tag-up)))))
         ("P" "List of active projects" tags "project"
-         ((org-agenda-sorting-strategy
-           '((tags alpha-up)))))))
+         ((org-agenda-sorting-strategy '((tags alpha-up)))))
+        ("T" "Test printable"
+         ((todo "TODO|STARTED"))
+         ((org-agenda-sorting-strategy '(tag-up timestamp-up))
+          (org-agenda-prefix-format "[ ] %-9:T ")
+          (org-agenda-todo-keyword-format "%-7s")
+          (org-agenda-overriding-header
+           "NEXT ACTIONS - sorted by context\n================================\n")
+          (org-agenda-remove-tags t)
+          (org-agenda-compact-blocks t)
+          (ps-number-of-columns 2)
+          (ps-landscape-mode t)
+          (ps-font-size 20.0)))
+        ("t" "Test2"
+         ((todo "TODO|STARTED"))
+         ((org-agenda-sorting-strategy '(tag-up timestamp-up))
+          (org-agenda-prefix-format " %-12:T ")
+          (org-agenda-overriding-header
+           "NEXT ACTIONS - sorted by context\n================================")
+          (org-agenda-remove-tags t)))))
 
 ;; org-capture settings
 (global-set-key "\C-cc" 'org-capture)
