@@ -25,6 +25,17 @@ XF86Explorer
 "pcmanfm"
 Mod4 + e
 
+"urxvt"
+Control + Alt + t
+
+# Screenshot - full screen
+"shutter --full"
+Print
+
+# Screenshot - active window
+"shutter --active"
+Alt + Print
+
 ## Multimedia keys
 
 "amixer set Master 1+"
@@ -64,3 +75,9 @@ Control + Escape
 
 "lxpanelctl menu"
 Alt + F1
+
+"lxtask"
+Control + Alt + Delete
+
+"lxde-logout"
+Mod4 + l

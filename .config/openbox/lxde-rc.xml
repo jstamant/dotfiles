@@ -161,11 +161,11 @@
     <keybind key="A-F4">
       <action name="Close"/>
     </keybind>
-    <keybind key="W-Down">
-      <action name="Iconify"/>
-    </keybind>
     <keybind key="W-Up">
-      <action name="ToggleMaximize"/>
+      <action name="Maximize"/>
+    </keybind>
+    <keybind key="W-Down">
+      <action name="Unmaximize"/>
     </keybind>
     <keybind key="A-Escape">
       <action name="Lower"/>
@@ -190,68 +190,8 @@
         <desktop>yes</desktop>
       </action>
     </keybind>
-    <!-- Keybindings for running applications -->
-    <keybind key="W-e">
-      <action name="Execute">
-        <command>pcmanfm</command>
-        <startupnotify>
-          <enabled>yes</enabled>
-          <name>PCManFM</name>
-        </startupnotify>
-      </action>
-    </keybind>
-    <!--keybindings for LXPanel -->
-    <keybind key="W-r">
-      <action name="Execute">
-        <command>lxpanelctl run</command>
-      </action>
-    </keybind>
-    <keybind key="A-F2">
-      <action name="Execute">
-        <command>lxpanelctl run</command>
-      </action>
-    </keybind>
-    <keybind key="C-Escape">
-      <action name="Execute">
-        <command>lxpanelctl menu</command>
-      </action>
-    </keybind>
-    <keybind key="A-F1">
-      <action name="Execute">
-        <command>lxpanelctl menu</command>
-      </action>
-    </keybind>
     <keybind key="A-F11">
       <action name="ToggleFullscreen"/>
-    </keybind>
-    <keybind key="W-l">
-      <action name="Execute">
-        <command>lxde-logout</command>
-      </action>
-    </keybind>
-    <!-- Launch Task Manager with Ctrl+Alt+Del -->
-    <keybind key="A-C-Delete">
-      <action name="Execute">
-        <command>lxtask</command>
-      </action>
-    </keybind>
-    <!-- Screenshot of the whole display when PrintScreen is pressed -->
-    <keybind key="Print">
-      <action name="Execute">
-        <command>shutter --full</command>
-      </action>
-    </keybind>
-    <!-- Screenshot of the active window when Alt+PrintScreen is pressed -->
-    <keybind key="A-Print">
-      <action name="Execute">
-        <command>shutter --active</command>
-      </action>
-    </keybind>
-    <!-- Shortcuts for opening a terminal window -->
-    <keybind key="A-C-t">
-      <action name="Execute">
-        <command>urxvt</command>
-      </action>
     </keybind>
   </keyboard>
   <mouse>
