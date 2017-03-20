@@ -30,8 +30,16 @@ if [ -d /etc/X11/xinit/xinitrc.d ] ; then
  unset f
 fi
 
-# Autostart applications
-# (none)
+# Set touchpad preferences
+# Tapping Enabled (274)
+xinput set-prop "SynPS/2 Synaptics TouchPad" 274 1
+# Accel Speed (282)
+xinput set-prop "SynPS/2 Synaptics TouchPad" 282 0.5
+# Natural Scrolling Enabled (284)
+xinput set-prop "SynPS/2 Synaptics TouchPad" 284 1
+
+# Autostart scripts and applications
+xbindkeys
 
 # Execute window manager or desktop environment
 exec startlxde
