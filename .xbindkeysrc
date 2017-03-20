@@ -1,0 +1,66 @@
+# -*- shell-script -*-
+################################################################################
+# File: .xbindkeysrc
+# Date: 2017-03-18
+# Desc: xbindkeys configuration file
+#
+# Generate a key-bind with 'xbindkeys --key'
+#
+# Mod4 is the Super modifier
+#
+# For more information on configuring xbindkeys, see the man page
+# 'man xbindkeys'
+#
+# Note that this configuration file does not have any
+# window-manager-specific settings. See the window-manager's
+# configuration file for window and layout key-bindings.
+#   i.e. ~/.config/openbox/lxde-rc.xml
+################################################################################
+
+##
+
+"pcmanfm"
+XF86Explorer
+
+"pcmanfm"
+Mod4 + e
+
+## Multimedia keys
+
+"amixer set Master 1+"
+XF86AudioRaiseVolume
+
+"amixer set Master 1-"
+XF86AudioLowerVolume
+
+"amixer set Master toggle"
+XF86AudioMute
+
+"amixer set Master 70%"
+Mod4 + XF86AudioMute
+
+"amixer set Capture toggle"
+XF86AudioMicMute
+
+"xbacklight -inc 10"
+XF86MonBrightnessUp
+
+"xbacklight -dec 10"
+XF86MonBrightnessDown
+
+##
+
+"lxpanelctl run"
+XF86LaunchA
+
+"lxpanelctl run"
+Mod4 + r
+
+"lxpanelctl run"
+Alt + F2
+
+"lxpanelctl menu"
+Control + Escape
+
+"lxpanelctl menu"
+Alt + F1
