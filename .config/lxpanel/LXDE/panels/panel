@@ -102,8 +102,15 @@ Plugin {
 Plugin {
   type=netstatus
   Config {
-    iface=wlan0
-    configtool=network-admin --configure %i
+    iface=enp0s31f6
+    configtool=nm-connection-editor
+  }
+}
+Plugin {
+  type=netstatus
+  Config {
+    iface=wlp4s0
+    configtool=nm-connection-editor
   }
 }
 Plugin {
@@ -114,10 +121,44 @@ Plugin {
 Plugin {
   type=batt
   Config {
+    BackgroundColor=black
+    ChargingColor1=#28f200
+    ChargingColor2=#22cc00
+    DischargingColor1=#ffee00
+    DischargingColor2=#d9ca00
+    HideIfNoBattery=0
+    AlarmCommand=notify-send "Battery low" --icon=battery-caution
+    AlarmTime=5
+    BorderWidth=2
+    Size=24
+    ShowExtendedInformation=0
+    BatteryNumber=0
+  }
+}
+Plugin {
+  type=batt
+  Config {
+    BackgroundColor=black
+    ChargingColor1=#28f200
+    ChargingColor2=#22cc00
+    DischargingColor1=#ffee00
+    DischargingColor2=#d9ca00
+    HideIfNoBattery=0
+    AlarmCommand=notify-send "Battery low" --icon=battery-caution
+    AlarmTime=5
+    BorderWidth=2
+    Size=24
+    ShowExtendedInformation=0
+    BatteryNumber=1
   }
 }
 Plugin {
   type=tray
+  Config {
+  }
+}
+Plugin {
+  type=volume
   Config {
   }
 }
