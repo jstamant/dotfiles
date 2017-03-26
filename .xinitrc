@@ -34,7 +34,7 @@ fi
 # Tapping Enabled (274)
 xinput set-prop "SynPS/2 Synaptics TouchPad" 274 1
 # Accel Speed (282)
-xinput set-prop "SynPS/2 Synaptics TouchPad" 282 0.5
+#xinput set-prop "SynPS/2 Synaptics TouchPad" 282 0.5
 # Natural Scrolling Enabled (284)
 xinput set-prop "SynPS/2 Synaptics TouchPad" 284 1
 
