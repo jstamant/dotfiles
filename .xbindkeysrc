@@ -17,7 +17,7 @@
 #   i.e. ~/.config/openbox/lxde-rc.xml
 ################################################################################
 
-##
+## Desktop functions and shortcuts
 
 "pcmanfm"
 XF86Explorer
@@ -53,16 +53,29 @@ Mod4 + XF86AudioMute
 "amixer set Capture toggle"
 XF86AudioMicMute
 
-"xbacklight -inc 10"
-XF86MonBrightnessUp
+# 2017-03-25 Backlight property does not work with modesetting driver,
+# because the backlight property is located in
+# /sys/class/backlight/intel_backlight/brightness. Look into this in a
+# few months from now.
 
-"xbacklight -dec 10"
-XF86MonBrightnessDown
+#"xbacklight -inc 10"
+#XF86MonBrightnessUp
+#"xbacklight -dec 10"
+#XF86MonBrightnessDown
+
+#XF86Display
+#XF86WLAN
 
 ##
 
 "lxpanelctl run"
 XF86LaunchA
+
+"lxpanelctl run"
+XF86Tools
+
+"lxpanelctl run"
+XF86Search
 
 "lxpanelctl run"
 Mod4 + r
