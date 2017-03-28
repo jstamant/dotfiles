@@ -85,10 +85,11 @@ i.e. Have your most visited file listed first.")
         ("P" "List of active projects" tags "project"
          ((org-agenda-sorting-strategy '((tags alpha-up)))))
         ("T" "Test printable"
-         ((todo "TODO|STARTED"))
+         ((todo "TODO"))
          ((org-agenda-sorting-strategy '(tag-up timestamp-up))
-          (org-agenda-prefix-format "[ ] %-9:T ")
-          (org-agenda-todo-keyword-format "%-7s")
+          (org-agenda-prefix-format "[ ] [ ] %-9:T ")
+          ;;(org-agenda-todo-keyword-format "%-7s")
+          (org-agenda-todo-keyword-format "")
           (org-agenda-overriding-header
            "NEXT ACTIONS - sorted by context\n================================\n")
           (org-agenda-remove-tags t)
@@ -97,7 +98,7 @@ i.e. Have your most visited file listed first.")
           (ps-landscape-mode t)
           (ps-font-size 20.0)))
         ("t" "Test2"
-         ((todo "TODO|STARTED"))
+         ((todo "TODO"))
          ((org-agenda-sorting-strategy '(tag-up timestamp-up))
           (org-agenda-prefix-format " %-12:T ")
           (org-agenda-overriding-header
