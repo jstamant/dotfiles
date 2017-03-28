@@ -1,12 +1,13 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; init-faces.el
+;; tinman16-theme.el
 ;; Justin R. St-Amant, 2017-02-18
 ;;
 ;; Commentary:
 ;;
+;; NEEDS DOCUMENTATION; SCRAP ALL OF THIS!
+;;
 ;; This file is strongly based off Kaleb Elwert's work in the
-;; base16-emacs repository
-;; , https://github.com/belak/base16-emacs/
+;; base16-emacs repository, https://github.com/belak/base16-emacs/
 ;;
 ;; The main reason for using the code from the base16-emacs repository
 ;; is for documentation purposes. I didn't feel like the code in the
@@ -25,49 +26,18 @@
 ;; what I want to do.
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(set-face-attribute 'default nil :height 100)
-
-;; Do not inherit any colors or settings from X resources
-(setq inhibit-x-resources t)
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Variables / Color sets / Faces
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(defvar tinman-base16-colors
-  '(:base00  "#2d2d2d"  ; grey18
-    :base01  "#393939"  ; grey22
-    :base02  "#515151"  ; grey32
-    :base03  "#747369"  ; grey45
-    :base04  "#a09f93"  ; grey62
-    :base05  "#d3d0c8"  ; grey82
-    :base06  "#e8e6df"  ; grey92
-    :base07  "#f2f0ec"  ; grey94
-    
-    :black   "grey18"
-    :red     "tomato"   ;"#f2777a" or "light coral"
-    :green   "DarkSeaGreen3" ;"#99cc99" or "PaleGreen3" or "LimeGreen" or "LightGreen"
-    :yellow  "gold"  ; "#ffcc66" or "gold" or "goldenrod1"
-    :blue    "CornflowerBlue" ; "#6699cc" or "SkyBlue3" or "SteelBlue3"
-    :magenta "plum3" ; "#cc99cc" or "orchid"
-    :cyan    "CadetBlue3" ; "#66cccc" or "MediumTurquoise" or "DarkSlateGray3"
-    :white   "gainsboro"
-    
-    :orange  "salmon1"  ; "#f99157" or "SandyBrown" or "DarkOrange1"
-    :brown   "LightSalmon3") ; "#d27b53" or "peru" or "LightSalmon3" or tan3
-  "Color palette for Justin St-Amant's Base16-inspired theme.
-
-All colors are currently set to the Base16 Eighties colors.
-i.e. soft-grey background with pastel foreground colors.")
-
 (defvar base16-shell-colors
-  '(:base01 "brightgreen"
-    :base02 "brightyellow"
-    :base03 "brightblack"
-    :base04 "brightblue"
-    :base05 "white"
-    :base06 "brightmagenta"
-    :base07 "brightwhite"
+  '(:base01  "brightgreen"
+    :base02  "brightyellow"
+    :base03  "brightblack"
+    :base04  "brightblue"
+    :base05  "white"
+    :base06  "brightmagenta"
+    :base07  "brightwhite"
 
     :black   "black"
     :red     "red"
@@ -80,10 +50,10 @@ i.e. soft-grey background with pastel foreground colors.")
 
     :orange  "yellow"
     :brown   "red")
-  "Base16 colors for use in a terminal.
+  "Safe Base16 colors for use in a terminal.
 i.e. with a limited color palette.
 
-UNIMPLEMENTED YET")
+UNIMPLEMENTED YET?")
 
 (defvar custom-faces
   '((default :foreground white :background black)
@@ -114,12 +84,12 @@ UNIMPLEMENTED YET")
   "A list of faces, and the attributes to apply to them.
 
 The format of this list is as follows:
-(face . plist)
-(face . plist)
-(face . plist)
+(face . attributes)
+(face . attributes)
+(face . attributes)
 ...
 
-Where face is the name of the face, and plist is a plist of
+Where face is the name of the face, and attributes is a plist of
 attributes taking the form:
 (attribute value attribute value ... )
 
@@ -135,30 +105,47 @@ Possible attributes can be found in Info node `(elisp)Face Attributes'.")
 ;; Theme-generation functions
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(defun initialize-theme (faces)
+(defun initialize-theme (theme colors faces)
   "DOCUMENTATION INCOMPLETE"
-  (apply 'custom-set-faces (mapcar 'apply-face-spec faces)))
+  ;;PROBLEM: custom-theme-set-faces needs the faces in seperate ARGS,
+  ;;not in a single list, as I'm making with 'apply-face-spec
+  (apply
+   'custom-theme-set-faces
+   theme
+   (mapcar
+    (lambda (face)
+      (apply-face-spec colors face))
+    faces)))
 
-(defun apply-face-spec (face)
-  "DOCUMENTATION INCOMPLETE Applies a face spec to a `FACE' for
-use with `custom-set-faces' or `custom-theme-set-face'. From a
-list containing the face symbol, and a plist of attributes."
+(defun apply-face-spec (colors face)
+  "DOCUMENTATION INCOMPLETE Applies a face spec to each face in
+`FACES', according to a list of `COLORS' to use. For use with
+`custom-set-faces' or `custom-theme-set-face'. From a list
+containing the face symbol, and a plist of attributes.  Returns a
+list of elements of the form ___"
   (let ((name       (car face))
         (attributes (cdr face)))
-    (list name (list (list '((min-colors 256)) (sub-color-keys attributes))
-                     (list t                   (sub-color-keys attributes))))))
+    ;; THIS CAN BE SHORTENED
+    (list name (list (list '((min-colors 256)) (sub-color-keys attributes colors))
+                     (list t                   (sub-color-keys attributes colors))))))
 
-(defun sub-color-keys (attributes)
-  "DOCUMENTATION INCOMPLETE Substitutes custom color names to
-color strings. Also does not work with constants or muliple
-attributes yet. Potentially does not work with :box or :underline
+(defun sub-color-keys (attributes colors)
+  "DOCUMENTATION INCOMPLETE
+
+Converts custom color names in a plist to color strings.
+
+Example: (:foreground red) gets converted to (:foreground \"#ff0000\")
+
+Does not support constants??
+
+Note: Potentially does not work with :box or :underline
 attributes."
   (let ((output))
     (while attributes
       (let* ((key   (car attributes))
              (value (cadr attributes))
              (color-key (if (symbolp value) (intern (concat ":" (symbol-name value)) nil)))
-             (color (plist-get tinman-base16-colors color-key)))
+             (color (plist-get colors color-key)))
         (cond (color
                (setq output (append output (list key color))))
               (t
@@ -169,9 +156,4 @@ attributes."
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;;(sub-color-keys '(:foreground "#ffffff" :background "#000000" :height 100))
-
-;; Add all the faces to the theme
-(initialize-theme custom-faces)
-
-(provide 'init-faces)
+(provide 'tinman16-theme)

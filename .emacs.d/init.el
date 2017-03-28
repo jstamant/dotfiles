@@ -28,11 +28,11 @@
 (tool-bar-mode -1)
 (setq inhibit-splash-screen t) ; Disable startup messages
 
-;; General settings
-(setq-default indicate-empty-lines t) ; Show empty lines with a fringe
-
 ;; General font settings
-(require 'init-faces)
+(add-to-list 'custom-theme-load-path "~/.emacs.d/lisp/")
+(load-theme 'tinman16-eighties t)
+;; Required; can't be set through the theme. Emacs bug, I think.
+(set-face-attribute 'default nil :height 100)
 
 ;; Set backup and auto-save file location
 (setq backup-directory-alist
