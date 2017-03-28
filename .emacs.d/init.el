@@ -16,6 +16,14 @@
   (interactive)
   (find-file "~/.emacs.d/init.el"))
 
+(defun work ()
+  "Shortcut for finding your work org file."
+  (interactive)
+  (find-file "~/work.org"))
+
+;; Do not inherit any colors or settings from X resources
+(setq inhibit-x-resources t)
+
 ;; Load my customizations
 (setq custom-file "~/.emacs.d/custom.el")
 (load custom-file)
@@ -84,14 +92,27 @@ jstamant24@gmail.com")
 ;;;; DIRED SETTINGS
 (put 'dired-find-alternate-file 'disabled nil)
 
+;;;; HELP-MODE SETTINGS
+(use-package help-mode
+  :bind (:map help-mode-map
+              ("n" . next-line)
+              ("p" . previous-line)))
+
 ;;;; LEDGER SETTINGS
 (use-package ledger-mode
   :ensure t
   :mode "\\.ledger$"
   :config
   (setq ledger-use-iso-dates t) ; Specify ISO-8601 date format
+  (setq ledger-highlight-xact-under-point nil)
   (add-to-list 'ledger-reports
                '("uncleared" "%(binary) -f %(ledger-file) reg --uncleared")))
+
+(use-package ledger-report-mode
+  :bind (:map ledger-report-mode-map
+              ("n"   . next-line)
+              ("p"   . previous-line)
+              ("TAB" . ledger-report-visit-source)))
 
 (defun ledger ()
   "Shortcut for finding your ledger file."
@@ -118,11 +139,11 @@ jstamant24@gmail.com")
   :config
   (setq pkgbuild-update-sums-on-save nil))
 
-;;;; SCAD SETTINGS
-(use-package scad
-  :ensure scad-mode)
-(use-package scad-preview
-  :ensure t)
+;; ;;;; SCAD SETTINGS
+;; (use-package scad
+;;   :ensure scad-mode)
+;; (use-package scad-preview
+;;   :ensure t)
 
 ;;;; SMART MODE-LINE SETTINGS
 (use-package smart-mode-line
@@ -162,3 +183,4 @@ jstamant24@gmail.com")
   (setq web-mode-markup-indent-offset 2)
   (setq web-mode-css-indent-offset 2)
   (setq web-mode-code-indent-offset 2))
+
