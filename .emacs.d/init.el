@@ -108,7 +108,7 @@ jstamant24@gmail.com")
   (add-to-list 'ledger-reports
                '("uncleared" "%(binary) -f %(ledger-file) reg --uncleared")))
 
-(use-package ledger-report-mode
+(use-package ledger-report
   :bind (:map ledger-report-mode-map
               ("n"   . next-line)
               ("p"   . previous-line)
