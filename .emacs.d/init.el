@@ -126,6 +126,7 @@ jstamant24@gmail.com")
 ;;;; MAGIT SETTINGS
 (use-package magit
   :ensure t
+  :bind ("C-x g" . magit-status)
   :init
   (when using-windows
     (setq magit-git-executable "c:/Program Files/Git/bin/git.exe")))
