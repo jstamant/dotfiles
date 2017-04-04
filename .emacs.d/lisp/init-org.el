@@ -68,14 +68,13 @@ i.e. Have your most visited file listed first.")
          ((org-agenda-sorting-strategy
            '((agenda time-up tag-up)
              (tags todo-state-up alpha-up)))))
-        ("N" "List of next-actions by context"
-         ((tags-todo "home")
-          (tags-todo "anywhere")
-          (tags-todo "computer")
-          (tags-todo "linux")
-          (tags-todo "out")
-          (tags-todo "work"))
-         ((org-agenda-sorting-strategy '((tags todo-state-up alpha-up)))))
+        ("n" "List of next-actions by context"
+         ((todo "TODO"))
+         ((org-agenda-sorting-strategy '(tag-up timestamp-up))
+          (org-agenda-prefix-format " %-12:T ")
+          (org-agenda-overriding-header
+           "NEXT ACTIONS - sorted by context\n================================")
+          (org-agenda-remove-tags t)))
         ("W" "WAITING state items" todo "WAITING"
          ((org-agenda-sorting-strategy '((todo tag-up)))))
         ("I" "Incomplete items" todo "STARTED"
@@ -96,14 +95,7 @@ i.e. Have your most visited file listed first.")
           (org-agenda-compact-blocks t)
           (ps-number-of-columns 2)
           (ps-landscape-mode t)
-          (ps-font-size 20.0)))
-        ("t" "Test2"
-         ((todo "TODO"))
-         ((org-agenda-sorting-strategy '(tag-up timestamp-up))
-          (org-agenda-prefix-format " %-12:T ")
-          (org-agenda-overriding-header
-           "NEXT ACTIONS - sorted by context\n================================")
-          (org-agenda-remove-tags t)))))
+          (ps-font-size 20.0)))))
 
 ;; org-capture settings
 (global-set-key "\C-cc" 'org-capture)
