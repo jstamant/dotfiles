@@ -89,6 +89,10 @@ jstamant24@gmail.com")
 (use-package tex-site
   :ensure auctex)
 
+;;;; CALC SETTINGS
+(use-package calc
+  :bind ("C-x c" . calc))
+
 ;;;; DIRED SETTINGS
 (put 'dired-find-alternate-file 'disabled nil)
 
