@@ -133,6 +133,10 @@ jstamant24@gmail.com")
 ;;;; ORG SETTINGS
 (require 'init-org)
 
+;;;; PAREN SETTINGS
+(use-package paren
+  :bind ("C-x p" . show-paren-mode))
+
 ;;;; PKGBUILD SETTINGS
 (use-package pkgbuild-mode
   :ensure t
