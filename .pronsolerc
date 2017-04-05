@@ -1,0 +1,31 @@
+set last_window_maximized True
+set last_window_width 1596
+set last_window_height 825
+set last_sash_position 721
+set baudrate 115200
+set build_dimensions 160.00x180.00x170.00+0.00+0.00+0.00+0.00+0.00+0.00
+set extruders 1
+set slic3rintegration True
+set sliceoptscommand /home/justin/applications/Slic3r/bin/slic3r
+set port /dev/ttyACM0
+set temperature_pla 200
+set mainviz 2D
+button 0 "P1" G1 X0 Y0 F2000;
+button 1 "P2" G1 X160 Y0 F2000;
+button 2 "P3" G1 X160 Y180 F2000;
+button 3 "P4" G1 X0 Y180 F2000;
+button 5 "Fan 100%" /c "red" M106 S255;
+button 6 "Fan 60%" /c "orange" M106 S152;
+button 7 "Fan 0%" /c "blue" M107;
+set last_file_path /home/justin/downloads
+set recentfiles ["/home/justin/downloads/compartment.gcode", "/home/justin/downloads/saber.gcode", "/home/justin/downloads/saber.stl", "/home/justin/drive/games/rimworld/RimWorld914Linux/RimWorld914Linux_Data/sharedassets1.assets", "/home/justin/downloads/watch-piece.gcode"]
+set last_bed_temperature 60.0
+set last_temperature 200.0
+set total_filament_used 127639.382609
+set xy_feedrate 3000
+set z_feedrate 100
+set e_feedrate 300
+set last_extrusion 1
+button 4 "Center" G1 X80 Y90 F2000;
+button 8 "Far left" G1 X160 F2000;
+button 9 "Far right" G1 X0 F2000;
