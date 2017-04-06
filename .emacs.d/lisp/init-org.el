@@ -55,33 +55,18 @@ i.e. Have your most visited file listed first.")
       '("+project/-DONE" ("TODO" "STARTED") nil ""))
 
 (setq org-agenda-custom-commands
-      '(("D" "Daily GTD review"
-         ((agenda "")
-          (todo "WAITING")
-          (todo "STARTED")
-          (tags-todo "home")
-          (tags-todo "anywhere")
-          (tags-todo "computer")
-          (tags-todo "linux")
-          (tags-todo "out")
-          (tags-todo "work"))
-         ((org-agenda-sorting-strategy
-           '((agenda time-up tag-up)
-             (tags todo-state-up alpha-up)))))
-        ("n" "List of next-actions by context"
+      '(("n" "Next-actions by context"
          ((todo "TODO"))
          ((org-agenda-sorting-strategy '(tag-up timestamp-up))
           (org-agenda-prefix-format " %-12:T ")
           (org-agenda-overriding-header
            "NEXT ACTIONS - sorted by context\n================================")
           (org-agenda-remove-tags t)))
-        ("W" "WAITING state items" todo "WAITING"
+        ("w" "WAITING items" todo "WAITING"
          ((org-agenda-sorting-strategy '((todo tag-up)))))
-        ("I" "Incomplete items" todo "STARTED"
+        ("i" "Incomplete items" todo "STARTED"
          ((org-agenda-sorting-strategy '((todo tag-up)))))
-        ("A" "Agenda context" tags-todo "agenda"
-         ((org-agenda-sorting-strategy '((todo tag-up)))))
-        ("P" "List of active projects" tags "project"
+        ("p" "List of active projects" tags "project"
          ((org-agenda-sorting-strategy '((tags alpha-up)))))
         ("T" "Test printable"
          ((todo "TODO"))
