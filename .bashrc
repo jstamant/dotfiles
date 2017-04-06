@@ -11,6 +11,7 @@ export PS2='> '
 
 # Set nano as primary editor
 EDITOR='nano'
+VISUAL='emacsclient'
 
 #
 # ALIASES
