@@ -31,12 +31,9 @@ if [ -d /etc/X11/xinit/xinitrc.d ] ; then
 fi
 
 # Set touchpad preferences
-# Tapping Enabled (274)
-xinput set-prop "SynPS/2 Synaptics TouchPad" 274 1
-# Accel Speed (282)
-#xinput set-prop "SynPS/2 Synaptics TouchPad" 282 0.5
-# Natural Scrolling Enabled (284)
-xinput set-prop "SynPS/2 Synaptics TouchPad" 284 1
+#xinput set-prop "SynPS/2 Synaptics TouchPad" "libinput Tapping Enabled" 1
+#xinput set-prop "SynPS/2 Synaptics TouchPad" "libinput Accel Speed" 0.5
+xinput set-prop "SynPS/2 Synaptics TouchPad" "libinput Natural Scrolling Enabled" 1
 
 # Autostart scripts and applications
 xbindkeys
