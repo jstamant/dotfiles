@@ -52,7 +52,7 @@ i.e. Have your most visited file listed first.")
 (put 'org-remove-file 'disabled
      "Agenda files are determined at startup through the init file!\n")
 (setq org-stuck-projects
-      '("+project/-DONE" ("TODO" "STARTED") nil ""))
+      '("+project" ("TODO" "STARTED") nil ""))
 
 (setq org-agenda-custom-commands
       '(("n" "Next-actions by context"
