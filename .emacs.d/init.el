@@ -109,6 +109,7 @@ jstamant24@gmail.com")
   :config
   (setq ledger-use-iso-dates t) ; Specify ISO-8601 date format
   (setq ledger-highlight-xact-under-point nil)
+  (setq ledger-mode-should-check-version nil)
   (add-to-list 'ledger-reports
                '("uncleared" "%(binary) -f %(ledger-file) reg --uncleared")))
 
