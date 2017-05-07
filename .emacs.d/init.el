@@ -63,24 +63,6 @@
     (progn (package-refresh-contents)
            (package-install 'use-package)))
 
-;; Mail settings (temporary location, to be moved)
-(setq message-signature
-      "Justin R. St-Amant
-Engineering Technologist\n
-204-451-7111 (phone)
-jstamant24@gmail.com")
-(setq message-from-style "angles")
-;;(setenv "MAIL" "~/mail")
-(setq message-directory "~/mail/")
-(setq rmail-preserve-inbox nil) ; Delete mail from the mbox file once retrieved
-(setq rmail-primary-inbox-list '("~/mail/inbox"))
-(setq rmail-file-name "~/mail/rmail")
-(setq rmail-remote-password-required nil)
-(setq mail-host-address "gmail.com")
-(setq user-full-name "Justin St-Amant")
-(setq user-mail-address "jstamant24@gmail.com")
-(setq mail-user-agent 'message-user-agent)
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; MODE SETTINGS
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
