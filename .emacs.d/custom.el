@@ -11,7 +11,8 @@
     (("bal" "%(binary) -f %(ledger-file) bal")
      ("reg" "%(binary) -f %(ledger-file) reg")
      ("payee" "%(binary) -f %(ledger-file) reg @%(payee)")
-     ("account" "%(binary) -f %(ledger-file) reg %(account)")))))
+     ("account" "%(binary) -f %(ledger-file) reg %(account)"))))
+ '(package-selected-packages (quote (htmlize web-mode auctex use-package))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
