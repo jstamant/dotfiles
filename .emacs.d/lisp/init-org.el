@@ -26,12 +26,7 @@ When setting this variable in your .emacs, sort them by priority.
 i.e. Have your most visited file listed first.")
 
 ;; Dynamically set org-directory depending on the OS
-(when using-windows
-  (let ((userprofile
-         (replace-regexp-in-string "\\\\" "/" (getenv "USERPROFILE"))))
-    (setq org-directory (concat userprofile "/Google Drive/"))))
-(if (not using-windows)
-    (setq org-directory "~/drive/"))
+(setq org-directory drive-directory)
 
 ;; Set agenda files
 (setq org-agenda-files '())

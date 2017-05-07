@@ -8,6 +8,13 @@
   (equal window-system 'w32)
   "t if emacs is running in windows")
 
+(defvar drive-directory
+  (if (not using-windows)
+      '("~/drive/")
+    (let ((userprofile (replace-regexp-in-string "\\\\" "/" (getenv "USERPROFILE"))))
+      (concat userprofile "/Google Drive/")))
+  "The absolute path to the Google Drive directory under Linux or Windows.")
+
 (if using-windows
     (setenv "HOME" (getenv "USERPROFILE")))
 
@@ -102,9 +109,9 @@
               ("TAB" . ledger-report-visit-source)))
 
 (defun ledger ()
-  "Shortcut for finding your ledger file."
+  "Shortcut for finding my ledger file."
   (interactive)
-  (find-file "~/drive/reference/budget/2017-test.ledger"))
+  (find-file (concat drive-directory "reference/finances/2017-finances.ledger")))
 
 ;;;; MAGIT SETTINGS
 (use-package magit
