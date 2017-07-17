@@ -10,7 +10,7 @@
 
 (defvar drive-directory
   (if (not using-windows)
-      '("~/drive/")
+      "~/drive/"
     (let ((userprofile (replace-regexp-in-string "\\\\" "/" (getenv "USERPROFILE"))))
       (concat userprofile "/Google Drive/")))
   "The absolute path to the Google Drive directory under Linux or Windows.")
