@@ -36,8 +36,8 @@ fi
 xinput set-prop "SynPS/2 Synaptics TouchPad" "libinput Natural Scrolling Enabled" 1
 
 # Autostart scripts and applications
-xbindkeys
+#xbindkeys
 
 # Execute window manager or desktop environment
-exec startlxde
+exec cinnamon-session
 
