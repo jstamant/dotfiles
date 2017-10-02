@@ -9,9 +9,9 @@
 export PS1='\[\e[1;34m\][\u@\h \W]\$\[\e[0m\] '
 export PS2='> '
 
-# Set nano as primary editor
-EDITOR='nano'
-VISUAL='emacsclient'
+# Set vim as primary editor
+EDITOR='vi'
+VISUAL='vim'
 
 #
 # ALIASES
@@ -22,8 +22,8 @@ alias ll='ls -l'
 alias la='ls -la'
 alias grep='grep --color=auto'
 # Also evaluate aliases preceded by 'sudo'
-alias sudo='sudo '
+#alias sudo='sudo '
 # Emacs over terminal
-alias emt='emacsclient -t'
+#alias emt='emacsclient -t'
 # Send file to running Emacs server
-alias emc='emacsclient -n'
+#alias emc='emacsclient -n'
