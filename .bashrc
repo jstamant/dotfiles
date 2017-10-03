@@ -21,6 +21,8 @@ alias l='ls -CF'
 alias ll='ls -l'
 alias la='ls -la'
 alias grep='grep --color=auto'
+alias todo='todo.sh'
+alias t='todo.sh'
 # Also evaluate aliases preceded by 'sudo'
 #alias sudo='sudo '
 # Emacs over terminal
