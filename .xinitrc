@@ -36,8 +36,11 @@ fi
 xinput set-prop "SynPS/2 Synaptics TouchPad" "libinput Natural Scrolling Enabled" 1
 
 # Autostart scripts and applications
-#xbindkeys
+xbindkeys
+# Set desktop wallpaper
+feh --bg-scale ~/downloads/01.jpg
 
 # Execute window manager or desktop environment
-exec cinnamon-session
+#exec cinnamon-session
+exec i3
 

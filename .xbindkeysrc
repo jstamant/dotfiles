@@ -22,8 +22,8 @@
 "pcmanfm"
 XF86Explorer
 
-"pcmanfm"
-Mod4 + e
+#"pcmanfm"
+#Mod4 + e
 
 "urxvt"
 Control + Alt + t
@@ -68,29 +68,29 @@ XF86AudioMicMute
 
 ##
 
-"lxpanelctl run"
-XF86LaunchA
+#"lxpanelctl run"
+#XF86LaunchA
 
-"lxpanelctl run"
-XF86Tools
+#"lxpanelctl run"
+#XF86Tools
 
-"lxpanelctl run"
-XF86Search
+#"lxpanelctl run"
+#XF86Search
 
-"lxpanelctl run"
-Mod4 + r
+#"lxpanelctl run"
+#Mod4 + r
 
-"lxpanelctl run"
-Alt + F2
+#"lxpanelctl run"
+#Alt + F2
 
-"lxpanelctl menu"
-Control + Escape
+#"lxpanelctl menu"
+#Control + Escape
 
-"lxpanelctl menu"
-Alt + F1
+#"lxpanelctl menu"
+#Alt + F1
 
-"lxtask"
-Control + Alt + Delete
+#"lxtask"
+#Control + Alt + Delete
 
-"lxde-logout"
-Mod4 + l
+#"lxde-logout"
+#Mod4 + l
