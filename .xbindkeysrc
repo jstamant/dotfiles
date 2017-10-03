@@ -38,10 +38,10 @@ Alt + Print
 
 ## Multimedia keys
 
-"amixer set Master 1+"
+"amixer set Master 2%+"
 XF86AudioRaiseVolume
 
-"amixer set Master 1-"
+"amixer set Master 2%-"
 XF86AudioLowerVolume
 
 "amixer set Master toggle"
