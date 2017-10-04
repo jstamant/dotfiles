@@ -77,9 +77,11 @@ cmap w!! w !sudo tee > /dev/null %
 " Shortcut to common files
 command Vimrc e ~/.vim/vimrc
 
+" Abbreviations
+iab <expr> dts strftime('%F')
+
 " Configure keybinds
 nnoremap <F4> :make!<cr>
 nnoremap <F5> :make run!<cr>
 "nnoremap <F8> :TagbarToggle<cr>
 nnoremap <F2> :NERDTreeToggle<cr>
-
