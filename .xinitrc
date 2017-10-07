@@ -39,6 +39,7 @@ xinput set-prop "SynPS/2 Synaptics TouchPad" "libinput Natural Scrolling Enabled
 xbindkeys
 # Set desktop wallpaper
 feh --bg-center ~/downloads/01.jpg
+nm-applet &
 
 # Execute window manager or desktop environment
 #exec cinnamon-session
