@@ -6,28 +6,29 @@ set rtp+=~/.vim/bundle/Vundle.vim
 " Declare all the desired plugins
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
-Plugin 'tpope/vim-fugitive'
-Plugin 'vim-airline/vim-airline'
-Plugin 'majutsushi/tagbar'
-Plugin 'scrooloose/syntastic'
-Plugin 'scrooloose/nerdtree'
-Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'pangloss/vim-javascript'
+"Plugin 'tpope/vim-fugitive'
+"Plugin 'vim-airline/vim-airline'
+"Plugin 'majutsushi/tagbar'
+"Plugin 'scrooloose/syntastic'
+"Plugin 'scrooloose/nerdtree'
+"Plugin 'ctrlpvim/ctrlp.vim'
+"Plugin 'pangloss/vim-javascript'
+"Plugin 'ledger/vim-ledger'
 call vundle#end()
 
 filetype plugin indent on
 
 " Configure vim-airline
-set laststatus=2
-set ttimeoutlen=10
-if !exists('g:airline_symbols')
-  let g:airline_symbols = {}
-endif
-let g:airline_left_sep = ''
-let g:airline_right_sep = ''
-let g:airline_symbols.linenr = '¶'
-"let g:airline_symbols.branch = '⎇'
-let g:airline_symbols.branch = 'b'
+"set laststatus=2
+"set ttimeoutlen=10
+"if !exists('g:airline_symbols')
+"  let g:airline_symbols = {}
+"endif
+"let g:airline_left_sep = ''
+"let g:airline_right_sep = ''
+"let g:airline_symbols.linenr = '¶'
+""let g:airline_symbols.branch = '⎇'
+"let g:airline_symbols.branch = 'b'
 
 " Configure syntastic
 "set statusline+=%#warningmsg#
@@ -39,8 +40,8 @@ let g:airline_symbols.branch = 'b'
 "let g:syntastic_check_on_wq = 0
 
 " Configure ctrlp fuzzy finder
-let g:ctrlp_map = '<c-p>'
-let g:ctrlp_cmd = 'CtrlP'
+"let g:ctrlp_map = '<c-p>'
+"let g:ctrlp_cmd = 'CtrlP'
 
 " Configure tab and indent settings
 set expandtab
@@ -69,6 +70,7 @@ set number
 
 " No text wrap by default
 set nowrap
+set linebreak " If wrap is on: logical linebreaks occur at the end of words
 set textwidth=80
 
 " Allow saving of files as sudo
@@ -84,4 +86,4 @@ iab <expr> dts strftime('%F')
 nnoremap <F4> :make!<cr>
 nnoremap <F5> :make run!<cr>
 "nnoremap <F8> :TagbarToggle<cr>
-nnoremap <F2> :NERDTreeToggle<cr>
+"nnoremap <F2> :NERDTreeToggle<cr>
