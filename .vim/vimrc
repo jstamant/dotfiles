@@ -6,6 +6,7 @@ set rtp+=~/.vim/bundle/Vundle.vim
 " Declare all the desired plugins
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
+Plugin 'chriskempson/base16-vim'
 "Plugin 'tpope/vim-fugitive'
 "Plugin 'vim-airline/vim-airline'
 "Plugin 'majutsushi/tagbar'
@@ -18,6 +19,14 @@ Plugin 'sirtaj/vim-openscad'
 call vundle#end()
 
 filetype plugin indent on
+
+" Set colorscheme
+"set t_Co=8
+set background=dark
+"colorscheme desert
+colorscheme base16-modified
+set colorcolumn=80
+highlight ColorColumn ctermbg=darkgray
 
 " Configure vim-airline
 "set laststatus=2
@@ -59,13 +68,6 @@ set wildmenu
 
 " Turn on syntax highlighting
 syntax on
-
-" Set colorscheme
-set t_Co=256
-set background=dark
-colorscheme desert
-set colorcolumn=80
-highlight ColorColumn ctermbg=darkgray
 
 " Move .viminfo file
 set viminfo+=n~/.vim/viminfo
