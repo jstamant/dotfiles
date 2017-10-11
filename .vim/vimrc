@@ -14,6 +14,7 @@ Plugin 'VundleVim/Vundle.vim'
 "Plugin 'ctrlpvim/ctrlp.vim'
 "Plugin 'pangloss/vim-javascript'
 "Plugin 'ledger/vim-ledger'
+Plugin 'sirtaj/vim-openscad'
 call vundle#end()
 
 filetype plugin indent on
