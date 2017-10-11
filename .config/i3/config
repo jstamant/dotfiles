@@ -53,6 +53,9 @@ bindsym $mod+Down        focus down
 bindsym $mod+Up          focus up
 bindsym $mod+Right       focus right
 
+bindsym $mod+p           focus parent
+bindsym $mod+Shift+p     focus child
+
 # Move focused window
 bindsym $mod+Shift+h     move left
 bindsym $mod+Shift+j     move down
@@ -91,11 +94,10 @@ bindsym $mod+Shift+0 move container to workspace 10
 # Layout management
 # ==================================================
 
-# split in horizontal orientation
-# Bound to change focus key
-#bindsym $mod+h split h
+# Split in horizontal orientation
+bindsym $mod+g split h
 
-# split in vertical orientation
+# Split in vertical orientation
 bindsym $mod+v split v
 
 # enter fullscreen mode for the focused container
@@ -111,12 +113,6 @@ bindsym $mod+Shift+space floating toggle
 
 # change focus between tiling / floating windows
 bindsym $mod+space focus mode_toggle
-
-# focus the parent container
-bindsym $mod+a focus parent
-
-# focus the child container
-#bindsym $mod+d focus child
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -160,12 +156,18 @@ mode "resize"
 
 # Syntax: set_from_resource $<name> <X_resource_name> <fallback>
 set_from_resource $black i3wm.color0 #000000
+# Blue
+set_from_resource $primary i3wm.primary #0000ff
+# White
+set_from_resource $foreground i3wm.foreground #ffffff
+set $foreground-alt #555555
+# Pastel black
+set_from_resource $background i3wm.background #000000
 
-# class border background text indicator
-# indicator color is the border color of the splitting side
-#client.focused $black $black $black $black
-#client.focused_inactive
-#client.unfocused
+# <class>               <border>    <bckgr.>    <text>   <indicator> <child_border>
+#client.focused          $primary    $background $primary $primary $primary
+#client.focused_inactive $background $background $foreground-alt $black $black
+#client.unfocused        $background $background $foreground-alt $black $black
 #client.urgent
 #client.placeholder
 #client.background
