@@ -1,6 +1,6 @@
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-!! .Xresources
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! ==================================================
+! .Xresources
+! ==================================================
 
 URxvt.geometry:        100x20
 URxvt.intensityStyles: false
@@ -8,27 +8,11 @@ URxvt.saveLines:       0      ! This function belongs to tmux
 URxvt.scrollBar:       false  ! This function belongs to tmux
 URxvt.font:            xft:DejaVu Sans Mono:size=10:antialias=true
 
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-!! TERMINAL COLOR SCHEME
-!! Base16 Eighties, by Chris Kempson
-!! http://chriskempson.com/projects/base16/
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-! Dark grey    (grey18)
-! Medium-dark  (grey22)
-! Medium grey  (grey32)
-! Light grey   (grey45)
-! Lighter grey (grey62)
-! Cream white  (grey82)
-! White        (grey90)
-! Pure white   (grey94)
-! Pastel red
-! Pastel orange?
-! Pastel yellow
-! Pastel green
-! Pastel cyan
-! Pastel blue    (SkyBlue3?)
-! Pastel magenta
-! Pastel orange?
+! ==================================================
+! Terminal color scheme
+! ==================================================
+
+! Base16 Eighties colors
 #define base00 #2d2d2d
 #define base01 #393939
 #define base02 #515151
@@ -46,24 +30,35 @@ URxvt.font:            xft:DejaVu Sans Mono:size=10:antialias=true
 #define base0E #cc99cc
 #define base0F #d27b53
 
-*.foreground:   base05
-*.background:   base00
-*.cursorColor:  base05
+! For the role of each base color, refer to
+! http://chriskempson.com/projects/base16/
 
-*.color0:       base00
-*.color1:       base08
-*.color2:       base0B
-*.color3:       base0A
-*.color4:       base0D
-*.color5:       base0E
-*.color6:       base0C
-*.color7:       base05
+! Special
+*foreground:   base05
+*background:   base00
+*cursorColor:  base05
 
-*.color8:       base03
-*.color9:       base09
-*.color10:      base01
-*.color11:      base02
-*.color12:      base04
-*.color13:      base06
-*.color14:      base0F
-*.color15:      base07
+! Black
+*color0:       base00
+*color8:       base03
+! Red
+*color1:       base08
+*color9:       base09
+! Green
+*color2:       base0B
+*color10:      base01
+! Yellow
+*color3:       base0A
+*color11:      base02
+! Blue
+*color4:       base0D
+*color12:      base04
+! Magenta
+*color5:       base0E
+*color13:      base06
+! Cyan
+*color6:       base0C
+*color14:      base0F
+! White
+*color7:       base05
+*color15:      base07
