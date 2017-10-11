@@ -52,6 +52,11 @@ set shiftwidth=2
 "set cindent
 "set autoindent
 
+" Set tab-completion preferences
+set wildmode=longest,list,full
+"set wildmode=longest,list " Bash-like completion
+set wildmenu
+
 " Turn on syntax highlighting
 syntax on
 
