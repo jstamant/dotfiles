@@ -23,9 +23,6 @@ alias la='ls -la'
 alias grep='grep --color=auto'
 alias todo='todo.sh'
 alias t='todo.sh'
+alias gtd='cd ~/drive/gtd'
 # Also evaluate aliases preceded by 'sudo'
-#alias sudo='sudo '
-# Emacs over terminal
-#alias emt='emacsclient -t'
-# Send file to running Emacs server
-#alias emc='emacsclient -n'
+alias sudo='sudo '
