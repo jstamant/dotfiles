@@ -41,6 +41,7 @@ xbindkeys
 feh --bg-center ~/downloads/01.jpg
 nm-applet &
 udiskie --tray &
+insync start
 
 # Execute window manager or desktop environment
 #exec cinnamon-session
