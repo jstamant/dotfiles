@@ -62,6 +62,7 @@ format = <label-state> <label-mode>
 index-sort = true
 enable-click = true
 
+# Label for alternative i3 modes, such as resize-mode
 label-mode-padding = 2
 label-mode-foreground = #000
 label-mode-background = ${colors.primary}
@@ -72,29 +73,22 @@ ws-icon-0 = 1;
 ws-icon-1 = 2;
 # Youtube icon
 ws-icon-2 = 10;
-# Default to workspace icon
+# Workspace icon
 ws-icon-default = 
 
-# focused = Active workspace on focused monitor
+# Focused = Active workspace on focused monitor
 label-focused = %icon% %name%
 label-focused-background = ${colors.background-alt}
 label-focused-underline = ${colors.primary}
 label-focused-padding = 2
 
-# unfocused = Inactive workspace on any monitor
+# Unfocused = Inactive workspace on any monitor
 label-unfocused = ${self.label-focused}
-label-unfocused-padding = 2
+label-unfocused-padding = ${self.label-focused-padding}
 
-# visible = Active workspace on unfocused monitor
-label-visible = %index%
-label-visible-background = ${self.label-focused-background}
-label-visible-underline = ${self.label-focused-underline}
-label-visible-padding = ${self.label-focused-padding}
-
-# urgent = Workspace with urgency hint set
-label-urgent = %index%
+# Urgent = Workspace with urgency hint set
 label-urgent-background = ${colors.alert}
-label-urgent-padding = 2
+label-urgent-padding = ${self.label-focused-padding}
 
 [module/xwindow]
 type = internal/xwindow
