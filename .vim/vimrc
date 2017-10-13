@@ -91,7 +91,8 @@ command Vimrc e ~/.vim/vimrc
 iab <expr> dts strftime('%F')
 
 " Configure keybinds
+"nnoremap <F2> :NERDTreeToggle<cr>
 nnoremap <F4> :make!<cr>
 nnoremap <F5> :make run!<cr>
 "nnoremap <F8> :TagbarToggle<cr>
-"nnoremap <F2> :NERDTreeToggle<cr>
+nnoremap <F12> :set cursorline!<cr>
