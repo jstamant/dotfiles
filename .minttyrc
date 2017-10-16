@@ -25,6 +25,6 @@ Transparency=off
 CursorType=block
 CursorBlinks=no
 Scrollbar=none
-Term=xterm
+Term=xterm-256color
 FontHeight=10
 BoldAsColour=no
