@@ -3,10 +3,6 @@
 # vim:ft=dosini
 # =====================================================
 
-# =====================================================
-# Custom variables
-# =====================================================
-
 [colors]
 background = ${xrdb:color0:#2d2d2d}
 background-alt = #444
@@ -47,7 +43,7 @@ font-2 = siji:pixelsize=10;1
 font-3 = FontAwesome:size=10;1
 
 modules-left = i3
-modules-right = xbacklight volume filesystem eth wifi battery date powermenu
+modules-right = xbacklight volume filesystem eth wifi bat0 bat1 date powermenu
 
 # Scroll across workspaces, anywhere on the bar
 scroll-up = i3wm-wsnext
@@ -210,45 +206,26 @@ bar-volume-empty = ─
 bar-volume-empty-font = 2
 bar-volume-empty-foreground = ${colors.foreground-alt}
 
-[module/battery]
+[module/bat0]
 type = internal/battery
 battery = BAT0
 adapter = AC
-full-at = 98
-
-format-charging = <animation-charging> <label-charging>
+# Power cord icon
+format-charging-prefix = " "
+# Battery icons with different levels
 format-discharging = <ramp-capacity> <label-discharging>
-format-full-prefix = " "
-
 ramp-capacity-0 = 
 ramp-capacity-1 = 
 ramp-capacity-2 = 
 ramp-capacity-3 = 
 ramp-capacity-4 = 
 
-animation-charging-0 = 
-animation-charging-1 = 
-animation-charging-2 = 
-animation-charging-3 = 
-animation-charging-4 = 
-animation-charging-framerate = 750
-
-#[module/temp]
-#type = internal/temperature
-#thermal-zone = 0
-#warn-temperature = 60
-#
-#format = <label>
-#format-warn = <ramp> <label-warn>
-#
-#label = %temperature%
-#label-warn = %temperature%
-#label-warn-foreground = ${colors.secondary}
-#
-#ramp-0 = 
-#ramp-1 = 
-#ramp-2 = 
-#ramp-foreground = ${colors.foreground-alt}
+[module/bat1]
+type = internal/battery
+battery = BAT1
+adapter = AC
+# Power cord icon
+format-charging-prefix = " "
 
 [module/date]
 type = internal/date
