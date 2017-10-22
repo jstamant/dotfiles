@@ -210,8 +210,11 @@ bar-volume-empty-foreground = ${colors.foreground-alt}
 type = internal/battery
 battery = BAT0
 adapter = AC
+full-at = 98
 # Power cord icon
 format-charging-prefix = " "
+# Battery full icon
+format-full-prefix = " "
 # Battery icons with different levels
 format-discharging = <ramp-capacity> <label-discharging>
 ramp-capacity-0 = 
@@ -224,8 +227,18 @@ ramp-capacity-4 = 
 type = internal/battery
 battery = BAT1
 adapter = AC
+full-at = 98
 # Power cord icon
 format-charging-prefix = " "
+# Battery full icon
+format-full-prefix = " "
+# Battery icons with different levels
+format-discharging = <ramp-capacity> <label-discharging>
+ramp-capacity-0 = 
+ramp-capacity-1 = 
+ramp-capacity-2 = 
+ramp-capacity-3 = 
+ramp-capacity-4 = 
 
 [module/date]
 type = internal/date
