@@ -177,12 +177,3 @@ set_from_resource $background i3wm.background #000000
 # ==================================================
 
 exec_always --no-startup-id ~/.config/polybar/start.sh
-#bar
-#{
-#  status_command i3status
-#  colors
-#  {
-#    background $black
-#    #statusline $black
-#  }
-#}
