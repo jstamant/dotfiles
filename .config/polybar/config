@@ -67,8 +67,8 @@ label-mode-background = ${colors.primary}
 ws-icon-0 = 1;
 # Firefox icon
 ws-icon-1 = 2;
-# Youtube icon
-ws-icon-2 = 10;
+# Chat icon
+ws-icon-2 = 10;
 # Workspace icon
 ws-icon-default = 
 
