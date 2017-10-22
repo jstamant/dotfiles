@@ -38,7 +38,7 @@ xinput set-prop "SynPS/2 Synaptics TouchPad" "libinput Natural Scrolling Enabled
 # Autostart scripts and applications
 xbindkeys
 # Set desktop wallpaper
-feh --bg-center ~/downloads/01.jpg
+~/.fehbg
 nm-applet &
 udiskie --tray &
 insync start
