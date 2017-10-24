@@ -1,8 +1,0 @@
-[Unit]
-Description=Check on URLs tracked by urlwatch
-
-[Service]
-ExecStart=/home/jstamant/bin/urlwatch-notify.sh
-
-[Install]
-WantedBy=default.target
