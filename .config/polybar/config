@@ -50,7 +50,7 @@ font-2 = siji:pixelsize=10;1
 font-3 = FontAwesome:size=10;1
 
 modules-left = i3
-modules-right = xbacklight volume filesystem eth wifi bat0 bat1 date powermenu
+modules-right = volume filesystem eth wifi bat0 bat1 date powermenu
 
 # Scroll across workspaces, anywhere on the bar
 scroll-up = i3wm-wsnext
@@ -105,40 +105,40 @@ mount-0 = /
 label-mounted =  %percentage_used%%
 label-unmounted =  ?
 
-[module/mpd]
-type = internal/mpd
-format-online = <label-song>  <icon-prev> <icon-stop> <toggle> <icon-next>
+#[module/mpd]
+#type = internal/mpd
+#format-online = <label-song>  <icon-prev> <icon-stop> <toggle> <icon-next>
+#
+#icon-prev = 
+#icon-stop = 
+#icon-play = 
+#icon-pause = 
+#icon-next = 
+#
+#label-song-maxlen = 25
+#label-song-ellipsis = true
 
-icon-prev = 
-icon-stop = 
-icon-play = 
-icon-pause = 
-icon-next = 
+#[module/xbacklight]
+#type = internal/xbacklight
+#
+#format = <label> <bar>
+#label = BL
+#
+#bar-width = 10
+#bar-indicator = |
+#bar-indicator-foreground = #ff
+#bar-indicator-font = 2
+#bar-fill = ─
+#bar-fill-font = 2
+#bar-fill-foreground = #9f78e1
+#bar-empty = ─
+#bar-empty-font = 2
+#bar-empty-foreground = ${colors.foreground-alt}
 
-label-song-maxlen = 25
-label-song-ellipsis = true
-
-[module/xbacklight]
-type = internal/xbacklight
-
-format = <label> <bar>
-label = BL
-
-bar-width = 10
-bar-indicator = |
-bar-indicator-foreground = #ff
-bar-indicator-font = 2
-bar-fill = ─
-bar-fill-font = 2
-bar-fill-foreground = #9f78e1
-bar-empty = ─
-bar-empty-font = 2
-bar-empty-foreground = ${colors.foreground-alt}
-
-[module/backlight-acpi]
-inherit = module/xbacklight
-type = internal/backlight
-card = intel_backlight
+#[module/backlight-acpi]
+#inherit = module/xbacklight
+#type = internal/backlight
+#card = intel_backlight
 
 #[module/cpu]
 #type = internal/cpu
@@ -187,31 +187,22 @@ format-volume = <ramp-volume> <bar-volume>
 ramp-volume-0 = 
 ramp-volume-1 = 
 ramp-volume-2 = 
+ramp-volume-3 = 
 ramp-volume-foreground = ${root.foreground}
 
-format-muted = <label-muted> <bar-volume>
-#format-muted-prefix = " "
-format-muted-foreground = ${colors.secondary}
-#label-muted = sound muted
-label-muted = 
-
 bar-volume-width = 10
-bar-volume-foreground-0 = #55aa55
-bar-volume-foreground-1 = #55aa55
-bar-volume-foreground-2 = #55aa55
-bar-volume-foreground-3 = #55aa55
-bar-volume-foreground-4 = #55aa55
-bar-volume-foreground-5 = #f5a70a
-bar-volume-foreground-6 = #ff5555
-bar-volume-gradient = false
-bar-volume-indicator = |
-#bar-volume-indicator = 
+bar-volume-indicator = =
 bar-volume-indicator-font = 2
 bar-volume-fill = ─
 bar-volume-fill-font = 2
+bar-volume-fill-foreground = ${colors.primary}
 bar-volume-empty = ─
 bar-volume-empty-font = 2
 bar-volume-empty-foreground = ${colors.foreground-alt}
+
+format-muted = <label-muted> <bar-volume>
+label-muted = 
+format-muted-foreground = ${colors.secondary}
 
 [module/bat0]
 type = internal/battery
