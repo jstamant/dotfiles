@@ -263,7 +263,7 @@ label = %date% %time%
 [module/powermenu]
 type = custom/menu
 
-# expand-right doesn't seem to be working. 2017-10-24
+# expand-right is not working in polybar 3.0.5, but has been fixed since.
 expand-right = false
 format-spacing = 1
 
