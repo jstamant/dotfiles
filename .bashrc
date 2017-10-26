@@ -10,7 +10,7 @@ export PS1='\[\e[1;34m\][\u@\h \W]\$\[\e[0m\] '
 export PS2='> '
 
 # Set vim as primary editor
-export EDITOR='vi'
+export EDITOR='vim'
 export VISUAL='vim'
 
 # Explicitly set pager to less
