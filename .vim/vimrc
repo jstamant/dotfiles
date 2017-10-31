@@ -60,6 +60,8 @@ set viminfo+=n~/.vim/viminfo
 " Enable line numbering
 set number
 "set relativenumber
+" Highlight cursor's line
+set cursorline
 
 " No text wrap by default
 set nowrap
