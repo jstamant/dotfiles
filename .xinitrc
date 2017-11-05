@@ -42,8 +42,11 @@ xbindkeys
 nm-applet &
 udiskie --tray &
 insync start
+numlockx &
+
+# Set DPMS preferences
+# Blank screen after 30 minutes
+xset s 1800
 
 # Execute window manager or desktop environment
-#exec cinnamon-session
 exec i3
-
