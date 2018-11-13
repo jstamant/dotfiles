@@ -72,8 +72,8 @@ label-mode-background = ${colors.primary}
 
 # Terminal icon
 ws-icon-0 = 1;
-# Firefox icon
-ws-icon-1 = 2;
+# Chrome icon
+ws-icon-1 = 2;
 # Chat icon
 ws-icon-2 = 10;
 # Workspace icon
