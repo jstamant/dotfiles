@@ -47,6 +47,7 @@ numlockx &
 # Set DPMS preferences
 # Blank screen after 30 minutes
 xset s 1800
+xset dpms 1800 1800 1800
 
 # Execute window manager or desktop environment
 exec i3
