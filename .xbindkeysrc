@@ -14,26 +14,26 @@
 # Note that this configuration file does not have any
 # window-manager-specific settings. See the window-manager's
 # configuration file for window and layout key-bindings.
+#   i.e. ~/.config/i3
 #   i.e. ~/.config/openbox/lxde-rc.xml
 ################################################################################
 
 ## Desktop functions and shortcuts
 
-"pcmanfm"
+"nemo"
 XF86Explorer
 
-#"pcmanfm"
+#"nemo"
 #Mod4 + e
 
 "urxvt"
 Control + Alt + t
 
 # Screenshot - full screen
-"shutter --full"
+"scrot ~/downloads/%Y-%m-%d-%H%M%S-scrot.png"
 Print
-
 # Screenshot - active window
-"shutter --active"
+"scrot -u ~/downloads/%Y-%m-%d-%H%M%S-scrot.png"
 Alt + Print
 
 ## Multimedia keys
