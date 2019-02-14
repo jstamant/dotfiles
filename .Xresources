@@ -2,66 +2,18 @@
 ! .Xresources
 ! ==================================================
 
-URxvt.geometry:        100x20
 URxvt.intensityStyles: false
 URxvt.saveLines:       0      ! This function belongs to tmux
 URxvt.scrollBar:       false  ! This function belongs to tmux
 URxvt.font:            xft:DejaVu Sans Mono:size=10:antialias=true
+*font:                 DejaVu Sans Mono-10
+*geometry:             100x20
 
 ! ==================================================
 ! Terminal color scheme
 ! ==================================================
 
-! Base16 Eighties colors
-#define base00 #2d2d2d
-#define base01 #393939
-#define base02 #515151
-#define base03 #747369
-#define base04 #a09f93
-#define base05 #d3d0c8
-#define base06 #e8e6df
-#define base07 #f2f0ec
-#define base08 #f2777a
-#define base09 #f99157
-#define base0A #ffcc66
-#define base0B #99cc99
-#define base0C #66cccc
-#define base0D #6699cc
-#define base0E #cc99cc
-#define base0F #d27b53
-
-! For the role of each base color, refer to
-! http://chriskempson.com/projects/base16/
-
-! Special
-*foreground:   base05
-*background:   base00
-*cursorColor:  base05
-
-! Black
-*color0:       base00
-*color8:       base03
-! Red
-*color1:       base08
-*color9:       base09
-! Green
-*color2:       base0B
-*color10:      base01
-! Yellow
-*color3:       base0A
-*color11:      base02
-! Blue
-*color4:       base0D
-*color12:      base04
-! Magenta
-*color5:       base0E
-*color13:      base06
-! Cyan
-*color6:       base0C
-*color14:      base0F
-! White
-*color7:       base05
-*color15:      base07
+#include ".Xresources.d/base16-theme"
 
 ! ==================================================
 ! rofi theme
