@@ -1,38 +1,24 @@
 #!/bin/sh
 
-userresources=$HOME/.Xresources
-usermodmap=$HOME/.Xmodmap
-sysresources=/etc/X11/xinit/.Xresources
-sysmodmap=/etc/X11/xinit/.Xmodmap
-
 # Merge in defaults and keymaps
 
-if [ -f $sysresources ]; then
-    xrdb -merge $sysresources
+userresources=$HOME/.Xresources
+usermodmap=$HOME/.Xmodmap
+
+if [ -f $userresources ]; then
+  xrdb $userresources
 fi
 
-if [ -f $sysmodmap ]; then
-    xmodmap $sysmodmap
-fi
-
-if [ -f "$userresources" ]; then
-    xrdb -merge "$userresources"
-fi
-
-if [ -f "$usermodmap" ]; then
-    xmodmap "$usermodmap"
+if [ -f $usermodmap ]; then
+  xmodmap "$usermodmap"
 fi
 
 if [ -d /etc/X11/xinit/xinitrc.d ] ; then
- for f in /etc/X11/xinit/xinitrc.d/?*.sh ; do
-  [ -x "$f" ] && . "$f"
- done
- unset f
+  for f in /etc/X11/xinit/xinitrc.d/?*.sh ; do
+    [ -x $f ] && . $f
+  done
+  unset f
 fi
-
-# Set touchpad preferences (now handled in an Xorg .conf file)
-#xinput set-prop "SynPS/2 Synaptics TouchPad" "libinput Tapping Enabled" 1
-#xinput set-prop "SynPS/2 Synaptics TouchPad" "libinput Natural Scrolling Enabled" 1
 
 # Autostart scripts and applications
 xbindkeys
@@ -42,6 +28,13 @@ nm-applet &
 udiskie --tray &
 insync start
 numlockx &
+compton &
+
+# Configure statusbar for dwm
+while true; do
+  xsetroot -name "$($HOME/bin/statusbar.sh)"
+  sleep 5s
+done &
 
 # Set DPMS preferences
 # Blank screen after 30 minutes
@@ -49,4 +42,4 @@ xset s 1800
 xset dpms 1800 1800 1800
 
 # Execute window manager or desktop environment
-exec i3
+exec dwm
