@@ -11,9 +11,10 @@
 # Set mod-key to Super (windows key)
 set $mod Mod4
 
-set $term urxvt
-#set $menu dmenu_run
-set $menu rofi -show run
+set $term st
+#set $term urxvt
+set $menu dmenu_run
+#set $menu rofi -show run
 
 # ==================================================
 # Essential configuration
@@ -94,11 +95,8 @@ bindsym $mod+Shift+0 move container to workspace 10
 # Layout management
 # ==================================================
 
-# Split in horizontal orientation
-bindsym $mod+g split h
-
-# Split in vertical orientation
-bindsym $mod+v split v
+# Toggle the splitting direction
+bindsym $mod+t split toggle
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
@@ -116,8 +114,8 @@ bindsym $mod+space focus mode_toggle
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
-# exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+# Exit i3 and end X session
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
 # Resize window
 bindsym $mod+r mode "resize"
@@ -149,6 +147,16 @@ mode "resize"
   bindsym Escape mode "default"
   bindsym q      mode "default"
 }
+# Coarse adjustment
+bindsym $mod+y resize shrink width  50 px or 10 ppt
+bindsym $mod+u resize grow   height 50 px or 10 ppt
+bindsym $mod+i resize shrink height 50 px or 10 ppt
+bindsym $mod+o resize grow   width  50 px or 10 ppt
+# Fine adjustment
+bindsym $mod+Shift+y resize shrink width  10 px or 1 ppt
+bindsym $mod+Shift+u resize grow   height 10 px or 1 ppt
+bindsym $mod+Shift+i resize shrink height 10 px or 1 ppt
+bindsym $mod+Shift+o resize grow   width  10 px or 1 ppt
 
 # ==================================================
 # Colors
