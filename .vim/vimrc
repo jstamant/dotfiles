@@ -13,15 +13,11 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 Plugin 'chriskempson/base16-vim'
+Plugin 'ledger/vim-ledger'
 Plugin 'sirtaj/vim-openscad'
-"Plugin 'tpope/vim-fugitive'
 "Plugin 'vim-airline/vim-airline'
-"Plugin 'majutsushi/tagbar'
-"Plugin 'scrooloose/syntastic'
 "Plugin 'scrooloose/nerdtree'
 "Plugin 'ctrlpvim/ctrlp.vim'
-"Plugin 'pangloss/vim-javascript'
-"Plugin 'ledger/vim-ledger'
 call vundle#end()
 
 filetype plugin indent on
@@ -31,12 +27,14 @@ filetype plugin indent on
 " ==================================================
 
 " Set colorscheme
-"set t_Co=8
-set background=dark
-"colorscheme desert
-colorscheme base16-modified
+colorscheme base16-default-dark
 set colorcolumn=80
 highlight ColorColumn ctermbg=darkgray
+" Set colorscheme overrides
+"augroup myBetterColors
+"  au!
+autocmd ColorScheme *  highlight! Normal ctermbg=none guibg=NONE
+"augroup END
 
 " Configure tab and indent settings
 set expandtab
@@ -69,8 +67,21 @@ set linebreak " If wrap is on: logical linebreaks occur at the end of words
 set textwidth=80
 
 " ==================================================
+" Filetype settings
+" ==================================================
+
+autocmd Filetype c setlocal ts=4 sts=4 sw=4
+autocmd Filetype cpp setlocal ts=4 sts=4 sw=4
+
+" ==================================================
 " Plugin settings
 " ==================================================
+
+" Configure ledger settings
+let g:ledger_maxwidth = 80
+let g:ledger_align_at = 50
+let g:ledger_date_format = '%Y-%m-%d'
+autocmd Filetype ledger setlocal ts=4 sts=4 sw=4
 
 " Configure vim-airline
 "set laststatus=2
