@@ -6,6 +6,7 @@
 [[ $- != *i* ]] && return
 
 # Standard Arch Linux PS1 in blue
+# [jstamant@t460 ~]$ ls -la
 export PS1='\[\e[1;34m\][\u@\h \W]\$\[\e[0m\] '
 export PS2='> '
 
@@ -15,6 +16,9 @@ export VISUAL='vim'
 
 # Explicitly set pager to less
 export PAGER='less'
+
+# Set other non-standard variables for my own scripts
+export LAUNCHER='dmenu'
 
 # Custom PATH additions
 export PATH=$PATH:~/bin
