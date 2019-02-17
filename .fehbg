@@ -1,2 +1,2 @@
 #!/bin/sh
-feh --no-fehbg --bg-fill ~/images/wallpaper/wall.jpg 
+feh --no-fehbg --bg-fill $HOME/images/wallpaper/wall
