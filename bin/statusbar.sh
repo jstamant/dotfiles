@@ -1,5 +1,11 @@
 #!/bin/sh
 
+# CPU usage not too accurate: it only adds the usage of the 3 top CPU processes
+cpu=$(ps -eo "%C" --sort=-pcpu | sed -n '2,4p' | \
+  awk '{ cpu+=$1 } END { print cpu }' | sed 's/\(^.*$\)/\1%/')
+
+memory=$(free -h | sed -n 2p | awk '{ print $3 }' )
+
 mute=$(amixer get Master | grep % --max-count 1 | sed "s/.*\[\([a-z]*\)\]/\1/")
 if [ $mute == 'on' ]; then
   mute=''
@@ -34,4 +40,5 @@ date=$(date '+%Y-%m-%d %-I:%M %p')
 
 sep="/"
 echo " $mute $volume $sep  $disk $sep  $network $sep  $battery_level% $sep $date "
+#echo "  $cpu $sep  $memory $sep $mute $volume $sep  $disk $sep  $network $sep  $battery_level% $sep $date "
 
