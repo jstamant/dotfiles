@@ -10,56 +10,44 @@
 
 ## Desktop functions and shortcuts
 
-"nemo"
-XF86Explorer
-
-#"nemo"
-#Mod4 + e
-
-"urxvt"
+"st"
 Control + Alt + t
+"st"
+Control + Alt + Delete
 
-# Screenshot - full screen
+# Screenshot - full screen, and active window
 "scrot ~/images/screenshots/%Y-%m-%d-%H%M%S-scrot.png"
 Print
-# Screenshot - active window
 "scrot -u ~/images/screenshots/%Y-%m-%d-%H%M%S-scrot.png"
 Alt + Print
 
-"~/bin/displayselect.sh"
+"~/bin/themeselect.sh"
 XF86Tools
 
 "~/bin/displayselect.sh"
 XF86Search
-
 "~/bin/displayselect.sh"
 XF86LaunchA
+"~/bin/displayselect.sh"
+XF86Explorer
+"~/bin/displayselect.sh"
+XF86Display
+
+#Somehow kills my network adapter with no binding?
+#XF86WLAN
 
 ## Multimedia keys
 
 "amixer set Master 2%+"
 XF86AudioRaiseVolume
-
 "amixer set Master 2%-"
 XF86AudioLowerVolume
-
 "amixer set Master toggle"
 XF86AudioMute
-
 "amixer set Master 70%"
 Mod4 + XF86AudioMute
-
 "amixer set Capture toggle"
 XF86AudioMicMute
-
-#"lxpanelctl run"
-#Mod4 + r
-
-#"lxtask"
-#Control + Alt + Delete
-
-#"lxde-logout"
-#Mod4 + l
 
 # 2017-03-25 Backlight property does not work with modesetting driver,
 # because the backlight property is located in
@@ -70,7 +58,3 @@ XF86AudioMicMute
 #XF86MonBrightnessUp
 #"xbacklight -dec 10"
 #XF86MonBrightnessDown
-
-#XF86Display
-#XF86WLAN
-
