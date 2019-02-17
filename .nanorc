@@ -1,47 +1,37 @@
-## ~/.nanorc
-##
-## Please note that you must have configured nano with --enable-nanorc
-## for this file to be read!  Also note that this file should not be in
-## DOS or Mac format, and that characters specially interpreted by the
-## shell should not be escaped here.
-##
-## To make sure an option is disabled, use "unset <option>".
-##
-## For the options that take parameters, the default value is given.
-## Other options are unset by default.
-##
-## Quotes inside string parameters don't have to be escaped with
-## backslashes.  The last double quote in the string will be treated as
-## its end.  For example, for the "brackets" option, ""')>]}" will match
-## ", ', ), >, ], and }.
+# ~/.nanorc
+
+# To make sure an option is disabled, use "unset <option>". For the options that
+# take parameters, the default value is given. Other options are unset by
+# default.
+#
+# Quotes inside string parameters don't have to be escaped with
+# backslashes.  The last double quote in the string will be treated as
+# its end.  For example, for the "brackets" option, ""')>]}" will match
+# ", ', ), >, ], and }.
 
 ## Use auto-indentation.
-# set autoindent
+#set autoindent
 
 ## Back up files to the current filename plus a tilde.
-# set backup
+#set backup
 
 ## The directory to put unique backup files in.
-# set backupdir ""
+#set backupdir ""
 
 ## Constantly display the cursor position in the statusbar.
-# set constantshow
+#set constantshow
 
-## Use the Emacs-style of text killing.
-## i.e. cut-to-end-of-line.
+## Use the Emacs-style of text killing, i.e: cut-to-end-of-line
 set cut
 
-## Set the line length for wrapping text and justifying paragraphs.
-## If the value is 0 or less, the wrapping point will be the screen
-## width less this number.
+## Set the line length for wrapping text and justifying paragraphs
 set fill 80
 
 ## Display line numbers.
 set linenumbers
 
-## Enable vim-style lock-files.  This is just to let a vim user know you
-## are editing a file [s]he is trying to edit and vice versa.
-# set locking
+## Enable vim-style lock-files
+#set locking
 
 ## Use the blank line below the titlebar as extra editing space.
 set morespace
