@@ -12,13 +12,17 @@
 set $mod Mod4
 
 set $term st
-#set $term urxvt
 set $menu dmenu_run
-#set $menu rofi -show run
 
 # ==================================================
 # Essential configuration
 # ==================================================
+
+# Exit i3; end X session
+bindsym $mod+Shift+q exec "i3-msg exit"
+bindsym $mod+Escape exec "i3-msg exit"
+# Reload the configuration file in-place
+bindsym $mod+Shift+c reload
 
 # Start a terminal
 bindsym $mod+Return exec $term
@@ -27,14 +31,11 @@ bindsym $mod+Return exec $term
 bindsym $mod+Shift+r restart
 
 # Kill focused window
-bindsym $mod+Shift+q kill
+bindsym $mod+q kill
 
-#focus_follows_mouse no
+focus_follows_mouse no
 
-# Font for window titles
-font pango:DejaVu Sans Mono 8
-
-# Start menu
+# Start application launcher
 bindsym $mod+d exec $menu
 
 # Use Mouse+$mod to drag floating windows to their wanted position
@@ -56,6 +57,9 @@ bindsym $mod+Right       focus right
 
 bindsym $mod+p           focus parent
 bindsym $mod+Shift+p     focus child
+
+bindsym $mod+Tab         workspace back_and_forth
+bindsym $mod+grave       workspace back_and_forth
 
 # Move focused window
 bindsym $mod+Shift+h     move left
@@ -97,25 +101,21 @@ bindsym $mod+Shift+0 move container to workspace 10
 
 # Toggle the splitting direction
 bindsym $mod+t split toggle
+bindsym $mod+s splith
+bindsym $mod+v splitv
+
+# Change container layout (stacked, tabbed, toggle split)
+#bindsym $mod+s layout stacking
+#bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
 
-# change container layout (stacked, tabbed, toggle split)
-bindsym $mod+s layout stacking
-bindsym $mod+w layout tabbed
-bindsym $mod+e layout toggle split
-
-# toggle tiling / floating
+# Toggle between tiling and floating
 bindsym $mod+Shift+space floating toggle
-
-# change focus between tiling / floating windows
+# Change focus between tiling and floating windows
 bindsym $mod+space focus mode_toggle
-
-# reload the configuration file
-bindsym $mod+Shift+c reload
-# Exit i3 and end X session
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
 # Resize window
 bindsym $mod+r mode "resize"
@@ -124,20 +124,20 @@ mode "resize"
   # Another option would be to shrink/grow left/bottom instead of width/height.
   # See the i3 user guide for more info.
   # Coarse adjustment
-  bindsym h resize shrink width  50 px or 10 ppt
-  bindsym j resize grow   height 50 px or 10 ppt
-  bindsym k resize shrink height 50 px or 10 ppt
-  bindsym l resize grow   width  50 px or 10 ppt
+  bindsym h resize shrink width  50 px or 5 ppt
+  bindsym j resize grow   height 50 px or 5 ppt
+  bindsym k resize shrink height 50 px or 5 ppt
+  bindsym l resize grow   width  50 px or 5 ppt
   # Fine adjustment
   bindsym Shift+h resize shrink width  10 px or 1 ppt
   bindsym Shift+j resize grow   height 10 px or 1 ppt
   bindsym Shift+k resize shrink height 10 px or 1 ppt
   bindsym Shift+l resize grow   width  10 px or 1 ppt
   # Same bindings, but for the arrow keys
-  bindsym Left  resize shrink width  50 px or 10 ppt
-  bindsym Down  resize grow   height 50 px or 10 ppt
-  bindsym Up    resize shrink height 50 px or 10 ppt
-  bindsym Right resize grow   width  50 px or 10 ppt
+  bindsym Left  resize shrink width  50 px or 5 ppt
+  bindsym Down  resize grow   height 50 px or 5 ppt
+  bindsym Up    resize shrink height 50 px or 5 ppt
+  bindsym Right resize grow   width  50 px or 5 ppt
   bindsym Shift+Left  resize shrink width  10 px or 1 ppt
   bindsym Shift+Down  resize grow   height 10 px or 1 ppt
   bindsym Shift+Up    resize shrink height 10 px or 1 ppt
@@ -148,10 +148,10 @@ mode "resize"
   bindsym q      mode "default"
 }
 # Coarse adjustment
-bindsym $mod+y resize shrink width  50 px or 10 ppt
-bindsym $mod+u resize grow   height 50 px or 10 ppt
-bindsym $mod+i resize shrink height 50 px or 10 ppt
-bindsym $mod+o resize grow   width  50 px or 10 ppt
+bindsym $mod+y resize shrink width  50 px or 5 ppt
+bindsym $mod+u resize grow   height 50 px or 5 ppt
+bindsym $mod+i resize shrink height 50 px or 5 ppt
+bindsym $mod+o resize grow   width  50 px or 5 ppt
 # Fine adjustment
 bindsym $mod+Shift+y resize shrink width  10 px or 1 ppt
 bindsym $mod+Shift+u resize grow   height 10 px or 1 ppt
@@ -159,26 +159,46 @@ bindsym $mod+Shift+i resize shrink height 10 px or 1 ppt
 bindsym $mod+Shift+o resize grow   width  10 px or 1 ppt
 
 # ==================================================
-# Colors
+# Workspace window assignments
 # ==================================================
 
-# Syntax: set_from_resource $<name> <X_resource_name> <fallback>
-set_from_resource $black i3wm.color0 #000000
-# Blue
-set_from_resource $primary i3wm.primary #0000ff
-# White
-set_from_resource $foreground i3wm.foreground #ffffff
-set $foreground-alt #555555
-# Pastel black
-set_from_resource $background i3wm.background #000000
+assign [class="^Chromium"]  2
+assign [class="^discord"]  10
 
-# <class>               <border>    <bckgr.>    <text>   <indicator> <child_border>
-#client.focused          $primary    $background $primary $primary $primary
-#client.focused_inactive $background $background $foreground-alt $black $black
-#client.unfocused        $background $background $foreground-alt $black $black
-#client.urgent
-#client.placeholder
-#client.background
+# ==================================================
+# Colors and appearance
+# ==================================================
+
+# Font for window titles
+# I think this needs fixing or adjusting
+font pango:DejaVu Sans Mono 8
+
+default_border pixel 1
+
+#                 $<name> <Xresource>  <fallback>
+set_from_resource $fg     i3wm.color7  #ffffff
+set_from_resource $fg-alt i3wm.color15 #ffffff
+set_from_resource $bg     i3wm.color0  #000000
+set_from_resource $bg-alt i3wm.color8  #000000
+# Blue primary accent
+set_from_resource $pri    i3wm.color4  #0000ff
+# Red secondary accent
+set_from_resource $sec    i3wm.color1  #ff0000
+
+# <class>               <border>   <bckgr.> <text>   <ind.>  <child_border>
+client.focused          $fg        $fg      $bg      $fg-alt $fg
+client.focused_inactive $bg-alt    $bg-alt  $bg      $fg     $bg-alt
+client.unfocused        $bg        $bg      $fg      $fg     $bg
+client.urgent           $pri       $pri     $bg      $pri    $pri
+client.placeholder      $bg        $bg-alt  $fg      $fg     $fg
+client.background       #ff0000
+
+# ==================================================
+# Gaps configuration
+# ==================================================
+
+gaps inner 10
+gaps outer 5
 
 # ==================================================
 # Status bar
