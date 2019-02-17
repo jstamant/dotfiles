@@ -28,13 +28,14 @@ nm-applet &
 udiskie --tray &
 insync start
 numlockx &
-compton &
+compton -C &
+dunst &
 
 # Configure statusbar for dwm
-while true; do
-  xsetroot -name "$($HOME/bin/statusbar.sh)"
-  sleep 5s
-done &
+#while true; do
+#  xsetroot -name "$($HOME/bin/statusbar.sh)"
+#  sleep 5s
+#done &
 
 # Set DPMS preferences
 # Blank screen after 30 minutes
@@ -42,4 +43,4 @@ xset s 1800
 xset dpms 1800 1800 1800
 
 # Execute window manager or desktop environment
-exec dwm
+exec i3
