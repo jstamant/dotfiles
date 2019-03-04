@@ -35,9 +35,23 @@ alias l1='ls -1'
 alias grep='grep --color=auto'
 alias gtd='cd ~/drive/gtd'
 alias finances='cd ~/drive/reference/finances'
+alias dl='cd ~/downloads'
 # Also evaluate aliases preceded by 'sudo'
 alias sudo='sudo '
 
 alias theme='themeselect.sh'
 
-alias vimrc='vim ~/.vim/vimrc'
+alias 2019="$EDITOR $HOME/drive/reference/finances/2019-finances.ledger"
+
+# Config file aliases
+alias cb="$EDITOR $HOME/.bashrc"
+alias cbash="$EDITOR $HOME/.bashrc"
+alias ci3="$EDITOR $HOME/.config/i3/config"
+alias cw="$EDITOR $HOME/.config/i3/config"
+alias cwm="$EDITOR $HOME/.config/i3/config"
+alias cpoly="$EDITOR $HOME/.config/polybar/config"
+alias cbar="$EDITOR $HOME/.config/polybar/config"
+alias cpolybar="$EDITOR $HOME/.config/polybar/config"
+alias vimrc="$EDITOR $HOME/.vim/vimrc"
+alias cv="$EDITOR $HOME/.vim/vimrc"
+alias cvim="$EDITOR $HOME/.vim/vimrc"
