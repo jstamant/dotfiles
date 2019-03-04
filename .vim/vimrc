@@ -15,9 +15,9 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'chriskempson/base16-vim'
 Plugin 'ledger/vim-ledger'
 Plugin 'sirtaj/vim-openscad'
+Plugin 'ctrlpvim/ctrlp.vim'
 "Plugin 'vim-airline/vim-airline'
 "Plugin 'scrooloose/nerdtree'
-"Plugin 'ctrlpvim/ctrlp.vim'
 call vundle#end()
 
 filetype plugin indent on
@@ -70,6 +70,7 @@ set textwidth=80
 " Filetype settings
 " ==================================================
 
+" Tab settings by filetype
 autocmd Filetype c setlocal ts=4 sts=4 sw=4
 autocmd Filetype cpp setlocal ts=4 sts=4 sw=4
 
@@ -82,6 +83,22 @@ let g:ledger_maxwidth = 80
 let g:ledger_align_at = 50
 let g:ledger_date_format = '%Y-%m-%d'
 autocmd Filetype ledger setlocal ts=4 sts=4 sw=4
+
+" Configure ctrlp fuzzy finder
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlPMixed' " Run fuzzy finder on files, buffers, and MRUs
+" Add C-n and C-p to select up/down in results window
+let g:ctrlp_prompt_mappings = {
+  \ 'PrtSelectMove("j")':   ['<c-n>', '<c-j>', '<down>'],
+  \ 'PrtSelectMove("k")':   ['<c-p>', '<c-k>', '<up>'],
+  \ 'PrtHistory(-1)':       [],
+  \ 'PrtHistory(1)':        [],
+  \ }
+" Set ctrlp files and results to ignore
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+  \ 'file': '\v\.(exe|so|dll|a|o|d)$',
+  \ }
 
 " Configure vim-airline
 "set laststatus=2
@@ -103,10 +120,6 @@ autocmd Filetype ledger setlocal ts=4 sts=4 sw=4
 "let g:syntastic_auto_loc_list = 1
 "let g:syntastic_check_on_open = 1
 "let g:syntastic_check_on_wq = 0
-
-" Configure ctrlp fuzzy finder
-"let g:ctrlp_map = '<c-p>'
-"let g:ctrlp_cmd = 'CtrlP'
 
 " ==================================================
 " Shortcuts
