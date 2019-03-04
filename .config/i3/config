@@ -159,11 +159,14 @@ bindsym $mod+Shift+i resize shrink height 10 px or 1 ppt
 bindsym $mod+Shift+o resize grow   width  10 px or 1 ppt
 
 # ==================================================
-# Workspace window assignments
+# Workspace and window assignments
 # ==================================================
 
 assign [class="^Chromium"]  2
+assign [class="^Steam"]     9
 assign [class="^discord"]  10
+
+for_window [class="Galculator"] floating enable
 
 # ==================================================
 # Colors and appearance
