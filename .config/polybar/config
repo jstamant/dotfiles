@@ -40,55 +40,15 @@ padding-right = 2
 module-margin-left = 1
 module-margin-right = 2
 
-font-0 = fixed:pixelsize=10;1
-font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
-font-2 = siji:pixelsize=10;1
-font-3 = FontAwesome:size=10;1
+# Default font is non-monospaced, and font for unicode characters
+font-0 = DejaVu Sans:size=10;1
+font-1 = FontAwesome:size=10;1
 
 modules-left = i3 xwindow
 modules-right = volume filesystem eth wifi bat0 bat1 date powermenu
 
 tray-position = right
 tray-padding = 0
-
-#[module/bspwm]
-#type           = internal/bspwm
-#format         = <label-state> [<label-mode>]
-#enable-click   = true
-#enable-scroll  = false
-#
-## Workspace mode labels
-#label-tiled      = T
-#label-monocle    = M
-#label-floating   = f
-#label-fullscreen = F
-#
-## Workspace icons
-## Terminal icon
-#ws-icon-0       = 1;
-## Chrome icon
-#ws-icon-1       = 2;
-## Chat icon
-#ws-icon-2       = 0;
-## Workspace icon
-##ws-icon-default = 
-#
-## Focused = Active workspace on focused monitor???
-#label-focused = %icon% %name%
-#label-focused-background = ${colors.background-alt}
-#label-focused-underline = ${colors.primary}
-#label-focused-padding = 1
-## Urgent = Workspace with urgency hint set
-#label-urgent = ${self.label-focused}
-#label-urgent-padding = ${self.label-focused-padding}
-#label-urgent-background = ${colors.alert}
-## Occupied = Unfocused workspace occupied with nodes/windows
-#label-occupied = ${self.label-focused}
-#label-occupied-padding = ${self.label-focused-padding}
-## Empty = Workspace without any nodes/windows
-#label-empty = ${self.label-focused}
-#label-empty-foreground = ${colors.background-alt}
-#label-empty-padding = ${self.label-focused-padding}
 
 [module/i3]
 type           = internal/i3
@@ -202,7 +162,7 @@ label-disconnected = 
 label-disconnected-foreground = ${colors.background-alt}
 
 [module/volume]
-type = internal/volume
+type = internal/alsa
 
 format-volume = <ramp-volume> <bar-volume>
 ramp-volume-0 = 
@@ -282,7 +242,7 @@ label-open-foreground = ${colors.foreground}
 label-close = 
 label-close-foreground = ${colors.secondary}
 label-separator = /
-label-separator-foreground = ${colors.foreground-alt}
+label-separator-foreground = ${colors.foreground}
 
 menu-0-0 = reboot
 menu-0-0-exec = systemctl reboot
