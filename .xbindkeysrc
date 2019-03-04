@@ -33,6 +33,9 @@ XF86Explorer
 "~/bin/displayselect.sh"
 XF86Display
 
+"galculator"
+XF86Calculator
+
 #Somehow kills my network adapter with no binding?
 #XF86WLAN
 
