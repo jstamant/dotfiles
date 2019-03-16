@@ -246,7 +246,7 @@ label-separator-foreground = ${colors.foreground}
 
 menu-0-0 = reboot
 menu-0-0-exec = systemctl reboot
-menu-0-1 = power off
+menu-0-1 = shutdown
 menu-0-1-exec = systemctl poweroff
 menu-0-2 = hibernate
 menu-0-2-exec = systemctl hibernate
