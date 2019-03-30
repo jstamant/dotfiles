@@ -36,10 +36,10 @@ xsetwacom set $STYLUS Area 0 0 15200 8550
 
 # Autostart scripts and applications
 xbindkeys
-# Set desktop wallpaper
 ~/.fehbg
 nm-applet &
 udiskie --tray &
+nextcloud &
 insync start
 numlockx &
 compton -C &
