@@ -1,5 +1,7 @@
 # -*- shell-script -*-
 ################################################################################
+# Mod4 is the super key
+#
 # Note that this configuration file does not have any
 # window-manager-specific settings. See the window-manager's
 # configuration file for window and layout key-bindings.
@@ -11,9 +13,14 @@
 ## Desktop functions and shortcuts
 
 "st"
+Mod4 + Return
+"st"
 Control + Alt + t
 "st"
 Control + Alt + Delete
+
+"dmenu_run"
+Mod4 + d
 
 # Screenshot - full screen, and active window
 "scrot ~/images/screenshots/%Y-%m-%d-%H%M%S-scrot.png"
