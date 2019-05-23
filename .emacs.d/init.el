@@ -85,11 +85,33 @@
 ;;;; DIRED SETTINGS
 (put 'dired-find-alternate-file 'disabled nil)
 
+;;;; EVIL SETTINGS
+(use-package evil
+  :ensure t
+  :config
+  (evil-mode 1))
+(use-package evil-org
+  :ensure t
+  :after org
+  :config
+  (add-hook 'org-mode-hook 'evil-org-mode)
+  (add-hook 'evil-org-mode-hook
+            (lambda ()
+              (evil-org-set-key-theme)))
+  (require 'evil-org-agenda)
+  (evil-org-agenda-set-keys))
+
 ;;;; HELP-MODE SETTINGS
 (use-package help-mode
   :bind (:map help-mode-map
               ("n" . next-line)
               ("p" . previous-line)))
+
+;;;; IVY SETTINGS
+(use-package ivy
+  :ensure t
+  :config
+  (ivy-mode 1))
 
 ;;;; LEDGER SETTINGS
 (use-package ledger-mode
@@ -138,12 +160,6 @@
   :config
   (setq pkgbuild-update-sums-on-save nil))
 
-;; ;;;; SCAD SETTINGS
-;; (use-package scad
-;;   :ensure scad-mode)
-;; (use-package scad-preview
-;;   :ensure t)
-
 ;;;; SMART MODE-LINE SETTINGS
 (use-package smart-mode-line
   :ensure t
@@ -157,13 +173,6 @@
 
 ;;;; TERM SETTINGS
 (use-package term)
-
-;; ;;;; WANDERLUST SETTINGS
-;; (use-package wanderlust
-;;   :ensure t
-;;   :mode
-;;   ("\\.wl$"      . emacs-lisp-mode)
-;;   ("\\.folders$" . conf-unix-mode))
 
 ;;;; WEB SETTINGS
 (use-package web-mode
