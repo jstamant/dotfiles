@@ -1,0 +1,21 @@
+#!/bin/sh
+
+# Source this file in login shells and non-login shells to gain access
+# to your environment variables
+
+# Set XDG variables
+export XDG_CONFIG_HOME="$HOME/.config"
+
+# Set vim as primary editor
+export EDITOR='vim'
+export VISUAL='vim'
+
+# Explicitly set pager to less
+export PAGER='less'
+
+# Set other non-standard variables for my own scripts
+export LAUNCHER='dmenu_run'
+export TERMINAL='st'
+
+# Custom PATH additions
+export PATH=$PATH:~/bin

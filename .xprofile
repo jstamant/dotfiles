@@ -1,0 +1,31 @@
+#!/bin/sh
+
+# Settings that are common to all window-managers I use
+
+[ -f $HOME/.Xresources ] && xrdb $HOME/.Xresources
+
+if [ -d /etc/X11/xinit/xinitrc.d ] ; then
+  for f in /etc/X11/xinit/xinitrc.d/?*.sh ; do
+    [ -x $f ] && . $f
+  done
+  unset f
+fi
+
+# Configure Wacom tablet if connected.
+$HOME/bin/setupwacom.sh
+
+# Autostart scripts and applications
+sxhkd &              # Common custom keybindings
+nitrogen --restore & # Set desktop background
+nm-applet &
+udiskie --tray &
+nextcloud &
+insync start
+numlockx &
+compton -C &         # Window compositor <3
+dunst &              # Notification server
+
+# DPMS preferences
+# Blank screen after 30 minutes
+xset s 1800
+xset dpms 1800 1800 1800
