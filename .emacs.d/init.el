@@ -160,6 +160,11 @@
   :config
   (setq pkgbuild-update-sums-on-save nil))
 
+;;;; SHELL-SCRIPT SETTINGS
+(use-package sh-script
+  :config
+  (add-hook 'sh-mode-hook (lambda () (sh-set-shell "bash"))))
+
 ;;;; SMART MODE-LINE SETTINGS
 (use-package smart-mode-line
   :ensure t
