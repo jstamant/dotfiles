@@ -82,6 +82,5 @@ if [ $chosen ]; then
       for output in $notchosen; do
         xrandr --output $output --off
       done
-      $HOME/.config/polybar/start.sh
   esac
 fi
