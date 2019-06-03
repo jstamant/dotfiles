@@ -4,26 +4,22 @@
 ;; This theme is not my design.
 
 (defvar tinman16-eighties-colors
-  '(:base00  "#2d2d2d"  ; grey18
-    :base01  "#393939"  ; grey22
-    :base02  "#515151"  ; grey32
-    :base03  "#747369"  ; grey45
-    :base04  "#a09f93"  ; grey62
-    :base05  "#d3d0c8"  ; grey82
-    :base06  "#e8e6df"  ; grey92
-    :base07  "#f2f0ec"  ; grey94
-    
-    :black   "grey18"
-    :red     "tomato"   ;"#f2777a" or "light coral"
-    :green   "DarkSeaGreen3" ;"#99cc99" or "PaleGreen3" or "LimeGreen" or "LightGreen"
-    :yellow  "gold"  ; "#ffcc66" or "gold" or "goldenrod1"
-    :blue    "CornflowerBlue" ; "#6699cc" or "SkyBlue3" or "SteelBlue3"
-    :magenta "plum3" ; "#cc99cc" or "orchid"
-    :cyan    "CadetBlue3" ; "#66cccc" or "MediumTurquoise" or "DarkSlateGray3"
-    :white   "gainsboro"
-    
-    :orange  "salmon1"  ; "#f99157" or "SandyBrown" or "DarkOrange1"
-    :brown   "LightSalmon3") ; "#d27b53" or "peru" or "LightSalmon3" or tan3
+  '(:base00 "#2d2d2d"
+    :base01 "#393939"
+    :base02 "#515151"
+    :base03 "#747369"
+    :base04 "#a09f93"
+    :base05 "#d3d0c8"
+    :base06 "#e8e6df"
+    :base07 "#f2f0ec"
+    :base08 "#f2777a"
+    :base09 "#f99157"
+    :base0A "#ffcc66"
+    :base0B "#99cc99"
+    :base0C "#66cccc"
+    :base0D "#6699cc"
+    :base0E "#cc99cc"
+    :base0F "#d27b53")
   "Color palette for Justin St-Amant's Base16-inspired theme.
 
 All colors are currently set to the Base16 Eighties colors.

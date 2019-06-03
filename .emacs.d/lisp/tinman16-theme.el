@@ -39,6 +39,22 @@
     :base06  "brightmagenta"
     :base07  "brightwhite"
 
+    :base01  "brightgreen"
+    :base02  "brightyellow"
+    :base03  "brightblack"
+    :base04  "brightblue"
+    :base05  "white"
+    :base06  "brightmagenta"
+    :base07  "brightwhite"
+    :base08
+    :base09
+    :base0A
+    :base0B
+    :base0C
+    :base0D
+    :base0E
+    :base0F
+
     :black   "black"
     :red     "red"
     :green   "green"
@@ -53,34 +69,38 @@
   "Safe Base16 colors for use in a terminal.
 i.e. with a limited color palette.
 
-UNIMPLEMENTED YET?")
+UNIMPLEMENTED YET? I broke this on 2019-05-24, and I don't think
+it's implemented")
 
 (defvar custom-faces
-  '((default :foreground white :background black)
-    (link :foreground cyan)
-    (font-lock-comment-face  :foreground cyan)
-    (font-lock-constant-face :foreground orange)
-    (font-lock-keyword-face  :foreground magenta)
-    (font-lock-string-face   :foreground green)
-    (outline-1 :foreground blue)
-    (outline-2 :foreground yellow)
-    (org-todo :foreground red)
-    (org-done :foreground green)
-    ;; (org-agenda-structure :foreground base0D)
-    ;; (org-special-keyword :foreground base0C)
-    ;; (org-link :foreground base0C)
-    (term-color-black :foreground black)
-    (term-color-red :foreground red)
-    (term-color-green :foreground green)
-    (term-color-yellow :foreground yellow)
-    (term-color-blue :foreground blue)
-    (term-color-magenta :foreground magenta)
-    (term-color-cyan :foreground cyan)
-    (term-color-white :foreground white))
-    ;; (highlight :background base03)
+  '((default                 :foreground base05 :background base00)
+    (link                    :foreground base08)
+    (font-lock-builtin-face  :foreground base0C)
+    (font-lock-comment-face  :foreground base03)
+    (font-lock-constant-face :foreground base09)
+    (font-lock-keyword-face  :foreground base0E)
+    (font-lock-string-face   :foreground base0B)
+    (font-lock-variable-name-face :foreground base08)
+    (outline-1               :foreground base0D)
+    (outline-2               :foreground base0A)
+    (outline-3               :foreground base0E)
+    (org-todo                :foreground base08)
+    (org-done                :foreground base0B)
+    ;; (org-agenda-structure    :foreground base0D)
+    ;; (org-special-keyword     :foreground base0C)
+    ;; (org-link                :foreground base0C)
+    (term-color-black        :foreground base00)
+    (term-color-red          :foreground base08)
+    (term-color-green        :foreground base0B)
+    (term-color-yellow       :foreground base0A)
+    (term-color-blue         :foreground base0D)
+    (term-color-magenta      :foreground base0E)
+    (term-color-cyan         :foreground base0C)
+    (term-color-white        :foreground base05))
+    ;; (highlight               :background base03)
     ;; (ledger-font-payee-uncleared-face :foreground base08)
-    ;; (ledger-font-other-face :foreground base04)
-  ;; (ledger-font-pending-face :foreground base09))
+    ;; (ledger-font-other-face  :foreground base04)
+  ;; (ledger-font-pending-face  :foreground base09))
   "A list of faces, and the attributes to apply to them.
 
 The format of this list is as follows:
@@ -96,6 +116,9 @@ attributes taking the form:
 Example:
 (:foreground \"#00ff00\" :background \"#000000\")
 
+To identify faces for customization, use the `customize-face'
+function.
+
 See macro `defface', and look into \"face specs\" or \"face
 attributes\" for more info.
 
@@ -105,15 +128,15 @@ Possible attributes can be found in Info node `(elisp)Face Attributes'.")
 ;; Theme-generation functions
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(defun initialize-theme (theme colors faces)
-  "DOCUMENTATION INCOMPLETE"
+(defun initialize-theme (theme-name colors faces)
+  "Generates a theme from a plist of colors and a list of
+font-faces with attributes to apply to them."
   ;;PROBLEM: custom-theme-set-faces needs the faces in seperate ARGS,
   ;;not in a single list, as I'm making with 'apply-face-spec
   (apply
    'custom-theme-set-faces
-   theme
-   (mapcar
-    (lambda (face)
+   theme-name
+   (mapcar (lambda (face)
       (apply-face-spec colors face))
     faces)))
 
@@ -125,21 +148,19 @@ containing the face symbol, and a plist of attributes.  Returns a
 list of elements of the form ___"
   (let ((name       (car face))
         (attributes (cdr face)))
-    ;; THIS CAN BE SHORTENED
+    ;; The following can be shortened, one day...
     (list name (list (list '((min-colors 256)) (sub-color-keys attributes colors))
                      (list t                   (sub-color-keys attributes colors))))))
 
 (defun sub-color-keys (attributes colors)
-  "DOCUMENTATION INCOMPLETE
+  "Substitutes color names in a plist to useable color strings.
 
-Converts custom color names in a plist to color strings.
+Example: (:foreground red) gets converted to (:foreground
+\"#ff0000\")
 
-Example: (:foreground red) gets converted to (:foreground \"#ff0000\")
+Does not support constants?? Untested.
 
-Does not support constants??
-
-Note: Potentially does not work with :box or :underline
-attributes."
+Note: Untested with :box, :underline, and similar attributes."
   (let ((output))
     (while attributes
       (let* ((key   (car attributes))
