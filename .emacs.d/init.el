@@ -89,7 +89,15 @@
 (use-package evil
   :ensure t
   :config
-  (evil-mode 1))
+  (evil-mode 1)
+  (add-hook 'evil-normal-state-entry-hook
+            (lambda () (set-face-background 'mode-line "#000000")))
+  (add-hook 'evil-insert-state-entry-hook
+            (lambda () (set-face-background 'mode-line "#006600")))
+  (add-hook 'evil-replace-state-entry-hook
+            (lambda () (set-face-background 'mode-line "#660000")))
+  (add-hook 'evil-visual-state-entry-hook
+            (lambda () (set-face-background 'mode-line "#666600"))))
 (use-package evil-org
   :ensure t
   :after org
@@ -108,10 +116,10 @@
               ("p" . previous-line)))
 
 ;;;; IVY SETTINGS
-(use-package ivy
-  :ensure t
-  :config
-  (ivy-mode 1))
+;(use-package ivy
+;  :ensure t
+;  :config
+;  (ivy-mode 1))
 
 ;;;; LEDGER SETTINGS
 (use-package ledger-mode
@@ -133,7 +141,7 @@
 (defun ledger ()
   "Shortcut for finding my ledger file."
   (interactive)
-  (find-file (concat drive-directory "reference/finances/2017-finances.ledger")))
+  (find-file (concat drive-directory "reference/finances/finances.ledger")))
 
 ;;;; MAGIT SETTINGS
 (use-package magit
@@ -163,6 +171,7 @@
 ;;;; SHELL-SCRIPT SETTINGS
 (use-package sh-script
   :config
+  (setq sh-basic-offset 2)
   (add-hook 'sh-mode-hook (lambda () (sh-set-shell "bash"))))
 
 ;;;; SMART MODE-LINE SETTINGS
