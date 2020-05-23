@@ -4,3 +4,5 @@
 [ -f $HOME/.xprofile ] && . $HOME/.xprofile
 
 exec i3
+#exec bspwm
+#exec dwm
