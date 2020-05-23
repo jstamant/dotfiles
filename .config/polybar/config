@@ -18,8 +18,8 @@ alert = ${colors.secondary}
 screenchange-reload = true
 
 [global/wm]
-margin-top = 5
-margin-bottom = 5
+margin-top = 0
+margin-bottom = 0
 
 [bar/main]
 #monitor = ${env:MONITOR:HDMI-1}
@@ -44,11 +44,41 @@ module-margin-right = 1
 font-0 = DejaVu Sans Mono:size=10;1
 font-1 = FontAwesome:size=10;1
 
-modules-left = i3 xwindow
+#modules-left = i3 xwindow
+modules-left = bspwm xwindow
 modules-right = volume filesystem eth wifi bat0 bat1 date powermenu
 
 tray-position = right
 tray-padding = 1
+
+# Required for bspwm; hides the bar when windows go fullscreen
+wm-restack = bspwm
+
+[module/bspwm]
+type = internal/bspwm
+format = <label-state> [<label-mode>]
+label-focused = %name%
+label-focused-foreground = ${colors.primary}
+label-focused-underline = ${colors.primary}
+label-focused-padding = 1
+label-occupied = ${self.label-focused}
+label-occupied-padding = ${self.label-focused-padding}
+label-empty = ${self.label-focused}
+label-empty-foreground = ${colors.background-alt}
+label-empty-padding = ${self.label-focused-padding}
+
+label-monocle = M
+label-tiled = T
+label-fullscreen = F
+label-floating = f
+label-pseudotiled = P
+label-locked = L
+label-locked-foreground = #bd2c40
+label-sticky = s
+label-sticky-foreground = #fba922
+label-private = p
+label-private-foreground = #bd2c40
+label-marked = *
 
 [module/i3]
 type           = internal/i3
