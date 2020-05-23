@@ -16,7 +16,7 @@ $HOME/bin/setupwacom.sh
 
 # Autostart scripts and applications
 sxhkd &              # Common custom keybindings
-nitrogen --restore & # Set desktop background
+$HOME/.fehbg         # Set desktop background
 nm-applet &
 udiskie --tray &
 nextcloud &
