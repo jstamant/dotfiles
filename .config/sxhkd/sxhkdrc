@@ -1,0 +1,77 @@
+# See environment variables in .bashrc for dereferencing any variables below
+
+### TODO sort this
+### Program keybinds
+
+super + Return
+  $TERMINAL
+control + alt + t
+  $TERMINAL
+super + d
+  $LAUNCHER
+#super + p
+#  $LAUNCHER
+super + shift + m
+  $HOME/bin/menu.sh
+
+ctrl + alt + Delete
+  $TERMINAL -e htop
+
+# Screenshot - full screen, and active window
+{_,alt} + Print
+  scrot {_,-u} $HOME/images/screenshots/%Y-%m-%d-%H%M%S-scrot.png
+
+XF86Tools
+  $HOME/bin/themeselect.sh
+XF86Search
+  $HOME/bin/displayselect.sh
+XF86LaunchA
+  $HOME/bin/displayselect.sh
+XF86Explorer
+  $HOME/bin/displayselect.sh
+XF86Display
+  $HOME/bin/displayselect.sh
+
+XF86Calculator
+  galculator
+
+#Somehow kills my network adapter with no binding?
+#XF86WLAN
+
+### Multimedia keys
+
+XF86AudioRaiseVolume
+  pactl set-sink-volume @DEFAULT_SINK@ +5%; refreshbar.sh
+XF86AudioLowerVolume
+  pactl set-sink-volume @DEFAULT_SINK@ -5%; refreshbar.sh
+XF86AudioMute
+  pactl set-sink-mute @DEFAULT_SINK@ toggle; refreshbar.sh
+super + XF86AudioMute
+  pactl set-sink-volume @DEFAULT_SINK@ 100%; refreshbar.sh
+XF86AudioMicMute
+  pactl set-source-mute @DEFAULT_SOURCE@ toggle
+
+### Wacom tablet buttons, from left-to-right
+
+button11
+  xdotool key ctrl+z
+button12
+  xdotool key x
+button13
+  xdotool key x
+button14
+  xdotool key ctrl+z
+
+# 2017-03-25 Backlight property does not work with modesetting driver,
+# because the backlight property is located in
+# /sys/class/backlight/intel_backlight/brightness. Look into this in a
+# few months from now.
+
+#"xbacklight -inc 10"
+#XF86MonBrightnessUp
+#"xbacklight -dec 10"
+#XF86MonBrightnessDown
+
+# make sxhkd reload its configuration files:
+super + Escape
+  pkill -USR1 -x sxhkd
