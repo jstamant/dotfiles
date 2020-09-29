@@ -2,14 +2,12 @@
 # This theme is designed according be Openbox v3.4's specification
 
 # Window geometry
-padding.width: 10
-#padding.width: 2
-#padding.height: 2 UNUSED
-border.width: 1
+padding.width: 8
+padding.height: 4
+border.width: 2
 window.client.padding.width: 0
-window.client.padding.height: 1
-window.handle.width: 4
-#window.handle.width: 0 WAS AT 0 ORIGINALLY
+window.client.padding.height: 0
+window.handle.width: 0
 
 # Menu geometry
 menu.border.width: 1
@@ -17,14 +15,11 @@ menu.overlap.x: 0
 menu.overlap.y: 0
 
 # Border colors
-window.active.border.color: #A0A0A0
-window.inactive.border.color: #A0A0A0
+window.active.border.color: #e8e8e7
+window.inactive.border.color: #e8e8e7
 menu.border.color: #A0A0A0
 window.active.client.color:  #E8E8E7
 window.inactive.client.color:  #E8E8E7
-
-# Text/font shadows
-# NONE FOUND IN ORIGINAL THEME
 
 # Titlebar
 window.active.title.bg: flat
@@ -98,13 +93,12 @@ menu.items.active.bg.color: #4A90D9
 menu.items.active.text.color: #FFFFFF
 
 # On-screen dialogs (focus cycling dialog and desktop pager dialog)
-osd.border.width: 0
-osd.order.color: #313739
+osd.border.width: 4
+osd.border.color: #313739
 osd.bg: flat
 osd.bg.color: #313739
-osd.bg.colorTo: #313739
 osd.label.text.color: #FFFFFF
-osd.hilight.bg: raised
+osd.hilight.bg: flat
 osd.unhilight.bg: flat
 osd.hilight.bg.color: #4A90D9
 osd.unhilight.bg.color: #747474
