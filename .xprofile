@@ -19,7 +19,7 @@ sxhkd &              # Common custom keybindings
 $HOME/.fehbg         # Set desktop background
 nm-applet &
 udiskie --tray &
-nextcloud &
+#nextcloud &
 insync start
 numlockx &
 compton -C &         # Window compositor <3
