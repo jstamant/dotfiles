@@ -30,6 +30,8 @@
 
 ;; Do not inherit any colors or settings from X resources
 (setq inhibit-x-resources t)
+;; Start emacs maximized, WM doesn't seem to control the frame size initially
+(add-to-list 'default-frame-alist '(fullscreen . maximized))
 
 ;; Load my customizations
 (setq custom-file "~/.emacs.d/custom.el")
@@ -43,11 +45,15 @@
 (tool-bar-mode -1)
 (setq inhibit-splash-screen t) ; Disable startup messages
 
-;; General font settings
-(add-to-list 'custom-theme-load-path "~/.emacs.d/lisp/")
-(load-theme 'tinman16-eighties t)
+;; Theme settings
+(add-to-list 'custom-theme-load-path "~/.emacs.d/lisp/") ;; Only required for my own theme
+(use-package base16-theme
+  :ensure t
+  :config
+  (load-theme 'base16-eighties t))
+;;(load-theme 'tinman16-eighties t)
 ;; Required; can't be set through the theme. Emacs bug, I think.
-(set-face-attribute 'default nil :height 100)
+;;(set-face-attribute 'default nil :height 100)
 
 ;; Set backup and auto-save file location
 (setq backup-directory-alist
@@ -86,18 +92,24 @@
 (put 'dired-find-alternate-file 'disabled nil)
 
 ;;;; EVIL SETTINGS
+(use-package evil-leader
+  :ensure t
+  :init
+  (setq evil-want-C-u-scroll t) ; required before loading evil
+  (setq evil-want-keybinding nil)) ; required if evil-collection will be used
 (use-package evil
   :ensure t
+  :init
   :config
-  (evil-mode 1)
-  (add-hook 'evil-normal-state-entry-hook
-            (lambda () (set-face-background 'mode-line "#000000")))
-  (add-hook 'evil-insert-state-entry-hook
-            (lambda () (set-face-background 'mode-line "#006600")))
-  (add-hook 'evil-replace-state-entry-hook
-            (lambda () (set-face-background 'mode-line "#660000")))
-  (add-hook 'evil-visual-state-entry-hook
-            (lambda () (set-face-background 'mode-line "#666600"))))
+  (global-evil-leader-mode)
+  (evil-set-initial-state 'help-mode 'emacs)
+  (evil-set-initial-state 'dired-mode 'emacs)
+  (evil-mode 1))
+(use-package evil-collection
+  :ensure t
+  :after evil
+  :config
+  (evil-collection-init))
 (use-package evil-org
   :ensure t
   :after org
