@@ -218,3 +218,5 @@
   (setq web-mode-css-indent-offset 2)
   (setq web-mode-code-indent-offset 2))
 
+(put 'downcase-region 'disabled nil)
+(put 'upcase-region 'disabled nil)
