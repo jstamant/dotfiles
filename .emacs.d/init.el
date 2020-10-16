@@ -28,6 +28,10 @@
   (interactive)
   (find-file "~/work.org"))
 
+;; Enable some pre-disabled commands
+(put 'downcase-region 'disabled nil)
+(put 'upcase-region 'disabled nil)
+
 ;; Do not inherit any colors or settings from X resources
 (setq inhibit-x-resources t)
 ;; Start emacs maximized, WM doesn't seem to control the frame size initially
@@ -47,10 +51,6 @@
 
 ;; Theme settings
 (add-to-list 'custom-theme-load-path "~/.emacs.d/lisp/") ;; Only required for my own theme
-(use-package base16-theme
-  :ensure t
-  :config
-  (load-theme 'base16-eighties t))
 ;;(load-theme 'tinman16-eighties t)
 ;; Required; can't be set through the theme. Emacs bug, I think.
 ;;(set-face-attribute 'default nil :height 100)
@@ -77,19 +77,23 @@
            (package-install 'use-package)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; MODE SETTINGS
+;; PACKAGES
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;;;; AUCTEX SETTINGS
-(use-package tex-site
-  :ensure auctex)
+;;;; THEME
+(use-package base16-theme
+  :ensure t
+  :config
+  (load-theme 'base16-eighties t))
 
 ;;;; CALC SETTINGS
 (use-package calc
   :bind ("C-x c" . calc))
 
 ;;;; DIRED SETTINGS
-(put 'dired-find-alternate-file 'disabled nil)
+(use-package dired
+  :config
+  (put 'dired-find-alternate-file 'disabled nil))
 
 ;;;; EVIL SETTINGS
 (use-package evil-leader
@@ -127,11 +131,8 @@
               ("n" . next-line)
               ("p" . previous-line)))
 
-;;;; IVY SETTINGS
-;(use-package ivy
-;  :ensure t
-;  :config
-;  (ivy-mode 1))
+;;;; ORG SETTINGS
+(require 'init-org)
 
 ;;;; LEDGER SETTINGS
 (use-package ledger-mode
@@ -167,9 +168,6 @@
 (use-package markdown-mode
   :ensure t)
 
-;;;; ORG SETTINGS
-(require 'init-org)
-
 ;;;; PAREN SETTINGS
 (use-package paren
   :bind ("C-x p" . show-paren-mode))
@@ -200,6 +198,10 @@
 ;;;; TERM SETTINGS
 (use-package term)
 
+;;;; AUCTEX SETTINGS
+(use-package tex-site
+  :ensure auctex)
+
 ;;;; WEB SETTINGS
 (use-package web-mode
   :ensure t
@@ -218,5 +220,3 @@
   (setq web-mode-css-indent-offset 2)
   (setq web-mode-code-indent-offset 2))
 
-(put 'downcase-region 'disabled nil)
-(put 'upcase-region 'disabled nil)
