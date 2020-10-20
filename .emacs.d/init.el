@@ -100,34 +100,40 @@
   (put 'dired-find-alternate-file 'disabled nil))
 
 ;;;; EVIL SETTINGS
-(use-package evil-leader
-  :ensure t
-  :init
-  (setq evil-want-C-u-scroll t) ; required before loading evil
-  (setq evil-want-keybinding nil)) ; required if evil-collection will be used
-(use-package evil
-  :ensure t
-  :init
-  :config
-  (global-evil-leader-mode)
-  (evil-set-initial-state 'help-mode 'emacs)
-  (evil-set-initial-state 'dired-mode 'emacs)
-  (evil-mode 1))
-(use-package evil-collection
-  :ensure t
-  :after evil
-  :config
-  (evil-collection-init))
-(use-package evil-org
-  :ensure t
-  :after org
-  :config
-  (add-hook 'org-mode-hook 'evil-org-mode)
-  (add-hook 'evil-org-mode-hook
-            (lambda ()
-              (evil-org-set-key-theme)))
-  (require 'evil-org-agenda)
-  (evil-org-agenda-set-keys))
+(defvar using-evil nil
+  "Set to t   if you are using evil-mode.\nSet to nil if you are not.")
+(defun init-evil ()
+    "Load and configure packages related to evil-mode."
+    (use-package evil-leader
+      :ensure t
+      :init
+      (setq evil-want-C-u-scroll t) ; required before loading evil
+      (setq evil-want-keybinding nil)) ; required if evil-collection will be used
+    (use-package evil
+      :ensure t
+      :init
+      :config
+      (global-evil-leader-mode)
+      (evil-set-initial-state 'help-mode 'emacs)
+      (evil-set-initial-state 'dired-mode 'emacs)
+      (evil-mode 1))
+    (use-package evil-collection
+      :ensure t
+      :after evil
+      :config
+      (evil-collection-init))
+    (use-package evil-org
+      :ensure t
+      :after org
+      :config
+      (add-hook 'org-mode-hook 'evil-org-mode)
+      (add-hook 'evil-org-mode-hook
+                (lambda ()
+                  (evil-org-set-key-theme)))
+      (require 'evil-org-agenda)
+      (evil-org-agenda-set-keys)))
+
+(if using-evil init-evil nil)
 
 ;;;; HELP-MODE SETTINGS
 (use-package help-mode
