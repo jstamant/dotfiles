@@ -24,6 +24,7 @@ insync start
 numlockx &
 compton -C &         # Window compositor <3
 dunst &              # Notification server
+emacs --daemon  &
 
 # DPMS preferences
 # Blank screen after 30 minutes
