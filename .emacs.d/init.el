@@ -65,6 +65,10 @@
 (setq-default indent-tabs-mode nil)
 (setq-default tab-width 4)
 
+;; Miscellaneous settings
+(setq scroll-preserve-screen-position t) ; Keep point position on screen when scrolling
+(setq show-trailing-whitespace t)
+
 ;; Initialize Emacs package manager
 (require 'package)
 (add-to-list 'package-archives '("gnu"   . "http://elpa.gnu.org/packages/"))
@@ -220,3 +224,7 @@
   (setq web-mode-css-indent-offset 2)
   (setq web-mode-code-indent-offset 2))
 
+(put 'downcase-region 'disabled nil)
+(put 'upcase-region 'disabled nil)
+(put 'scroll-left 'disabled nil)
+(put 'narrow-to-region 'disabled nil)
