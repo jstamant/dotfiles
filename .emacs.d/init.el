@@ -31,6 +31,8 @@
 ;; Enable some pre-disabled commands
 (put 'downcase-region 'disabled nil)
 (put 'upcase-region 'disabled nil)
+(put 'scroll-left 'disabled nil)
+(put 'narrow-to-region 'disabled nil)
 
 ;; Do not inherit any colors or settings from X resources
 (setq inhibit-x-resources t)
@@ -229,8 +231,3 @@
   (setq web-mode-markup-indent-offset 2)
   (setq web-mode-css-indent-offset 2)
   (setq web-mode-code-indent-offset 2))
-
-(put 'downcase-region 'disabled nil)
-(put 'upcase-region 'disabled nil)
-(put 'scroll-left 'disabled nil)
-(put 'narrow-to-region 'disabled nil)
