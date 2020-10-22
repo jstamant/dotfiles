@@ -15,6 +15,12 @@
       (concat userprofile "/Google Drive/")))
   "The absolute path to the Google Drive directory under Linux or Windows.")
 
+(defvar onedrive-directory
+  (if using-windows
+      (let ((userprofile (replace-regexp-in-string "\\\\" "/" (getenv "USERPROFILE"))))
+        (concat userprofile "/OneDrive - Manitoba Hydro/")))
+  "The absolute path to your work OneDrive directory. Only for Windows.")
+
 (if using-windows
     (setenv "HOME" (getenv "USERPROFILE")))
 
@@ -26,7 +32,7 @@
 (defun work ()
   "Shortcut for finding your work org file."
   (interactive)
-  (find-file "~/work.org"))
+  (find-file (concat onedrive-directory "work.org")))
 
 ;; Enable some pre-disabled commands
 (put 'downcase-region 'disabled nil)
@@ -140,8 +146,16 @@
 ;;;; HELP-MODE SETTINGS
 (use-package help-mode
   :bind (:map help-mode-map
+              ;; Some additional navigation bindings
               ("n" . next-line)
-              ("p" . previous-line)))
+              ("p" . previous-line)
+              ("f" . forward-char)
+              ("b" . backward-char)
+              ("a" . move-beginning-of-line)
+              ("e" . move-end-of-line)
+              ("v" . scroll-up-command)
+              ("V" . scroll-down-command)
+              ("C-d" . scroll-up-command)))
 
 ;;;; ORG SETTINGS
 (require 'init-org)
@@ -156,6 +170,7 @@
   (setq ledger-mode-should-check-version nil)
   (add-to-list 'ledger-reports
                '("uncleared" "%(binary) -f %(ledger-file) reg --uncleared")))
+;; See (calc-fix-notation N)
 
 (use-package ledger-report
   :bind (:map ledger-report-mode-map
@@ -213,6 +228,11 @@
 ;;;; AUCTEX SETTINGS
 (use-package tex-site
   :ensure auctex)
+
+;;;; VIEW MODE
+(use-package view
+  :ensure t
+  :bind ("C-x v" . view-mode))
 
 ;;;; WEB SETTINGS
 (use-package web-mode

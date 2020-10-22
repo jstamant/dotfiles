@@ -41,10 +41,10 @@ i.e. Have your most visited file listed first.")
 (setq org-deadline-warning-days 7)
 (setq org-agenda-skip-deadline-prewarning-if-scheduled t)
 (setq org-agenda-scheduled-leaders '("" ""))
-(put 'org-agenda-file-to-front 'disabled
-     "Agenda files are determined at startup through the init file!\n")
-(put 'org-remove-file 'disabled
-     "Agenda files are determined at startup through the init file!\n")
+;;(put 'org-agenda-file-to-front 'disabled
+;;     "Agenda files are determined at startup through the init file!\n")
+;;(put 'org-remove-file 'disabled
+;;     "Agenda files are determined at startup through the init file!\n")
 (setq org-stuck-projects
       '("+project" ("TODO" "STARTED") nil ""))
 
