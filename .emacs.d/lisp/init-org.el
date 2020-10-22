@@ -17,6 +17,9 @@ variable. It searches your `org-directory'."
   (interactive)
   (find-file (concat org-directory (car org-files))))
 
+;; Settings for a clean view
+(setq org-adapt-indentation nil) ; Promotes and demotes headings like org used to
+
 ;; Set Org files
 (defvar org-files
   '("gtd.org")
@@ -78,6 +81,7 @@ i.e. Have your most visited file listed first.")
 
 ;; org-capture settings
 (global-set-key "\C-cc" 'org-capture)
+(global-set-key "\C-cl" 'org-store-link)
 
 (setq org-capture-templates
       '(("t" "TODO" entry

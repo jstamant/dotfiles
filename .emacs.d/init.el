@@ -105,7 +105,9 @@
 ;;;; DIRED SETTINGS
 (use-package dired
   :config
-  (put 'dired-find-alternate-file 'disabled nil))
+  (put 'dired-find-alternate-file 'disabled nil)
+  :bind (:map dired-mode-map
+              ("C-s" . dired-isearch-filenames)))
 
 ;;;; EVIL SETTINGS
 (defvar using-evil nil
