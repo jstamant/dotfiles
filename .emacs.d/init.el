@@ -181,9 +181,11 @@
               ("TAB" . ledger-report-visit-source)))
 
 (defun ledger ()
-  "Shortcut for finding my ledger file."
+  "Shortcut for finding my ledger file, and navigating to the end
+of the buffer."
   (interactive)
-  (find-file (concat drive-directory "reference/finances/finances.ledger")))
+  (find-file (concat drive-directory "reference/finances/finances.ledger"))
+  (end-of-buffer))
 
 ;;;; MAGIT SETTINGS
 (use-package magit
