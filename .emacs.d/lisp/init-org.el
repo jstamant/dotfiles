@@ -1,8 +1,26 @@
 ;;;; ORG-MODE SETTINGS
 
+;; Ensure org is loaded explicitly, and not lazily
+(use-package org
+  :ensure t)
+(defalias 'o 'org-mode)
+;; TODO Ensure org-capture is loaded explicitly, and not lazily
+
+;; Set priorities in org to numeric priorities
+(setq org-highest-priority ?1)
+(setq org-lowest-priority ?5)
+(setq org-default-priority ?5)
+;; Set priority faces to be color-coded like in Todoist
+;; TODO get this to automatically assign colors from the current theme
+(setq org-priority-faces
+      '((?1 . "orangered")
+        (?2 . "darkorange")
+        (?3 . "cornflowerblue")
+        (?4 . "darkgray")))
+
 ;; Some general org-mode preferences and global options
 (setq org-todo-keywords
-      '((sequence "TODO(t)" "STARTED(s)" "WAITING(w)" "DEFERRED(f)" "APPT(a)"
+      '((sequence "TODO(t)" "STARTED(s)" "WAITING(w)"
                   "|" "DONE(d)" "CANCELLED(c)")))
 (put 'org-toggle-time-stamp-overlays 'disabled
      "I don't use timestamp overlays.\n
@@ -10,31 +28,32 @@ This command is usually invoked as an accident.\n")
 (setq org-refile-targets '((nil . (:level . 1))
                            (nil . (:tag . "project"))))
 (setq org-src-fontify-natively t) ; Fontify source blocks
-(defun gtd ()
-  "Shortcut for finding your GTD file.
-This function visits the first file in the `org-files'
-variable. It searches your `org-directory'."
-  (interactive)
-  (find-file (concat org-directory (car org-files))))
+
+;; Aliases for finding your main org file, provided it is an agenda file
+(defalias 'gtd  'org-cycle-agenda-files)
+(defalias 'work 'org-cycle-agenda-files)
+(defalias 'w    'org-cycle-agenda-files)
 
 ;; Settings for a clean view
 (setq org-adapt-indentation nil) ; Promotes and demotes headings like org used to
 
-;; Set Org files
-(defvar org-files
-  '("gtd.org")
-  "List of your org-mode files for use with Emacs.
-When setting this variable in your .emacs, sort them by priority.
-i.e. Have your most visited file listed first.")
-
-;; Dynamically set org-directory depending on the OS
-(setq org-directory drive-directory)
-
-;; Set agenda files
-(setq org-agenda-files '())
-(dolist (file org-files)
-  (if (file-exists-p (concat org-directory file))
-      (add-to-list 'org-agenda-files (concat org-directory file))))
+;; Set org-directory, agenda files, and main org files
+;;Implement some kind of also do a function for 'at home' or 'at work' boolean
+;; TODO use org-agenda-file-to-front to bring the default
+;; I should also bind org-cycle-agenda-files (C-' and C-,) globally
+(if (at-work)
+    (progn
+      (setq org-directory onedrive-directory)
+      (add-to-list 'org-agenda-files (concat org-directory "work.org"))))
+(if (at-home)
+    (progn
+      (setq org-directory drive-directory)
+      (add-to-list 'org-agenda-files (concat org-directory "gtd.org"))))
+;; DISABLED - set agenda files via C-c [ org-agenda-file-to-front
+;; (setq org-agenda-files '())
+;; (dolist (file org-files)
+;;   (if (file-exists-p (concat org-directory file))
+;;       (add-to-list 'org-agenda-files (concat org-directory file))))
 
 ;; Disable tag inheritance, because I don't make use of it
 (setq org-use-tag-inheritance nil)
@@ -44,55 +63,47 @@ i.e. Have your most visited file listed first.")
 (setq org-deadline-warning-days 7)
 (setq org-agenda-skip-deadline-prewarning-if-scheduled t)
 (setq org-agenda-scheduled-leaders '("" ""))
-;;(put 'org-agenda-file-to-front 'disabled
-;;     "Agenda files are determined at startup through the init file!\n")
-;;(put 'org-remove-file 'disabled
-;;     "Agenda files are determined at startup through the init file!\n")
 (setq org-stuck-projects
       '("+project" ("TODO" "STARTED") nil ""))
 
 (setq org-agenda-custom-commands
-      '(("n" "Next-actions by context"
-         ((todo "TODO"))
-         ((org-agenda-sorting-strategy '(tag-up timestamp-up))
-          (org-agenda-prefix-format " %-12:T ")
-          (org-agenda-overriding-header
-           "NEXT ACTIONS - sorted by context\n================================")
-          (org-agenda-remove-tags t)))
+      '(("d" "Daily report" ; This one is special, it's a composite agenda
+         ((tags-todo
+           "-TODO\"WAITING\""
+           ((org-agenda-overriding-header "Prioritized todo list")))
+          (todo
+           "WAITING"
+           ((org-agenda-overriding-header "Waiting list")))))
+        ("u" "Agenda - upcoming" agenda ""
+         ((org-agenda-span 30)))
+        ("r" "TODO list (r)eport"
+         ((tags-todo "-TODO=\"WAITING\""))
+         ((org-agenda-sorting-strategy '(priority-down timestamp-up))
+          (org-agenda-prefix-format " ")
+          (org-agenda-overriding-header "Prioritized TODO list")))
         ("w" "WAITING items" todo "WAITING"
-         ((org-agenda-sorting-strategy '((todo tag-up)))))
+         ((org-agenda-overriding-header "WAITING list")
+          (org-agenda-prefix-format " ")
+          (org-agenda-sorting-strategy '((tsia-up)))))
         ("i" "Incomplete items" todo "STARTED"
          ((org-agenda-sorting-strategy '((todo tag-up)))))
-        ("p" "List of active projects" tags "project"
-         ((org-agenda-sorting-strategy '((tags alpha-up)))))
-        ("T" "Test printable"
-         ((todo "TODO"))
-         ((org-agenda-sorting-strategy '(tag-up timestamp-up))
-          (org-agenda-prefix-format "[ ] [ ] %-9:T ")
-          ;;(org-agenda-todo-keyword-format "%-7s")
-          (org-agenda-todo-keyword-format "")
-          (org-agenda-overriding-header
-           "NEXT ACTIONS - sorted by context\n================================\n")
-          (org-agenda-remove-tags t)
-          (org-agenda-compact-blocks t)
-          (ps-number-of-columns 2)
-          (ps-landscape-mode t)
-          (ps-font-size 20.0)))))
+        ("P" "List of active projects" tags "project"
+         ((org-agenda-sorting-strategy '((tags alpha-up)))))))
 
 ;; org-capture settings
 (global-set-key "\C-cc" 'org-capture)
 (global-set-key "\C-cl" 'org-store-link)
 
 (setq org-capture-templates
-      '(("t" "TODO" entry
-         (file+headline "gtd.org" "Tasks")
+      `(("t" "TODO" entry
+         (file+headline ,(car org-agenda-files) "Tasks")
          "* TODO %^{Next-action description}\n%u%?")
         ("c" "Collect" entry
-         (file+headline "gtd.org" "In")
+         (file+headline ,(car org-agenda-files) "In")
          "* %^{Brief description}\n%u%?")
         ("j" "Journal entry" plain
          (file+datetree "reference/journal.org")
-          "TEXT\n\nWhat did I accomplish?\n- \n\nWhat did I learn?\n- \n\nWhat am I grateful for?\n- \n\n")))
+         "TEXT\n\nWhat did I accomplish?\n- \n\nWhat did I learn?\n- \n\nWhat am I grateful for?\n- \n\n")))
 
 
 (provide 'init-org)
