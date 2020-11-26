@@ -24,15 +24,17 @@
 (if using-windows
     (setenv "HOME" (getenv "USERPROFILE")))
 
+(defun at-work ()
+  "t if using a work computer."
+  (equal "MH" (substring (system-name) 0 2)))
+(defun at-home ()
+  "t if using a non-work computer."
+  (not (at-work)))
+
 (defun init ()
   "Shortcut for finding your Emacs configuration file."
   (interactive)
   (find-file "~/.emacs.d/init.el"))
-
-(defun work ()
-  "Shortcut for finding your work org file."
-  (interactive)
-  (find-file (concat onedrive-directory "work.org")))
 
 ;; Enable some pre-disabled commands
 (put 'downcase-region 'disabled nil)
@@ -51,11 +53,13 @@
 
 ;; Disable GUI elements
 (menu-bar-mode -1)
-(mouse-wheel-mode -1)
 (tooltip-mode -1)
 (scroll-bar-mode -1)
 (tool-bar-mode -1)
 (setq inhibit-splash-screen t) ; Disable startup messages
+
+;; Sound settings
+(setq ring-bell-function 'ignore) ; Turn off audible bell
 
 ;; Theme settings
 (add-to-list 'custom-theme-load-path "~/.emacs.d/lisp/") ;; Only required for my own theme
