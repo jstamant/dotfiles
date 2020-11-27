@@ -359,6 +359,9 @@ This command is usually invoked as an accident.\n")
 (setq org-refile-targets '((nil . (:level . 1))
                            (nil . (:tag . "project"))))
 (setq org-src-fontify-natively t) ; Fontify source blocks
+(set-face-foreground 'org-block (face-attribute 'default :foreground))
+(setq org-src-tab-acts-natively t) ; Allow proper indentation of code blocks
+(setq org-edit-src-content-indentation 0)
 
 ;; Aliases for finding your main org file, provided it is an agenda file
 (defalias 'gtd  'org-cycle-agenda-files)
