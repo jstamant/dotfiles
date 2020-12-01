@@ -123,6 +123,25 @@ to my liking and use of Emacs.
 
 #+end_src
 
+* Aliases
+Placing all my mode aliases here. Other aliases may be present
+in this configuration, especially the [[*org-mode][org-mode]] section, as I have
+functions and aliases for navigating to my main org files.
+
+#+begin_src emacs-lisp
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;; ALIASES
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; Major-mode aliases
+(defalias 'o 'org-mode)
+(defalias 'org 'org-mode)
+
+;; Minor-mode aliases
+(defalias 'afm 'auto-fill-mode)
+
+#+end_src
+
 * Package settings
 Here are all the packages I use or for which I have settings.
 
@@ -328,7 +347,6 @@ By the way: I use Arch.
 ;; Ensure org is loaded explicitly, and not lazily
 (use-package org
   :ensure t)
-(defalias 'o 'org-mode)
 ;; TODO Ensure org-capture is loaded explicitly, and not lazily
 
 ;; Set priorities in org to numeric priorities
@@ -358,6 +376,7 @@ This command is usually invoked as an accident.\n")
 (setq org-edit-src-content-indentation 0)
 
 ;; Aliases for finding your main org file, provided it is an agenda file
+(defalias 'g    'org-cycle-agenda-files)
 (defalias 'gtd  'org-cycle-agenda-files)
 (defalias 'work 'org-cycle-agenda-files)
 (defalias 'w    'org-cycle-agenda-files)
