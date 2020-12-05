@@ -180,7 +180,8 @@ Here are all the packages I use or for which I have settings.
   :config
   (put 'dired-find-alternate-file 'disabled nil)
   :bind (:map dired-mode-map
-              ("C-s" . dired-isearch-filenames)))
+              ("C-s" . dired-isearch-filenames)
+              ("TAB" . dired-find-file)))
 #+end_src
 
 ** evil-mode
