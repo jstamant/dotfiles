@@ -402,12 +402,17 @@ This command is usually invoked as an accident.\n")
           (todo
            "WAITING"
            ((org-agenda-overriding-header "Waiting list")))))
-        ("u" "Agenda - upcoming" agenda ""
+        ("u" "Unscheduled"
+         ((tags-todo "-TODO=\"WAITING\"-SCHEDULED<>\"\""))
+         ((org-agenda-sorting-strategy '(priority-down timestamp-up))
+          (org-agenda-prefix-format " %-14:c")
+          (org-agenda-overriding-header "Prioritized TODO list - unscheduled items")))
+        ("x" "Agenda - upcoming" agenda ""
          ((org-agenda-span 30)))
         ("r" "TODO list (r)eport"
          ((tags-todo "-TODO=\"WAITING\""))
          ((org-agenda-sorting-strategy '(priority-down timestamp-up))
-          (org-agenda-prefix-format " ")
+          (org-agenda-prefix-format " %-14:c")
           (org-agenda-overriding-header "Prioritized TODO list")))
         ("w" "WAITING items" todo "WAITING"
          ((org-agenda-overriding-header "WAITING list")
