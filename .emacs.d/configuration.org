@@ -123,6 +123,14 @@ to my liking and use of Emacs.
 
 #+end_src
 
+* Miscellaneous setup
+Other setup items that have don't have to be loaded early on.
+
+#+begin_src emacs-lisp
+(setq delete-by-moving-to-trash t) ; Use trash instead of destroying files
+
+#+end_src
+
 * Aliases
 Placing all my mode aliases here. Other aliases may be present
 in this configuration, especially the [[*org-mode][org-mode]] section, as I have
