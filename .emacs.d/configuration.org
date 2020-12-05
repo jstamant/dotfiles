@@ -151,6 +151,69 @@ Here are all the packages I use or for which I have settings.
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 #+end_src
 
+** auctex
+#+begin_src emacs-lisp
+;;;; AUCTEX SETTINGS
+(use-package tex-site
+  :ensure auctex)
+#+end_src
+
+** calc
+#+begin_src emacs-lisp
+;;;; CALC SETTINGS
+(use-package calc
+  :bind ("C-x c" . calc))
+#+end_src
+
+** dired
+#+begin_src emacs-lisp
+;;;; DIRED SETTINGS
+(use-package dired
+  :config
+  (put 'dired-find-alternate-file 'disabled nil)
+  :bind (:map dired-mode-map
+              ("C-s" . dired-isearch-filenames)))
+#+end_src
+
+** evil-mode
+#+begin_src emacs-lisp
+;;;; EVIL SETTINGS
+(defvar using-evil nil
+  "Set to t   if you are using evil-mode.\nSet to nil if you are not.")
+(defun init-evil ()
+    "Load and configure packages related to evil-mode."
+    (use-package evil-leader
+      :ensure t
+      :init
+      (setq evil-want-C-u-scroll t) ; required before loading evil
+      (setq evil-want-keybinding nil)) ; required if evil-collection will be used
+    (use-package evil
+      :ensure t
+      :init
+      :config
+      (global-evil-leader-mode)
+      (evil-set-initial-state 'help-mode 'emacs)
+      (evil-set-initial-state 'dired-mode 'emacs)
+      (evil-mode 1))
+    (use-package evil-collection
+      :ensure t
+      :after evil
+      :config
+      (evil-collection-init))
+    (use-package evil-org
+      :ensure t
+      :after org
+      :config
+      (add-hook 'org-mode-hook 'evil-org-mode)
+      (add-hook 'evil-org-mode-hook
+                (lambda ()
+                  (evil-org-set-key-theme)))
+      (require 'evil-org-agenda)
+      (evil-org-agenda-set-keys)))
+
+(if using-evil init-evil nil)
+#+end_src
+
 ** help-mode
 #+begin_src emacs-lisp
 ;;;; HELP-MODE SETTINGS
@@ -212,131 +275,6 @@ of the buffer."
 ;;;; MARKDOWN SETTINGS
 (use-package markdown-mode
   :ensure t)
-#+end_src
-
-** paren-mode
-#+begin_src emacs-lisp
-;;;; PAREN SETTINGS
-(use-package paren
-  :bind ("C-x p" . show-paren-mode))
-#+end_src
-
-** pkgbuild-mode
-By the way: I use Arch.
-
-#+begin_src emacs-lisp
-;;;; PKGBUILD SETTINGS
-(use-package pkgbuild-mode
-  :ensure t
-  :config
-  (setq pkgbuild-update-sums-on-save nil))
-#+end_src
-
-** sh-mode
-#+begin_src emacs-lisp
-;;;; SHELL-SCRIPT SETTINGS
-(use-package sh-script
-  :config
-  (setq sh-basic-offset 2)
-  (add-hook 'sh-mode-hook (lambda () (sh-set-shell "bash"))))
-#+end_src
-
-** term
-#+begin_src emacs-lisp
-;;;; TERM SETTINGS
-(use-package term)
-#+end_src
-
-** auctex
-#+begin_src emacs-lisp
-;;;; AUCTEX SETTINGS
-(use-package tex-site
-  :ensure auctex)
-#+end_src
-
-** view-mod
-#+begin_src emacs-lisp
-;;;; VIEW MODE
-(use-package view
-  :ensure t
-  :bind ("C-x v" . view-mode))
-#+end_src
-
-** web-mode
-#+begin_src emacs-lisp
-;;;; WEB SETTINGS
-(use-package web-mode
-  :ensure t
-  :mode
-  "\\.css$"
-  "\\.htaccess$"
-  "\\.html?$"
-  "\\.twig$"
-  "\\.php$"
-  "\\.xml$"
-  :config
-  ;; Make .html files recognize Twig templates by default
-  (setq web-mode-engines-alist '(("twig" . "\\.html$")))
-  ;; web-mode indentation settings
-  (setq web-mode-markup-indent-offset 2)
-  (setq web-mode-css-indent-offset 2)
-  (setq web-mode-code-indent-offset 2))
-#+end_src
-
-** calc
-#+begin_src emacs-lisp
-;;;; CALC SETTINGS
-(use-package calc
-  :bind ("C-x c" . calc))
-#+end_src
-
-** dired
-#+begin_src emacs-lisp
-;;;; DIRED SETTINGS
-(use-package dired
-  :config
-  (put 'dired-find-alternate-file 'disabled nil)
-  :bind (:map dired-mode-map
-              ("C-s" . dired-isearch-filenames)))
-#+end_src
-
-** evil-mode
-#+begin_src emacs-lisp
-;;;; EVIL SETTINGS
-(defvar using-evil nil
-  "Set to t   if you are using evil-mode.\nSet to nil if you are not.")
-(defun init-evil ()
-    "Load and configure packages related to evil-mode."
-    (use-package evil-leader
-      :ensure t
-      :init
-      (setq evil-want-C-u-scroll t) ; required before loading evil
-      (setq evil-want-keybinding nil)) ; required if evil-collection will be used
-    (use-package evil
-      :ensure t
-      :init
-      :config
-      (global-evil-leader-mode)
-      (evil-set-initial-state 'help-mode 'emacs)
-      (evil-set-initial-state 'dired-mode 'emacs)
-      (evil-mode 1))
-    (use-package evil-collection
-      :ensure t
-      :after evil
-      :config
-      (evil-collection-init))
-    (use-package evil-org
-      :ensure t
-      :after org
-      :config
-      (add-hook 'org-mode-hook 'evil-org-mode)
-      (add-hook 'evil-org-mode-hook
-                (lambda ()
-                  (evil-org-set-key-theme)))
-      (require 'evil-org-agenda)
-      (evil-org-agenda-set-keys)))
-
-(if using-evil init-evil nil)
 #+end_src
 
 ** org-mode
@@ -457,5 +395,67 @@ This command is usually invoked as an accident.\n")
         ("j" "Journal entry" plain
          (file+datetree "reference/journal.org")
          "TEXT\n\nWhat did I accomplish?\n- \n\nWhat did I learn?\n- \n\nWhat am I grateful for?\n- \n\n")))
+#+end_src
+
+** paren-mode
+#+begin_src emacs-lisp
+;;;; PAREN SETTINGS
+(use-package paren
+  :bind ("C-x p" . show-paren-mode))
+#+end_src
+
+** pkgbuild-mode
+By the way: I use Arch.
+
+#+begin_src emacs-lisp
+;;;; PKGBUILD SETTINGS
+(use-package pkgbuild-mode
+  :ensure t
+  :config
+  (setq pkgbuild-update-sums-on-save nil))
+#+end_src
+
+** sh-mode
+#+begin_src emacs-lisp
+;;;; SHELL-SCRIPT SETTINGS
+(use-package sh-script
+  :config
+  (setq sh-basic-offset 2)
+  (add-hook 'sh-mode-hook (lambda () (sh-set-shell "bash"))))
+#+end_src
+
+** term
+#+begin_src emacs-lisp
+;;;; TERM SETTINGS
+(use-package term)
+#+end_src
+
+** view-mod
+#+begin_src emacs-lisp
+;;;; VIEW MODE
+(use-package view
+  :ensure t
+  :bind ("C-x v" . view-mode))
+#+end_src
+
+** web-mode
+#+begin_src emacs-lisp
+;;;; WEB SETTINGS
+(use-package web-mode
+  :ensure t
+  :mode
+  "\\.css$"
+  "\\.htaccess$"
+  "\\.html?$"
+  "\\.twig$"
+  "\\.php$"
+  "\\.xml$"
+  :config
+  ;; Make .html files recognize Twig templates by default
+  (setq web-mode-engines-alist '(("twig" . "\\.html$")))
+  ;; web-mode indentation settings
+  (setq web-mode-markup-indent-offset 2)
+  (setq web-mode-css-indent-offset 2)
+  (setq web-mode-code-indent-offset 2))
 #+end_src
 
