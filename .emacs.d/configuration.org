@@ -293,8 +293,13 @@ of the buffer."
 
 ;; Ensure org is loaded explicitly, and not lazily
 (use-package org
-  :ensure t)
+  :ensure t
+  :mode ("\\.te?xt\\'" . org-mode))
 ;; TODO Ensure org-capture is loaded explicitly, and not lazily
+
+;; Set org-mode as the default major-mode if none is determined by
+;; auto-mode-alist
+(setq-default major-mode 'org-mode)
 
 ;; Set priorities in org to numeric priorities
 (setq org-highest-priority ?1)
