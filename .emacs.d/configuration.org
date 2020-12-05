@@ -365,6 +365,7 @@ By the way: I use Arch.
 (setq org-todo-keywords
       '((sequence "TODO(t)" "STARTED(s)" "WAITING(w)"
                   "|" "DONE(d)" "CANCELLED(c)")))
+(setq org-log-done 'time) ; Log closing-time of tasks
 (put 'org-toggle-time-stamp-overlays 'disabled
      "I don't use timestamp overlays.\n
 This command is usually invoked as an accident.\n")
