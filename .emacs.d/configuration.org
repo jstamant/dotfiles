@@ -286,6 +286,14 @@ of the buffer."
   :ensure t)
 #+end_src
 
+** multiple-cursors
+#+begin_src emacs-lisp
+;;;; MULTIPLE-CURSORS SETTINGS
+(use-package multiple-cursors
+  :ensure t
+  :bind ("C-c m c" . mc/edit-lines))
+#+end_src
+
 ** org-mode
 
 #+begin_src emacs-lisp
