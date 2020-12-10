@@ -383,14 +383,14 @@ This command is usually invoked as an accident.\n")
            "WAITING"
            ((org-agenda-overriding-header "Waiting list")))))
         ("u" "Unscheduled"
-         ((tags-todo "-TODO=\"WAITING\"-SCHEDULED<>\"\""))
+         ((tags-todo "-TODO=\"WAITING\"-SCHEDULED<>\"\"-CATEGORY=\"repetitives\""))
          ((org-agenda-sorting-strategy '(priority-down timestamp-up))
           (org-agenda-prefix-format " %-14:c")
           (org-agenda-overriding-header "Prioritized TODO list - unscheduled items")))
         ("x" "Agenda - upcoming" agenda ""
          ((org-agenda-span 30)))
         ("r" "TODO list (r)eport"
-         ((tags-todo "-TODO=\"WAITING\""))
+         ((tags-todo "-TODO=\"WAITING\"-CATEGORY=\"repetitives\""))
          ((org-agenda-sorting-strategy '(priority-down timestamp-up))
           (org-agenda-prefix-format " %-14:c")
           (org-agenda-overriding-header "Prioritized TODO list")))
