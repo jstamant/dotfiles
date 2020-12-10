@@ -245,7 +245,7 @@ Here are all the packages I use or for which I have settings.
 ;;;; LEDGER SETTINGS
 (use-package ledger-mode
   :ensure t
-  :mode "\\.ledger$"
+  :mode "\\.ledger\\'"
   :config
   (setq ledger-default-date-format ledger-iso-date-format) ; YYYY-MM-DD
   (setq ledger-highlight-xact-under-point nil)
@@ -458,15 +458,15 @@ By the way: I use Arch.
 (use-package web-mode
   :ensure t
   :mode
-  "\\.css$"
-  "\\.htaccess$"
-  "\\.html?$"
-  "\\.twig$"
-  "\\.php$"
-  "\\.xml$"
+  "\\.css\\'"
+  "\\.htaccess\\'"
+  "\\.html?\\'"
+  "\\.twig\\'"
+  "\\.php\\'"
+  "\\.xml\\'"
   :config
   ;; Make .html files recognize Twig templates by default
-  (setq web-mode-engines-alist '(("twig" . "\\.html$")))
+  (setq web-mode-engines-alist '(("twig" . "\\.html\\'")))
   ;; web-mode indentation settings
   (setq web-mode-markup-indent-offset 2)
   (setq web-mode-css-indent-offset 2)
