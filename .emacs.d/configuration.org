@@ -418,13 +418,18 @@ This command is usually invoked as an accident.\n")
 (setq org-capture-templates
       `(("t" "TODO" entry
          (file+headline ,(car org-agenda-files) "Tasks")
-         "* TODO %^{Next-action description}\n%u%?")
+         "* TODO %?\n%u")
+        ("T" "TODO with clipboard" entry
+         (file+headline ,(car org-agenda-files) "Tasks")
+         "* TODO %?\n%u\n%c")
         ("c" "Collect" entry
          (file+headline ,(car org-agenda-files) "In")
          "* %^{Brief description}\n%u%?")
-        ("j" "Journal entry" plain
+        ("J" "Journal entry - with prompts" plain
          (file+datetree "reference/journal.org")
-         "TEXT\n\nWhat did I accomplish?\n- \n\nWhat did I learn?\n- \n\nWhat am I grateful for?\n- \n\n")))
+         "TEXT\n\nWhat did I accomplish?\n- \n\nWhat did I learn?\n- \n\nWhat am I grateful for?\n- \n\n")
+        ("j" "Journal entry - plain" plain
+         (file+datetree "reference/journal.org") "")))
 #+end_src
 
 ** paren-mode
