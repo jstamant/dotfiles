@@ -310,7 +310,11 @@ of the buffer."
 ;; Ensure org is loaded explicitly, and not lazily
 (use-package org
   :ensure t
-  :mode ("\\.te?xt\\'" . org-mode))
+  :mode ("\\.te?xt\\'" . org-mode)
+  :bind (:map org-mode-map
+              ;; Next and previous errors for when using org-occur C-c /
+              ("M-n" . next-error)
+              ("M-p" . previous-error)))
 ;; TODO Ensure org-capture is loaded explicitly, and not lazily
 
 ;; Set org-mode as the default major-mode if none is determined by
