@@ -771,5 +771,8 @@
     <application name="st">
       <maximized>true</maximized>
     </application>
+    <application class="Zathura">
+      <maximized>true</maximized>
+    </application>
   </applications>
 </openbox_config>

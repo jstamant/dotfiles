@@ -11,6 +11,8 @@ super + d
   $LAUNCHER
 #super + p
 #  $LAUNCHER
+super + e
+  $TERMINAL -e ranger
 super + shift + m
   $HOME/bin/menu.sh
 
