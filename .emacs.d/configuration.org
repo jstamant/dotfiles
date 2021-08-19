@@ -190,7 +190,7 @@ Here are all the packages I use or for which I have settings.
 (use-package emojify
   :ensure t
   :hook (after-init . global-emojify-mode))
-
+#+end_src
 
 ** evil-mode
 #+begin_src emacs-lisp
