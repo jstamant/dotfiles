@@ -129,6 +129,10 @@ Other setup items that have don't have to be loaded early on.
 #+begin_src emacs-lisp
 (setq delete-by-moving-to-trash t) ; Use trash instead of destroying files
 
+;; Set sentences to be identified by a period and a single space, instead of two spaces
+(setq sentence-end "[.?!][]\"')]*\\($\\|\t\\| \\)[ \t\n]*")
+(setq sentence-end-double-space nil)
+
 #+end_src
 
 * Aliases
@@ -467,6 +471,13 @@ By the way: I use Arch.
 #+begin_src emacs-lisp
 ;;;; TERM SETTINGS
 (use-package term)
+#+end_src
+
+** unfill
+#+begin_src emacs-lisp
+;;;; UNFILL SETTINGS
+(use-package unfill
+  :ensure t)
 #+end_src
 
 ** view-mod
