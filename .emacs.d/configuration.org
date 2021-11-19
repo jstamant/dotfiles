@@ -133,6 +133,12 @@ Other setup items that have don't have to be loaded early on.
 (setq sentence-end "[.?!][]\"')]*\\($\\|\t\\| \\)[ \t\n]*")
 (setq sentence-end-double-space nil)
 
+;; Make a quick function to insert today's date in ISO 8601
+(defun dts ()
+  "Insert today's date in ISO 8601 (YYYY-MM-DD)."
+  (interactive)
+  (insert (format-time-string "%Y-%m-%d")))
+
 #+end_src
 
 * Aliases
@@ -151,6 +157,7 @@ functions and aliases for navigating to my main org files.
 
 ;; Minor-mode aliases
 (defalias 'afm 'auto-fill-mode)
+(defalias 'fsm 'flyspell-mode)
 
 #+end_src
 
@@ -235,6 +242,14 @@ Here are all the packages I use or for which I have settings.
 (if using-evil init-evil nil)
 #+end_src
 
+** flyspell
+#+begin_src emacs-lisp
+;;;; FLYSPELL SETTINGS
+(use-package flyspell
+  :hook (text-mode . flyspell-mode)) ; Start spell checking on all modes derived from text-mode
+
+#+end_src
+
 ** help-mode
 #+begin_src emacs-lisp
 ;;;; HELP-MODE SETTINGS
@@ -252,6 +267,15 @@ Here are all the packages I use or for which I have settings.
               ("C-d" . scroll-up-command)))
 #+end_src
 
+** ispell
+#+begin_src emacs-lisp
+;;;; ISPELL SETTINGS
+(use-package ispell
+  :config
+  (setq ispell-program-name "/usr/bin/aspell")) ; Change default spell checking program from ispell to aspell
+
+#+end_src
+
 ** ledger
 #+begin_src emacs-lisp
 ;;;; LEDGER SETTINGS
@@ -262,6 +286,7 @@ Here are all the packages I use or for which I have settings.
   (setq ledger-default-date-format ledger-iso-date-format) ; YYYY-MM-DD
   (setq ledger-highlight-xact-under-point nil)
   (setq ledger-mode-should-check-version nil)
+  (setq ledger-clear-whole-transactions t) ; For reconciliation, clear whole transactions, doesn't work great. It would be nice to have this only set during reconcile-mode
   (add-to-list 'ledger-reports
                '("uncleared" "%(binary) -f %(ledger-file) reg --uncleared")))
 ;; See (calc-fix-notation N)
@@ -278,6 +303,7 @@ of the buffer."
   (interactive)
   (find-file (concat drive-directory "reference/finances/finances.ledger"))
   (end-of-buffer))
+
 #+end_src
 
 ** magit
@@ -314,7 +340,7 @@ of the buffer."
 ;; Ensure org is loaded explicitly, and not lazily
 (use-package org
   :ensure t
-  :mode ("\\.te?xt\\'" . org-mode)
+  ;;:mode ("\\.te?xt\\'" . org-mode) ; Disabled; Use org-mode by default for text files
   :bind (:map org-mode-map
               ;; Next and previous errors for when using org-occur C-c /
               ("M-n" . next-error)
@@ -480,7 +506,7 @@ By the way: I use Arch.
   :ensure t)
 #+end_src
 
-** view-mod
+** view-mode
 #+begin_src emacs-lisp
 ;;;; VIEW MODE
 (use-package view
