@@ -1,0 +1,3 @@
+#!/bin/sh
+# Script run after every switch of autorandr
+$HOME/.fehbg # Refresh the background to fit the new screen

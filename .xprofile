@@ -4,12 +4,16 @@
 
 [ -f $HOME/.Xresources ] && xrdb $HOME/.Xresources
 
+# Load any system X configs if present
 if [ -d /etc/X11/xinit/xinitrc.d ] ; then
   for f in /etc/X11/xinit/xinitrc.d/?*.sh ; do
     [ -x $f ] && . $f
   done
   unset f
 fi
+
+# Explicity set cursor for window managers that don't set it (xmonad)
+xsetroot -cursor_name left_ptr
 
 # Configure Wacom tablet if connected.
 $HOME/bin/setupwacom.sh
@@ -19,12 +23,12 @@ sxhkd &              # Common custom keybindings
 $HOME/.fehbg         # Set desktop background
 nm-applet &
 udiskie --tray &
-#nextcloud &
 insync start
 numlockx &
-compton -C &         # Window compositor <3
+#picom &             # Window compositor, havig issues with fading
 dunst &              # Notification server
 emacs --daemon  &
+autorandr --change & # Automatic monitor configuration
 
 # DPMS preferences
 # Blank screen after 30 minutes
