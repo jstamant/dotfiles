@@ -184,6 +184,18 @@ Here are all the packages I use or for which I have settings.
   :bind ("C-x c" . calc))
 #+end_src
 
+** cc-mode
+#+begin_src emacs-lisp
+;;;; C/C++ MODE SETTINGS
+
+;; Ensure org is loaded explicitly, and not lazily
+(use-package cc-mode
+  :ensure t
+  :config
+  (setq c-default-style "linux")
+  (setq c-basic-offset 4))
+#+end_src
+
 ** dired
 #+begin_src emacs-lisp
 ;;;; DIRED SETTINGS
