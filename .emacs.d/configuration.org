@@ -288,7 +288,13 @@ Here are all the packages I use or for which I have settings.
   (setq ledger-mode-should-check-version nil) ; Ignore checking the 'ledger' binary
   (setq ledger-clear-whole-transactions t) ; For reconciliation, clear whole transactions, doesn't work great. It would be nice to have this only set during reconcile-mode
   (add-to-list 'ledger-reports
-               '("uncleared" "%(binary) -f %(ledger-file) reg --uncleared")))
+               '("uncleared" "%(binary) -f %(ledger-file) reg --uncleared"))
+  ;; Fix auto-completion for ledger accounts
+  (add-hook 'ledger-mode-hook
+            (lambda ()
+              (setq-local tab-always-indent 'complete)
+              (setq-local completion-cycle-threshold t)
+              (setq-local ledger-complete-in-steps t))))
 
 (use-package ledger-report
   :bind (:map ledger-report-mode-map
