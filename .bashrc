@@ -33,8 +33,6 @@ alias sudo='sudo '
 
 alias theme='themeselect.sh'
 
-alias 2019="$EDITOR $HOME/drive/reference/finances/2019-finances.ledger"
-
 # Config file aliases
 alias cb="$EDITOR $HOME/.bashrc"
 alias cbash="$EDITOR $HOME/.bashrc"
