@@ -599,6 +599,7 @@ before packages are loaded."
     (setq ledger-post-amount-alignment-column 52)
     ;; (setq ledger-highlight-xact-under-point nil) ; Screen is less cluttered without xact highlighting
     ;; (setq ledger-mode-should-check-version nil) ; Ignore checking the 'ledger' binary
+    (setq ledger-narrow-on-reconcile nil)     ; For reconciliation, DO NOT narrow the ledger file! Copying narrowed regions fucks up the file!
     (setq ledger-clear-whole-transactions t)) ; For reconciliation, clear whole transactions, doesn't work great. It would be nice to have this only set during reconcile-mode
     ;; (add-to-list 'ledger-reports
     ;;              '("uncleared" "%(binary) -f %(ledger-file) reg --uncleared"))
