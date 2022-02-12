@@ -532,6 +532,40 @@ default it calls `spacemacs/load-spacemacs-env' which loads the environment
 variables declared in `~/.spacemacs.env' or `~/.spacemacs.d/.spacemacs.env'.
 See the header of this file for more information."
   (spacemacs/load-spacemacs-env)
+  (setq user-full-name "Justin St-Amant")
+  (defvar using-windows
+    (equal window-system 'w32)
+    "t if emacs is running in windows")
+  (defvar drive-directory
+    (if (not using-windows)
+        "~/drive/"
+      (let ((userprofile (replace-regexp-in-string "\\\\" "/" (getenv "USERPROFILE"))))
+        (concat userprofile "/Google Drive/")))
+    "The absolute path to the Google Drive directory under Linux or Windows.")
+  (defvar onedrive-directory
+    (if using-windows
+        (let ((userprofile (replace-regexp-in-string "\\\\" "/" (getenv "USERPROFILE"))))
+          (concat userprofile "/OneDrive - Manitoba Hydro/")))
+    "The absolute path to your work OneDrive directory. Only for Windows.")
+  (if using-windows
+      (setenv "HOME" (getenv "USERPROFILE")))
+  (defun at-work ()
+    "t if using a work computer."
+    (equal "MH" (substring (system-name) 0 2)))
+  (defun at-home ()
+    "t if using a non-work computer."
+    (not (at-work)))
+  ;; Enable some pre-disabled commands
+  ;; (put 'downcase-region 'disabled nil)
+  ;; (put 'upcase-region 'disabled nil)
+  ;; (put 'scroll-left 'disabled nil)
+  ;; (put 'narrow-to-region 'disabled nil)
+
+  ;; Set backup and auto-save file location
+  ;; (setq backup-directory-alist
+  ;;       `((".*" . ,temporary-file-directory)))
+  ;; (setq auto-save-file-name-transforms
+  ;;       `((".*"   ,temporary-file-directory t)))
 )
 
 (defun dotspacemacs/user-init ()
@@ -557,6 +591,36 @@ This function is called at the very end of Spacemacs startup, after layer
 configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
+  ;; Ledger settings
+  (use-package ledger-mode
+    :defer t
+    :config
+    (setq ledger-default-date-format ledger-iso-date-format) ; YYYY-MM-DD
+    (setq ledger-post-amount-alignment-column 52)
+    ;; (setq ledger-highlight-xact-under-point nil) ; Screen is less cluttered without xact highlighting
+    ;; (setq ledger-mode-should-check-version nil) ; Ignore checking the 'ledger' binary
+    (setq ledger-clear-whole-transactions t)) ; For reconciliation, clear whole transactions, doesn't work great. It would be nice to have this only set during reconcile-mode
+    ;; (add-to-list 'ledger-reports
+    ;;              '("uncleared" "%(binary) -f %(ledger-file) reg --uncleared"))
+    ;; Fix auto-completion for ledger accounts
+    ;; (add-hook 'ledger-mode-hook
+    ;;           (lambda ()
+    ;;             (setq-local tab-always-indent 'complete)
+    ;;             (setq-local completion-cycle-threshold t)
+    ;;             (setq-local ledger-complete-in-steps t))))
+
+  ;; (use-package ledger-report
+  ;;   :bind (:map ledger-report-mode-map
+  ;;               ("n"   . next-line)
+  ;;               ("p"   . previous-line)
+  ;;               ("TAB" . ledger-report-visit-source)))
+
+  (defun ledger ()
+    "Shortcut for finding my ledger file, and navigating to the end
+of the buffer."
+    (interactive)
+    (find-file (concat drive-directory "reference/finances/finances.ledger"))
+    (end-of-buffer))
 )
 
 
