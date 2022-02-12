@@ -10,5 +10,5 @@ trayer --edge top\
        --alpha 0\
        --tint 0x2d2d2d\
        --widthtype request\
-       --monitor 0\
+       --monitor "primary"\
        --margin 0
