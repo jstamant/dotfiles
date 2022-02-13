@@ -595,26 +595,37 @@ before packages are loaded."
   (use-package ledger-mode
     :defer t
     :config
-    (setq ledger-default-date-format ledger-iso-date-format) ; YYYY-MM-DD
-    (setq ledger-post-amount-alignment-column 52)
-    ;; (setq ledger-highlight-xact-under-point nil) ; Screen is less cluttered without xact highlighting
-    ;; (setq ledger-mode-should-check-version nil) ; Ignore checking the 'ledger' binary
-    (setq ledger-narrow-on-reconcile nil)     ; For reconciliation, DO NOT narrow the ledger file! Copying narrowed regions fucks up the file!
-    (setq ledger-clear-whole-transactions t)) ; For reconciliation, clear whole transactions, doesn't work great. It would be nice to have this only set during reconcile-mode
-    ;; (add-to-list 'ledger-reports
-    ;;              '("uncleared" "%(binary) -f %(ledger-file) reg --uncleared"))
+    ;; Dates are YYYY-MM-DD when adding or killing transactions
+    (setq ledger-default-date-format ledger-iso-date-format)
+    (setq ledger-post-amount-alignment-column 52) ; 52 aligns with my main ledger file
+    (setq ledger-highlight-xact-under-point t)
+    ;; Ignore checking the 'ledger' binary. Raises an error if not installed.
+    (setq ledger-mode-should-check-version nil)
+    ;; For reconciliation, DO NOT narrow the ledger file!
+    ;; Copying narrowed regions fucks up the file, and killing cleared
+    ;; transactions will disappear!
+    (setq ledger-narrow-on-reconcile nil)
+    ;; For reconciliation, clear whole transactions.
+    ;; Doesn't work great. It would be nice to have this only set during
+    ;; reconcile-mode
+    (setq ledger-clear-whole-transactions t)
+    ;; Custom reports
+    (add-to-list 'ledger-reports
+                  '("uncleared" "%(binary) -f %(ledger-file) reg --uncleared"))
     ;; Fix auto-completion for ledger accounts
-    ;; (add-hook 'ledger-mode-hook
-    ;;           (lambda ()
-    ;;             (setq-local tab-always-indent 'complete)
-    ;;             (setq-local completion-cycle-threshold t)
-    ;;             (setq-local ledger-complete-in-steps t))))
+    (add-hook 'ledger-mode-hook
+               (lambda ()
+                 (setq-local tab-always-indent 'complete)
+                 (setq-local completion-cycle-threshold t)
+                 (setq-local ledger-complete-in-steps t))))
 
-  ;; (use-package ledger-report
-  ;;   :bind (:map ledger-report-mode-map
-  ;;               ("n"   . next-line)
-  ;;               ("p"   . previous-line)
-  ;;               ("TAB" . ledger-report-visit-source)))
+  ;; ledger-report-mode settings
+  (use-package ledger-report
+    :bind (:map ledger-report-mode-map
+                ;; This currently doesn't work.
+                ;; Binding keys doesn't work this way with evil.
+                ;; It works in emacs-mode, however.
+                ("TAB" . ledger-report-visit-source)))
 
   (defun ledger ()
     "Shortcut for finding my ledger file, and navigating to the end
