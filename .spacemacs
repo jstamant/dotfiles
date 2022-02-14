@@ -631,7 +631,7 @@ of the buffer."
              evil-ex-search-next
              evil-ex-search-previous))
     (advice-add search-function :after
-                (lambda () (evil-scroll-line-to-center))))
+                (lambda (&rest x) (evil-scroll-line-to-center (line-number-at-pos)))))
 )
 
 
