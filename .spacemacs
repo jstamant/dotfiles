@@ -617,6 +617,10 @@ before packages are loaded."
                 ;; It works in emacs-mode, however.
                 ("TAB" . ledger-report-visit-source)))
 
+  ;; ledger-reconcile-mode settings
+  (evil-define-key 'normal ledger-reconcile-mode-map ",b" 'ledger-display-balance)
+  (evil-define-key 'normal ledger-reconcile-mode-map "q" 'ledger-reconcile-quit)
+
   (defun ledger ()
     "Shortcut for finding my ledger file, and navigating to the end
 of the buffer."
