@@ -622,6 +622,16 @@ of the buffer."
     (interactive)
     (find-file (concat drive-directory "reference/finances/finances.ledger"))
     (end-of-buffer))
+
+  ;; Center search results for better visibility of the result's context
+  ;; Applies the same advice-add to these four evil-search functions
+  (dolist (search-function
+           '(evil-ex-search-forward
+             evil-ex-search-backward
+             evil-ex-search-next
+             evil-ex-search-previous))
+    (advice-add search-function :after
+                (lambda () (evil-scroll-line-to-center))))
 )
 
 
