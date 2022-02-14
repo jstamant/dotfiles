@@ -555,17 +555,6 @@ See the header of this file for more information."
   (defun at-home ()
     "t if using a non-work computer."
     (not (at-work)))
-  ;; Enable some pre-disabled commands
-  ;; (put 'downcase-region 'disabled nil)
-  ;; (put 'upcase-region 'disabled nil)
-  ;; (put 'scroll-left 'disabled nil)
-  ;; (put 'narrow-to-region 'disabled nil)
-
-  ;; Set backup and auto-save file location
-  ;; (setq backup-directory-alist
-  ;;       `((".*" . ,temporary-file-directory)))
-  ;; (setq auto-save-file-name-transforms
-  ;;       `((".*"   ,temporary-file-directory t)))
 )
 
 (defun dotspacemacs/user-init ()
