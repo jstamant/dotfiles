@@ -652,6 +652,8 @@ of the buffer."
              evil-ex-search-previous))
     (advice-add search-function :after
                 (lambda (&rest x) (evil-scroll-line-to-center (line-number-at-pos)))))
+  ;; Add a keybinding for C-x C-w, write-file, which I use enough to warrant a shortcut
+  (evil-define-key 'normal 'global " fw" 'ido-write-file)
 )
 
 
