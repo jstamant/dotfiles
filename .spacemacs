@@ -590,6 +590,8 @@ before packages are loaded."
     (setq ledger-default-date-format ledger-iso-date-format)
     (setq ledger-post-amount-alignment-column 52) ; 52 aligns with my main ledger file
     (setq ledger-highlight-xact-under-point t)
+    ;; I put spaces between all my transactions
+    (setq ledger-copy-transaction-insert-blank-line-after t)
     ;; Ignore checking the 'ledger' binary. Raises an error if not installed.
     (setq ledger-mode-should-check-version nil)
     ;; For reconciliation, DO NOT narrow the ledger file!
