@@ -631,6 +631,13 @@ of the buffer."
     (find-file (concat drive-directory "reference/finances/finances.ledger"))
     (end-of-buffer))
 
+  ;; Magit settings
+  (use-package magit
+    :defer t
+    :init
+    ;; Disable forge.el message when starting magit, I don't use that package
+    (setq forge-add-default-bindings nil))
+
   ;; web-mode settings
   (setq
    ;; js2-mode and js-mode
