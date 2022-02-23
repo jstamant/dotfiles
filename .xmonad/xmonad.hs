@@ -10,7 +10,6 @@ import XMonad.Util.ClickableWorkspaces -- For clickable workspaces (nothing else
 
 -- Imports for layouts
 import XMonad.Layout.NoBorders -- For removing borders on layouts with smartBorders
-import XMonad.Layout.Dishes
 import XMonad.Layout.Renamed -- For renaming layouts
 
 --import XMonad.Operations -- For basic window manager operations
@@ -47,11 +46,10 @@ myNormalBorderColor  = "#444444"
 --
 -- LAYOUTS
 --
-myLayout = myTall ||| myFull ||| myDishes
+myLayout = myFull ||| myTall
   where
     myTall   = renamed [Replace "TALL"] $ smartBorders $ Tall nmaster delta ratio
     myFull   = renamed [Replace "FULL"] $ smartBorders $ Full
-    myDishes = renamed [Replace "STACK"] $ smartBorders $ Dishes nmaster (1/6)
     nmaster  = 1      -- Default number of windows in the master pane
     ratio    = 1/2    -- Default proportion of screen occupied by master pane
     delta    = 3/100  -- Percent of screen to increment by when resizing panes
