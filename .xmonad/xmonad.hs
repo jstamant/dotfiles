@@ -29,12 +29,15 @@ myConfig = def
              layoutHook         = myLayout,    -- Use custom layouts
              manageHook         = myManageHook -- Change window management on custom matches
            }
-           `additionalKeysP`
-           [ ("M-]",   spawn "google-chrome-stable"),
-             ("M-q",   kill), -- close the focused window
-             ("M-S-q", io exitSuccess), -- quit xmonad
-             ("M-S-r", spawn "xmonad --recompile && xmonad --restart") -- recompile and restart xmonad
-           ]
+           `additionalKeysP` myKeys
+
+myKeys :: [(String, X ())]
+myKeys =
+  [ ("M-]",   spawn "google-chrome-stable"),
+    ("M-q",   kill),                                          -- close the focused window
+    ("M-S-q", io exitSuccess),                                -- quit xmonad
+    ("M-S-r", spawn "xmonad --recompile && xmonad --restart") -- recompile and restart xmonad
+  ]
 
 --myTerminal           = "st"
 myTerminal           = "kitty"
