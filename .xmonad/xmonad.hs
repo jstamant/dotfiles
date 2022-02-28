@@ -1,12 +1,12 @@
--- This configuration depends on xmonad-contrib >=0.17
+-- This configuration depends on xmonad=0.15 and xmonad-contrib=0.16
 import XMonad
 import XMonad.Hooks.EwmhDesktops
 
 -- Used for xmobar
-import XMonad.Hooks.StatusBar
-import XMonad.Hooks.StatusBar.PP
+import XMonad.Hooks.DynamicLog
 import XMonad.Util.Loggers -- For showing window titles
-import XMonad.Util.ClickableWorkspaces -- For clickable workspaces (nothing else is clickable...)
+import XMonad.Util.Font -- For aligning text in window titles
+--import XMonad.Util.ClickableWorkspaces -- For clickable workspaces (nothing else is clickable...)
 
 -- Imports for layouts
 import XMonad.Layout.NoBorders -- For removing borders on layouts with smartBorders
@@ -27,7 +27,8 @@ myConfig = def
              normalBorderColor  = myNormalBorderColor,
              startupHook        = myStartupHook,
              layoutHook         = myLayout,    -- Use custom layouts
-             manageHook         = myManageHook -- Change window management on custom matches
+             manageHook         = myManageHook, -- Change window management on custom matches
+             handleEventHook    = fullscreenEventHook -- Support fullscreen using Ewmh standards
            }
            `additionalKeysP` myKeys
 
@@ -66,11 +67,13 @@ myXmobarPP = def
     ppSep             = blue " • ",
     ppTitleSanitize   = xmobarStrip,
     ppOrder           = \[ws, l, _, wins] -> [ws, l, wins],
-    ppExtras          = [logTitles formatFocused formatUnfocused]
+    --ppExtras          = [logTitles formatFocused formatUnfocused]
+    ppExtras          = [lTitle]
   }
   where
-    formatFocused   = wrap (brightWhite "[") (brightWhite    "]") . blue  . ppWindow
-    formatUnfocused = wrap (white       "[") (white          "]") . white . ppWindow
+    lTitle = fixedWidthL AlignLeft "." 99 <$> dzenColorL "cornsilk3" "" <$> padL . shortenL 80 $ logTitle
+    -- formatFocused   = wrap (brightWhite "[") (brightWhite    "]") . blue  . ppWindow
+    -- formatUnfocused = wrap (white       "[") (white          "]") . white . ppWindow
     -- Windows should have *some* title, which should not not exceed a sane length
     -- TODO make each window the same size in the bar
     -- TODO make workspaces a bit clearer if they're occupied or not..
@@ -97,13 +100,12 @@ myStartupHook :: X ()
 myStartupHook = do
   spawn "$HOME/.xmonad/systray.sh &" -- System tray
 
+-- Key binding to toggle the gap for the bar
+toggleStrutsKey XConfig {XMonad.modMask = modMask} = (modMask, xK_b)
+
 --
 -- MAIN
 --
 main :: IO ()
-main = xmonad
-  . ewmhFullscreen
-  . ewmh
-  . withEasySB (statusBarProp "xmobar ~/.config/xmobar/xmobarrc" (clickablePP myXmobarPP)) defToggleStrutsKey
-  $ myConfig
-
+main = xmonad =<< statusBar "xmobar ~/.config/xmobar/xmobarrc" (myXmobarPP) toggleStrutsKey myConfig
+  -- . ewmh
