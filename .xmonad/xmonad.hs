@@ -107,5 +107,4 @@ toggleStrutsKey XConfig {XMonad.modMask = modMask} = (modMask, xK_b)
 -- MAIN
 --
 main :: IO ()
-main = xmonad =<< statusBar "xmobar ~/.config/xmobar/xmobarrc" (myXmobarPP) toggleStrutsKey myConfig
-  -- . ewmh
+main = xmonad . ewmh =<< statusBar "xmobar ~/.config/xmobar/xmobarrc" (myXmobarPP) toggleStrutsKey myConfig

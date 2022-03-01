@@ -40,9 +40,9 @@ Config { overrideRedirect = False
                     , Run Weather "CYQD"
                         [ "--template", "<fc=#6699cc><station>:</fc> <tempC>°C"
                         ] 9000
-                    , Run UnsafeXMonadLog
+                    , Run StdinReader
                     ]
        , sepChar  = "%"
        , alignSep = "}{"
-       , template = "%UnsafeXMonadLog% }{ %alsa:default:Master% | %battery% | %cpu% | %memory% | %CYQD% | %date% %traypadding%"
+       , template = "%StdinReader% }{ %alsa:default:Master% | %battery% | %cpu% | %memory% | %CYQD% | %date% %traypadding%"
        }
