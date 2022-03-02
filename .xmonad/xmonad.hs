@@ -6,7 +6,6 @@ import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.DynamicLog
 import XMonad.Util.Loggers -- For showing window titles
 import XMonad.Util.Font -- For aligning text in window titles
---import XMonad.Util.ClickableWorkspaces -- For clickable workspaces (nothing else is clickable...)
 
 -- Imports for layouts
 import XMonad.Layout.NoBorders -- For removing borders on layouts with smartBorders
@@ -67,18 +66,12 @@ myXmobarPP = def
     ppSep             = blue " • ",
     ppTitleSanitize   = xmobarStrip,
     ppOrder           = \[ws, l, _, wins] -> [ws, l, wins],
-    --ppExtras          = [logTitles formatFocused formatUnfocused]
     ppExtras          = [lTitle]
   }
   where
-    lTitle = fixedWidthL AlignLeft "." 99 <$> dzenColorL "cornsilk3" "" <$> padL . shortenL 80 $ logTitle
-    -- formatFocused   = wrap (brightWhite "[") (brightWhite    "]") . blue  . ppWindow
-    -- formatUnfocused = wrap (white       "[") (white          "]") . white . ppWindow
-    -- Windows should have *some* title, which should not not exceed a sane length
-    -- TODO make each window the same size in the bar
+    lTitle :: Logger
+    lTitle = wrapL (brightWhite "[") (brightWhite "]") $ blueL $ shortenL 30 $ logTitle
     -- TODO make workspaces a bit clearer if they're occupied or not..
-    ppWindow :: String -> String
-    ppWindow    = xmobarRaw . (\w -> if null w then "untitled" else w) . shorten 30
     blue, white, magenta, red, brightWhite, yellow :: String -> String
     magenta     = xmobarColor "#ff79c6" ""
     blue        = xmobarColor "#6699cc" ""
@@ -86,6 +79,8 @@ myXmobarPP = def
     yellow      = xmobarColor "#f1fa8c" ""
     red         = xmobarColor "#ff5555" ""
     brightWhite = xmobarColor "#f2f0ec" ""
+    blueL :: Logger -> Logger
+    blueL       = xmobarColorL "#6699cc" ""
 
 myManageHook :: ManageHook
 myManageHook = composeAll
@@ -100,11 +95,12 @@ myStartupHook :: X ()
 myStartupHook = do
   spawn "$HOME/.xmonad/systray.sh &" -- System tray
 
--- Key binding to toggle the gap for the bar
-toggleStrutsKey XConfig {XMonad.modMask = modMask} = (modMask, xK_b)
-
 --
 -- MAIN
 --
 main :: IO ()
-main = xmonad . ewmh =<< statusBar "xmobar ~/.config/xmobar/xmobarrc" (myXmobarPP) toggleStrutsKey myConfig
+main = xmonad . ewmh =<< statusBar "xmobar ~/.config/xmobar/xmobarrc" myXmobarPP toggleStrutsKey myConfig
+  where
+    toggleStrutsKey :: XConfig Layout -> (KeyMask, KeySym)
+    toggleStrutsKey XConfig { modMask = m } = (m, xK_b)
+
