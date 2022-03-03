@@ -1,11 +1,12 @@
--- This configuration depends on xmonad=0.15 and xmonad-contrib=0.16
+-- This configuration depends on xmonad=0.17 and xmonad-contrib=0.17
 import XMonad
 import XMonad.Hooks.EwmhDesktops
 
 -- Used for xmobar
-import XMonad.Hooks.DynamicLog
+import XMonad.Hooks.StatusBar
+import XMonad.Hooks.StatusBar.PP
 import XMonad.Util.Loggers -- For showing window titles
-import XMonad.Util.Font -- For aligning text in window titles
+import XMonad.Util.ClickableWorkspaces -- For clickable workspaces (nothing else is clickable...)
 
 -- Imports for layouts
 import XMonad.Layout.NoBorders -- For removing borders on layouts with smartBorders
@@ -26,8 +27,7 @@ myConfig = def
              normalBorderColor  = myNormalBorderColor,
              startupHook        = myStartupHook,
              layoutHook         = myLayout,    -- Use custom layouts
-             manageHook         = myManageHook, -- Change window management on custom matches
-             handleEventHook    = fullscreenEventHook -- Support fullscreen using Ewmh standards
+             manageHook         = myManageHook -- Change window management on custom matches
            }
            `additionalKeysP` myKeys
 
@@ -66,12 +66,16 @@ myXmobarPP = def
     ppSep             = blue " • ",
     ppTitleSanitize   = xmobarStrip,
     ppOrder           = \[ws, l, _, wins] -> [ws, l, wins],
-    ppExtras          = [lTitle]
+    ppExtras          = [logTitles formatFocused formatUnfocused]
   }
   where
-    lTitle :: Logger
-    lTitle = wrapL (brightWhite "[") (brightWhite "]") $ blueL $ shortenL 30 $ logTitle
+    formatFocused   = wrap (brightWhite "[") (brightWhite    "]") . blue  . ppWindow
+    formatUnfocused = wrap (white       "[") (white          "]") . white . ppWindow
+    -- Windows should have *some* title, which should not not exceed a sane length
+    -- TODO make each window the same size in the bar
     -- TODO make workspaces a bit clearer if they're occupied or not..
+    ppWindow :: String -> String
+    ppWindow    = xmobarRaw . (\w -> if null w then "untitled" else w) . shorten 30
     blue, white, magenta, red, brightWhite, yellow :: String -> String
     magenta     = xmobarColor "#ff79c6" ""
     blue        = xmobarColor "#6699cc" ""
@@ -79,8 +83,6 @@ myXmobarPP = def
     yellow      = xmobarColor "#f1fa8c" ""
     red         = xmobarColor "#ff5555" ""
     brightWhite = xmobarColor "#f2f0ec" ""
-    blueL :: Logger -> Logger
-    blueL       = xmobarColorL "#6699cc" ""
 
 myManageHook :: ManageHook
 myManageHook = composeAll
@@ -99,8 +101,9 @@ myStartupHook = do
 -- MAIN
 --
 main :: IO ()
-main = xmonad . ewmh =<< statusBar "xmobar ~/.config/xmobar/xmobarrc" myXmobarPP toggleStrutsKey myConfig
-  where
-    toggleStrutsKey :: XConfig Layout -> (KeyMask, KeySym)
-    toggleStrutsKey XConfig { modMask = m } = (m, xK_b)
+main = xmonad
+  . ewmhFullscreen
+  . ewmh
+  . withEasySB (statusBarProp "xmobar ~/.config/xmobar/xmobarrc" (clickablePP myXmobarPP)) defToggleStrutsKey
+  $ myConfig
 
