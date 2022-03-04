@@ -636,7 +636,9 @@ of the buffer."
     :defer t
     :init
     ;; Disable forge.el message when starting magit, I don't use that package
-    (setq forge-add-default-bindings nil))
+    (setq forge-add-default-bindings nil)
+    :config
+    (evil-define-key 'normal magit-mode-map " gfc" 'magit-file-checkout))
 
   ;; web-mode settings
   (setq
