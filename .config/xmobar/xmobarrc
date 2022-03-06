@@ -44,5 +44,5 @@ Config { overrideRedirect = False
                     ]
        , sepChar  = "%"
        , alignSep = "}{"
-       , template = "%UnsafeXMonadLog% }{ %alsa:default:Master% | %battery% | %cpu% | %memory% | %CYQD% | %date% %traypadding%"
+       , template = "%UnsafeXMonadLog% }{ %alsa:default:Master% | %cpu% | %memory% | %CYQD% | %date% %traypadding%"
        }
