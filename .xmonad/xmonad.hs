@@ -51,7 +51,7 @@ myNormalBorderColor  = "#444444"
 myWorkspaces         = ["1","2","3","4","5","6","7","8","9"]
 
 --
--- LAYOUTS
+-- Layouts
 --
 myLayout = myFull ||| myTall
   where
@@ -61,6 +61,9 @@ myLayout = myFull ||| myTall
     ratio    = 1/2    -- Default proportion of screen occupied by master pane
     delta    = 3/100  -- Percent of screen to increment by when resizing panes
 
+--
+-- Status bar configuration
+--
 myXmobarPP :: PP
 myXmobarPP = def
   { ppCurrent         = blue . wrap (fgBright "[") (fgBright "]")
@@ -95,6 +98,22 @@ myXmobarPP = def
     bg          = xmobarColor "#2d2d2d" ""
     bgBright    = xmobarColor "#747369" ""
 
+secondaryPP :: PP
+secondaryPP = myXmobarPP
+  { ppOrder = \[_, _, _, wins] -> []
+  }
+
+primarySB   = statusBarProp "xmobar -x 0 ~/.config/xmobar/xmobarrc" $ clickablePP myXmobarPP
+secondarySB :: Int -> StatusBarConfig
+secondarySB id = statusBarPropTo "_XMONAD_LOG_2" ("xmobar -x " ++ (show id) ++ " ~/.config/xmobar/xmobarrc-secondary") $ clickablePP secondaryPP
+
+spawnBar :: ScreenId -> IO StatusBarConfig
+spawnBar 0 = pure $ primarySB
+spawnBar 1 = pure $ secondarySB 1
+
+--
+-- Window rules
+--
 myManageHook :: ManageHook
 myManageHook = composeAll
   [ className =? "Pavucontrol" --> doCenterFloat
@@ -102,6 +121,9 @@ myManageHook = composeAll
   , isDialog                   --> doCenterFloat
   ]
 
+--
+-- Startup commands
+--
 -- Start xmonad-specific applications, applications that are common to
 -- all my window-managers are started in ~/.xprofile
 myStartupHook :: X ()
@@ -115,6 +137,6 @@ main :: IO ()
 main = xmonad
   . ewmhFullscreen
   . ewmh
-  . withEasySB (statusBarProp "xmobar ~/.config/xmobar/xmobarrc" (clickablePP myXmobarPP)) defToggleStrutsKey
+  . dynamicEasySBs spawnBar -- TODO need to add a toggleStrutsKey
   $ myConfig
 

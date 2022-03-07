@@ -1,0 +1,18 @@
+Config
+  { overrideRedirect = False
+  , font        =  "xft:DejaVu Sans Mono-9"
+  , bgColor     = "#2d2d2d"
+  , fgColor     = "#d3d0c8"
+  , position    = TopH 24
+  , border      = BottomB
+  , borderColor = "#6699cc"
+  , borderWidth = 1
+  , iconRoot    = ".config/xmobar/"
+  , commands =
+    [ Run Date "%a %b %d, %Y <fc=#6699cc>%-I:%M:%S %p</fc>" "date" 10
+    , Run UnsafeXPropertyLog "_XMONAD_LOG_2"
+    ]
+  , sepChar  = "%"
+  , alignSep = "}{"
+  , template = " <icon=arch_20.xpm/> %_XMONAD_LOG_2% }{ %date% "
+  }
