@@ -1,5 +1,6 @@
 -- This configuration depends on xmonad=0.17 and xmonad-contrib=0.17
 import XMonad
+import qualified XMonad.StackSet as W -- For stack, window, and view functions
 import XMonad.Hooks.EwmhDesktops
 
 -- Used for the status bar (xmobar)
@@ -28,6 +29,7 @@ myConfig = def
            , startupHook        = myStartupHook
            , layoutHook         = myLayout     -- Use custom layouts
            , manageHook         = myManageHook -- Change window management on custom matches
+           , workspaces         = myWorkspaces
            }
            `additionalKeysP` myKeys
 
@@ -37,14 +39,16 @@ myKeys =
   , ("M-q",   kill)                                           -- close the focused window
   , ("M-S-q", io exitSuccess)                                 -- quit xmonad
   , ("M-S-r", spawn "xmonad --recompile && xmonad --restart") -- recompile and restart xmonad
+  -- Move focus
+  , ("M-m",   windows W.focusMaster) -- Move focus to the master window
   ]
 
---myTerminal           = "st"
 myTerminal           = "kitty"
 myModMask            = mod4Mask -- Win key or Super_L
 myBorderWidth        = 1
 myFocusedBorderColor = "#6699cc"
 myNormalBorderColor  = "#444444"
+myWorkspaces         = ["1","2","3","4","5","6","7","8","9"]
 
 --
 -- LAYOUTS
