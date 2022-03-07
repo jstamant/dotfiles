@@ -5,7 +5,7 @@ trayer --edge top\
        --SetDockType true\
        --SetPartialStrut true\
        --expand true\
-       --height 17\
+       --height 20\
        --transparent true\
        --alpha 0\
        --tint 0x2d2d2d\

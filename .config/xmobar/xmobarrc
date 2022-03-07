@@ -1,48 +1,51 @@
-Config { overrideRedirect = False
-       , font        =  "xft:DejaVu Sans Mono-9"
-       , bgColor     = "#2d2d2d"
-       , fgColor     = "#d3d0c8"
-       , position    = Top
-       , border      = BottomB
-       , borderColor = "#6699cc"
-       , borderWidth = 1
-       , commands = [ Run Alsa "default" "Master"
-                        [ "--template", "<fc=#6699cc>VOL:</fc><volumestatus>"
-                        , "--suffix", "True"
-                        , "--width", "4"
-                        , "--"
-                        , "--on", ""
-                        , "--off", " OFF"
-                        , "--offc", "#f2777a"
-                        ]
-                    , Run Battery
-                        [ "--template", "<fc=#6699cc>BATT:</fc> <acstatus>"
-                        , "-L", "15"
-                        , "-l", "#f2777a"
-                        , "--"
-                        , "-O", "<fc=#d3d0c8>CHRG</fc>"
-                        , "-i", "FULL"
-                        , "-o", "<left>/<timeleft>"
-                        , "-A", "5"
-                        , "-a", "notify-send -u critical 'Battery critically low!'"
-                        , "-P"
-                        ] 300
-                    , Run Cpu
-                        [ "--template", "<fc=#6699cc>CPU:</fc><total>%"
-                        , "--width", "3"
-                        ] 10
-                    , Run Com ".config/xmobar/tray-padding.sh" [] "traypadding" 30
-                    , Run Date "%a %b %d, %Y <fc=#6699cc>%-I:%M:%S %p</fc>" "date" 10
-                    , Run Memory
-                        [ "--template", "<fc=#6699cc>MEM:</fc><usedratio>%"
-                        , "--width", "3"
-                        ] 10
-                    , Run Weather "CYQD"
-                        [ "--template", "<fc=#6699cc><station>:</fc> <tempC>°C"
-                        ] 9000
-                    , Run UnsafeXMonadLog
-                    ]
-       , sepChar  = "%"
-       , alignSep = "}{"
-       , template = "%UnsafeXMonadLog% }{ %alsa:default:Master% | %cpu% | %memory% | %CYQD% | %date% %traypadding%"
-       }
+Config
+  { overrideRedirect = False
+  , font        =  "xft:DejaVu Sans Mono-9"
+  , bgColor     = "#2d2d2d"
+  , fgColor     = "#d3d0c8"
+  , position    = TopH 24
+  , border      = BottomB
+  , borderColor = "#6699cc"
+  , borderWidth = 1
+  , iconRoot    = ".config/xmobar/"
+  , commands =
+    [ Run Alsa "default" "Master"
+      [ "--template", "<fc=#6699cc>VOL:</fc><volumestatus>"
+      , "--suffix", "True"
+      , "--width", "4"
+      , "--"
+      , "--on", ""
+      , "--off", " OFF"
+      , "--offc", "#f2777a"
+      ]
+    , Run Battery
+      [ "--template", "<fc=#6699cc>BATT:</fc> <acstatus>"
+      , "-L", "15"
+      , "-l", "#f2777a"
+      , "--"
+      , "-O", "<fc=#d3d0c8>CHRG</fc>"
+      , "-i", "FULL"
+      , "-o", "<left>/<timeleft>"
+      , "-A", "5"
+      , "-a", "notify-send -u critical 'Battery critically low!'"
+      , "-P"
+      ] 300
+    , Run Cpu
+      [ "--template", "<fc=#6699cc>CPU:</fc><total>%"
+      , "--width", "3"
+      ] 10
+    , Run Com ".config/xmobar/tray-padding.sh" [] "traypadding" 30
+    , Run Date "%a %b %d, %Y <fc=#6699cc>%-I:%M:%S %p</fc>" "date" 10
+    , Run Memory
+      [ "--template", "<fc=#6699cc>MEM:</fc><usedratio>%"
+      , "--width", "3"
+      ] 10
+    , Run Weather "CYQD"
+      [ "--template", "<fc=#6699cc><station>:</fc> <tempC>°C"
+      ] 9000
+    , Run UnsafeXMonadLog
+    ]
+  , sepChar  = "%"
+  , alignSep = "}{"
+  , template = " <icon=arch_20.xpm/> %UnsafeXMonadLog% }{ %alsa:default:Master% | %cpu% | %memory% | %CYQD% | %date% %traypadding%"
+  }
