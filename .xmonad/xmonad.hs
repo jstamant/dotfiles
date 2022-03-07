@@ -2,7 +2,7 @@
 import XMonad
 import XMonad.Hooks.EwmhDesktops
 
--- Used for xmobar
+-- Used for the status bar (xmobar)
 import XMonad.Hooks.StatusBar
 import XMonad.Hooks.StatusBar.PP
 import XMonad.Util.Loggers -- For showing window titles
@@ -20,23 +20,23 @@ import System.Exit -- required for quitting xmonad
 import XMonad.Hooks.ManageHelpers -- Includes basic policies for window rules
 
 myConfig = def
-           { terminal           = myTerminal,
-             modMask            = myModMask,
-             borderWidth        = myBorderWidth,
-             focusedBorderColor = myFocusedBorderColor,
-             normalBorderColor  = myNormalBorderColor,
-             startupHook        = myStartupHook,
-             layoutHook         = myLayout,    -- Use custom layouts
-             manageHook         = myManageHook -- Change window management on custom matches
+           { terminal           = myTerminal
+           , modMask            = myModMask
+           , borderWidth        = myBorderWidth
+           , focusedBorderColor = myFocusedBorderColor
+           , normalBorderColor  = myNormalBorderColor
+           , startupHook        = myStartupHook
+           , layoutHook         = myLayout     -- Use custom layouts
+           , manageHook         = myManageHook -- Change window management on custom matches
            }
            `additionalKeysP` myKeys
 
 myKeys :: [(String, X ())]
 myKeys =
-  [ ("M-]",   spawn "google-chrome-stable"),
-    ("M-q",   kill),                                          -- close the focused window
-    ("M-S-q", io exitSuccess),                                -- quit xmonad
-    ("M-S-r", spawn "xmonad --recompile && xmonad --restart") -- recompile and restart xmonad
+  [ ("M-]",   spawn "google-chrome-stable")
+  , ("M-q",   kill)                                           -- close the focused window
+  , ("M-S-q", io exitSuccess)                                 -- quit xmonad
+  , ("M-S-r", spawn "xmonad --recompile && xmonad --restart") -- recompile and restart xmonad
   ]
 
 --myTerminal           = "st"
@@ -59,14 +59,17 @@ myLayout = myFull ||| myTall
 
 myXmobarPP :: PP
 myXmobarPP = def
-  { ppCurrent         = blue . wrap " " "",
-    ppHidden          = brightWhite . wrap " " "",
-    ppHiddenNoWindows = white . wrap " " "",
-    ppUrgent          = red . wrap (yellow "!") (yellow "!"),
-    ppSep             = blue " • ",
-    ppTitleSanitize   = xmobarStrip,
-    ppOrder           = \[ws, l, _, wins] -> [ws, l, wins],
-    ppExtras          = [logTitles formatFocused formatUnfocused]
+  { ppCurrent         = blue . wrap (fgBright "[") (fgBright "]")
+  , ppVisible         = fgBright . pad
+  , ppHidden          = fg . pad
+  , ppHiddenNoWindows = bgBright . pad
+  , ppUrgent          = red . wrap (yellow "!") (yellow "!")
+  , ppSep             = blue "• "
+  , ppWsSep           = ""
+  , ppTitleSanitize   = xmobarStrip
+  , ppLayout          = wrap "" " "
+  , ppOrder           = \[ws, l, _, wins] -> [ws, l, wins]
+  , ppExtras          = [logTitles formatFocused formatUnfocused]
   }
   where
     formatFocused   = wrap (brightWhite "[") (brightWhite    "]") . blue  . ppWindow
@@ -83,12 +86,16 @@ myXmobarPP = def
     yellow      = xmobarColor "#f1fa8c" ""
     red         = xmobarColor "#ff5555" ""
     brightWhite = xmobarColor "#f2f0ec" ""
+    fg          = xmobarColor "#d3d0c8" ""
+    fgBright    = xmobarColor "#f2f0ec" ""
+    bg          = xmobarColor "#2d2d2d" ""
+    bgBright    = xmobarColor "#747369" ""
 
 myManageHook :: ManageHook
 myManageHook = composeAll
-  [ className =? "Pavucontrol" --> doCenterFloat,
-    className =? "Xarchiver"   --> doCenterFloat,
-    isDialog                   --> doCenterFloat
+  [ className =? "Pavucontrol" --> doCenterFloat
+  , className =? "Xarchiver"   --> doCenterFloat
+  , isDialog                   --> doCenterFloat
   ]
 
 -- Start xmonad-specific applications, applications that are common to
