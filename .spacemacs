@@ -55,12 +55,17 @@ This function should only modify configuration layer settings."
      org
      react
      rust ; for .toml files
-     (shell :variables
-            shell-default-height 30
-            shell-default-position 'bottom)
+     (shell
+      :variables
+      shell-default-height 30
+      shell-default-position 'bottom)
      shell-scripts
-     spell-checking
-     syntax-checking
+     (spell-checking
+      :variables
+      spell-checking-enable-by-default nil)
+     (syntax-checking
+      :variables
+      syntax-checking-enable-by-default nil)
      version-control
      themes-megapack
      treemacs)
