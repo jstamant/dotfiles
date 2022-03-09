@@ -69,6 +69,7 @@ myAdditionalKeys =
   , ("M-S-r", spawn "xmonad --recompile && xmonad --restart") -- recompile and restart xmonad
   -- Move focus
   , ("M-m",   windows W.focusMaster) -- Move focus to the master window
+  , ("M-S-m", windows W.swapMaster)  -- Swap the focused window with the master window
   ]
 
 --

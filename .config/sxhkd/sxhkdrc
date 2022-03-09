@@ -9,11 +9,14 @@ control + alt + t
   $TERMINAL
 super + d
   $LAUNCHER
-#super + p
-#  $LAUNCHER
 super + e
   $TERMINAL -e ranger
-super + shift + m
+super + Escape
+  $HOME/bin/menu.sh
+super + F1
+  $HOME/bin/menu.sh
+# Works on my mechanical keyboard
+Menu
   $HOME/bin/menu.sh
 
 ctrl + alt + Delete
@@ -75,5 +78,5 @@ button14
 #XF86MonBrightnessDown
 
 # make sxhkd reload its configuration files:
-super + Escape
-  pkill -USR1 -x sxhkd
+#super + Escape
+#  pkill -USR1 -x sxhkd
