@@ -12,6 +12,7 @@ import XMonad.Util.Loggers -- For showing window titles
 import XMonad.Util.ClickableWorkspaces -- For clickable workspaces (nothing else is clickable...)
 
 -- Layout dependencies
+import XMonad.Hooks.InsertPosition -- For placing new windows at the end of the stack
 import XMonad.Layout.NoBorders -- For removing borders on layouts with smartBorders
 import XMonad.Layout.Renamed -- For renaming layouts
 
@@ -22,6 +23,9 @@ import XMonad.Util.EZConfig (additionalKeysP)
 
 -- Window-rule depencencies
 import XMonad.Hooks.ManageHelpers -- Includes basic policies for window rules
+
+-- Unsorted dependencies
+import XMonad.Actions.CycleWS (nextScreen, prevScreen)
 
 --
 -- Main - putting it all together
@@ -69,7 +73,12 @@ myAdditionalKeys =
   , ("M-S-r", spawn "xmonad --recompile && xmonad --restart") -- recompile and restart xmonad
   -- Move focus
   , ("M-m",   windows W.focusMaster) -- Move focus to the master window
-  , ("M-S-m", windows W.swapMaster)  -- Swap the focused window with the master window
+  , ("M-S-m", windows W.shiftMaster) -- Make the focused window the master, and shift everything else
+  , ("M-.",   nextScreen)            -- Move focus to the next monitor
+  , ("M-,",   prevScreen)            -- Move focus to the previous monitor
+  -- Master/slave commands
+  , ("M-S-h", sendMessage (IncMasterN 1))
+  , ("M-S-l", sendMessage (IncMasterN (-1)))
   ]
 
 --
@@ -154,11 +163,13 @@ spawnBar 0 = pure $ primarySB
 spawnBar 1 = pure $ secondarySB 1
 
 --
--- Window rules
+-- Window-management configuration
 --
 
+-- New windows are placed at the bottom of the stack
 myManageHook :: ManageHook
-myManageHook = composeAll
+myManageHook = insertPosition End Newer
+  <+> composeAll
   [ className =? "Pavucontrol" --> doCenterFloat
   , className =? "Xarchiver"   --> doCenterFloat
   , isDialog                   --> doCenterFloat
