@@ -19,7 +19,7 @@ import XMonad.Layout.Renamed -- For renaming layouts
 -- Generic utility dependencies
 import qualified Data.Map as M
 import System.Exit -- required for quitting xmonad
-import XMonad.Util.EZConfig (additionalKeysP)
+import XMonad.Util.EZConfig (mkKeymap)
 
 -- Window-rule depencencies
 import XMonad.Hooks.ManageHelpers -- Includes basic policies for window rules
@@ -43,14 +43,14 @@ main = xmonad
 --
 
 myConfig = def
-  { borderWidth        = 1
-  , workspaces         = ["1","2","3","4","5","6","7","8","9"]
+  { borderWidth        = 2
+  , workspaces         = myWorkspaces
   , layoutHook         = myLayouts
   , terminal           = "kitty"
   , normalBorderColor  = "#444444"
   , focusedBorderColor = "#6699cc"
   , modMask            = mod4Mask -- Windows key / Super_L
-  -- , keys            = using the default set (see additional keys below)
+  , keys               = myKeys
   -- , logHook         = using the default log hook
   , startupHook        = myStartupHook
   , mouseBindings      = myMouseBindings
@@ -59,26 +59,59 @@ myConfig = def
   , focusFollowsMouse  = True
   , clickJustFocuses   = True
   }
-  `additionalKeysP` myAdditionalKeys
+
+myWorkspaces = ["1","2","3","4","5","6","7","8","9"]
 
 --
 -- Keybindings
 --
 
-myAdditionalKeys :: [(String, X ())]
-myAdditionalKeys =
-  [ ("M-]",   spawn "google-chrome-stable")
-  , ("M-q",   kill)                                           -- close the focused window
-  , ("M-S-q", io exitSuccess)                                 -- quit xmonad
-  , ("M-S-r", spawn "xmonad --recompile && xmonad --restart") -- recompile and restart xmonad
-  -- Move focus
-  , ("M-m",   windows W.focusMaster) -- Move focus to the master window
+myKeys :: XConfig Layout -> M.Map (KeyMask, KeySym) (X ())
+myKeys = \conf -> mkKeymap conf $
+  [ ("M-q",         kill)  -- Close the focused window
+  , ("M-<Space>",   sendMessage NextLayout) -- Rotate through the available layouts
+  , ("M-S-<Space>", setLayout $ XMonad.layoutHook conf) -- Reset the layouts on the current workspace to default
+  , ("M-n",         refresh) -- Resize viewed windows to the correct size
+  -- Move window focus
+  , ("M-j",       windows W.focusDown)   -- Move focus to the next window
+  , ("M-k",       windows W.focusUp)     -- Move focus to the previous window
+  , ("M-<Tab>",   windows W.focusDown)   -- Move focus to the next window
+  , ("M-S-<Tab>", windows W.focusUp)     -- Move focus to the previous window
+  , ("M-m",       windows W.focusMaster) -- Move focus to the master window
+  -- Move screen focus
+  , ("M-.", nextScreen) -- Move focus to the next monitor
+  , ("M-,", prevScreen) -- Move focus to the previous monitor
+  , ("M-o", nextScreen) -- Move focus to the other monitor (with two monitors, nextScreen does the trick)
+  -- Modifying the window order
+  , ("M-S-j", windows W.swapDown)    -- Swap the focused window with the next window
+  , ("M-S-k", windows W.swapUp)      -- Swap the focused window with the previous window
   , ("M-S-m", windows W.shiftMaster) -- Make the focused window the master, and shift everything else
-  , ("M-.",   nextScreen)            -- Move focus to the next monitor
-  , ("M-,",   prevScreen)            -- Move focus to the previous monitor
   -- Master/slave commands
-  , ("M-S-h", sendMessage (IncMasterN 1))
-  , ("M-S-l", sendMessage (IncMasterN (-1)))
+  , ("M-h",   sendMessage Shrink)            -- Shrink the master area
+  , ("M-l",   sendMessage Expand)            -- Expand the master area
+  , ("M-S-h", sendMessage (IncMasterN 1))    -- Increment the number of windows in the master area
+  , ("M-S-l", sendMessage (IncMasterN (-1))) -- Deincrement the number of windows in the master area
+  -- Floating layer support
+  , ("M-t", withFocused $ windows . W.sink)  -- Push window back into tiling
+  -- Quit or restart
+  , ("M-S-q", io (exitWith ExitSuccess))                      -- Quit xmonad
+  , ("M-S-r", spawn "xmonad --recompile && xmonad --restart") -- Recompile and restart xmonad
+  ]
+  ++
+  -- Workspace focus and window moving
+  -- mod-[1..9]       -- Focus on workspace N
+  -- mod-shift-[1..9] -- Move window to workspace N
+  [ ("M-" ++ shift ++ [key], action tag)
+  | (tag, key) <- zip myWorkspaces "123456789"
+  , (shift, action) <- [ ("", windows . W.greedyView)
+                       , ("S-", windows . W.shift)]
+  ]
+  ++
+  -- Screen-selection keys
+  -- Only works for 2 screens, with the primary being on the right
+  [ ("M-" ++ shift ++ [key], screenWorkspace scr >>= flip whenJust (windows . action))
+  | (key, scr)  <- zip "uiwe" [1,0,1,0]
+  , (action, shift) <- [(W.view, ""), (W.shift, "S-")]
   ]
 
 --
