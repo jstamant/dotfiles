@@ -1,7 +1,12 @@
 # See environment variables in .bashrc for dereferencing any variables below
 
-### TODO sort this
-### Program keybinds
+# make sxhkd reload its configuration files:
+super + x ; super + x
+  pkill -USR1 -x sxhkd
+
+#
+# Generic keybindings
+#
 
 super + Return
   $TERMINAL
@@ -9,14 +14,9 @@ control + alt + t
   $TERMINAL
 super + d
   $LAUNCHER
-super + e
-  $TERMINAL -e ranger
 super + Escape
   $HOME/bin/menu.sh
 super + F1
-  $HOME/bin/menu.sh
-# Works on my mechanical keyboard
-Menu
   $HOME/bin/menu.sh
 
 ctrl + alt + Delete
@@ -25,6 +25,31 @@ ctrl + alt + Delete
 # Screenshot - full screen, and active window
 {_,alt} + Print
   scrot {_,-u} $HOME/images/screenshots/%Y-%m-%d-%H%M%S-scrot.png
+
+#
+# Quick keybindings for common programs
+#
+
+super + bracketright
+  google-chrome-stable
+
+#
+# Grouped program-launching keybindings
+# (using either prefix super+x or super+p)
+#
+
+super + {x,p} ; c
+  google-chrome-stable
+super + {x,p} ; e
+  $TERMINAL -e ranger
+super + {x,p} ; l
+  emacs -f ledger
+super + {x,p} ; m
+  $HOME/bin/menu.sh
+
+#
+# Special keys
+#
 
 XF86Tools
   $HOME/bin/themeselect.sh
@@ -40,10 +65,13 @@ XF86Display
 XF86Calculator
   galculator
 
-#Somehow kills my network adapter with no binding?
-#XF86WLAN
+# Works on my mechanical keyboard
+Menu
+  $HOME/bin/menu.sh
 
-### Multimedia keys
+#
+# Multimedia keys
+#
 
 XF86AudioRaiseVolume
   pactl set-sink-volume @DEFAULT_SINK@ +5%; refreshbar.sh
@@ -56,7 +84,10 @@ super + XF86AudioMute
 XF86AudioMicMute
   pactl set-source-mute @DEFAULT_SOURCE@ toggle
 
-### Wacom tablet buttons, from left-to-right
+#
+# Wacom tablet buttons
+# (from left-to-right)
+#
 
 button11
   xdotool key ctrl+z
@@ -66,17 +97,3 @@ button13
   xdotool key x
 button14
   xdotool key ctrl+z
-
-# 2017-03-25 Backlight property does not work with modesetting driver,
-# because the backlight property is located in
-# /sys/class/backlight/intel_backlight/brightness. Look into this in a
-# few months from now.
-
-#"xbacklight -inc 10"
-#XF86MonBrightnessUp
-#"xbacklight -dec 10"
-#XF86MonBrightnessDown
-
-# make sxhkd reload its configuration files:
-#super + Escape
-#  pkill -USR1 -x sxhkd
