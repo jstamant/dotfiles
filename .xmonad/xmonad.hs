@@ -206,6 +206,10 @@ myManageHook = insertPosition End Newer
   [ className =? "Pavucontrol" --> doCenterFloat
   , className =? "Xarchiver"   --> doCenterFloat
   , isDialog                   --> doCenterFloat
+  -- Assigning programs to certain workspaces
+  -- Note that I'm doing -1 to show which workspace I'm getting,
+  -- which is zero-indexed in the array.
+  , className =? "discord"     --> doShift (myWorkspaces !! (9-1))
   ]
 
 --
