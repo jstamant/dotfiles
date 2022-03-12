@@ -30,6 +30,8 @@ ctrl + alt + Delete
 # Quick keybindings for common programs
 #
 
+super + bracketleft
+  emacs
 super + bracketright
   google-chrome-stable
 
@@ -46,6 +48,8 @@ super + {x,p} ; l
   emacs -f ledger
 super + {x,p} ; m
   $HOME/bin/menu.sh
+super + {x,p} ; p
+  passmenu
 
 #
 # Special keys
