@@ -42,6 +42,8 @@ super + bracketright
 
 super + {x,p} ; c
   google-chrome-stable
+super + {x,p} ; d
+  discord
 super + {x,p} ; e
   $TERMINAL -e ranger
 super + {x,p} ; l
