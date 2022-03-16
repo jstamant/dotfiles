@@ -203,7 +203,8 @@ spawnBar 1 = pure $ secondarySB 1
 myManageHook :: ManageHook
 myManageHook = insertPosition End Newer
   <+> composeAll
-  [ className =? "Pavucontrol" --> doCenterFloat
+  [ className =? "galculator"  --> doCenterFloat
+  , className =? "Pavucontrol" --> doCenterFloat
   , className =? "Xarchiver"   --> doCenterFloat
   , isDialog                   --> doCenterFloat
   -- Assigning programs to certain workspaces

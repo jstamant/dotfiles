@@ -46,6 +46,8 @@ super + {x,p} ; d
   discord
 super + {x,p} ; e
   $TERMINAL -e ranger
+super + {x,p} ; g
+  galculator
 super + {x,p} ; l
   emacs -f ledger
 super + {x,p} ; m
