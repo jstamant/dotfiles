@@ -5,6 +5,6 @@
 
 #exec bspwm
 #exec dwm
-#exec i3
+exec i3
 #exec openbox-session
-exec xmonad
+#exec xmonad
