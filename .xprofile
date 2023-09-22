@@ -29,6 +29,7 @@ numlockx &
 dunst &              # Notification server
 emacs --daemon  &
 autorandr --change & # Automatic monitor configuration
+blueman-applet &
 
 # DPMS preferences
 # Blank screen after 30 minutes
