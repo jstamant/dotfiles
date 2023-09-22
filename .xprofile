@@ -23,7 +23,7 @@ sxhkd &              # Common custom keybindings
 $HOME/.fehbg         # Set desktop background
 nm-applet &
 udiskie --tray &
-insync start
+sleep 10 && insync start & # Delay is required to get systray icon working
 numlockx &
 #picom &             # Window compositor, havig issues with fading
 dunst &              # Notification server
