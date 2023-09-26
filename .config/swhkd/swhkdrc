@@ -1,0 +1,112 @@
+# See environment variables in .bashrc for dereferencing any variables below
+
+# make swhkd reload its configuration files:
+# SWHKD DOESN'T UNDERSTAND `;`
+#Super + x ; Super + x
+#  pkill -USR1 -x swhkd
+#  sudo pkill -HUP swhkd # This one is for swhkd, but it needs root privileges...
+#
+# Generic keybindings
+#
+
+# SWHKD DOESN'T UNDERSTAND YOUR VARIABLES??
+#Super + return
+#  $TERMINAL
+#Control + Alt + t
+#  $TERMINAL
+#Super + d
+#  $LAUNCHER
+#Super + escape
+#  $HOME/bin/menu.sh
+#Super + f1
+#  $HOME/bin/menu.sh
+#
+#Control + Alt + delete
+#  $TERMINAL -e htop
+#Super + return
+#  kitty
+#Control + Alt + t
+#  kitty
+#Super + d
+#  wofi -show drun
+#Super + escape
+#  $HOME/bin/menu.sh
+#Super + f1
+#  $HOME/bin/menu.sh
+
+#Control + Alt + delete
+#  kitty -e htop
+
+# Screenshot - full screen, and active window
+#{_,Alt} + print
+#  scrot {_,-u} $HOME/images/screenshots/%Y-%m-%d-%H%M%S-scrot.png
+
+#
+# Quick keybindings for common programs
+#
+
+#Super + bracketleft
+#  emacs
+#Super + bracketright
+#  google-chrome-stable
+
+#
+# Grouped program-launching keybindings
+# (using either prefix Super+x or Super+p)
+#
+
+# SWHKD DOESN'T UNDERSTAND `;`
+#Super + {x,p} ; c
+#  google-chrome-stable
+#Super + {x,p} ; d
+#  discord
+#Super + {x,p} ; e
+#  $TERMINAL -e ranger
+#Super + {x,p} ; g
+#  galculator
+#Super + {x,p} ; l
+#  emacs -f ledger
+#Super + {x,p} ; m
+#  $HOME/bin/menu.sh
+#Super + {x,p} ; p
+#  passmenu
+
+#
+# Special keys
+#
+
+# NOT SURE IF THESE WORK IN WAYLAND
+#XF86Tools
+#  $HOME/bin/themeselect.sh
+#XF86Search
+#  $HOME/bin/displayselect.sh
+#XF86LaunchA
+#  $HOME/bin/displayselect.sh
+#XF86Explorer
+#  $HOME/bin/displayselect.sh
+#XF86Display
+#  $HOME/bin/displayselect.sh
+#
+#XF86Calculator
+#  galculator
+
+# This key shows-up on certain keyboards
+# swhkd DOESN'T UNDERSTAND THIS KEY
+#menu
+#  $HOME/bin/menu.sh
+
+#
+# Multimedia keys
+#
+
+#xf86audioraisevolume
+#  pactl set-sink-volume @DEFAULT_SINK@ +5%; refreshbar.sh
+#xf86audiolowervolume
+#  pactl set-sink-volume @DEFAULT_SINK@ -5%; refreshbar.sh
+#xf86audiomute
+#  pactl set-sink-mute @DEFAULT_SINK@ toggle; refreshbar.sh
+#Super + xf86audiomute
+#  pactl set-sink-volume @DEFAULT_SINK@ 100%; refreshbar.sh
+#xf86audiomicmute
+#  pactl set-source-mute @DEFAULT_SOURCE@ toggle
+
