@@ -167,6 +167,7 @@ assign [class="^Steam"]     9
 assign [class="^discord"]  10
 
 for_window [class="Galculator"] floating enable
+for_window [class="Insync"] floating enable
 
 # ==================================================
 # Colors and appearance
