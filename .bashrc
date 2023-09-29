@@ -19,6 +19,8 @@ export PS2='> '
 # Aliases
 # ==================================================
 
+alias config='git --git-dir=$HOME/.dotfiles --work-tree=$HOME'
+
 alias ls='ls --color=auto'
 alias l='ls -CF'
 alias ll='ls -l'
