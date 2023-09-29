@@ -8,29 +8,14 @@
   :config
   ;;(evil-set-initial-state 'help-mode 'emacs)
   ;;(evil-set-initial-state 'dired-mode 'emacs)
-  ;; TODO - move these keybindings to somewhere universal?
-  (evil-set-leader 'normal " ")
-  (evil-define-key 'normal 'global (kbd "<leader>fs") 'save-buffer)
-  (evil-define-key 'normal 'global (kbd "<leader>ff") 'find-file)
-  (evil-define-key 'normal 'global (kbd "<leader>fv") 'find-alternate-file)
-  (evil-define-key 'normal 'global (kbd "<leader>fed") (lambda () (interactive) (find-file user-init-file)))
-  (evil-define-key 'normal 'global (kbd "<leader>fr") 'recentf-open-files)
-  (evil-define-key 'normal 'global (kbd "<leader>fd") 'dired)
-  (evil-define-key 'normal 'global (kbd "<leader>bb") 'switch-to-buffer)
-  (evil-define-key 'normal 'global (kbd "<leader>bl") 'list-buffers)
-  (evil-define-key 'normal 'global (kbd "<leader>bd") 'kill-buffer)
-  (evil-define-key 'normal 'global (kbd "<leader>bk") 'kill-buffer)
-  (evil-define-key 'normal 'global (kbd "<leader>ww") 'other-window)
-  (evil-define-key 'normal 'global (kbd "<leader>wo") 'other-window)
-  (evil-define-key 'normal 'global (kbd "<leader>w1") 'delete-other-windows)
-  (evil-define-key 'normal 'global (kbd "<leader>w0") 'delete-window)
-  (evil-define-key 'normal 'global (kbd "<leader>wd") 'delete-window)
-  (evil-define-key 'normal 'global (kbd "<leader>wk") 'delete-window)
-  ;; Use visual line motions even outside of visual-line-mode buffers
-  (evil-global-set-key 'motion "j" 'evil-next-visual-line)
-  (evil-global-set-key 'motion "k" 'evil-previous-visual-line)
-  (evil-set-initial-state 'messages-buffer-mode 'normal)
-  (evil-set-initial-state 'dashboard-mode 'normal)
+  (advice-add 'evil-search-next :after
+              (lambda (&rest x) (evil-scroll-line-to-center (line-number-at-pos))))
+  (advice-add 'evil-search-previous :after
+              (lambda (&rest x) (evil-scroll-line-to-center (line-number-at-pos))))
+  ;; (advice-add 'evil-scroll-up :after
+  ;;             (lambda (&rest x) (move-to-window-line nil)))
+  ;; (advice-add 'evil-scroll-down :after
+  ;;             (lambda (&rest x) (move-to-window-line nil)))
   (evil-mode 1))
 
 (use-package evil-surround

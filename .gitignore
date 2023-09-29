@@ -5,3 +5,7 @@
 # Track my custom scripts (prone to not getting added to dotfiles repo)
 !bin
 !bin/*
+
+# Track my Emacs configuration files
+!.emacs.d/lisp
+!.emacs.d/lisp/*

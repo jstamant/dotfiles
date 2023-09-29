@@ -7,9 +7,11 @@
            gcs-done))
 (add-hook 'emacs-startup-hook #'efs/display-startup-time)
 
+;; TODO all packages will need to be reviewed for proper deferring / lazy loading
 
-
-(add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
+(defvar user-lisp-directory (expand-file-name "lisp" user-emacs-directory)
+  "Directory that has all your additional Emacs [lisp] configuration files.")
+(add-to-list 'load-path user-lisp-directory)
 
 ;; Load my customizations
 (setq custom-file (locate-user-emacs-file "custom.el"))
@@ -96,6 +98,7 @@ This is great for when you're tinkering on your `user-init-file'"
 (set-fringe-mode 10)        ; Give some breathing room??
 (setq inhibit-startup-screen t) ; Disable the default Emacs startup screen
 (setq use-dialog-box nil) ; Disables dialog boxes for mouse-driven actions
+;;(setq scroll-margin 8)
 
 ;; Sound settings
 (setq ring-bell-function 'ignore) ; Turn off audible bell
@@ -130,7 +133,7 @@ This is great for when you're tinkering on your `user-init-file'"
   :ensure t)
 (use-package spacemacs-theme
   :ensure t)
-(global-hl-line-mode 1)
+(global-hl-line-mode 1) ;; This currently overlays faces, so you can't use `describe-face' on them
 (use-package modus-themes
   :ensure t)
 (load-theme 'spacemacs-dark t)
@@ -206,6 +209,7 @@ This is great for when you're tinkering on your `user-init-file'"
   :bind ("C-x c" . calc))
 
 ;;;; C/C++ MODE SETTINGS
+;; clangd needs to be installed for LSP-use
 (use-package cc-mode
   :ensure t
   :config
@@ -257,6 +261,8 @@ This is great for when you're tinkering on your `user-init-file'"
 
 ;;;; HELP-MODE SETTINGS
 (use-package help-mode
+  :bind-keymap
+  ("C-c h" . help-map) ;; That's it! That's how you bind help-map to another key??
   :bind (:map help-mode-map
               ;; Some additional navigation bindings
               ("n" . next-line)
@@ -329,9 +335,6 @@ of the buffer."
   (find-file (concat drive-directory "reference/finances/finances.ledger"))
   (end-of-buffer))
 
-;;;; LSP SETTINGS
-(use-package jstamant-lsp)
-
 ;;;; MAGIT SETTINGS
 (use-package magit
   :ensure t
@@ -386,7 +389,15 @@ of the buffer."
 (use-package term)
 
 ;;;; TREESITTER SETTINGS
-(use-package jstamant-treesitter)
+;; (use-package tree-sitter
+;;   :ensure t
+;;   :config
+;;   (global-tree-sitter-mode))
+
+;; (use-package tree-sitter-langs
+;;   :ensure t
+;;   :hook (tree-sitter-after-on . tree-sitter-hl-mode)
+;;   :after tree-sitter)
 
 ;;;; UNFILL SETTINGS
 (use-package unfill
@@ -416,12 +427,13 @@ of the buffer."
   (setq web-mode-code-indent-offset 2))
 
 ;;;; WHICH-KEY SETTINGS
+;; which-key is responsible for showing your options along a key sequence.
 (use-package which-key
   :ensure t
   :init (which-key-mode)
   :diminish which-key-mode
   :config
-  (setq which-key-idle-delay 2.0))
+  (setq which-key-idle-delay 1.0))
 
 
 
@@ -437,16 +449,19 @@ of the buffer."
 
 ;; Helpful provides us with a help-mode that shows prettier and better organized
 ;; help content than the default help-mode
+;; I don't like its navigation, though. It doesn't reuse the same window
 (use-package helpful
-  :ensure t
-  :custom
-  (counsel-describe-function-function #'helpful-callable)
-  (counsel-describe-variable-function #'helpful-variable)
-  :bind
-  ([remap describe-function] . counsel-describe-function)
-  ([remap describe-command] . helpful-command)
-  ([remap describe-variable] . counsel-describe-variable)
-  ([remap describe-key] . helpful-key))
+  :ensure t)
+;; (use-package helpful
+;;   :ensure t
+;;   :custom
+;;   (counsel-describe-function-function #'helpful-callable)
+;;   (counsel-describe-variable-function #'helpful-variable)
+;;   :bind
+;;   ([remap describe-function] . counsel-describe-function)
+;;   ([remap describe-command] . helpful-command)
+;;   ([remap describe-variable] . counsel-describe-variable)
+;;   ([remap describe-key] . helpful-key))
 
 
 ;; Hydra is a package that lets you call functions at the end of a prefix
@@ -469,14 +484,17 @@ of the buffer."
 
 (use-package projectile
   :ensure t
-  :diminish projectile-mode
-  :config (projectile-mode)
+  ;;:diminish projectile-mode
   :bind-keymap
   ("C-c p" . projectile-command-map)
+  ;; TODO bind this key!! ("<SPC> p" . projectile-command-map)
+  ;; Same as (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
   :init
   (when (file-directory-p "~/programming")
     (setq projectile-project-search-path '("~/programming")))
-  (setq projectile-switch-project-action #'projectile-dired))
+  (setq projectile-switch-project-action #'projectile-dired)
+  :config
+  (projectile-mode))
 
 (use-package counsel-projectile
   :ensure t
@@ -484,21 +502,39 @@ of the buffer."
   :config
   (counsel-projectile-mode 1))
 
-(use-package jstamant-keybinds)
 
-;; (use-package company
-;;   :after lsp-mode
-;;   :hook (prog-mode . company-mode)
-;;   :bind (:map company-active-map
-;;          ("<tab>" . company-complete-selection))
-;;         (:map lsp-mode-map
-;;          ("<tab>" . company-indent-or-complete-common))
-;;   :custom
-;;   (company-minimum-prefix-length 1)
-;;   (company-idle-delay 0.0))
+;;;; LSP SETTINGS
+;; Main documentation page for lsp-mode is located at:
+;; https://emacs-lsp.github.io/lsp-mode/
+;; https://emacs-lsp.github.io/lsp-mode/page/languages/
 
-;; (use-package company-box
-;;   :hook (company-mode . company-box-mode))
+(use-package lsp-mode
+  :ensure t
+  :commands (lsp lsp-deferred) ; defer loading until one of these commands are executed
+  ;;:after which-key
+  :init
+  (setq lsp-keymap-prefix "C-c l")
+  :hook
+  (lsp-mode . lsp-enable-which-key-integration))
+;;(XXX-mode . lsp) ; for enabling lsp upon entering certain modes
+
+;; ;; optionally
+;; (use-package lsp-ui :commands lsp-ui-mode)
+;; ;; if you are helm user
+;; (use-package helm-lsp :commands helm-lsp-workspace-symbol)
+;; ;; if you are ivy user
+;; (use-package lsp-ivy :commands lsp-ivy-workspace-symbol)
+;; (use-package lsp-treemacs :commands lsp-treemacs-errors-list)
+
+;; ;; optionally if you want to use debugger
+;; (use-package dap-mode)
+;; ;; (use-package dap-LANGUAGE) to load the dap adapter for your language
+
+;; ;; optional if you want which-key integration
+;; (use-package which-key
+;;     :config
+;;     (which-key-mode))
+
 (use-package lsp-ui
   :ensure t
   :hook (lsp-mode . lsp-ui-mode))
@@ -513,6 +549,26 @@ of the buffer."
 (use-package lsp-ivy
   :ensure t)
 
+(use-package company
+  :ensure t
+  :after lsp-mode
+  :hook (prog-mode . company-mode)
+  :bind
+  ;; TODO bind `company-complete'??
+  (:map company-active-map
+        ("<tab>" . company-complete-selection))
+  (:map lsp-mode-map
+        ("<tab>" . company-indent-or-complete-common))
+  :custom
+  (company-minimum-prefix-length 1)
+  (company-idle-delay 0.0))
+
+;; This adds extra info to company mode, which appears as a box, by default
+;; TODO need to disable this if in a tty. Not compatible.
+(use-package company-box
+  :ensure t
+  :hook (company-mode . company-box-mode))
+
 ;; (use-package typescript-mode
 ;;   :mode "\\.ts\\'"
 ;;   :hook (typescript-mode . lsp-deferred)
@@ -520,6 +576,44 @@ of the buffer."
 ;;   (setq typescript-indent-level 2))
 ;; ;;npm install -g typescript-language-server
 
+;; I don't find this package useful yet?
+;; Don't forget to use M-; for comment-dwim
 (use-package evil-nerd-commenter
   :ensure t
+  :after evil
   :bind ("M-/" . evilnc-comment-or-uncomment-lines))
+
+(use-package lua-mode
+  :ensure t)
+
+;; This might be cool to implement - move to beginning of line or code
+;; (use-package mwim
+;;   :ensure t)
+
+;; Unsure if unfill works with comments of other programming languages
+;; And how exactly is this being deferred?
+(use-package unfill
+  :ensure t
+  :defer t
+  :commands (unfill-region unfill-paragraph unfill-toggle)
+  :init
+  (global-set-key [remap fill-paragraph] #'unfill-toggle))
+
+;; This would be good to implement in emacs mode:
+;; (defun spacemacs/backward-kill-word-or-region (&optional arg)
+;;   "Calls `kill-region' when a region is active and
+;; `backward-kill-word' otherwise. ARG is passed to
+;; `backward-kill-word' if no region is active."
+;;   (interactive "p")
+;;   (if (region-active-p)
+;;       ;; call interactively so kill-region handles rectangular selection
+;;       ;; correctly (see https://github.com/syl20bnr/spacemacs/issues/3278)
+;;       (call-interactively #'kill-region)
+;;     (backward-kill-word arg)))
+;; (global-set-key (kbd "C-w") 'spacemacs/backward-kill-word-or-region)
+
+;; Another package to implement one day:
+;; The main one is (use-package dashboard)
+;; (use-package welcome-dashboard) is that right??
+
+(use-package jstamant-keybinds)

@@ -2,4 +2,6 @@
 	name = Justin R. St-Amant
 	email = jstamant24@gmail.com
 [core]
-	editor = vim
+	editor = nvim
+[init]
+	defaultBranch = master
