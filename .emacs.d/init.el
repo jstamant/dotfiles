@@ -114,11 +114,13 @@ This is great for when you're tinkering on your `user-init-file'"
 ;; Make ESC quit prompts
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
 
-;(set-face-attribute 'default nil :font "Deja Vu Sans Mono" :height 100) ; ??????
+;;TODO SET THE FONT TO SOMETHING THAT WILL SUPPORT EMOJI?
+;;(set-face-attribute 'default nil :font "DejaVu Sans Mono" :height 100)
 
 (column-number-mode 1)
 ;; TODO - add a toggle for this
 (add-hook 'prog-mode-hook 'display-line-numbers-mode)
+(add-hook 'conf-mode-hook 'display-line-numbers-mode)
 ;; Or...Disable line numbers for some modes
 ;;(dolist (mode '(org-mode-hook
 ;;                term-mode-hook
@@ -244,16 +246,22 @@ This is great for when you're tinkering on your `user-init-file'"
 ;;     "H" 'dired-hide-dotfiles-mode))
 
 ;;;; EMOJIFY SETTINGS
+;; Not sure if I like this mode.
+;; TODO add a toggle for this, which should be a hydra
 (use-package emojify
   :ensure t
-  :hook (after-init . global-emojify-mode))
+  :hook (after-init . global-emojify-mode)
+  :init
+  (setq emojify-display-style 'image) ; Or can be set to 'unicode
+  (setq emojify-emoji-styles '(unicode github))) ; Don't display ascii emojis
 
 ;;;; EVIL SETTINGS
 (use-package jstamant-evil)
 
 ;;;; FLYSPELL SETTINGS
-(use-package flyspell
-  :hook (text-mode . flyspell-mode)) ; Start spell checking on all modes derived from text-mode
+;; TODO add a toggle for flyspell mode
+;; (use-package flyspell
+;;   :hook (text-mode . flyspell-mode)) ; Start spell checking on all modes derived from text-mode
 
 ;;;; HELM-MODE SETTINGS
 ;;(use-package helm
@@ -262,9 +270,10 @@ This is great for when you're tinkering on your `user-init-file'"
 ;;;; HELP-MODE SETTINGS
 (use-package help-mode
   :bind-keymap
-  ("C-c h" . help-map) ;; That's it! That's how you bind help-map to another key??
+  ("C-c h" . help-map) ;; That's it! That's how you bind help-map to another key?? See below, figured it out
   :bind (:map help-mode-map
               ;; Some additional navigation bindings
+              ;; TODO move these, as they are emacs keybindings, not really meant for evil mode
               ("n" . next-line)
               ("p" . previous-line)
               ("f" . forward-char)
@@ -274,6 +283,7 @@ This is great for when you're tinkering on your `user-init-file'"
               ("v" . scroll-up-command)
               ("V" . scroll-down-command)
               ("C-d" . scroll-up-command)))
+;;(define-key evil-normal-state-map (kbd "SPC h") help-map) ;; Found it! This is how you do maps!
 
 ;;;; ISPELL SETTINGS
 (use-package ispell
@@ -409,22 +419,22 @@ of the buffer."
   :bind ("C-x v" . view-mode))
 
 ;;;; WEB SETTINGS
-(use-package web-mode
-  :ensure t
-  :mode
-  "\\.css\\'"
-  "\\.htaccess\\'"
-  "\\.html?\\'"
-  "\\.twig\\'"
-  "\\.php\\'"
-  "\\.xml\\'"
-  :config
-  ;; Make .html files recognize Twig templates by default
-  (setq web-mode-engines-alist '(("twig" . "\\.html\\'")))
-  ;; web-mode indentation settings
-  (setq web-mode-markup-indent-offset 2)
-  (setq web-mode-css-indent-offset 2)
-  (setq web-mode-code-indent-offset 2))
+;; (use-package web-mode
+;;   :ensure t
+;;   :mode
+;;   "\\.css\\'"
+;;   "\\.htaccess\\'"
+;;   "\\.html?\\'"
+;;   "\\.twig\\'"
+;;   "\\.php\\'"
+;;   "\\.xml\\'"
+;;   :config
+;;   ;; Make .html files recognize Twig templates by default
+;;   (setq web-mode-engines-alist '(("twig" . "\\.html\\'")))
+;;   ;; web-mode indentation settings
+;;   (setq web-mode-markup-indent-offset 2)
+;;   (setq web-mode-css-indent-offset 2)
+;;   (setq web-mode-code-indent-offset 2))
 
 ;;;; WHICH-KEY SETTINGS
 ;; which-key is responsible for showing your options along a key sequence.
@@ -484,23 +494,29 @@ of the buffer."
 
 (use-package projectile
   :ensure t
+  ;; :after '(ag rg) ; optionally depends on these two packages
   ;;:diminish projectile-mode
   :bind-keymap
-  ("C-c p" . projectile-command-map)
-  ;; TODO bind this key!! ("<SPC> p" . projectile-command-map)
-  ;; Same as (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+  ("C-c p" . projectile-command-map) ;; TODO remove this binding, it's been moved to general
   :init
   (when (file-directory-p "~/programming")
     (setq projectile-project-search-path '("~/programming")))
   (setq projectile-switch-project-action #'projectile-dired)
+  (setq projectile-sort-order 'recentf) ;; Does not apply to 'alien' sort order, which is what I use
   :config
-  (projectile-mode))
+  (projectile-mode 1))
 
-(use-package counsel-projectile
-  :ensure t
-  :after projectile
-  :config
-  (counsel-projectile-mode 1))
+;; Need these to perform ag and ripgrep searches using projectile
+(use-package ag
+  :ensure t)
+(use-package rg
+  :ensure t)
+;; TODO to implement this package once I understand projectile a bit more
+;; (use-package counsel-projectile
+;;   :ensure t
+;;   :after projectile
+;;   :config
+;;   (counsel-projectile-mode 1))
 
 
 ;;;; LSP SETTINGS

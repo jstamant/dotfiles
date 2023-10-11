@@ -16,24 +16,20 @@
   :prefix ","
   :global-prefix "M-,")
 
-;; TODO REQUIRE HELPFUL?
+;; TODO (REQUIRE) HELPFUL?
+; None of these <leader> prefixed keys would work in help-mode without
+; being in the override map
 (jstamant/leader-key
-  :keymaps 'normal
+  ;; :keymaps 'normal
+  :states 'normal
+  :keymaps 'override
   "" '(nil :which-key "<leader>")
   "b" '(:ignore t :which-key "buffers")
+  "bb" 'switch-to-buffer
+  "bl" 'list-buffers
+  "bd" 'kill-buffer
+  "bk" 'kill-buffer
   "f" '(:ignore t :which-key "files")
-  "g" '(:ignore t :which-key "git")
-  "gg" 'magit
-  "gs" 'magit-status
-  "h" '(:ignore t :which-key "help")
-  "hd" '(:ignore t :which-key "describe")
-  "hdf" 'helpful-callable
-  ;;"hdf" 'helpful-callable ;TODO add a describe-face?
-  "hdm" 'describe-mode
-  "hdv" 'helpful-variable
-  "t"  '(:ignore t :which-key "toggles") ;not added by me
-  "tt" '(counsel-load-theme :which-key "choose theme") ;not added by me
-  "w" '(:ignore t :which-key "windows")
   "fs" 'save-buffer
   "ff" 'find-file
   "fv" 'find-alternate-file
@@ -43,10 +39,20 @@
   "fek" '((lambda () (interactive) (find-file (expand-file-name "jstamant-keybinds.el" user-lisp-directory))) :which-key "keybinds")
   "fr" 'recentf-open-files
   "fd" 'dired
-  "bb" 'switch-to-buffer
-  "bl" 'list-buffers
-  "bd" 'kill-buffer
-  "bk" 'kill-buffer
+  "g" '(:ignore t :which-key "git")
+  "gg" 'magit
+  "gs" 'magit-status
+  "h" '(:ignore t :which-key "help")
+  "hd" '(:ignore t :which-key "describe")
+  "hdf" 'helpful-callable
+  ;;"hdf" 'helpful-callable ;TODO add a describe-face?
+  "hdm" 'describe-mode
+  "hdv" 'helpful-variable
+  "l" '(:keymap lsp-command-map :package lsp :which-key "lsp") ; doesn't work the greatest
+  "p" '(:keymap projectile-command-map :package projectile :which-key "projectile")
+  "t"  '(:ignore t :which-key "toggles") ;not added by me
+  "tt" '(counsel-load-theme :which-key "choose theme") ;not added by me
+  "w" '(:ignore t :which-key "windows")
   "ww" 'other-window
   "wo" 'other-window
   "w1" 'delete-other-windows
@@ -61,8 +67,12 @@
 
 (general-define-key 
  :keymaps '(normal insert)
- "C-a" 'move-beginning-of-line
- "C-e" 'move-end-of-line)
+ ;; "C-a" 'move-beginning-of-line
+ ;; "C-e" 'move-end-of-line
+ "C-u" 'jstamant/scroll-up
+ "C-d" 'jstamant/scroll-down)
 
+;; (general-define-key
+;;  "C-c p" '(:keymap projectile-command-map :package projectile))
 
 (provide 'jstamant-keybinds)
