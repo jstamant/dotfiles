@@ -1,0 +1,3 @@
+[submodule "/home/jstamant/.emacs.d"]
+	path = /home/jstamant/.emacs.d
+	url = https://github.com/syl20bnr/spacemacs
