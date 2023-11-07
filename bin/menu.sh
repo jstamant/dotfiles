@@ -2,7 +2,7 @@
 
 DMENULAUNCHER=dmenu
 if [[ $WAYLAND_DISPLAY ]]; then
-    DMENULAUNCHER=wofi --dmenu
+    DMENULAUNCHER="rofi -dmenu"
 fi
 
 chosen=$(echo -e "xorg-xeyes\nprinters\nscanners\ndisplays\nshutdown\nreboot\nhibernate" | $DMENULAUNCHER -l 10 -p "Menu:")
