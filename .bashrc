@@ -21,5 +21,3 @@ alias grep='grep --color=auto'
 alias dl='cd ~/downloads'
 alias lg='lazygit'
 alias sudo='sudo ' # Evaluate aliases preceded by sudo
-
-alias theme='themeselect.sh'
