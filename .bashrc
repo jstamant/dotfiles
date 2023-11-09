@@ -30,6 +30,7 @@ alias grep='grep --color=auto'
 alias gtd='cd ~/drive/gtd'
 alias finances='cd ~/drive/reference/finances'
 alias dl='cd ~/downloads'
+alias lg='lazygit'
 # Also evaluate aliases preceded by 'sudo'
 alias sudo='sudo '
 
