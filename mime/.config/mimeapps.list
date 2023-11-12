@@ -8,7 +8,9 @@ application/pdf=FoxitReader.desktop
 x-scheme-handler/mailto=google-chrome.desktop
 application/ppdf=FoxitReader.desktop
 x-scheme-handler/notion=notion-app.desktop
+x-scheme-handler/webcal=google-chrome.desktop
 
 [Added Associations]
 application/pdf=google-chrome.desktop;
 audio/mpeg=vlc.desktop;
+application/vnd.insync.link.drive.doc=google-chrome.desktop;
