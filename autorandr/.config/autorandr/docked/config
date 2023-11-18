@@ -1,14 +1,22 @@
+output HDMI-1
+off
+output DP-1
+off
+output DP-2
+off
+output DP-1-1
+off
+output DP-1-3
+off
 output eDP-1
 off
-output HDMI-1
+output DP-1-2
 crtc 0
 mode 1920x1200
 pos 0x0
 primary
 rate 59.95
-x-prop-max_bpc 16
+x-prop-audio auto
+x-prop-broadcast_rgb Automatic
+x-prop-max_bpc 12
 x-prop-non_desktop 0
-x-prop-scaling_mode None
-x-prop-underscan off
-x-prop-underscan_hborder 0
-x-prop-underscan_vborder 0
