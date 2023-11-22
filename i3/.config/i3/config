@@ -1,49 +1,25 @@
-# ==================================================
 #
-# Justin St-Amant's i3 configuration file
+# Essential configuration
 #
-# ==================================================
-
-# ==================================================
-# Definitions
-# ==================================================
 
 # Set mod-key to Super (windows key)
 set $mod Mod4
 
-set $term st
-set $menu dmenu_run
-
-# ==================================================
-# Essential configuration
-# ==================================================
-
-# Exit i3; end X session
-bindsym $mod+Shift+q exec "i3-msg exit"
-bindsym $mod+Escape exec "i3-msg exit"
-# Reload the configuration file in-place
-bindsym $mod+Shift+c reload
-
-# Start a terminal
-bindsym $mod+Return exec $term
-
-# Restart i3 in-place, preseving the current X session
+bindsym $mod+Shift+q exit
 bindsym $mod+Shift+r restart
-
-# Kill focused window
+# bindsym $mod+Shift+r reload
 bindsym $mod+q kill
+bindsym $mod+c kill
 
 focus_follows_mouse no
-
-# Start application launcher
-bindsym $mod+d exec $menu
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
-# ==================================================
+
+#
 # Navigation
-# ==================================================
+#
 
 # Change focus
 bindsym $mod+h           focus left
@@ -95,9 +71,10 @@ bindsym $mod+Shift+8 move container to workspace 8
 bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+Shift+0 move container to workspace 10
 
-# ==================================================
+
+#
 # Layout management
-# ==================================================
+#
 
 # Toggle the splitting direction
 bindsym $mod+t split toggle
@@ -158,9 +135,10 @@ bindsym $mod+Shift+u resize grow   height 10 px or 1 ppt
 bindsym $mod+Shift+i resize shrink height 10 px or 1 ppt
 bindsym $mod+Shift+o resize grow   width  10 px or 1 ppt
 
-# ==================================================
+
+#
 # Workspace and window assignments
-# ==================================================
+#
 
 assign [class="^Chromium"]  2
 assign [class="^Steam"]     9
@@ -169,15 +147,17 @@ assign [class="^discord"]  10
 for_window [class="Galculator"] floating enable
 for_window [class="Insync"] floating enable
 
-# ==================================================
+
+#
 # Colors and appearance
-# ==================================================
+#
 
 # Font for window titles
 # I think this needs fixing or adjusting
 font pango:DejaVu Sans Mono 8
 
 default_border pixel 1
+smart_borders on
 
 #                 $<name> <Xresource>  <fallback>
 set_from_resource $fg     i3wm.color7  #ffffff
@@ -197,15 +177,9 @@ client.urgent           $pri       $pri     $bg      $pri    $pri
 client.placeholder      $bg        $bg-alt  $fg      $fg     $fg
 client.background       #ff0000
 
-# ==================================================
-# Gaps configuration
-# ==================================================
 
-#gaps inner 10
-#gaps outer 5
-
-# ==================================================
+#
 # Status bar
-# ==================================================
+#
 
 exec_always --no-startup-id ~/.config/polybar/start.sh
