@@ -1,5 +1,3 @@
-#
-# ~/.bash_profile
-#
+#!/usr/bin/bash
 
-[[ -f ~/.bashrc ]] && . ~/.bashrc
+[ -f $HOME/.bashrc ] && . $HOME/.bashrc

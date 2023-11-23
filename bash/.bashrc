@@ -21,3 +21,8 @@ alias grep='grep --color=auto'
 alias dl='cd ~/downloads'
 alias lg='lazygit'
 alias sudo='sudo ' # Evaluate aliases preceded by sudo
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+
+alias op='open-project.sh'
