@@ -55,6 +55,9 @@ super + {x,p} ; m
 super + {x,p} ; p
   passmenu
 
+super + shift + m
+  $HOME/bin/menu.sh
+
 #
 # Special keys
 #

@@ -16,8 +16,8 @@ export PAGER='less'
 # Set other non-standard variables for my own scripts
 export BROWSER='google-chrome-stable' # Currently unused
 export FILE_MANAGER='pcmanfm' # Currently unused
-export LAUNCHER='dmenu_run'
-export TERMINAL='kitty'
+export LAUNCHER='rofi -show drun'
+export TERMINAL='alacritty'
 
 # Custom PATH additions
 export PATH=$PATH:~/bin
