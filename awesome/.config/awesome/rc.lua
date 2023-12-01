@@ -95,6 +95,9 @@ local brightness_config = {
     rmb_set_max = true,
 }
 
+-- Volume indicator module
+local volume_widget = require("awesome-wm-widgets.pactl-widget.volume")
+
 -- Battery power indicator module
 -- local battery = require("awesome-wm-widgets.battery-widget.battery")
 local theme = {} -- TODO fix widget icons for battery widget
@@ -288,6 +291,7 @@ awful.screen.connect_for_each_screen(function(s)
             -- Right widgets
             {
                 layout = wibox.layout.fixed.horizontal,
+                volume_widget();
                 brightness_widget(brightness_config),
                 battery,
                 mytextclock,
@@ -403,15 +407,25 @@ globalkeys = gears.table.join(
               end,
               {description = "restore minimized", group = "client"}),
 
+    -- These multimedia keys are here to override sxhkd's bindings, so that I
+    -- get an immediate change reflected on the bar
     awful.key({}, "XF86MonBrightnessUp", function() brightness_widget:inc() end,
-        { description = "increase brightness", group = "custom" }),
+        { description = "increase brightness", group = "multimedia" }),
     awful.key({}, "XF86MonBrightnessDown", function() brightness_widget:dec() end,
-        { description = "decrease brightness", group = "custom" }),
+        { description = "decrease brightness", group = "multimedia" }),
     awful.key({ modkey }, "XF86MonBrightnessUp", function() brightness_widget:set(80) end,
-        { description = "high brightness", group = "custom" }),
+        { description = "high brightness", group = "multimedia" }),
     awful.key({ modkey }, "XF86MonBrightnessDown", function() brightness_widget:set(40) end,
-        { description = "low brightness", group = "custom" })
-    -- Prompt
+        { description = "low brightness", group = "multimedia" }),
+
+    awful.key({}, "XF86AudioRaiseVolume", function() volume_widget:inc(5) end,
+        { description = "raise volume", group = "multimedia" }),
+    awful.key({}, "XF86AudioLowerVolume", function() volume_widget:dec(5) end,
+        { description = "lower volume", group = "multimedia" }),
+    awful.key({}, "XF86AudioMute", function() volume_widget:toggle() end,
+        { description = "toggle mute/unmute", group = "multimedia" })
+
+-- Prompt
     -- awful.key({ modkey },            "r",     function () awful.screen.focused().mypromptbox:run() end,
     --           {description = "run prompt", group = "launcher"}),
 
