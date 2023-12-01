@@ -37,6 +37,10 @@ This function should only modify configuration layer settings."
       :variables
       better-defaults-move-to-beginning-of-code-first nil
       better-defaults-move-to-end-of-code-first nil)
+     (c-c++
+      :variables
+      c-c++-backend 'lsp-clangd)
+     cmake
      emacs-lisp
      git
      helm
@@ -58,10 +62,19 @@ This function should only modify configuration layer settings."
       javascript-lsp-linter nil ; for use with React layer
       js2-basic-offset 2)
      lsp
+     (lua
+      :variables
+      lua-indent-level 4
+      lua-backend 'lsp
+      lua-lsp-server 'lua-language-server
+      ;; Requires the installation of arch package 'lua-language-server' to be installed for these files to be present
+      lsp-clients-lua-language-server-bin "/usr/bin/lua-language-server"
+      lsp-clients-lua-language-server-main-location "/usr/lib/lua-language-server/main.lua")
      markdown
      multiple-cursors
      org
      react
+     rust
      (shell
       :variables
       ;; shell-default-shell 'ansi-term ; default for windows is 'eshell
@@ -69,7 +82,7 @@ This function should only modify configuration layer settings."
       multi-term-program "/bin/bash"
       shell-default-height 30
       shell-default-position 'bottom
-      terminal-here-linux-terminal-command 'kitty)
+      terminal-here-linux-terminal-command 'alacritty)
      (spell-checking
       :variables
       spell-checking-enable-by-default nil)
@@ -83,8 +96,12 @@ This function should only modify configuration layer settings."
       ;; spacemacs-tree-sitter-hl-black-list '(js2-mode)
       tree-sitter-indent-enable nil ; Only Rust is supported, right now
       tree-sitter-fold-enable nil)
-     version-control
-     web-beautify)
+     (version-control
+      :variables
+      vc-follow-symlinks t)
+     vimscript
+     web-beautify
+     yaml)
 
 
    ;; List of additional packages that will be installed without being wrapped
@@ -431,7 +448,7 @@ It should only modify the values of Spacemacs settings."
 
    ;; Show the scroll bar while scrolling. The auto hide time can be configured
    ;; by setting this variable to a number. (default t)
-   dotspacemacs-scroll-bar-while-scrolling t
+   dotspacemacs-scroll-bar-while-scrolling nil
 
    ;; Control line numbers activation.
    ;; If set to `t', `relative' or `visual' then line numbers are enabled in all
@@ -582,6 +599,8 @@ This function is called immediately after `dotspacemacs/init', before layer
 configuration.
 It is mostly for variables that should be set before packages are loaded.
 If you are unsure, try setting them in `dotspacemacs/user-config' first."
+  (when (file-directory-p "~/programming")
+    (setq projectile-project-search-path '("~/programming")))
 )
 
 
@@ -599,6 +618,9 @@ This function is called at the very end of Spacemacs startup, after layer
 configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
+  (spacemacs/toggle-fill-column-indicator-globally-on)
+  ;; This mode messes with the faces as you type. Seems broken.
+  (remove-hook 'markdown-mode-hook 'spacemacs/activate-mmm-mode)
 )
 
 
@@ -615,7 +637,7 @@ This function is called at the very end of Spacemacs initialization."
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(auto-dictionary browse-at-remote evil-org flyspell-correct-helm flyspell-correct gh-md git-gutter-fringe fringe-helper git-gutter gnuplot helm-org-rifle markdown-toc mmm-mode mwim org-cliplink org-contrib org-download org-mime org-pomodoro alert log4e gntp org-present org-projectile org-project-capture org-category-capture org-rich-yank orgit-forge orgit unfill tree-sitter-langs tree-sitter tsc ac-ispell auto-complete auto-yasnippet flycheck-pos-tip pos-tip fuzzy helm-c-yasnippet helm-company helm-lsp lsp-origami origami lsp-ui yasnippet-snippets rjsx-mode company-web web-completion-data counsel-css emmet-mode helm-css-scss pug-mode sass-mode haml-mode scss-mode slim-mode tagedit web-mode esh-help eshell-prompt-extras eshell-z multi-term shell-pop terminal-here vterm xterm-color hierarchy json-reformat json-snatcher add-node-modules-path company counsel-gtags counsel swiper ivy dap-mode lsp-docker lsp-treemacs bui lsp-mode ggtags impatient-mode htmlize import-js grizzl js-doc js2-refactor yasnippet multiple-cursors livid-mode nodejs-repl npm-mode prettier-js skewer-mode js2-mode simple-httpd tern web-beautify afternoon-theme alect-themes ample-theme ample-zen-theme anti-zenburn-theme apropospriate-theme badwolf-theme birds-of-paradise-plus-theme bubbleberry-theme busybee-theme cherry-blossom-theme chocolate-theme clues-theme color-theme-sanityinc-solarized color-theme-sanityinc-tomorrow cyberpunk-theme dakrone-theme darkmine-theme darkokai-theme darktooth-theme django-theme doom-themes dracula-theme espresso-theme exotica-theme eziam-themes farmhouse-themes flatland-theme flatui-theme gandalf-theme gotham-theme grandshell-theme gruber-darker-theme gruvbox-theme hc-zenburn-theme hemisu-theme heroku-theme inkpot-theme ir-black-theme jazz-theme jbeans-theme kaolin-themes light-soap-theme lush-theme madhat2r-theme majapahit-themes material-theme minimal-theme modus-themes moe-theme molokai-theme monochrome-theme monokai-theme mustang-theme naquadah-theme noctilux-theme obsidian-theme occidental-theme oldlace-theme omtose-phellack-theme organic-green-theme phoenix-dark-mono-theme phoenix-dark-pink-theme planet-theme professional-theme purple-haze-theme railscasts-theme rebecca-theme reverse-theme seti-theme smyx-theme soft-charcoal-theme soft-morning-theme soft-stone-theme solarized-theme soothe-theme autothemer spacegray-theme subatomic-theme subatomic256-theme sublime-themes sunny-day-theme tango-2-theme tango-plus-theme tangotango-theme tao-theme toxi-theme twilight-anti-bright-theme twilight-bright-theme twilight-theme ujelly-theme underwater-theme white-sand-theme zen-and-art-theme zenburn-theme zonokai-emacs ws-butler writeroom-mode winum which-key volatile-highlights vim-powerline vi-tilde-fringe uuidgen undo-tree treemacs-projectile treemacs-persp treemacs-magit treemacs-icons-dired treemacs-evil toc-org term-cursor symon symbol-overlay string-inflection string-edit-at-point spacemacs-whitespace-cleanup spacemacs-purpose-popwin spaceline space-doc smeargle restart-emacs request rainbow-delimiters quickrun popwin pcre2el password-generator paradox overseer org-superstar open-junk-file nameless multi-line macrostep lorem-ipsum link-hint inspector info+ indent-guide hybrid-mode hungry-delete holy-mode hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt helm-xref helm-themes helm-swoop helm-purpose helm-projectile helm-org helm-mode-manager helm-make helm-ls-git helm-git-grep helm-descbinds helm-ag google-translate golden-ratio gitignore-templates git-timemachine git-modes git-messenger git-link forge flycheck-package flycheck-elsa flx-ido fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-textobj-line evil-surround evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-evilified-state evil-escape evil-easymotion evil-collection evil-cleverparens evil-args evil-anzu eval-sexp-fu emr elisp-slime-nav elisp-def editorconfig dumb-jump drag-stuff dotenv-mode dired-quick-sort diminish devdocs define-word column-enforce-mode clean-aindent-mode centered-cursor-mode auto-highlight-symbol auto-compile all-the-icons aggressive-indent ace-link ace-jump-helm-line)))
+   '(ron-mode rustic rust-mode toml-mode company-lua lua-mode dactyl-mode vimrc-mode yaml-mode auto-dictionary browse-at-remote evil-org flyspell-correct-helm flyspell-correct gh-md git-gutter-fringe fringe-helper git-gutter gnuplot helm-org-rifle markdown-toc mmm-mode mwim org-cliplink org-contrib org-download org-mime org-pomodoro alert log4e gntp org-present org-projectile org-project-capture org-category-capture org-rich-yank orgit-forge orgit unfill tree-sitter-langs tree-sitter tsc ac-ispell auto-complete auto-yasnippet flycheck-pos-tip pos-tip fuzzy helm-c-yasnippet helm-company helm-lsp lsp-origami origami lsp-ui yasnippet-snippets rjsx-mode company-web web-completion-data counsel-css emmet-mode helm-css-scss pug-mode sass-mode haml-mode scss-mode slim-mode tagedit web-mode esh-help eshell-prompt-extras eshell-z multi-term shell-pop terminal-here vterm xterm-color hierarchy json-reformat json-snatcher add-node-modules-path company counsel-gtags counsel swiper ivy dap-mode lsp-docker lsp-treemacs bui lsp-mode ggtags impatient-mode htmlize import-js grizzl js-doc js2-refactor yasnippet multiple-cursors livid-mode nodejs-repl npm-mode prettier-js skewer-mode js2-mode simple-httpd tern web-beautify afternoon-theme alect-themes ample-theme ample-zen-theme anti-zenburn-theme apropospriate-theme badwolf-theme birds-of-paradise-plus-theme bubbleberry-theme busybee-theme cherry-blossom-theme chocolate-theme clues-theme color-theme-sanityinc-solarized color-theme-sanityinc-tomorrow cyberpunk-theme dakrone-theme darkmine-theme darkokai-theme darktooth-theme django-theme doom-themes dracula-theme espresso-theme exotica-theme eziam-themes farmhouse-themes flatland-theme flatui-theme gandalf-theme gotham-theme grandshell-theme gruber-darker-theme gruvbox-theme hc-zenburn-theme hemisu-theme heroku-theme inkpot-theme ir-black-theme jazz-theme jbeans-theme kaolin-themes light-soap-theme lush-theme madhat2r-theme majapahit-themes material-theme minimal-theme modus-themes moe-theme molokai-theme monochrome-theme monokai-theme mustang-theme naquadah-theme noctilux-theme obsidian-theme occidental-theme oldlace-theme omtose-phellack-theme organic-green-theme phoenix-dark-mono-theme phoenix-dark-pink-theme planet-theme professional-theme purple-haze-theme railscasts-theme rebecca-theme reverse-theme seti-theme smyx-theme soft-charcoal-theme soft-morning-theme soft-stone-theme solarized-theme soothe-theme autothemer spacegray-theme subatomic-theme subatomic256-theme sublime-themes sunny-day-theme tango-2-theme tango-plus-theme tangotango-theme tao-theme toxi-theme twilight-anti-bright-theme twilight-bright-theme twilight-theme ujelly-theme underwater-theme white-sand-theme zen-and-art-theme zenburn-theme zonokai-emacs ws-butler writeroom-mode winum which-key volatile-highlights vim-powerline vi-tilde-fringe uuidgen undo-tree treemacs-projectile treemacs-persp treemacs-magit treemacs-icons-dired treemacs-evil toc-org term-cursor symon symbol-overlay string-inflection string-edit-at-point spacemacs-whitespace-cleanup spacemacs-purpose-popwin spaceline space-doc smeargle restart-emacs request rainbow-delimiters quickrun popwin pcre2el password-generator paradox overseer org-superstar open-junk-file nameless multi-line macrostep lorem-ipsum link-hint inspector info+ indent-guide hybrid-mode hungry-delete holy-mode hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt helm-xref helm-themes helm-swoop helm-purpose helm-projectile helm-org helm-mode-manager helm-make helm-ls-git helm-git-grep helm-descbinds helm-ag google-translate golden-ratio gitignore-templates git-timemachine git-modes git-messenger git-link forge flycheck-package flycheck-elsa flx-ido fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-textobj-line evil-surround evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-evilified-state evil-escape evil-easymotion evil-collection evil-cleverparens evil-args evil-anzu eval-sexp-fu emr elisp-slime-nav elisp-def editorconfig dumb-jump drag-stuff dotenv-mode dired-quick-sort diminish devdocs define-word column-enforce-mode clean-aindent-mode centered-cursor-mode auto-highlight-symbol auto-compile all-the-icons aggressive-indent ace-link ace-jump-helm-line)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
