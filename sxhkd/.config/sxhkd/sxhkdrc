@@ -1,3 +1,4 @@
+# -*- mode: Conf -*-
 # See environment variables in .bashrc for dereferencing any variables below
 
 # make sxhkd reload its configuration files:
@@ -94,6 +95,15 @@ super + XF86AudioMute
   pactl set-sink-volume @DEFAULT_SINK@ 100%; refreshbar.sh
 XF86AudioMicMute
   pactl set-source-mute @DEFAULT_SOURCE@ toggle
+
+XF86MonBrightnessUp
+  brightnessctl set +5%
+XF86MonBrightnessDown
+  brightnessctl set -5%
+super + XF86MonBrightnessUp
+  brightnessctl set 80%
+super + XF86MonBrightnessDown
+  brightnessctl set 40%
 
 #
 # Wacom tablet buttons
