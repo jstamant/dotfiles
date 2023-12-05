@@ -36,16 +36,30 @@ Here's what I'm running that I have configuration files for:
 | picom           | Compositor (not currently being used)      |
 
 
-## Installation
+## Installation & Usage
 
-To clone the repository to your home directory and pull in the files, run the
-following commands in your `$HOME` directory:
+Clone the repository, then install the dotfiles packages all at once with the
+`install.sh` script:
 
 ```
-$ git init
-$ git remote add origin https://github.com/jstamant/dotfiles.git
-$ git pull origin master
+git clone https://github.com/jstamant/dotfiles.git ~/.dotfiles
+cd ~/.dotfiles
+./install.sh
 ```
+
+Or use `stow` from the dotfiles folder to individually manage packages:
+
+```
+cd ~/.dotfiles
+stow <package_name>           # Installs the folder called <package_name>
+stow -D <package_name>        # Stows/uninstalls the links to <package_name>
+stow --restow <package_name>  # Uninstalls and re-installs the links to <package_name>
+```
+
+In the future, installation of these dotfiles will be managed by an Ansible
+playbook that I'm working on. Having a dotfiles repository is nice, but the
+convenience isn't worth much if I can't pull the required software at the same
+time.
 
 ## Older setups
 
