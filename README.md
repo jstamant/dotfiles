@@ -25,15 +25,15 @@ Here's what I'm running that I have configuration files for:
 
 | Software        | Function/purpose                           |
 | :-------------- | :----------------------------------------- |
-| **awesome**     | Window manager                             |
-| **awful.wibar** | Status bar (builtin with awesome)          |
-| **emacs**       | Text editor                                |
-| **alacritty**   | Terminal emulator                          |
-| **naughty**     | Notification daemon (builtin with awesome) |
-| **ranger**      | Terminal file-manager                      |
-| **sxhkd**       | Hotkey daemon                              |
-| **autorandr**   | Automatic switching of display setups      |
-| picom           | Compositor (not currently being used)      |
+| *awesome*       | Window manager                             |
+| *awful.wibar*   | Status bar (builtin with awesome)          |
+| *emacs*         | Text editor                                |
+| *alacritty*     | Terminal emulator                          |
+| *naughty*       | Notification daemon (builtin with awesome) |
+| *ranger*        | Terminal file-manager                      |
+| *sxhkd*         | Hotkey daemon                              |
+| *autorandr*     | Automatic switching of display setups      |
+| *picom*         | Compositor (not currently being used)      |
 
 
 ## Installation & Usage
