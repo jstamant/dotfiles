@@ -24,13 +24,14 @@ sxhkd &              # Common custom keybindings
 $HOME/.fehbg         # Set desktop background
 nm-applet &
 udiskie --tray &
-sleep 10 && insync start & # Delay is required to get systray icon working
+sleep 10 && insync start & # Delay is required to get systray icon working with polybar
 numlockx &
 #picom &             # Window compositor, havig issues with fading
 dunst &              # Notification server
 emacs --daemon  &
 autorandr --change & # Automatic monitor configuration
 blueman-applet &
+lxpolkit &
 
 # DPMS preferences
 # Blank screen after 30 minutes
