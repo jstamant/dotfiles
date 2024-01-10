@@ -291,9 +291,24 @@ awful.screen.connect_for_each_screen(function(s)
             -- Right widgets
             {
                 layout = wibox.layout.fixed.horizontal,
-                volume_widget();
+                volume_widget(),
+                {
+                    widget = wibox.container.constraint,
+                    strategy = "min",
+                    width = 10,
+                },
                 brightness_widget(brightness_config),
+                {
+                    widget = wibox.container.constraint,
+                    strategy = "min",
+                    width = 10,
+                },
                 battery,
+                {
+                    widget = wibox.container.constraint,
+                    strategy = "min",
+                    width = 10,
+                },
                 mytextclock,
                 systray,
                 -- TODO add some kind of logout menu button
