@@ -16,9 +16,6 @@ set wildmode=longest,list,full
 " Turn on syntax highlighting
 syntax on
 
-" Move .viminfo file
-set viminfo+=n~/.vim/viminfo
-
 " Enable line numbering
 set number
 
