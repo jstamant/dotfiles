@@ -63,12 +63,6 @@ theme.taglist_squares_unsel = theme_assets.taglist_squares_unsel(
     taglist_square_size, theme.fg_normal
 )
 
--- Variables set for theming notifications:
--- notification_font
--- notification_[bg|fg]
--- notification_[width|height|margin]
--- notification_[border_color|border_width|shape|opacity]
-
 -- Variables set for theming the menu:
 -- menu_[bg|fg]_[normal|focus]
 -- menu_[border_color|border_width]
@@ -327,19 +321,8 @@ theme.icon_theme = nil
 -- theme.menubar_bg_normal = nil
 
 -- notification
--- theme.notification_font = nil
--- theme.notification_bg = nil
--- theme.notification_fg = nil
--- theme.notification_border_width = nil
--- theme.notification_border_color = nil
--- theme.notification_shape = nil
--- theme.notification_opacity = nil
--- theme.notification_margin = nil
 theme.notification_width = 500
-theme.notification_height = 100
--- theme.notification_max_width = nil
--- theme.notification_max_height = nil
--- theme.notification_icon_size = nil
+theme.notification_icon_size = 96
 
 -- piechart
 -- theme.piechart_border_color = nil
