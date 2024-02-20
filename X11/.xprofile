@@ -34,6 +34,9 @@ blueman-applet &
 lxpolkit &
 
 # DPMS preferences
+# Explicitly set brightness to counter a bug with my laptop
+# (on each boot or login, the brightness decreases by one point)
+brightnessctl set 40%
 # Blank screen after 30 minutes
 xset s 1800
 xset dpms 1800 1800 1800
