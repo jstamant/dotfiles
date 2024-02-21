@@ -26,7 +26,7 @@ nm-applet &
 udiskie --tray &
 sleep 10 && insync start & # Delay is required to get systray icon working with polybar
 numlockx &
-#picom &             # Window compositor, havig issues with fading
+picom &              # Window compositor
 dunst &              # Notification server
 emacs --daemon  &
 autorandr --change & # Automatic monitor configuration
