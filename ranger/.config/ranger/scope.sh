@@ -78,13 +78,13 @@ handle_extension() {
             odt2txt "${FILE_PATH}" && exit 5
             exit 1;;
 
-        # HTML
-        htm|html|xhtml)
-            # Preview as text conversion
-            w3m -dump "${FILE_PATH}" && exit 5
-            lynx -dump -- "${FILE_PATH}" && exit 5
-            elinks -dump "${FILE_PATH}" && exit 5
-            ;; # Continue with next handler on failure
+        # # HTML
+        # htm|html|xhtml)
+        #     # Preview as text conversion
+        #     w3m -dump "${FILE_PATH}" && exit 5
+        #     lynx -dump -- "${FILE_PATH}" && exit 5
+        #     elinks -dump "${FILE_PATH}" && exit 5
+        #     ;; # Continue with next handler on failure
     esac
 }
 
@@ -132,7 +132,8 @@ handle_mime() {
     local mimetype="${1}"
     case "${mimetype}" in
         # Text
-        text/* | */xml)
+        # (for some reason, javascript files have the application/* type on my machine)
+        text/* | */xml | */javascript | */json)
             # Syntax highlight
             if [[ "$( stat --printf='%s' -- "${FILE_PATH}" )" -gt "${HIGHLIGHT_SIZE_MAX}" ]]; then
                 exit 2
