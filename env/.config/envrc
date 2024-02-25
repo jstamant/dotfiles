@@ -21,3 +21,6 @@ export TERMINAL='alacritty'
 
 # Custom PATH additions
 export PATH=$PATH:~/bin
+
+# SSH setup (ssh-agent.service must be running)
+export SSH_AUTH_SOCK=$XDG_RUNTIME_DIR/ssh-agent.socket
