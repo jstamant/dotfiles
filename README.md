@@ -38,22 +38,19 @@ Here's what I'm running that I have configuration files for:
 
 ## Installation & Usage
 
-Clone the repository, then install the dotfiles packages all at once with the
-`install.sh` script:
+Clone the repository, then install the dotfiles all at once with `stow .`:
 
 ```
 git clone https://github.com/jstamant/dotfiles.git ~/.dotfiles
 cd ~/.dotfiles
-./install.sh
+stow .
 ```
 
-Or use `stow` from the dotfiles folder to individually manage packages:
+To remove the installed dotfiles or refresh them, run:
 
 ```
-cd ~/.dotfiles
-stow <package_name>           # Installs the folder called <package_name>
-stow -D <package_name>        # Stows/uninstalls the links to <package_name>
-stow --restow <package_name>  # Uninstalls and re-installs the links to <package_name>
+stow -D .
+stow --restow .
 ```
 
 In the future, installation of these dotfiles will be managed by an Ansible
