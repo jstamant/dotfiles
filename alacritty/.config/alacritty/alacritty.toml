@@ -3,7 +3,6 @@ import = ["~/.config/alacritty/alacritty-theme/themes/onedark.toml"]
 [window]
 position = "None" # Managed by the window manager (default)
 opacity = 0.95
-option_as_alt = "Both"
 
 [scrolling]
 history = 10000
