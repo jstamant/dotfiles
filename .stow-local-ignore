@@ -6,7 +6,7 @@
 .+~
 \#.*\#
 
-assets
+.assets
 ^/README.*
 ^/LICENSE.*
 ^/COPYING
