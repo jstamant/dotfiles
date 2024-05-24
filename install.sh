@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
 
 PACKAGES=$(find * -mindepth 0 -maxdepth 0 -type d -regex "^[^.].*")
 
