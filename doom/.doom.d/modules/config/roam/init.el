@@ -17,4 +17,4 @@
            (concat userprofile "/Google Drive/"))))
   "The absolute path to the Google Drive directory under any operating system.")
 
-(setq org-roam-directory (concat drive-directory "/org-roam"))
+(setq org-roam-directory (concat drive-directory "org-roam"))
