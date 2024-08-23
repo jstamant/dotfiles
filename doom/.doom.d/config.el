@@ -89,3 +89,7 @@
  :leader
  "0" 'delete-window
  "1" 'delete-other-windows)
+
+(use-package! magit
+  :init
+  (setq transient-levels-file (concat doom-user-dir ".local/etc/transient/levels")))
