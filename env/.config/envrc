@@ -20,7 +20,8 @@ export LAUNCHER='rofi -show drun'
 export TERMINAL='alacritty'
 
 # Custom PATH additions
-export PATH=$PATH:~/bin
+export PATH="$PATH:~/bin"
+export PATH="$PATH:~/.emacs.d/bin" # for Doom Emacs
 
 # SSH setup (ssh-agent.service must be running)
 export SSH_AUTH_SOCK=$XDG_RUNTIME_DIR/ssh-agent.socket
