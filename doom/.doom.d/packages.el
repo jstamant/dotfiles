@@ -48,3 +48,16 @@
 ;; (unpin! pinned-package another-pinned-package)
 ;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
 ;; (unpin! t)
+
+;; Package to show key-presses in a *command-log* buffer
+;; https://github.com/lewang/command-log-mode
+(package! command-log-mode)
+
+;; Prettify non-printing characters
+;; Line feed character ^L can be inserted with
+;; C-q `quoted-insert' C-l
+;; https://github.com/purcell/page-break-lines
+(package! page-break-lines)
+
+(package! pkgbuild-mode)
+

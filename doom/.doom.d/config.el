@@ -6,8 +6,8 @@
 
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets. It is optional.
-;; (setq user-full-name "John Doe"
-;;       user-mail-address "john@doe.com")
+(setq user-full-name "Justin St-Amant")
+;; (setq user-mail-address "jstamant24@gmail.com")
 
 ;; Doom exposes five (optional) variables for controlling fonts in Doom:
 ;;
@@ -37,6 +37,37 @@
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type t)
+
+(defvar drive-directory
+  (cond ((equal system-type 'gnu/linux)
+         "~/drive/")
+        ((equal system-type 'darwin)
+         (cond ((file-directory-p "~/Google Drive/My Drive/")
+                ;; This is when only one account is added
+                "~/Google Drive/My Drive/")
+               ((file-directory-p "~/jstamant24@gmail.com - Google Drive/My Drive/")
+                ;; This is when more than one accounts are added
+                "~/jstamant24@gmail.com - Google Drive/My Drive/")))
+        ((equal system-type 'windows-nt)
+         (let ((userprofile (replace-regexp-in-string "\\\\" "/" (getenv "USERPROFILE"))))
+           (concat userprofile "/Google Drive/"))))
+  "The absolute path to the Google Drive directory under any operating system.")
+
+(defvar onedrive-directory
+  (when (eq system-type 'windows-nt)
+    (let ((userprofile (replace-regexp-in-string "\\\\" "/" (getenv "USERPROFILE"))))
+      (concat userprofile "/OneDrive - Manitoba Hydro/")))
+  "The absolute path to your work OneDrive directory. Only for Windows.")
+
+(when (eq system-type 'windows-nt)
+  (setenv "HOME" (getenv "USERPROFILE")))
+
+(defun at-work ()
+  "t if using a work computer."
+  (equal "MH" (substring (system-name) 0 2)))
+(defun at-home ()
+  "t if using a non-work computer."
+  (not (at-work)))
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
@@ -93,3 +124,63 @@
 (setq transient-levels-file (concat doom-user-dir ".local/etc/transient/levels"))
 
 (setq org-startup-indented nil)
+
+;; Remove the annoying suggestions for command abbreviations
+(setq extended-command-suggest-shorter nil)
+
+;; TODO will these take affect?
+(setq evil-want-C-u-delete nil) ;; nope
+
+;; TODO add a toggle for this?
+(global-page-break-lines-mode)
+
+;; TODO make link face not bold if using this...
+;; (global-goto-address-mode)
+
+(auto-revert-mode)
+
+(setq-default abbrev-mode t)
+
+;; Use trash instead of destroying files
+(setq delete-by-moving-to-trash t)
+
+(setq pkgbuild-update-sums-on-save nil)
+
+(map! :prefix "C-x" "v" 'view-mode)
+
+(defun headerise-elisp ()
+  "Add minimal header and footer to an elisp buffer in order to placate flycheck."
+  (interactive)
+  (let ((fname (if (buffer-file-name)
+                   (file-name-nondirectory (buffer-file-name))
+                 (error "This buffer is not visiting a file"))))
+    (save-excursion
+      (goto-char (point-min))
+      (insert ";;; " fname " --- Insert description here -*- lexical-binding: t -*-\n"
+              ";;; Commentary:\n"
+              ";;; Code:\n\n")
+      (goto-char (point-max))
+      (insert "\n;;; " fname " ends here\n"))))
+
+(let ((directory (cond ((eq system-type 'gnu/linux)
+                        "~/programming")
+                       ((eq system-type 'darwin)
+                        "~/Developer"))))
+  (when (file-directory-p directory)
+    (setq projectile-project-search-path `(,directory))))
+;; (setq projectile-switch-project-action #'projectile-find-file)
+
+;; org-mode config
+(setq org-log-done 'time) ; Log closing-time of tasks
+;; Set org-directory, agenda files, and main org files
+;; Implement some kind of also do a function for 'at home' or 'at work' boolean
+;; I should also bind org-cycle-agenda-files (C-' and C-,) globally
+(after! org
+  (if (at-work)
+      (progn
+        (setq org-directory onedrive-directory)
+        (add-to-list 'org-agenda-files (concat org-directory "work.org"))))
+  (if (at-home)
+      (progn
+        (setq org-directory drive-directory)
+        (add-to-list 'org-agenda-files (concat org-directory "gtd.org")))))
