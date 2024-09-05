@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
 # Open one of my programming projects in a tmux session
 
 PROJECT_PATH=$(find $HOME/programming/* -maxdepth 0 | fzf)
