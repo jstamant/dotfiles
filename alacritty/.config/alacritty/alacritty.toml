@@ -1,4 +1,3 @@
-import = ["~/.config/alacritty/alacritty-theme/themes/onedark.toml"]
 
 [window]
 position = "None" # Managed by the window manager (default)
@@ -10,4 +9,7 @@ history = 10000
 [font]
 normal = {family = "DejaVu Sans Mono", style = "Regular"}
 size = 11.0
+
+[general]
+import = ["~/.config/alacritty/alacritty-theme/themes/onedark.toml"]
 
