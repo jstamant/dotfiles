@@ -6,6 +6,7 @@
 
 {
   imports = [
+    ./jellyfin.nix
     ./hardware-configuration.nix
   ];
 
@@ -95,8 +96,7 @@
   users.users.jstamant = {
     isNormalUser = true;
     description = "Justin St-Amant";
-    # jellyfin added to easily copy over media to /srv/jellyfin
-    extraGroups = [ "docker" "lp" "networkmanager" "scanner" "wheel" "jellyfin" ];
+    extraGroups = [ "docker" "lp" "networkmanager" "scanner" "wheel" ];
     packages = with pkgs; [
     ];
   };
@@ -110,14 +110,6 @@
       STOP_CHARGE_THRESH_BAT1 = 80;
     };
   };
-
-  # Required to open jellyfin to local network at default port 8096/8920
-  services.jellyfin = {
-    enable = true;
-    openFirewall = true;
-  };
-  # jellyfin must be started with `sudo systemctl start jellyfin`
-  systemd.services.jellyfin.wantedBy = lib.mkForce [ ];
 
   # Enable docker for local development
   virtualisation.docker.enable = true;
@@ -160,9 +152,6 @@
     inkscape
     insync
     # insync-nautilus
-    jellyfin
-    jellyfin-web
-    jellyfin-ffmpeg
     kicad
     libreoffice
     lutris
