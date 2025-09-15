@@ -8,6 +8,7 @@
   imports = [
     ./gnome.nix
     ./jellyfin.nix
+    ./printing.nix
     ./hardware-configuration.nix
   ];
 
@@ -37,27 +38,6 @@
     LC_TIME = "en_US.UTF-8";
   };
 
-  # Enable CUPS to print documents
-  services.printing = {
-    enable = true;
-    drivers = with pkgs; [
-      cups-filters
-      cups-browsed
-    ];
-  };
-  # Added to apparently support network printer auto-discovery
-  services.avahi = {
-    enable = true;
-    nssmdns4 = true;
-    openFirewall = true;
-  };
-  # Enable SANE for scanner support
-  hardware.sane.enable = true;
-  # sane-airscan is apparently a third-party package with better support
-  # than the default escl backend
-  hardware.sane.extraBackends = [ pkgs.sane-airscan ];
-  hardware.sane.disabledDefaultBackends = [ "escl" ];
-
   # Enable sound with pipewire
   services.pulseaudio.enable = false;
   security.rtkit.enable = true;
@@ -73,7 +53,7 @@
   users.users.jstamant = {
     isNormalUser = true;
     description = "Justin St-Amant";
-    extraGroups = [ "docker" "lp" "networkmanager" "scanner" "wheel" ];
+    extraGroups = [ "docker" "networkmanager" "wheel" ];
     packages = with pkgs; [
     ];
   };
