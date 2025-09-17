@@ -6,6 +6,7 @@
 
 {
   imports = [
+    ./dev.nix
     ./gnome.nix
     ./jellyfin.nix
     ./printing.nix
@@ -53,7 +54,7 @@
   users.users.jstamant = {
     isNormalUser = true;
     description = "Justin St-Amant";
-    extraGroups = [ "docker" "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
     ];
   };
@@ -67,9 +68,6 @@
       STOP_CHARGE_THRESH_BAT1 = 80;
     };
   };
-
-  # Enable docker for local development
-  virtualisation.docker.enable = true;
 
   # Allow unfree packages
   nixpkgs.config = {
@@ -90,7 +88,6 @@
     audacity
     cheese
     coreutils-full
-    dbeaver-bin
     deluge
     discord
     eagle
