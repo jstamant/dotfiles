@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, lib, pkgs, ... }:
+{ config, inputs, lib, pkgs, ... }:
 
 {
   imports = [
@@ -11,6 +11,7 @@
     ./jellyfin.nix
     ./printing.nix
     ./hardware-configuration.nix
+    inputs.home-manager.nixosModules.default
   ];
 
   # Bootloader
@@ -55,8 +56,11 @@
     isNormalUser = true;
     description = "Justin St-Amant";
     extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [
-    ];
+  };
+
+  home-manager = {
+    extraSpecialArgs = {inherit inputs;};
+    users.jstamant = import ./home.nix;
   };
 
   # Set the battery charge threshold to 80% to preserve battery life
