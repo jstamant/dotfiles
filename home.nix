@@ -218,7 +218,9 @@ export PS2='> '
       la="ls -la";
       l1="ls -1";
       grep="grep --color=auto";
+      # TODO make this determined by my home dir as per nix
       dl="cd ~/downloads";
+      dot="cd ~/.dotfiles";
       lg="lazygit";
       sudo="sudo "; # Evaluate aliases preceded by sudo
       ".."="cd ..";
