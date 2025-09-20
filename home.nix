@@ -1,3 +1,6 @@
+# Look-up home-manager options at https://home-manager-options.extranix.com/
+# Or in the manual at $ man home-configuration.nix.5
+
 { config, pkgs, ... }:
 
 {

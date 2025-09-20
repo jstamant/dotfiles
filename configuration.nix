@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, inputs, lib, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 {
   imports = [
@@ -11,7 +11,6 @@
     ./jellyfin.nix
     ./printing.nix
     ./hardware-configuration.nix
-    inputs.home-manager.nixosModules.default
   ];
 
   # Bootloader
@@ -58,11 +57,6 @@
     extraGroups = [ "networkmanager" "wheel" ];
   };
 
-  home-manager = {
-    extraSpecialArgs = {inherit inputs;};
-    users.jstamant = import ./home.nix;
-  };
-
   # Set the battery charge threshold to 80% to preserve battery life
   services.power-profiles-daemon.enable = false; # Conflicts with tlp
   services.tlp = {
@@ -103,6 +97,7 @@
     gimp
     gnupg
     google-chrome
+    home-manager # TODO move this elsewhere?
     htop
     inkscape
     insync

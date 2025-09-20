@@ -11,15 +11,27 @@
     };
   };
 
-  outputs = { self, nixpkgs, ... }@inputs: {
-    # use "nixos", or your hostname as the name of the configuration
-    # it's a better practice than "default" shown in the video
+  outputs = { self, nixpkgs, home-manager, ... }@inputs: let
+    inherit (self) outputs;
+  in {
+    # NixOS configuration entrypoint
+    # Available through 'sudo nixos-rebuild switch --flake .#navy'
     nixosConfigurations.navy = nixpkgs.lib.nixosSystem {
-      specialArgs = {inherit inputs;};
+      specialArgs = {inherit inputs outputs;};
       modules = [
         ./configuration.nix
-        inputs.home-manager.nixosModules.default
       ];
+    };
+    # Standalone home-manager configuration entrypoint
+    # Available through 'home-manager switch --flake .#jstamant@navy'
+    homeConfigurations = {
+      "jstamant@navy" = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires a 'pkgs' instance
+        extraSpecialArgs = {inherit inputs outputs;};
+        modules = [
+          ./home.nix
+        ];
+      };
     };
   };
 }
