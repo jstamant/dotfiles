@@ -19,7 +19,7 @@
     nixosConfigurations.navy = nixpkgs.lib.nixosSystem {
       specialArgs = {inherit inputs outputs;};
       modules = [
-        ./configuration.nix
+        ./hosts/navy/configuration.nix
       ];
     };
     # Standalone home-manager configuration entrypoint

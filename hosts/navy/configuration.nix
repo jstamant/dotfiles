@@ -6,11 +6,11 @@
 
 {
   imports = [
-    ./dev.nix
-    ./gnome.nix
-    ./jellyfin.nix
-    ./printing.nix
     ./hardware-configuration.nix
+    ../../dev.nix
+    ../../gnome.nix
+    ../../jellyfin.nix
+    ../../printing.nix
   ];
 
   # Bootloader
