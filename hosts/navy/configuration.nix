@@ -94,6 +94,7 @@
     gimp
     gnupg
     google-chrome
+    guile
     home-manager # TODO move this elsewhere?
     htop
     inkscape
