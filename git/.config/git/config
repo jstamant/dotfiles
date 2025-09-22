@@ -1,8 +1,0 @@
-[user]
-	name = Justin St-Amant
-	email = jstamant24@gmail.com
-[core]
-	editor = nvim
-	excludesfile = /Users/justin/.config/git/ignore
-[init]
-	defaultBranch = master

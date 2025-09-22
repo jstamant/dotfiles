@@ -95,6 +95,30 @@
     };
   };
 
+  programs.git = {
+    enable = true;
+    userName = "Justin St-Amant";
+    userEmail = "jstamant24@gmail.com";
+    extraConfig = {
+      core = {
+        editor = "nvim"; # TODO use a variable here
+        excludesFile = "${config.home.homeDirectory}/.config/git/ignore";
+      };
+      init.defaultBranch = "master";
+    };
+  };
+  home.file.gitIgnore = {
+    enable = true;
+    target = ".config/git/ignore";
+    text = ''
+# Emacs projectile package project indicator file
+.projectile
+
+# Xcode project (insert poop emoji)
+**/project.xcworkspace/xcuserdata/*
+'';
+  };
+
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 }
