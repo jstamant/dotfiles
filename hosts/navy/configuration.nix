@@ -87,6 +87,7 @@
     eagle
     emacs # TODO needs to come from unstable
     fd
+    file # Utility for file info introspection
     fzf
     gcc # Definitely required to compile sqlite in Emacs
     git
