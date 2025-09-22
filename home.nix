@@ -191,6 +191,44 @@ bind-key p run "wl-paste -n | tmux load-buffer - ; tmux paste-buffer"
 '';
   };
 
+  programs.bash = {
+    enable = true;
+    initExtra = ''
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
+# Standard Arch Linux PS1 in blue
+# [user@hostname ~]$ ls -la
+export PS1='\[\e[1;34m\][\u@\h \W]\$\[\e[0m\] '
+export PS2='> '
+
+# TODO to remove with the use of proper env/session variables
+# Set environment variables
+[ -f $HOME/.config/envrc ] && . $HOME/.config/envrc
+'';
+    profileExtra = ''
+# TODO to remove with the use of proper env/session variables
+# Set environment variables for login shells; .profile runs for login
+# shell, but not for interactive non-login shells
+[ -f $HOME/.config/envrc ] && . $HOME/.config/envrc
+'';
+    shellAliases = {
+      ls="ls --color=auto";
+      l="ls -CF";
+      ll="ls -l";
+      la="ls -la";
+      l1="ls -1";
+      grep="grep --color=auto";
+      dl="cd ~/downloads";
+      lg="lazygit";
+      sudo="sudo "; # Evaluate aliases preceded by sudo
+      ".."="cd ..";
+      "..."="cd ../..";
+      "...."="cd ../../..";
+      op="open-project.sh";
+    };
+  };
+
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 }
