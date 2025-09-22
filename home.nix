@@ -229,6 +229,22 @@ export PS2='> '
     };
   };
 
+  # TODO need to also install w3m to enable image viewing
+  programs.ranger = {
+    enable = true;
+    mappings = {
+      gd =  "cd ~/downloads";
+      gD = "cd ~/drive";
+      gm = "cd /run/media";
+      gj = "cd /srv/jellyfin";
+      gr = "cd ~/drive/reference";
+    };
+  };
+  home.file.".config/ranger/scope.sh" = {
+    # TODO make this figure out the directory
+    source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/ranger/scope.sh";
+  };
+
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 }
