@@ -107,9 +107,8 @@
       init.defaultBranch = "master";
     };
   };
-  home.file.gitIgnore = {
+  home.file.".config/git/ignore" = {
     enable = true;
-    target = ".config/git/ignore";
     text = ''
 # Emacs projectile package project indicator file
 .projectile
