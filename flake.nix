@@ -20,6 +20,7 @@
       specialArgs = {inherit inputs outputs;};
       modules = [
         ./hosts/navy/configuration.nix
+        ./modules
       ];
     };
     # Standalone home-manager configuration entrypoint
