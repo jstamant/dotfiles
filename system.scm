@@ -9,7 +9,9 @@
 
 ;; Indicate which modules to import to access the variables
 ;; used in this configuration.
-(use-modules (gnu) (nongnu packages linux))
+(use-modules (gnu)
+             (gnu services pm) ; for TLP
+             (nongnu packages linux))
 (use-service-modules cups desktop networking ssh xorg)
 
 (operating-system
@@ -34,6 +36,10 @@
   (services
    (append (list (service gnome-desktop-service-type)
                  (service cups-service-type)
+                 (service tlp-service-type
+                          (tlp-configuration
+                           (stop-charge-thresh-bat0 80)
+                           (stop-charge-thresh-bat1 80)))
                  (set-xorg-configuration
                   (xorg-configuration (keyboard-layout keyboard-layout))))
 
