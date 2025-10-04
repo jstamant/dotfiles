@@ -11,8 +11,9 @@
 ;; used in this configuration.
 (use-modules (gnu)
              (gnu services pm) ; for TLP
+             (jstamant home)
              (nongnu packages linux))
-(use-service-modules cups desktop networking ssh xorg)
+(use-service-modules cups desktop guix networking ssh xorg)
 
 (operating-system
   (kernel linux)
@@ -35,6 +36,7 @@
   ;; services, run 'guix system search KEYWORD' in a terminal.
   (services
    (append (list (service gnome-desktop-service-type)
+                 (service guix-home-service-type `(("jstamant" ,home-config)))
                  (service cups-service-type)
                  (service tlp-service-type
                           (tlp-configuration
