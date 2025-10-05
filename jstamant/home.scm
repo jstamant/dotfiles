@@ -9,17 +9,8 @@
   #:use-module (gnu packages linux)
   #:use-module (gnu services)
   #:use-module (gnu system shadow)
+  #:use-module (jstamant home-services emacs)
   #:export (home-config))
-
-(define home-emacs-service-type
-  (service-type (name 'home-emacs-service)
-                (description "Packages for Emacs setup")
-                (extensions
-                 (list
-                  (service-extension
-                   home-profile-service-type
-                   (lambda (_) (list (specification->package "emacs"))))))
-                (default-value #f)))
 
 (define home-config
   (home-environment
