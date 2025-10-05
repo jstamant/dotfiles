@@ -1,12 +1,17 @@
+(define-module (jstamant system))
+
 (use-modules (gnu)
+             (gnu home services)
              (gnu services pm) ; for TLP
              (jstamant home)
-             (nongnu packages linux))
+             (nongnu packages linux)
+             (nongnu system linux-initrd))
 (use-service-modules cups desktop guix networking ssh xorg)
 
 (operating-system
   (kernel linux)
   (firmware (list linux-firmware))
+  (initrd microcode-initrd)
   (locale "en_CA.utf8")
   (timezone "America/Halifax")
   (keyboard-layout (keyboard-layout "us"))
