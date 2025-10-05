@@ -4,10 +4,22 @@
   #:use-module (gnu home services desktop)
   #:use-module (gnu home services shepherd)
   #:use-module (gnu home services shells)
+  #:use-module (gnu packages)
+  #:use-module (gnu packages emacs)
   #:use-module (gnu packages linux)
   #:use-module (gnu services)
   #:use-module (gnu system shadow)
   #:export (home-config))
+
+(define home-emacs-service-type
+  (service-type (name 'home-emacs-service)
+                (description "Packages for Emacs setup")
+                (extensions
+                 (list
+                  (service-extension
+                   home-profile-service-type
+                   (lambda (_) (list (specification->package "emacs"))))))
+                (default-value #f)))
 
 (define home-config
   (home-environment
@@ -36,6 +48,7 @@
    (services
     (list
      (service home-bash-service-type)
+     (service home-emacs-service-type)
      (service home-files-service-type
               `((".guile" ,%default-dotguile)
                 (".Xdefaults" ,%default-xdefaults)))
@@ -44,3 +57,4 @@
               `(("gdb/gdbinit" ,%default-gdbinit)
                 ("nano/nanorc" ,%default-nanorc)))))))
 
+home-config
