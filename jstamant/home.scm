@@ -2,6 +2,7 @@
   #:use-module (gnu home)
   #:use-module (gnu home services)
   #:use-module (gnu home services desktop)
+  #:use-module (gnu home services dotfiles)
   #:use-module (gnu home services shepherd)
   #:use-module (gnu home services shells)
   #:use-module (gnu packages)
@@ -39,6 +40,10 @@
    (services
     (list
      (service home-bash-service-type)
+     (service home-dotfiles-service-type
+              (home-dotfiles-configuration
+                (directories '("../files")) ; root of this repo
+                (layout 'stow)))
      (service home-emacs-service-type)
      (service home-files-service-type
               `((".guile" ,%default-dotguile)

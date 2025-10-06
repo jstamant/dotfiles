@@ -2,8 +2,9 @@
 
 These are my personal configuration files. Please feel free to use them or browse them.
 
-*Please note that I'm currently transitioning over to a Nix Flake
-setup. This repository might be a mess going forward.*
+*Please note that I'm currently transitioning over to a GNU Guix. This
+repository might be a mess going forward, and the remainder of the
+information on this page is largely inaccurate for my current usage.*
 
 The goal of my dotfiles are to provide me with a portable user experience across
 all the machines that I use. At home, I use an Arch Linux laptop. I'm currently
