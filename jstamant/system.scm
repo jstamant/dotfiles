@@ -6,6 +6,8 @@
 
 (use-service-modules cups desktop guix networking pm ssh xorg)
 
+(use-package-modules file package-management tmux version-control vim)
+
 (operating-system
  (kernel linux)
  (firmware (list linux-firmware))
@@ -22,6 +24,16 @@
                 (home-directory "/home/jstamant")
                 (supplementary-groups '("wheel" "netdev" "audio" "video")))
                %base-user-accounts))
+
+ ;; System-level packages that are either necessary or convenient for
+ ;; when no profile is loaded
+ (packages
+  (cons* file
+         git
+         stow
+         tmux
+         vim
+         %base-packages))
 
  (services
   (append (list
