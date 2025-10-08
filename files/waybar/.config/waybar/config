@@ -1,33 +1,19 @@
-// -*- js-json -*-
-// ================================================
-// Justin St-Amant's waybar configuration
-// ================================================
-
-// TODO REMOVE DUNST??
+// -*- mode: js-json; js-indent-level: 4 -*-
 {
-    //General bar settings
-    "layer": "top", //default is "bottom"
+	//General bar settings
+    "layer": "top",
     "position": "top",
-    "height": 30, // Waybar height (to be removed for auto height)
-    // "width": 1280, // Waybar width, I think it's auto if left out
-    "spacing": 4, // Gaps between modules (4px)
+    "height": 30,
+    "spacing": 4,
 
-    //TODO make color SOLID and look more like polybar
-    //Order of the modules
-    //TODO add logo/launcher on left
-    "modules-left": ["hyprland/workspaces", "hyprland/submap", "hyprland/window"],
-    //TODO add module to center, like clock or window?
-    //"modules-center": ["clock"],
-    //TODO add logout menu button to far right
+    "modules-left": ["sway/workspaces", "sway/mode", "sway/window"],
     "modules-right": ["idle_inhibitor", "cpu", "pulseaudio", "network", "backlight", "battery", "clock", "custom/dunst", "tray", "custom/exit"],
-    //TODO use pango markup to give color to icons
-    //TODO add flashing to urgent workspaces??
 
     //Module configurations
-    "hyprland/workspaces": {
+    "sway/workspaces": {
         "all-outputs": true,
         "warp-on-scroll": false,
-        // Disabled because scrolling doesn't work smoothly
+        // TODO get these scroll events working for sway?
         // "on-scroll-up": "hyprctl dispatch workspace e-1",
         // "on-scroll-down": "hyprctl dispatch workspace e+1",
         "format": "{name}"
@@ -50,14 +36,17 @@
         //     // "default": ""
         // }
     },
-    "hyprland/submap": {
+
+    "sway/mode": {
         "format": "<span style=\"italic\">{}</span>",
         "tooltip": true
     },
-    "hyprland/window": {
+
+    "sway/window": {
         "format": "{title}",
-        "separate-outputs": true
+        "all-outputs": false
     },
+
     "idle_inhibitor": {
         "format": "{icon}",
         "format-icons": {
@@ -65,12 +54,14 @@
             "deactivated": ""
         }
     },
+
     "cpu": {
         "interval": 1,
-        //TODO maybe just do a percentage? I have 20 cpus, so this might be a great option
         "format": "{icon0}{icon1}{icon2}{icon3}{icon4}{icon5}{icon6}{icon7}{icon8}{icon9}",
         "format-icons": ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"]
     },
+
+	// TODO change this module to wireplumber for pipewire once I have that set-up
     "pulseaudio": {
         // "scroll-step": 1, // %, can be a float
         "format": "{volume}% {icon} {format_source}",
@@ -90,8 +81,9 @@
         },
         "on-click": "pavucontrol"
     },
+
     "network": {
-        // "interface": "wlp2*", // (Optional) To force the use of this interface
+        "interface": "wlo1*",
         "format-wifi": "{essid} ({signalStrength}%) ",
         "format-ethernet": "{ipaddr}/{cidr} ",
         "tooltip-format": "{ifname} via {gwaddr} ",
@@ -99,11 +91,13 @@
         "format-disconnected": "Disconnected ⚠",
         "format-alt": "{ifname}: {ipaddr}/{cidr}"
     },
+
     "backlight": {
         // "device": "acpi_video1",
         "format": "{percent}% {icon}",
         "format-icons": ["", "", "", "", "", "", "", "", ""]
     },
+
     "battery": {
         "interval": 30,
         "states": {
@@ -118,303 +112,30 @@
         "tooltip": true,
         "tooltip-format": "{timeTo}"
     },
+
     "clock": {
-        // "timezone": "Canada/Central", // Uses system timezone?
         "interval": 30,
         // "format": "{:%a, %b %-d, %-I:%M %p}",
         "format": "{:%a, %b %d, %I:%M %p}",
         //"format-alt": "{:%Y-%m-%d}"
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
     },
+
     "custom/dunst": {
         // "exec": "~/.config/waybar/dunst.sh",
         "on-click": "dunstctl set-paused toggle",
         "format": "{}",
         "restart-interval": 10
     },
+
     "tray": {
         "icon-size": 16,
         "spacing": 8,
         "show-passive-items": true
     },
+
     "custom/exit": {
         "format": "",
         "on-click": "nwg-bar"
     }
 }
-
-
-//[colors]
-//background = ${xrdb:color0:#000}
-//background-alt = ${xrdb:color8:#000}
-//foreground = ${xrdb:color7:#fff}
-//foreground-alt = ${xrdb:color15:#fff}
-//# Blue
-//primary = ${xrdb:color4:#00f}
-//# Red
-//secondary = ${xrdb:color1:#f00}
-//alert = ${colors.secondary}
-//
-//[settings]
-//screenchange-reload = true
-//
-//[global/wm]
-//margin-top = 0
-//margin-bottom = 0
-//
-//[bar/main]
-//#monitor = ${env:MONITOR:HDMI-1}
-//#fixed-center = false
-//
-//background = ${colors.background}
-//foreground = ${colors.foreground}
-//
-//#border-bottom-size = 3
-//#border-bottom-color = ${colors.background-alt}
-//
-//line-size = 3
-//line-color = #f00
-//
-//padding-left = 0
-//padding-right = 0
-//
-//module-margin-left = 1
-//module-margin-right = 1
-//
-//# Default font is monospaced, and alternate font is for unicode characters
-//font-0 = DejaVu Sans Mono:size=10;1
-//font-1 = FontAwesome:size=10;1
-//
-//modules-left = i3 xwindow
-//#modules-left = bspwm xwindow
-//modules-right = volume filesystem eth wifi bat0 bat1 date powermenu
-//
-//tray-position = right
-//tray-padding = 1
-//
-//[module/bspwm]
-//type = internal/bspwm
-//format = <label-state> [<label-mode>]
-//label-focused = %name%
-//label-focused-foreground = ${colors.primary}
-//label-focused-underline = ${colors.primary}
-//label-focused-padding = 1
-//label-occupied = ${self.label-focused}
-//label-occupied-padding = ${self.label-focused-padding}
-//label-empty = ${self.label-focused}
-//label-empty-foreground = ${colors.background-alt}
-//label-empty-padding = ${self.label-focused-padding}
-//
-//label-monocle = M
-//label-tiled = T
-//label-fullscreen = F
-//label-floating = f
-//label-pseudotiled = P
-//label-locked = L
-//label-locked-foreground = #bd2c40
-//label-sticky = s
-//label-sticky-foreground = #fba922
-//label-private = p
-//label-private-foreground = #bd2c40
-//label-marked = *
-//
-//[module/i3]
-//type           = internal/i3
-//format         = <label-state> <label-mode>
-//index-sort     = true
-//enable-click   = true
-//enable-scroll  = false
-//
-//# Label for alternative i3 modes, such as resize-mode
-//label-mode-padding = 1
-//label-mode-foreground = #000
-//label-mode-background = ${colors.primary}
-//
-//# Terminal icon
-//ws-icon-0       = 1;
-//# Chrome icon
-//ws-icon-1       = 2;
-//# Chat icon
-//ws-icon-2       = 10;
-//# Workspace icon
-//ws-icon-default = 
-//
-//# Focused = Active workspace on focused monitor
-//label-focused = %icon% %name%
-//#label-focused-background = ${colors.background-alt}
-//label-focused-underline = ${colors.primary}
-//label-focused-padding = 1
-//
-//# Unfocused = Inactive workspace on any monitor
-//label-unfocused = ${self.label-focused}
-//label-unfocused-padding = ${self.label-focused-padding}
-//
-//# Urgent = Workspace with urgency hint set
-//label-urgent-foreground = ${colors.alert}
-//#label-urgent-underline = ${colors.alert}
-//label-urgent-padding = ${self.label-focused-padding}
-//
-//[module/xwindow]
-//type = internal/xwindow
-//label = %title%
-//label-maxlen = 50
-//
-//[module/filesystem]
-//type = internal/fs
-//# 30 second refresh interval
-//interval = 30
-//mount-0 = /
-//label-mounted =  %percentage_used%%
-//label-unmounted =  ?
-//
-//#[module/xbacklight]
-//#type = internal/xbacklight
-//#
-//#format = <label> <bar>
-//#label = BL
-//#
-//#bar-width = 10
-//#bar-indicator = |
-//#bar-indicator-foreground = #ff
-//#bar-indicator-font = 2
-//#bar-fill = ─
-//#bar-fill-font = 2
-//#bar-fill-foreground = #9f78e1
-//#bar-empty = ─
-//#bar-empty-font = 2
-//#bar-empty-foreground = ${colors.foreground-alt}
-//
-//#[module/backlight-acpi]
-//#inherit = module/xbacklight
-//#type = internal/backlight
-//#card = intel_backlight
-//
-//#[module/cpu]
-//#type = internal/cpu
-//#interval = 2
-//#format-prefix = " "
-//#format-prefix-foreground = ${colors.foreground-alt}
-//##format-underline = #f90000
-//#label = %percentage%%
-//
-//#[module/memory]
-//#type = internal/memory
-//#interval = 2
-//#format-prefix = " "
-//#format-prefix-foreground = ${colors.foreground-alt}
-//##format-underline = #4bffdc
-//#label = %percentage_used%%
-//
-//[module/wifi]
-//type = internal/network
-//interface = wlp4s0
-//interval = 5
-//
-//format-connected = <label-connected>
-//label-connected =  %essid%
-//
-//format-disconnected = <label-disconnected>
-//label-disconnected = 
-//label-disconnected-foreground = ${colors.background-alt}
-//
-//[module/eth]
-//type = internal/network
-//interface = enp0s31f6
-//interval = 3.0
-//
-//format-connected = <label-connected>
-//label-connected =  %local_ip%
-//
-//format-disconnected = <label-disconnected>
-//label-disconnected = 
-//label-disconnected-foreground = ${colors.background-alt}
-//
-//[module/volume]
-//type = internal/alsa
-//
-//format-volume = <ramp-volume> <bar-volume>
-//ramp-volume-0 = 
-//ramp-volume-1 = 
-//ramp-volume-2 = 
-//ramp-volume-3 = 
-//ramp-volume-foreground = ${root.foreground}
-//
-//bar-volume-width = 10
-//bar-volume-indicator = =
-//bar-volume-indicator-font = 2
-//bar-volume-fill = ─
-//bar-volume-fill-font = 2
-//bar-volume-fill-foreground = ${colors.primary}
-//bar-volume-empty = ─
-//bar-volume-empty-font = 2
-//bar-volume-empty-foreground = ${colors.background-alt}
-//
-//format-muted = <label-muted> <bar-volume>
-//label-muted = 
-//format-muted-foreground = ${colors.secondary}
-//
-//[module/bat0]
-//type = internal/battery
-//battery = BAT0
-//adapter = AC
-//full-at = 98
-//# Power cord icon
-//format-charging-prefix = " "
-//# Battery full icon
-//format-full-prefix = " "
-//# Battery icons with different levels
-//format-discharging = <ramp-capacity> <label-discharging>
-//ramp-capacity-0 = 
-//ramp-capacity-1 = 
-//ramp-capacity-2 = 
-//ramp-capacity-3 = 
-//ramp-capacity-4 = 
-//
-//[module/bat1]
-//type = internal/battery
-//battery = BAT1
-//adapter = AC
-//full-at = 98
-//# Power cord icon
-//format-charging-prefix = " "
-//# Battery full icon
-//format-full-prefix = " "
-//# Battery icons with different levels
-//format-discharging = <ramp-capacity> <label-discharging>
-//ramp-capacity-0 = 
-//ramp-capacity-1 = 
-//ramp-capacity-2 = 
-//ramp-capacity-3 = 
-//ramp-capacity-4 = 
-//
-//[module/date]
-//type = internal/date
-//interval = 5
-//
-//date = %Y-%m-%d
-//time = %l:%M
-//
-//format-prefix =
-//format-prefix-foreground = ${colors.foreground-alt}
-//format-underline = ${colors.primary}
-//
-//label = %date% %time%
-//
-//[module/powermenu]
-//type = custom/menu
-//expand-right = false
-//format-spacing = 1
-//
-//label-open = 
-//label-open-foreground = ${colors.foreground}
-//label-close = 
-//label-close-foreground = ${colors.secondary}
-//label-separator = /
-//label-separator-foreground = ${colors.foreground}
-//
-//menu-0-0 = reboot
-//menu-0-0-exec = systemctl reboot
-//menu-0-1 = shutdown
-//menu-0-1-exec = systemctl poweroff
-//menu-0-2 = hibernate
-//menu-0-2-exec = systemctl hibernate
