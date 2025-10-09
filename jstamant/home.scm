@@ -68,11 +68,35 @@
 
     (services
      (list
-      (service home-bash-service-type)
+      (simple-service 'jstamant/bash-service
+                      home-bash-service-type
+                      (home-bash-extension
+                        ;; This is the standard Guix Home bash PS1, but in blue
+                        ;; PS1='\[\e[1;34m\]\u@\h \w${GUIX_ENVIRONMENT:+ [env]}\$\[\e[0m\] '
+                        ;; TODO change this so it's not all escaped, which makes it difficult to read. Will need  to use gexps for this, I think
+                        (bashrc (list (plain-file "bash-ps1" "\nPS1='\\[\\e[1;34m\\]\\u@\\h \\w${GUIX_ENVIRONMENT:+ [env]}\\$\\[\\e[0m\\] '")))
+                        (aliases
+                         '(("ls" . "ls --color=auto")
+                           ("l" . "ls -CF")
+                           ("ll" . "ls -l")
+                           ("la" . "ls -la")
+                           ("l1" . "ls -1")
+                           ("grep" . "grep --color=auto")
+                           ("dl" . "cd ~/downloads")
+                           ("dot" . "d ~/.dotfiles")
+                           ("sudo" . "sudo ") ; Evaluate aliases preceded by sudo
+                           (".." . "cd ..")
+                           ("..." . "cd ../..")
+                           ("...." . "cd ../../..")
+                           ("op" . "open-project.sh")))))
       (service home-dotfiles-service-type
                (home-dotfiles-configuration
                  (directories '("../files")) ; root of this repo
                  (layout 'stow)))
+      (simple-service 'jstamant/env-variables-service
+                      home-environment-variables-service-type
+                      ;; TODO get this ssh-agent working
+                      '(("SSH_AUTH_SOCK" . "$XDG_RUNTIME_DIR/ssh-agent.socket")))
       (service home-emacs-service-type)
       (service home-files-service-type
                `((".guile" ,%default-dotguile)
