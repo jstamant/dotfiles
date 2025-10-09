@@ -106,12 +106,6 @@
                (home-openssh-configuration
                  ;; Automatically add keys to eliminate future passphrase-use
                  (add-keys-to-agent "yes")
-                 ;; I think these hosts were added to deal with two
-                 ;; github accounts on my work computer back at 1Life.
-                 ;; To make these work, I had to set the remote
-                 ;; addresses in the local git repositories to point
-                 ;; to these hosts. Saving these here in case I do
-                 ;; this again, one day.
                  (hosts
                   (list
                    ;; Host for personal account
@@ -120,12 +114,12 @@
                      (user "git")
                      (host-name "github.com")
                      (identity-file "~/.ssh/id_ed25519"))
-                   ;; Host for work account
+                   ;; Host for work account, set git remote to
                    ;; git@github.com-1life:1Life-Workplace-Safety-Solutions/1Life.git
                    (openssh-host
                      (name "gh-1life")
                      (user "git")
-                     (host-name "github.com")
+                     (host-name "github.com") ; or github.com-1life ??
                      (identity-file "~/.ssh/id_ed25519"))))))
 
       (service home-shepherd-service-type)
