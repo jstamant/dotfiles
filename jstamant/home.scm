@@ -128,6 +128,7 @@
                      (identity-file "~/.ssh/id_ed25519"))))))
 
       (service home-shepherd-service-type)
+      (service home-ssh-agent-service-type)
       (service home-sway-service-type) ; TODO make custom service and don't install foot
       (service home-xdg-configuration-files-service-type
                `(("gdb/gdbinit" ,%default-gdbinit)
