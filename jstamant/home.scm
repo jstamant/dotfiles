@@ -10,7 +10,6 @@
   #:use-module (gnu home services sway)
   #:use-module (gnu home services xdg)
   #:use-module (gnu packages)
-  #:use-module (gnu packages emacs)
   #:use-module (gnu packages linux)
   #:use-module (gnu services)
   #:use-module (gnu system shadow)
@@ -95,7 +94,6 @@
                (home-dotfiles-configuration
                  (directories '("../files")) ; root of this repo
                  (layout 'stow)))
-      (service home-emacs-service-type)
       (service home-files-service-type
                `((".guile" ,%default-dotguile)
                  (".Xdefaults" ,%default-xdefaults)))
@@ -143,6 +141,7 @@
                  (documents "$HOME/")
                  (music "$HOME/music")
                  (pictures "$HOME/images")
-                 (videos "$HOME/videos")))))))
+                 (videos "$HOME/videos")))
+      (service jstamant-emacs-service-type)))))
 
 home-config

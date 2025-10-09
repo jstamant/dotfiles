@@ -1,16 +1,19 @@
 (define-module (jstamant home-services emacs)
   #:use-module (gnu packages)
+  #:use-module (gnu packages emacs)
+  #:use-module (gnu packages emacs-xyz)
   #:use-module (gnu services)
-  #:use-module (gnu home services))
+  #:use-module (gnu home services)
+  #:export (jstamant-emacs-service-type))
 
-(define-public home-emacs-service-type
+(define jstamant-emacs-service-type
   (service-type
-   (name 'home-emacs)
+   (name 'jstamant-emacs)
    (description "Install Emacs and required packages")
    (extensions
     (list
      (service-extension
       home-profile-service-type
-      (lambda (_) (list (specification->package "emacs"))))))
+      (lambda (_) (list emacs)))))
    (default-value #f)))
 
