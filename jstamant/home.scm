@@ -18,7 +18,7 @@
   #:export (home-config))
 
 ;; TODO remove this once the package list is split into other modules
-(use-package-modules admin audio bittorrent disk emulators file music package-management rust-apps ssh terminals tmux version-control vim wm xdisorg)
+(use-package-modules admin audio bittorrent disk emulators file gnome music package-management rust-apps ssh terminals tmux version-control vim wm xdisorg)
 
 (define home-config
   (home-environment
@@ -30,6 +30,9 @@
 
       ;; Terminal emulators
       alacritty
+
+      ;; Settings
+      gnome-tweaks
 
       ;; Command-line utilities
       fd ; to add to emacs?
