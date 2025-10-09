@@ -6,6 +6,7 @@
   #:use-module (gnu home services dotfiles)
   #:use-module (gnu home services shepherd)
   #:use-module (gnu home services shells)
+  #:use-module (gnu home services ssh)
   #:use-module (gnu home services sway)
   #:use-module (gnu home services xdg)
   #:use-module (gnu packages)
@@ -35,6 +36,7 @@
       fd ; to add to emacs?
       file
       htop
+      openssh ; TODO add to an ssh.scm home-service file
       ranger
       ripgrep ; to add to emacs
       stow
@@ -52,7 +54,6 @@
 
       ;; Gaming
       mednafen
-      openssh-sans-x
 
       ;; Sound - not working yet
       ;; cable ; optional for pipewire? try it out, never opened it yet
@@ -94,14 +95,38 @@
                (home-dotfiles-configuration
                  (directories '("../files")) ; root of this repo
                  (layout 'stow)))
-      (simple-service 'jstamant/env-variables-service
-                      home-environment-variables-service-type
-                      ;; TODO get this ssh-agent working
-                      '(("SSH_AUTH_SOCK" . "$XDG_RUNTIME_DIR/ssh-agent.socket")))
       (service home-emacs-service-type)
       (service home-files-service-type
                `((".guile" ,%default-dotguile)
                  (".Xdefaults" ,%default-xdefaults)))
+
+      ;; TODO move ssh and ssh-agent services to its own file
+      (service home-openssh-service-type
+               (home-openssh-configuration
+                 ;; Automatically add keys to eliminate future passphrase-use
+                 (add-keys-to-agent "yes")
+                 ;; I think these hosts were added to deal with two
+                 ;; github accounts on my work computer back at 1Life.
+                 ;; To make these work, I had to set the remote
+                 ;; addresses in the local git repositories to point
+                 ;; to these hosts. Saving these here in case I do
+                 ;; this again, one day.
+                 (hosts
+                  (list
+                   ;; Host for personal account
+                   (openssh-host
+                     (name "github.com")
+                     (user "git")
+                     (host-name "github.com")
+                     (identity-file "~/.ssh/id_ed25519"))
+                   ;; Host for work account
+                   ;; git@github.com-1life:1Life-Workplace-Safety-Solutions/1Life.git
+                   (openssh-host
+                     (name "gh-1life")
+                     (user "git")
+                     (host-name "github.com")
+                     (identity-file "~/.ssh/id_ed25519"))))))
+
       (service home-shepherd-service-type)
       (service home-sway-service-type) ; TODO make custom service and don't install foot
       (service home-xdg-configuration-files-service-type
