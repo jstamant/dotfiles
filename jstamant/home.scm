@@ -7,6 +7,7 @@
   #:use-module (gnu home services shepherd)
   #:use-module (gnu home services shells)
   #:use-module (gnu home services sway)
+  #:use-module (gnu home services xdg)
   #:use-module (gnu packages)
   #:use-module (gnu packages emacs)
   #:use-module (gnu packages linux)
@@ -105,6 +106,17 @@
       (service home-sway-service-type) ; TODO make custom service and don't install foot
       (service home-xdg-configuration-files-service-type
                `(("gdb/gdbinit" ,%default-gdbinit)
-                 ("nano/nanorc" ,%default-nanorc)))))))
+                 ("nano/nanorc" ,%default-nanorc)))
+      (service home-xdg-user-directories-service-type
+               (home-xdg-user-directories-configuration
+                 ;; Eliminate some of these folders by pointing them to $HOME
+                 (desktop "$HOME/desktop")
+                 (download "$HOME/downloads")
+                 (templates "$HOME/")
+                 (publicshare "$HOME/")
+                 (documents "$HOME/")
+                 (music "$HOME/music")
+                 (pictures "$HOME/images")
+                 (videos "$HOME/videos")))))))
 
 home-config
