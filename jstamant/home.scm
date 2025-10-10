@@ -13,6 +13,7 @@
   #:use-module (gnu packages linux)
   #:use-module (gnu services)
   #:use-module (gnu system shadow)
+  #:use-module (jstamant home-services channels)
   #:use-module (jstamant home-services emacs)
   #:use-module (nongnu packages chrome)
   #:export (home-config))
@@ -139,6 +140,7 @@
                  (music "$HOME/music")
                  (pictures "$HOME/images")
                  (videos "$HOME/videos")))
+      (service jstamant-channels-service-type)
       (service jstamant-emacs-service-type)))))
 
 home-config
