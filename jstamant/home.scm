@@ -16,10 +16,11 @@
   #:use-module (jstamant home-services channels)
   #:use-module (jstamant home-services emacs)
   #:use-module (nongnu packages chrome)
+  #:use-module (nongnu packages fonts)
   #:export (home-config))
 
 ;; TODO remove this once the package list is split into other modules
-(use-package-modules admin audio bittorrent disk emulators file gnome music package-management rust-apps ssh terminals tmux version-control vim wm xdisorg)
+(use-package-modules admin audio bittorrent disk emulators file fonts gnome music package-management rust-apps ssh terminals tmux version-control vim wm xdisorg)
 
 (define home-config
   (home-environment
@@ -47,6 +48,11 @@
 
       ;; Version control
       git
+
+      ;; Fonts
+      font-awesome-nonfree
+      font-dejavu
+      font-liberation
 
       ;; Browsers
       google-chrome-stable
