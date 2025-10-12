@@ -4,9 +4,9 @@
   #:use-module (nongnu packages linux)
   #:use-module (nongnu system linux-initrd))
 
-(use-service-modules cups desktop guix networking pm ssh xorg)
+(use-service-modules cups desktop guix networking pm ssh shepherd xorg)
 
-(use-package-modules file package-management tmux version-control vim)
+(use-package-modules file linux package-management tmux version-control vim)
 
 (operating-system
  (kernel linux)
@@ -28,7 +28,8 @@
  ;; System-level packages that are either necessary or convenient for
  ;; when no profile is loaded
  (packages
-  (cons* file
+  (cons* brightnessctl
+         file
          git
          stow
          tmux
@@ -44,6 +45,22 @@
                     (tlp-configuration
                      (stop-charge-thresh-bat0 80)
                      (stop-charge-thresh-bat1 80)))
+
+           ;; Setting default brightness, slightly modified from RDE
+           (simple-service
+            'backlight-set-brightness-on-startup
+            shepherd-root-service-type
+            (list (shepherd-service
+                    (provision '(startup-brightness))
+                    (requirement '(term-tty1))
+                    (start
+                     #~(lambda ()
+                         (invoke #$(file-append brightnessctl "/bin/brightnessctl")
+                                 "set" (string-append
+                                        (number->string 20) "%"))))
+                    (one-shot? #t))))
+           (udev-rules-service 'backlight brightnessctl)
+
            (set-xorg-configuration
             (xorg-configuration (keyboard-layout keyboard-layout))))
           (modify-services
