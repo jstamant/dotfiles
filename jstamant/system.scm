@@ -57,7 +57,7 @@
                      #~(lambda ()
                          (invoke #$(file-append brightnessctl "/bin/brightnessctl")
                                  "set" (string-append
-                                        (number->string 20) "%"))))
+                                        (number->string 30) "%"))))
                     (one-shot? #t))))
            (udev-rules-service 'backlight brightnessctl)
 
