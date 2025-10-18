@@ -6,7 +6,7 @@
 
 (use-service-modules cups desktop guix networking pm ssh shepherd xorg)
 
-(use-package-modules file linux package-management tmux version-control vim)
+(use-package-modules file linux package-management scanner tmux version-control vim)
 
 (operating-system
  (kernel linux)
@@ -22,7 +22,7 @@
                 (comment "Justin St-Amant")
                 (group "users")
                 (home-directory "/home/jstamant")
-                (supplementary-groups '("wheel" "netdev" "audio" "video")))
+                (supplementary-groups '("wheel" "netdev" "audio" "video" "lp")))
                %base-user-accounts))
 
  ;; System-level packages that are either necessary or convenient for
@@ -31,6 +31,8 @@
   (cons* brightnessctl
          file
          git
+         sane-airscan
+         sane-backends
          stow
          tmux
          vim
@@ -40,7 +42,20 @@
   (append (list
            (service gnome-desktop-service-type)
            (service guix-home-service-type `(("jstamant" ,home-config)))
-           (service cups-service-type)
+
+           (service sane-service-type
+                    (sane-configuration
+                     (backends (list sane-airscan sane-backends))))
+           (service cups-service-type
+                    (cups-configuration
+                      (web-interface? #t)))
+           ;; (service dbus-root-service-type)
+           ;; The D-Bus clique, from RDE
+           ;; (service accountsservice-service-type)
+           ;; (service cups-pk-helper-service-type)
+           ;; (service colord-service-type)
+           ;; (service avahi-service-type) ; TODO move with printing service, might need firewall opened-up on port 5353
+
            (service tlp-service-type
                     (tlp-configuration
                      (stop-charge-thresh-bat0 80)
