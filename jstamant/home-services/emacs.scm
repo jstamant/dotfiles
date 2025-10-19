@@ -8,12 +8,12 @@
 
 (define jstamant-emacs-service-type
   (service-type
-   (name 'jstamant-emacs)
-   (description "Install Emacs and required packages")
-   (extensions
-    (list
-     (service-extension
-      home-profile-service-type
-      (lambda (_) (list emacs)))))
-   (default-value #f)))
+    (name 'jstamant-emacs)
+    (description "Install Emacs and required packages")
+    (extensions
+     (list
+      (service-extension
+       home-profile-service-type
+       (lambda (_) (list emacs)))))
+    (default-value #f)))
 
