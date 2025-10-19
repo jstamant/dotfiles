@@ -15,13 +15,14 @@
   #:use-module (gnu system shadow)
   #:use-module (jstamant home-services channels)
   #:use-module (jstamant home-services emacs)
+  #:use-module (jstamant home-services gaming)
   #:use-module (jstamant home-services sway)
   #:use-module (nongnu packages chrome)
   #:use-module (nongnu packages fonts)
   #:export (home-config))
 
 ;; TODO remove this once the package list is split into other modules
-(use-package-modules admin audio bittorrent disk emulators file fonts gnome music package-management rust-apps ssh terminals tmux version-control vim)
+(use-package-modules admin audio bittorrent disk file fonts gnome music package-management rust-apps ssh terminals tmux version-control vim)
 
 (define home-config
   (home-environment
@@ -61,9 +62,6 @@
       ;; Multi-media
       audacity
       ;; picard
-
-      ;; Gaming
-      mednafen
 
       ;; Sound - not working yet
       ;; cable ; optional for pipewire? try it out, never opened it yet
@@ -143,6 +141,7 @@
                  (pictures "$HOME/images")
                  (videos "$HOME/videos")))
       (service jstamant-channels-service-type)
-      (service jstamant-emacs-service-type)))))
+      (service jstamant-emacs-service-type)
+      (service jstamant-gaming-service-type)))))
 
 home-config
