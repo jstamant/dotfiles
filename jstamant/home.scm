@@ -7,7 +7,7 @@
   #:use-module (gnu home services shepherd)
   #:use-module (gnu home services shells)
   #:use-module (gnu home services ssh)
-  #:use-module (gnu home services sway)
+  #:use-module (gnu home services sway) ; TODO remove this once moved over to my own sway module
   #:use-module (gnu home services xdg)
   #:use-module (gnu packages)
   #:use-module (gnu packages linux)
@@ -15,12 +15,13 @@
   #:use-module (gnu system shadow)
   #:use-module (jstamant home-services channels)
   #:use-module (jstamant home-services emacs)
+  #:use-module (jstamant home-services sway)
   #:use-module (nongnu packages chrome)
   #:use-module (nongnu packages fonts)
   #:export (home-config))
 
 ;; TODO remove this once the package list is split into other modules
-(use-package-modules admin audio bittorrent disk emulators file fonts gnome music package-management rust-apps ssh terminals tmux version-control vim wm xdisorg)
+(use-package-modules admin audio bittorrent disk emulators file fonts gnome music package-management rust-apps ssh terminals tmux version-control vim)
 
 (define home-config
   (home-environment
@@ -68,11 +69,6 @@
       ;; cable ; optional for pipewire? try it out, never opened it yet
       pipewire
       wireplumber
-
-      ;; Window-managers / related programs
-      rofi
-      sway
-      waybar
 
       ;; Editors
       vim))
@@ -131,7 +127,7 @@
 
       (service home-shepherd-service-type)
       (service home-ssh-agent-service-type)
-      (service home-sway-service-type) ; TODO make custom service and don't install foot
+      (service home-sway-service-type jstamant-sway-configuration)
       (service home-xdg-configuration-files-service-type
                `(("gdb/gdbinit" ,%default-gdbinit)
                  ("nano/nanorc" ,%default-nanorc)))
