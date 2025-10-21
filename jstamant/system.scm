@@ -4,7 +4,7 @@
   #:use-module (nongnu packages linux)
   #:use-module (nongnu system linux-initrd))
 
-(use-service-modules cups desktop guix networking pm ssh shepherd xorg)
+(use-service-modules cups desktop guix networking nix pm ssh shepherd xorg)
 
 (use-package-modules file linux package-management scanner tmux version-control vim)
 
@@ -55,6 +55,8 @@
            ;; (service cups-pk-helper-service-type)
            ;; (service colord-service-type)
            ;; (service avahi-service-type) ; TODO move with printing service, might need firewall opened-up on port 5353
+
+           (service nix-service-type)
 
            (service tlp-service-type
                     (tlp-configuration
