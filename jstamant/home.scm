@@ -102,6 +102,15 @@
                `((".guile" ,%default-dotguile)
                  (".Xdefaults" ,%default-xdefaults)))
 
+      ;; TODO move nix config to its own module, along with associated dotfiles
+      (simple-service 'nix-env-vars-service
+                      home-shell-profile-service-type
+                      (list
+                       (mixed-text-file
+                        "nix-env-vars.sh"
+                        "source $HOME/.nix-profile/etc/profile.d/hm-session-vars.sh" "\n"
+                        "source /run/current-system/profile/etc/profile.d/nix.sh")))
+
       ;; TODO move ssh and ssh-agent services to its own file
       (service home-openssh-service-type
                (home-openssh-configuration
