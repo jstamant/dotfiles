@@ -4,7 +4,7 @@
   #:use-module (nongnu packages linux)
   #:use-module (nongnu system linux-initrd))
 
-(use-service-modules cups desktop guix networking nix pm ssh shepherd xorg)
+(use-service-modules containers cups desktop docker guix networking nix pm ssh shepherd virtualization xorg)
 
 (use-package-modules file linux package-management scanner tmux version-control vim)
 
@@ -22,7 +22,7 @@
                 (comment "Justin St-Amant")
                 (group "users")
                 (home-directory "/home/jstamant")
-                (supplementary-groups '("wheel" "netdev" "audio" "video" "lp")))
+                (supplementary-groups '("wheel" "netdev" "audio" "video" "lp" "docker")))
                %base-user-accounts))
 
  ;; System-level packages that are either necessary or convenient for
@@ -77,6 +77,30 @@
                                         (number->string 30) "%"))))
                     (one-shot? #t))))
            (udev-rules-service 'backlight brightnessctl)
+
+           ;; Enable Docker containers and virtual machines, pulled from David Wilson's config
+           (service containerd-service-type)
+           (service docker-service-type)
+           (service libvirt-service-type
+                    (libvirt-configuration
+                     (unix-sock-group "libvirt")
+                     (tls-port "16555")))
+
+           (simple-service 'oci-provisioning
+                           oci-service-type
+                           (oci-extension
+                            (containers
+                             (list
+                              (oci-container-configuration
+                               (image "jellyfin/jellyfin")
+                               (provision "jellyfin")
+                               (network "host")
+                               (ports
+                                '(("8096" . "8096")))
+                               (volumes
+                                '("jellyfin-config:/config"
+                                  "jellyfin-cache:/cache"
+                                  "/home/jstamant/jellyfin:/media")))))))
 
            (set-xorg-configuration
             (xorg-configuration (keyboard-layout keyboard-layout))))
