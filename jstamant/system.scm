@@ -6,7 +6,7 @@
 
 (use-service-modules containers cups desktop docker guix networking nix pm ssh shepherd virtualization xorg)
 
-(use-package-modules file linux package-management scanner tmux version-control vim)
+(use-package-modules file gnome-xyz linux package-management scanner tmux version-control vim)
 
 (operating-system
  (kernel linux)
@@ -31,6 +31,7 @@
   (cons* brightnessctl
          file
          git
+         gnome-shell-extension-blur-my-shell
          sane-airscan
          sane-backends
          stow
