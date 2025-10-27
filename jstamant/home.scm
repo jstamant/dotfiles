@@ -7,7 +7,6 @@
   #:use-module (gnu home services shepherd)
   #:use-module (gnu home services shells)
   #:use-module (gnu home services ssh)
-  #:use-module (gnu home services sway) ; TODO remove this once moved over to my own sway module
   #:use-module (gnu home services xdg)
   #:use-module (gnu packages)
   #:use-module (gnu packages linux)
@@ -16,7 +15,7 @@
   #:use-module (jstamant home-services channels)
   #:use-module (jstamant home-services emacs)
   #:use-module (jstamant home-services gaming)
-  #:use-module (jstamant home-services sway)
+  #:use-module (jstamant home-services hyprland)
   #:use-module (nongnu packages chrome)
   #:use-module (nongnu packages fonts)
   #:export (home-config))
@@ -132,9 +131,10 @@
                      (host-name "github.com") ; or github.com-1life ??
                      (identity-file "~/.ssh/id_ed25519"))))))
 
+      (service jstamant-hyprland-service-type)
+
       (service home-shepherd-service-type)
       (service home-ssh-agent-service-type)
-      (service home-sway-service-type jstamant-sway-configuration)
       (service home-xdg-configuration-files-service-type
                `(("gdb/gdbinit" ,%default-gdbinit)
                  ("nano/nanorc" ,%default-nanorc)))
