@@ -96,7 +96,7 @@
                            ("op" . "open-project.sh")))))
       (service home-dotfiles-service-type
                (home-dotfiles-configuration
-                 (directories '("../files")) ; root of this repo
+                 (directories '("../stow")) ; root of this repo
                  (layout 'stow)))
       (service home-files-service-type
                `((".guile" ,%default-dotguile)
