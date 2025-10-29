@@ -10,7 +10,7 @@
 
 (operating-system
  (kernel linux)
- (firmware (list linux-firmware))
+ (firmware (list linux-firmware sof-firmware)) ;; sof-firmeware required for sound on my laptop
  (initrd microcode-initrd)
  (locale "en_CA.utf8")
  (timezone "America/Halifax")
