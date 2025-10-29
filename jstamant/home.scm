@@ -6,6 +6,7 @@
   #:use-module (gnu home services dotfiles)
   #:use-module (gnu home services shepherd)
   #:use-module (gnu home services shells)
+  #:use-module (gnu home services sound)
   #:use-module (gnu home services ssh)
   #:use-module (gnu home services xdg)
   #:use-module (gnu packages)
@@ -109,6 +110,10 @@
                         "nix-env-vars.sh"
                         "source $HOME/.nix-profile/etc/profile.d/hm-session-vars.sh" "\n"
                         "source /run/current-system/profile/etc/profile.d/nix.sh")))
+
+      ;; Pipewire setup (required a user dbus session)
+      (service home-dbus-service-type)
+      (service home-pipewire-service-type)
 
       ;; TODO move ssh and ssh-agent services to its own file
       (service home-openssh-service-type
