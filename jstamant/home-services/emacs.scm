@@ -14,6 +14,6 @@
      (list
       (service-extension
        home-profile-service-type
-       (lambda (_) (list emacs)))))
+       (lambda (_) (list emacs-pgtk))))) ; emacs-pgtk is the emacs package for wayland support
     (default-value #f)))
 
