@@ -44,6 +44,8 @@
            (service gnome-desktop-service-type)
            (service guix-home-service-type `(("jstamant" ,home-config)))
 
+           (service bluetooth-service-type)
+
            (service sane-service-type
                     (sane-configuration
                      (backends (list sane-airscan sane-backends))))
