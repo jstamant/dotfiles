@@ -17,6 +17,7 @@
   #:use-module (jstamant home-services emacs)
   #:use-module (jstamant home-services gaming)
   #:use-module (jstamant home-services hyprland)
+  #:use-module (jstamant home-services kmonad)
   #:use-module (nongnu packages chrome)
   #:use-module (nongnu packages fonts)
   #:export (home-config))
@@ -137,6 +138,9 @@
                      (identity-file "~/.ssh/id_ed25519"))))))
 
       (service jstamant-hyprland-service-type)
+
+      ;; Holding SPC acts as holding control
+      (service jstamant-kmonad-service-type)
 
       (service home-shepherd-service-type)
       (service home-ssh-agent-service-type)

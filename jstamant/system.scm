@@ -6,7 +6,7 @@
 
 (use-service-modules containers cups desktop docker guix networking nix pm ssh shepherd virtualization xorg)
 
-(use-package-modules file gnome-xyz linux package-management scanner tmux version-control vim)
+(use-package-modules file gnome-xyz haskell-apps linux package-management scanner tmux version-control vim)
 
 (operating-system
  (kernel linux)
@@ -22,7 +22,13 @@
                 (comment "Justin St-Amant")
                 (group "users")
                 (home-directory "/home/jstamant")
-                (supplementary-groups '("wheel" "netdev" "audio" "video" "lp" "docker")))
+                (supplementary-groups '("wheel"
+                                        "input" ; required by kmonad
+                                        "netdev"
+                                        "audio"
+                                        "video"
+                                        "lp"
+                                        "docker")))
                %base-user-accounts))
 
  ;; System-level packages that are either necessary or convenient for
@@ -60,6 +66,8 @@
            ;; (service avahi-service-type) ; TODO move with printing service, might need firewall opened-up on port 5353
 
            (service nix-service-type)
+
+           (udev-rules-service 'keyboard-configuration kmonad) ; required for users of group "input" to run kmonad
 
            (service tlp-service-type
                     (tlp-configuration
