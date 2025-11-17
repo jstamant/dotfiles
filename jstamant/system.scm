@@ -50,7 +50,9 @@
            (service gnome-desktop-service-type)
            (service guix-home-service-type `(("jstamant" ,home-config)))
 
-           (service bluetooth-service-type)
+           (service bluetooth-service-type
+                    (bluetooth-configuration
+                     (auto-enable? #t)))
 
            (service sane-service-type
                     (sane-configuration
