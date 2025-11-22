@@ -20,6 +20,7 @@
   #:use-module (jstamant home-services kmonad)
   #:use-module (nongnu packages chrome)
   #:use-module (nongnu packages fonts)
+  #:use-module (nongnu packages game-client)
   #:export (home-config))
 
 ;; TODO remove this once the package list is split into other modules
@@ -59,6 +60,9 @@
 
       ;; Browsers
       google-chrome-stable
+
+      ;; Gaming
+      steam ;; TODO this needs a .desktop entry
 
       ;; Multi-media
       audacity
