@@ -107,7 +107,7 @@
                               (oci-container-configuration
                                (image "jellyfin/jellyfin")
                                (provision "jellyfin")
-                               (auto-start? #f)
+                               (auto-start? #t)
                                (network "host")
                                (ports
                                 '(("8096" . "8096")))
