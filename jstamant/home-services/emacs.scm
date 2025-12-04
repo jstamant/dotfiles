@@ -13,7 +13,44 @@
     (default-value #f)
     (extensions
      (list
-      ;; NOTE I'd love to run the Emacs daemon from Shepherd, but it's too complicated. Instead I've opted to use XDG autostart
+      ;; NOTE I'd love to run the Emacs daemon from Shepherd, but
+      ;; there's a bug in the way Emacs handles its argv[0] when it
+      ;; gets called. This is an Emacs bug, but Guix might implement a
+      ;; fix in the next core update:
+      ;; https://lists.gnu.org/archive/html/guix-patches/2025-07/msg00181.html
+      ;; Instead I've opted to use XDG autostart :(
+
+      ;; https://codeberg.org/guix/guix/issues/1674
+
+;; (define* (emacs #:key (name 'server)
+;;                 (uid (getuid))
+;;                 (gid (getgid))
+;;                 (options '()))
+;;   (service (list (symbol-append 'emacs@ name))
+;;     #:start
+;;     (make-systemd-constructor
+;;      (cons* "emacs" "--fg-daemon" options)
+;;      (list (endpoint
+;;             (make-socket-address AF_UNIX
+;;                                  (format #f "/run/user/~d/emacs/~s"
+;;                                          uid name))
+;;             #:socket-directory-permissions #o700
+;;             #:socket-owner uid
+;;             #:socket-group gid)))
+;;     #:stop (make-systemd-destructor)
+;;     #:respawn? #t))
+
+      ;; (map
+      ;;                   (lambda (var)
+      ;;                     (if (string-prefix? "PATH=" var)
+      ;;                         (string-append
+      ;;                          "PATH="
+      ;;                          #$(file-append (home-emacs-configuration-emacs config) "/bin")
+      ;;                          ":"
+      ;;                          (substring var 5))
+      ;;                         var))
+
+
       ;; (service-extension
       ;;  home-shepherd-service-type
       ;;  (const
