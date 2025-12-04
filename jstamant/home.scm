@@ -50,6 +50,10 @@
       stow
       tmux
 
+      ;; Package management
+      flatpak
+      ;; I've got openmw installed via flatpak
+
       ;; Version control
       git
 
@@ -115,6 +119,11 @@
                         "nix-env-vars.sh"
                         "source $HOME/.nix-profile/etc/profile.d/hm-session-vars.sh" "\n"
                         "source /run/current-system/profile/etc/profile.d/nix.sh")))
+
+      (simple-service 'flatpak-env-vars-service
+                      home-environment-variables-service-type
+                      '(("PATH" . "$PATH:/home/jstamant/.local/share/flatpak/exports/bin")
+                        ("XDG_DATA_DIRS" . "$XDG_DATA_DIRS:/home/jstamant/.local/share/flatpak/exports/share")))
 
       ;; Pipewire setup (required a user dbus session)
       (service home-dbus-service-type)
