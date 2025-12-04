@@ -3,7 +3,8 @@
   #:use-module (gnu packages emulators)
   #:use-module (gnu services)
   #:use-module (gnu home services)
-  #:export (jstamant-gaming-service-type))
+  #:use-module (nongnu packages game-client)
+ #:export (jstamant-gaming-service-type))
 
 (define jstamant-gaming-service-type
   (service-type
@@ -13,6 +14,6 @@
      (list
       (service-extension
        home-profile-service-type
-       (lambda (_) (list mednafen)))))
+       (const (list heroic mednafen)))))
     (default-value #f)))
 
