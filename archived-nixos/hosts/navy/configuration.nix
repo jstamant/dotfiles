@@ -145,7 +145,7 @@
   # this value at the release version of the first install of this system.
   # If considering changing this value, read this first:
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
-  system.stateVersion = "23.11"; # Did you read the comment?
+  system.stateVersion = "25.11"; # Did you read the comment?
 
 }
 
