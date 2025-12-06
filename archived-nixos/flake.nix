@@ -13,6 +13,7 @@
 
   outputs = { self, nixpkgs, home-manager, ... }@inputs: let
     inherit (self) outputs;
+    system = "x86_64-linux";
   in {
     # NixOS configuration entrypoint
     # Available through 'sudo nixos-rebuild switch --flake .#navy'
@@ -27,7 +28,7 @@
     # Available through 'home-manager switch --flake .#jstamant@navy'
     homeConfigurations = {
       "jstamant@navy" = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires a 'pkgs' instance
+        pkgs = import nixpkgs { inherit system; config.allowUnfree = true; };
         extraSpecialArgs = {inherit inputs outputs;};
         modules = [
           ./home.nix
