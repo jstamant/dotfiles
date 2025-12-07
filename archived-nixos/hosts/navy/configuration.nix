@@ -85,7 +85,7 @@
     deluge
     discord
     eagle
-    emacs # TODO needs to come from unstable
+    emacs-pgtk
     fd
     file # Utility for file info introspection
     fzf
