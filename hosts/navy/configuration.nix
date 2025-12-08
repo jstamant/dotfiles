@@ -115,6 +115,7 @@
     zoom-us
   ];
 
+  kmonad.enable = true;
   gaming.enable = true;
 
   # Fonts to install at the system-level
