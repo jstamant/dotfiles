@@ -63,18 +63,10 @@
     };
   };
 
-  # Allow unfree packages
-  nixpkgs.config = {
-    allowUnfree = true;
-    # TODO move this into an overlay
-    packageOverrides = pkgs: {
-      unstable = import (fetchTarball "https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz") {};
-    };
-  };
-
   # Enable flakes
   nix.settings.experimental-features = [ "flakes" "nix-command" ];
 
+  nixpkgs.config.allowUnfree = true;
   # Packages to install at the system-level
   environment.systemPackages = with pkgs; [
     alacritty
