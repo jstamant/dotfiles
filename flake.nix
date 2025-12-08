@@ -1,7 +1,5 @@
-# TODO delete files in /etc/nixos once I have this going??????
 {
-  # TODO change description
-  description = "Nixos config flake";
+  description = "Justin St-Amant's NixOS configuration flake";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
@@ -11,29 +9,25 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }@inputs: let
-    inherit (self) outputs;
-    system = "x86_64-linux";
-  in {
-    # NixOS configuration entrypoint
-    # Available through 'sudo nixos-rebuild switch --flake .#navy'
-    nixosConfigurations.navy = nixpkgs.lib.nixosSystem {
-      specialArgs = {inherit inputs outputs;};
-      modules = [
-        ./hosts/navy/configuration.nix
-        ./modules
-      ];
-    };
-    # Standalone home-manager configuration entrypoint
-    # Available through 'home-manager switch --flake .#jstamant@navy'
-    homeConfigurations = {
-      "jstamant@navy" = home-manager.lib.homeManagerConfiguration {
-        pkgs = import nixpkgs { inherit system; config.allowUnfree = true; };
-        extraSpecialArgs = {inherit inputs outputs;};
+  outputs = { self, nixpkgs, home-manager, ... }@inputs:
+    let
+      inherit (self) outputs;
+      system = "x86_64-linux";
+    in {
+      # NixOS configuration entrypoint
+      # Available through 'sudo nixos-rebuild switch --flake ~/path/to/flake/#navy'
+      nixosConfigurations.navy = nixpkgs.lib.nixosSystem {
+        specialArgs = {inherit inputs outputs;};
         modules = [
-          ./home.nix
+          ./hosts/navy/configuration.nix
+          ./modules
+          home-manager.nixosModules.home-manager {
+            home-manager.users.jstamant = import ./home.nix;
+            # Use system pkgs for HM for consistency
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+          }
         ];
       };
     };
-  };
 }
