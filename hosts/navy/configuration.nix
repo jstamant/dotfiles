@@ -127,9 +127,7 @@
     zoom-us
   ];
 
-  programs.steam = {
-    enable = true;
-  };
+  gaming.enable = true;
 
   # Fonts to install at the system-level
   fonts.packages = with pkgs; [
