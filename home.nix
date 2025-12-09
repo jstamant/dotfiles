@@ -192,6 +192,9 @@ export PS2='> '
     source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/ranger/scope.sh";
   };
 
+  # Allow unfree packages for utilities like nix-env, nix-shell, and nix-build
+  home.file.".config/nixpkgs/config.nix".text = "{ allowUnfree = true; }";
+
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
