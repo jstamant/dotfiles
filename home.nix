@@ -20,24 +20,24 @@
     # EDITOR = "emacs";
   };
 
-  programs.alacritty.enable = true;
-  # I used to use the one dark theme, but have been liking the default, lol
-  # programs.alacritty.theme = "one_dark";
-  programs.alacritty.settings = {
-    window = {
-      position = "None"; # Managed by the window manager (default)
-      opacity = 0.95;
-      startup_mode = "Maximized";
-    };
-    scrolling = {
-      history = 10000;
-    };
-    font = {
-      normal = {
-        family = "DejaVu Sans Mono";
-        style = "Regular";
+  programs.alacritty = {
+    enable = true;
+    settings = {
+      window = {
+        position = "None"; # Managed by the window manager (default)
+        opacity = 0.95;
+        startup_mode = "Maximized";
       };
-      size = 11.0;
+      scrolling = {
+        history = 10000;
+      };
+      font = {
+        normal = {
+          family = "DejaVu Sans Mono";
+          style = "Regular";
+        };
+        size = 11.0;
+      };
     };
   };
 
