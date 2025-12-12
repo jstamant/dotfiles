@@ -196,6 +196,8 @@ export PS2='> '
 
   # Allow unfree packages for utilities like nix-env, nix-shell, and nix-build
   home.file.".config/nixpkgs/config.nix".text = "{ allowUnfree = true; }";
+  # Ensure experimental features are enabled (important for non-NixOS setups)
+  home.file.".config/nix/nix.conf".text = "experimental-features = nix-command flakes";
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
