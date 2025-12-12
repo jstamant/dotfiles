@@ -6,7 +6,11 @@
   };
 
   config = lib.mkIf config.gaming.enable {
-    programs.steam.enable = true;
+    programs.steam = {
+      enable = true;
+      extraCompatPackages = [ pkgs.proton-ge-bin];
+      protontricks.enable = true;
+    };
     environment.systemPackages = with pkgs; [
       heroic
       openmw
