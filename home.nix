@@ -187,10 +187,12 @@ export PS2='> '
       gr = "cd ~/drive/reference";
     };
   };
-  home.file.".config/ranger/scope.sh" = {
-    # TODO make this figure out the directory
-    source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/ranger/scope.sh";
-  };
+  # xdg.configFile.ranger = {
+  #   recursive = true;
+  #   source = ./stow/ranger/.config/ranger;
+  # };
+  xdg.configFile."ranger/scope.sh".source =
+    ./stow/ranger/.config/ranger/scope.sh;
 
   # Allow unfree packages for utilities like nix-env, nix-shell, and nix-build
   home.file.".config/nixpkgs/config.nix".text = "{ allowUnfree = true; }";
