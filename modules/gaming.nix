@@ -10,6 +10,7 @@
       enable = true;
       extraCompatPackages = [ pkgs.proton-ge-bin];
       protontricks.enable = true;
+      remotePlay.openFirewall = true; # Enable Steam Link
     };
     environment.systemPackages = with pkgs; [
       heroic
