@@ -16,6 +16,8 @@
       heroic
       openmw
       openrct2
+      openttd
+      openttd-ttf
     ];
   };
 }
