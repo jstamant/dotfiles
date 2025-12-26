@@ -72,7 +72,6 @@
     coreutils-full
     deluge
     discord
-    eagle
     emacs-pgtk
     fd
     file # Utility for file info introspection
@@ -103,7 +102,7 @@
     postman
     ranger
     ripgrep
-    rofi-wayland
+    rofi
     ruffle
     rustup # might want to split this into its sub-packages
     shellcheck

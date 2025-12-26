@@ -43,9 +43,9 @@
 
   programs.git = {
     enable = true;
-    userName = "Justin St-Amant";
-    userEmail = "jstamant24@gmail.com";
-    extraConfig = {
+    settings = {
+      user.name = "Justin St-Amant";
+      user.email = "jstamant24@gmail.com";
       core = {
         editor = "nvim"; # TODO use a variable here
         excludesFile = "${config.home.homeDirectory}/.config/git/ignore";
