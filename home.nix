@@ -136,6 +136,11 @@ bind-key p run "wl-paste -n | tmux load-buffer - ; tmux paste-buffer"
 '';
   };
 
+  programs.direnv = {
+    enable = true;
+    nix-direnv.enable = true;
+    # enableBashIntegration = true;
+  };
   programs.bash = {
     enable = true;
     initExtra = ''
