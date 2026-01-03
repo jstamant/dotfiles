@@ -111,6 +111,8 @@
     tmux
     vim
     yt-dlp
+    zig
+    zls # zig language server
     zoom-us
   ];
 
