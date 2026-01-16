@@ -19,5 +19,11 @@
       openttd
       openttd-ttf
     ];
+    home-manager.users.jstamant = { pkgs, ... }: {
+      programs.retroarch = {
+        enable = true;
+        cores.snes9x.enable = true;
+      };
+    };
   };
 }
