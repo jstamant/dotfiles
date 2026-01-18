@@ -20,6 +20,8 @@
     # EDITOR = "emacs";
   };
 
+  programs.discord.enable = true;
+
   programs.alacritty = {
     enable = true;
     settings = {
