@@ -5,6 +5,20 @@
   home.username = "jstamant";
   home.homeDirectory = "/home/jstamant";
 
+  xdg.userDirs = {
+    enable = true;
+    createDirectories = true;
+    # Eliminate some of these folders by pointing them to $HOME
+    desktop = "${config.home.homeDirectory}/desktop";
+    documents = "${config.home.homeDirectory}/documents";
+    download = "${config.home.homeDirectory}/downloads";
+    music = "${config.home.homeDirectory}/music";
+    pictures = "${config.home.homeDirectory}/images";
+    publicShare = "${config.home.homeDirectory}";
+    templates = "${config.home.homeDirectory}";
+    videos = "${config.home.homeDirectory}/videos";
+  };
+
   home.packages = with pkgs; [
     insync
   ];
