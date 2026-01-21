@@ -66,7 +66,6 @@
   # Packages to install at the system-level
   environment.systemPackages = with pkgs; [
     alacritty
-    ardour
     audacity
     cheese
     coreutils-full
@@ -114,6 +113,10 @@
     zig
     zls # zig language server
     zoom-us
+
+    # DAW related
+    ardour
+    surge-XT
   ];
 
   kmonad.enable = true;
