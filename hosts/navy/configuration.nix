@@ -116,6 +116,7 @@
 
     # DAW related
     ardour
+    drumgizmo
     surge-XT
   ];
 
