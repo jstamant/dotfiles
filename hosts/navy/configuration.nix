@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, pkgs-unstable, ... }:
 
 {
   imports = [
@@ -117,7 +117,14 @@
     # DAW related
     ardour
     drumgizmo
+    helm
+    hydrogen
+    non
+    pkgs-unstable.sfizz-ui
     surge-XT
+    x42-plugins
+    x42-gmsynth
+    x42-avldrums
     zynaddsubfx
   ];
 
