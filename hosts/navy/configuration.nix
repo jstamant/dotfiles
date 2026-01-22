@@ -118,6 +118,7 @@
     ardour
     drumgizmo
     surge-XT
+    zynaddsubfx
   ];
 
   kmonad.enable = true;
