@@ -117,8 +117,11 @@
     # DAW related
     ardour
     drumgizmo
+    geonkick
     helm
     hydrogen
+    lmms
+    lsp-plugins
     non
     pkgs-unstable.sfizz-ui
     surge-XT
