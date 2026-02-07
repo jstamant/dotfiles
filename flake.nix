@@ -14,7 +14,10 @@
     let
       inherit (self) outputs;
       system = "x86_64-linux";
-      pkgs-unstable = nixpkgs-unstable.legacyPackages.${system};
+      pkgs-unstable = import nixpkgs-unstable {
+        inherit system;
+        config.allowUnfree = true;
+      };
     in {
       # NixOS configuration entrypoint
       # Available through 'sudo nixos-rebuild switch --flake ~/path/to/flake/#navy'

@@ -116,6 +116,9 @@
 
     # DAW related
     ardour
+    pkgs-unstable.decent-sampler # NOTE not working?
+    pkgs-unstable.dexed
+    dragonfly-reverb
     drumgizmo
     geonkick
     helm
@@ -125,9 +128,11 @@
     non
     pkgs-unstable.sfizz-ui
     surge-XT
+    vital
     x42-plugins
     x42-gmsynth
     x42-avldrums
+    yoshimi
     zynaddsubfx
   ];
 
