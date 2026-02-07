@@ -114,20 +114,25 @@
     zls # zig language server
     zoom-us
 
-    # DAW related
+    # DAW and audio related
     ardour
+    cardinal
+    carla
     pkgs-unstable.decent-sampler # NOTE not working?
     pkgs-unstable.dexed
     dragonfly-reverb
     drumgizmo
     geonkick
     helm
+    helvum
     hydrogen
     lmms
     lsp-plugins
     non
+    qpwgraph
     pkgs-unstable.sfizz-ui
     surge-XT
+    vcv-rack
     vital
     x42-plugins
     x42-gmsynth
