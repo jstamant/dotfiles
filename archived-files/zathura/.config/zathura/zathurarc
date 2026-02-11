@@ -1,6 +1,0 @@
-# Set window title to show filename, and not the entire path
-set window-title-basename true
-# Set window title to also show the current page
-set window-title-page true
-# Allow the window icon to be derived from the document's first page
-set window-icon-document true
