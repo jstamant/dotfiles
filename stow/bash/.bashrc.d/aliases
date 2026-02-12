@@ -1,0 +1,16 @@
+# aliases
+
+alias sudo="sudo "; # Evaluate aliases preceded by sudo
+alias ".."="cd ..";
+alias "..."="cd ../..";
+alias "...."="cd ../../..";
+
+alias dl="cd ~/Downloads";
+alias dot="cd ~/.dotfiles";
+
+alias ls="ls --color=auto";
+alias l="ls -CF";
+alias ll="ls -l";
+alias la="ls -la";
+alias l1="ls -1";
+alias grep="grep --color=auto";
