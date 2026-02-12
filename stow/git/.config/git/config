@@ -1,0 +1,7 @@
+[user]
+	name = Justin St-Amant
+	email = jstamant24@gmail.com
+[core]
+	editor = nvim
+[init]
+	defaultBranch = master
