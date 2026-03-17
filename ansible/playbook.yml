@@ -2,20 +2,25 @@
 
   roles:
     - backup
-  #   - common
-  #   - packages
-  #   - ssh
-  #   - stow
 
   vars:
     new_hostname: "navy"
     enabled_systemd_services: []
 
+
+
   tasks:
     - name: Set the system hostname
-      become: true
+      become: yes
       ansible.builtin.hostname:
         name: "{{ new_hostname }}"
+
+    - name: Install packages generically
+      become: yes
+      ansible.builtin.package:
+        state: present
+        name:
+          - neovim
 
     - name: Install battery limit service
       become: yes
@@ -26,6 +31,8 @@
         group: root
         mode: '644'
       notify: Reload systemd
+
+
 
   handlers:
     - name: Reload systemd daemon
@@ -40,18 +47,20 @@
         name: battery-limit.service
         enabled: true
 
+    - name: Reload udev rules
+      listen: Reload udev
+      become: yes
+      command: udevadm control --reload-rules
+
+
+
+  post_tasks:
     - name: Enable systemd services
-      listen: Reload systemd
       become: yes
       ansible.builtin.systemd_service:
         name: "{{ item }}"
         enabled: true
       loop: "{{ enabled_systemd_services }}"
-
-    - name: Reload udev rules
-      listen: Reload udev
-      become: yes
-      command: udevadm control --reload-rules
 
 
 # Confirmed that this does it! Just followed the instructions from kmonad

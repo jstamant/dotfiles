@@ -1,3 +1,9 @@
+- name: Install restic
+  become: yes
+  ansible.builtin.package:
+    name: restic
+    state: present
+
 - name: Install shell script
   become: yes
   ansible.builtin.copy:
