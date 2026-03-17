@@ -4,6 +4,7 @@
     - backup
 
   vars:
+    my_user: "jstamant"
     new_hostname: "navy"
     enabled_systemd_services: []
 
@@ -11,19 +12,19 @@
 
   tasks:
     - name: Set the system hostname
-      become: yes
+      become: true
       ansible.builtin.hostname:
         name: "{{ new_hostname }}"
 
     - name: Install packages generically
-      become: yes
+      become: true
       ansible.builtin.package:
         state: present
         name:
           - neovim
 
     - name: Install battery limit service
-      become: yes
+      become: true
       ansible.builtin.copy:
         src: battery-limit.service
         dest: /etc/systemd/system/battery-limit.service
@@ -32,31 +33,45 @@
         mode: '644'
       notify: Reload systemd
 
+    - name: Install Syncthing
+      become: true
+      ansible.builtin.package:
+        name: syncthing
+        state: present
+
+    - name: Enable Syncthing
+      become: true
+      become_user: "{{ my_user }}"
+      systemd:
+        name: syncthing.service
+        enabled: true
+        scope: user
+
 
 
   handlers:
     - name: Reload systemd daemon
       listen: Reload systemd
-      become: yes
+      become: true
       ansible.builtin.command: systemctl daemon-reload
 
     - name: Enable battery limit
       listen: Reload systemd
-      become: yes
+      become: true
       ansible.builtin.systemd_service:
         name: battery-limit.service
         enabled: true
 
     - name: Reload udev rules
       listen: Reload udev
-      become: yes
+      become: true
       command: udevadm control --reload-rules
 
 
 
   post_tasks:
     - name: Enable systemd services
-      become: yes
+      become: true
       ansible.builtin.systemd_service:
         name: "{{ item }}"
         enabled: true
@@ -84,9 +99,6 @@
 
 # Reaper was installed to ~/.local/opt/REAPER
 # It added a desktop file in ~/.local/share/applications/cockos-reaper.desktop
-
-# dnf install syncthing, then
-# systemctl --user enable syncthing
 
 # Emacs needs grammars installed
 # Emacs requires package dejavu-fonts-all, probably font awesome
