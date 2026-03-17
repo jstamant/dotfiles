@@ -1,0 +1,11 @@
+[Unit]
+Description=Restic backup to external hard drive
+BindsTo=sys-devices-pci0000:00-0000:00:14.0-usb4-4\x2d1-4\x2d1:1.0-host0-target0:0:0-0:0:0:0-block-sda-sda1.device
+After=sys-devices-pci0000:00-0000:00:14.0-usb4-4\x2d1-4\x2d1:1.0-host0-target0:0:0-0:0:0:0-block-sda-sda1.device
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/backup.sh external
+Nice=19
+IOSchedulingClass=best-effort
+IOSchedulingPriority=7

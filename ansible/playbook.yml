@@ -1,6 +1,7 @@
 - hosts: localhost
 
-  # roles:
+  roles:
+    - backup
   #   - common
   #   - packages
   #   - ssh
@@ -8,6 +9,7 @@
 
   vars:
     new_hostname: "navy"
+    enabled_systemd_services: []
 
   tasks:
     - name: Set the system hostname
@@ -38,6 +40,19 @@
         name: battery-limit.service
         enabled: true
 
+    - name: Enable systemd services
+      listen: Reload systemd
+      become: yes
+      ansible.builtin.systemd_service:
+        name: "{{ item }}"
+        enabled: true
+      loop: "{{ enabled_systemd_services }}"
+
+    - name: Reload udev rules
+      listen: Reload udev
+      become: yes
+      command: udevadm control --reload-rules
+
 
 # Confirmed that this does it! Just followed the instructions from kmonad
 # kmonad binary is at https://github.com/kmonad/kmonad/releases/download/0.4.4/kmonad
@@ -45,17 +60,6 @@
 # sudo groupadd --system uinput -U jstamant
 # sudo echo 'KERNEL=="uinput", MODE="0660", GROUP="uinput", OPTIONS+="static_node=uinput"' > /etc/udev/rules.d/kmonad.rules
 # need to stow the kmonad files, then enable user service
-
-# systemctl --user enable --now restic-backup.timer
-# /usr/local/bin/backup.sh
-# /etc/restic (new folder)
-# /etc/restic/  template files
-# /etc/systemd/system/restic-backup.service
-# /etc/systemd/system/restic-backup.timer (enable me!)
-# /etc/systemd/system/restic-backup-external.service (enable me!)
-# /etc/systemd/system/restic-backup-external.path (TO DELETE me!)
-# jstamant@navy:~$ cat /etc/udev/rules.d/touro.rules
-# ACTION=="add", SUBSYSTEM=="block", ENV{ID_FS_UUID}=="2868-4BED", TAG+="systemd", ENV{SYSTEMD_WANTS}="restic-backup-external.service"
 
 # Also add a symlink from vim to nvim
 
@@ -77,5 +81,3 @@
 
 # Emacs needs grammars installed
 # Emacs requires package dejavu-fonts-all, probably font awesome
-
-# need to log ansible-playbook site.yml --ask-become-pass in order to run playbook

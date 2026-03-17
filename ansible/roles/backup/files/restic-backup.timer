@@ -1,0 +1,10 @@
+[Unit]
+Description=Daily restic backup to cloud backup provider
+
+[Timer]
+OnCalendar=daily
+Persistent=true
+RandomizedDelaySec=2m
+
+[Install]
+WantedBy=timers.target

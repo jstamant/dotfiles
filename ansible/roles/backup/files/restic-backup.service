@@ -1,0 +1,11 @@
+[Unit]
+Description=Restic backup to cloud backup provider
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/backup.sh cloud
+Nice=19
+IOSchedulingClass=best-effort
+IOSchedulingPriority=7

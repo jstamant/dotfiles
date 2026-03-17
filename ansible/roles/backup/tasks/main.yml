@@ -1,0 +1,48 @@
+- name: Install shell script
+  become: yes
+  ansible.builtin.copy:
+    src: backup.sh
+    dest: /usr/local/bin/
+    owner: root
+    group: root
+    mode: '755'
+
+- name: Install configuration template files
+  become: yes
+  ansible.builtin.copy:
+    src: "{{ item }}"
+    dest: /etc/restic/
+    owner: root
+    group: root
+    mode: '644'
+  loop:
+    - credentials-template.sh
+    - repo-template.sh
+
+- name: Install systemd unit files
+  become: yes
+  ansible.builtin.copy:
+    src: "{{ item }}"
+    dest: /etc/systemd/system/
+    owner: root
+    group: root
+    mode: '644'
+  notify: Reload systemd
+  loop:
+    - restic-backup.service
+    - restic-backup.timer
+    - restic-backup-external.service
+
+- name: Add systemd unit files to enable
+  ansible.builtin.set_fact:
+    enabled_systemd_services: "{{ enabled_systemd_services + ['restic-backup.timer','restic-backup-external.service'] }}"
+
+- name: Install udev rules
+  become: yes
+  ansible.builtin.copy:
+    src: touro.rules
+    dest: /etc/udev/rules.d/
+    owner: root
+    group: root
+    mode: '644'
+  notify: Reload udev

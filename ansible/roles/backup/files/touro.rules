@@ -1,0 +1,1 @@
+ACTION=="add", SUBSYSTEM=="block", ENV{ID_FS_UUID}=="2868-4BED", TAG+="systemd", ENV{SYSTEMD_WANTS}="restic-backup-external.service"
