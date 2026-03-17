@@ -6,3 +6,9 @@ for the last commit I made on NixOS before nuking this repo.
 
 If you're looking for my custom Emacs configuration, it's located in [its own
 repository](https://github.com/jstamant/.emacs.d).
+
+In order to use the ansible playbook, run the following from the `ansible` folder:
+
+```bash
+ansible-playbook playbook.yml --ask-become-pass
+```
