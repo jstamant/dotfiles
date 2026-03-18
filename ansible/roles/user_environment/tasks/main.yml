@@ -1,0 +1,36 @@
+- name: Install stow
+  become: yes
+  ansible.builtin.package:
+    name: stow
+    state: present
+
+- name: Ensure dotfiles repo exists
+  become: yes
+  become_user: "{{ user_env_user }}"
+  ansible.builtin.git:
+    repo: "{{ user_env_dotfiles_repo }}"
+    dest: "{{ user_env_dotfiles_dir }}"
+    version: master
+    update: no
+  when: user_env_dotfiles_repo != ""
+
+- name: Run stow for requested packages
+  become: yes
+  become_user: "{{ user_env_user }}"
+  ansible.builtin.command: "stow {{ item }} -t /home/{{ user_env_user }}"
+  args:
+    chdir: "{{ user_env_dotfiles_dir }}/stow"
+  loop: "{{ user_env_stow_packages | default([]) | unique }}"
+  when:
+    - user_env_dotfiles_repo != ""
+    - user_env_stow_packages | length > 0
+
+- name: Enable user services
+  become: yes
+  become_user: "{{ user_env_user }}"
+  ansible.builtin.systemd:
+    name: "{{ item }}"
+    enabled: true
+    scope: user
+  loop: "{{ user_env_systemd_services | default([]) | unique }}"
+  when: user_env_systemd_services | length > 0

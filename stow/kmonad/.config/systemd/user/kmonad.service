@@ -1,0 +1,10 @@
+[Unit]
+Description=Run kmonad as a user daemon
+
+[Service]
+ExecStart=%h/.local/bin/kmonad %h/.config/kmonad/config.kbd
+Restart=on-failure
+RestartSec=2s
+
+[Install]
+WantedBy=default.target

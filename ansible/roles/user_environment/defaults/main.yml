@@ -1,0 +1,10 @@
+user_env_user: "{{ ansible_user }}"
+
+
+# https://github.com/jstamant/dotfiles
+user_env_dotfiles_repo: ""
+user_env_dotfiles_dir: "/home/{{ user_env_user }}/.dotfiles"
+
+# These get populated dynamically by other roles
+user_env_stow_packages: []
+user_env_systemd_services: []

@@ -1,30 +1,41 @@
 - hosts: localhost
 
+  vars:
+    my_user: "jstamant"
+    my_hostname: "navy"
+    enabled_systemd_services: []
+
+
+
   roles:
     - backup
 
-  vars:
-    my_user: "jstamant"
-    new_hostname: "navy"
-    enabled_systemd_services: []
+    - role: kmonad
+      vars:
+        kmonad_user: "{{ my_user }}"
+    - role: user_environment
+      vars:
+        user_env_user: "{{ my_user }}"
+        user_env_dotfiles_repo: "git@github.com:jstamant/dotfiles.git"
 
 
 
   tasks:
     - name: Set the system hostname
-      become: true
+      become: yes
       ansible.builtin.hostname:
-        name: "{{ new_hostname }}"
+        name: "{{ my_hostname }}"
 
-    - name: Install packages generically
-      become: true
+    - name: Install system packages
+      become: yes
       ansible.builtin.package:
         state: present
         name:
+          - emacs-pgtk
           - neovim
 
     - name: Install battery limit service
-      become: true
+      become: yes
       ansible.builtin.copy:
         src: battery-limit.service
         dest: /etc/systemd/system/battery-limit.service
@@ -34,13 +45,13 @@
       notify: Reload systemd
 
     - name: Install Syncthing
-      become: true
+      become: yes
       ansible.builtin.package:
         name: syncthing
         state: present
 
     - name: Enable Syncthing
-      become: true
+      become: yes
       become_user: "{{ my_user }}"
       systemd:
         name: syncthing.service
@@ -52,26 +63,26 @@
   handlers:
     - name: Reload systemd daemon
       listen: Reload systemd
-      become: true
+      become: yes
       ansible.builtin.command: systemctl daemon-reload
 
     - name: Enable battery limit
       listen: Reload systemd
-      become: true
+      become: yes
       ansible.builtin.systemd_service:
         name: battery-limit.service
         enabled: true
 
     - name: Reload udev rules
       listen: Reload udev
-      become: true
+      become: yes
       command: udevadm control --reload-rules
 
 
 
   post_tasks:
     - name: Enable systemd services
-      become: true
+      become: yes
       ansible.builtin.systemd_service:
         name: "{{ item }}"
         enabled: true

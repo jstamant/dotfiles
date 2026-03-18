@@ -1,0 +1,50 @@
+- name: Ensure uinput group exists
+  become: true
+  ansible.builtin.group:
+    name: uinput
+    state: present
+    system: yes
+
+- name: Ensure user is in uinput group
+  become: true
+  ansible.builtin.user:
+    name: "{{ kmonad_user }}"
+    groups: uinput
+    append: yes
+
+- name: Ensure ~/.local/bin exists
+  ansible.builtin.file:
+    path: "{{ kmonad_bin_dir }}"
+    state: directory
+    mode: '755'
+    owner: "{{ kmonad_user }}"
+    group: "{{ kmonad_user }}"
+
+- name: Download kmonad binary
+  become: false
+  ansible.builtin.get_url:
+    url: "https://github.com/kmonad/kmonad/releases/download/{{ kmonad_version }}/kmonad"
+    dest: "{{ kmonad_bin_dir }}/kmonad"
+    mode: '755'
+
+- name: Add udev rules for kmonad
+  become: true
+  ansible.builtin.copy:
+    content: 'KERNEL=="uinput", MODE="0660", GROUP="uinput", OPTIONS+="static_node=uinput"'
+    dest: /etc/udev/rules.d/kmonad.rules
+    mode: '644'
+  notify: Reload udev
+
+- name: Register kmonad stow package
+  set_fact:
+    user_env_stow_packages: >-
+      {{
+        (user_env_stow_packages | default([])) + ['kmonad']
+      }}
+
+- name: Register kmonad user service
+  set_fact:
+    user_env_systemd_services: >-
+      {{
+        (user_env_systemd_services | default([])) + ['kmonad.service']
+      }}
