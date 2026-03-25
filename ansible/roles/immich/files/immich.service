@@ -1,0 +1,15 @@
+[Unit]
+Description=Run Immich server
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=oneshot
+WorkingDirectory=/srv/immich
+ExecStart=/usr/bin/podman compose up -d
+ExecStop=/usr/bin/podman compose down
+RemainAfterExit=yes
+TimeoutStartSec=0
+
+[Install]
+WantedBy=multi-user.target

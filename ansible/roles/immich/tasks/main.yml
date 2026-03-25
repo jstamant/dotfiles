@@ -1,0 +1,13 @@
+- name: Install systemd unit files
+  become: yes
+  ansible.builtin.copy:
+    src: immich.service
+    dest: /etc/systemd/system/
+    owner: root
+    group: root
+    mode: '644'
+  notify: Reload systemd
+
+- name: Add systemd unit files to enable
+  ansible.builtin.set_fact:
+    enabled_systemd_services: "{{ enabled_systemd_services + ['immich.service'] }}"

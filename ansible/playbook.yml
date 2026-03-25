@@ -9,6 +9,7 @@
 
   roles:
     - backup
+    - immich
 
     - role: kmonad
       vars:
@@ -89,21 +90,9 @@
       loop: "{{ enabled_systemd_services }}"
 
 
-# Confirmed that this does it! Just followed the instructions from kmonad
-# kmonad binary is at https://github.com/kmonad/kmonad/releases/download/0.4.4/kmonad
-# needs to be placed in ~/.local/bin and chmod +x and user added to input group
-# sudo groupadd --system uinput -U jstamant
-# sudo echo 'KERNEL=="uinput", MODE="0660", GROUP="uinput", OPTIONS+="static_node=uinput"' > /etc/udev/rules.d/kmonad.rules
-# need to stow the kmonad files, then enable user service
-
-# Also add a symlink from vim to nvim
-
 # reaper, download a certain version and run the install?
 
 # Install tailscale from lines found in https://tailscale.com/download/linux/fedora-2
-
-# /etc/systemd/system/immich.service enable it and deploy it
-
 
 # For jellyfin:
 # /etc/containers/systemd/jellyfin.container
