@@ -10,6 +10,7 @@
   roles:
     - backup
     - immich
+    - jellyfin
 
     - role: kmonad
       vars:

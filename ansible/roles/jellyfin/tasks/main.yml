@@ -1,0 +1,13 @@
+- name: Install Podman Quadlet files
+  become: yes
+  ansible.builtin.copy:
+    src: jellyfin.container
+    dest: /etc/containers/systemd/
+    owner: root
+    group: root
+    mode: '644'
+  notify: Reload systemd
+
+- name: Add systemd unit files to enable
+  ansible.builtin.set_fact:
+    enabled_systemd_services: "{{ enabled_systemd_services + ['jellyfin.service'] }}"

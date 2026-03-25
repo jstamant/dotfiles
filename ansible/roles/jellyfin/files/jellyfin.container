@@ -1,0 +1,23 @@
+[Unit]
+Description=Jellyfin media server
+After=network-online.target
+Wants=network-online.target
+
+[Container]
+Image=docker.io/jellyfin/jellyfin:latest
+
+PublishPort=8096:8096
+
+Volume=/srv/jellyfin:/config:Z
+Volume=jellyfin_cache:/cache:Z
+Volume=/srv/media:/media:Z
+
+Environment=TZ=America/Halifax
+
+AddDevice=/dev/dri
+
+[Service]
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
