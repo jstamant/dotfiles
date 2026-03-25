@@ -1,0 +1,23 @@
+- name: Add Tailscale repo
+  become: yes
+  get_url:
+    url: https://pkgs.tailscale.com/stable/fedora/tailscale.repo
+    dest: /etc/yum.repos.d/tailscale.repo
+
+- name: Install Tailscale
+  become: yes
+  package:
+    name: tailscale
+    state: present
+
+# TODO implement this in the future instead of having to run `tailscale up` manually    
+# - name: Bring up Tailscale
+#   become: yes
+#   command: >
+#     tailscale up --authkey={{ tailscale_auth_key }}
+#   args:
+#     creates: /var/lib/tailscale/tailscaled.state
+
+- name: Add systemd unit file to enable
+  ansible.builtin.set_fact:
+    enabled_systemd_services: "{{ enabled_systemd_services + ['tailscaled.service'] }}"

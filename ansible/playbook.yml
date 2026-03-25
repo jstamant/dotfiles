@@ -11,6 +11,7 @@
     - backup
     - immich
     - jellyfin
+    - tailscale
 
     - role: kmonad
       vars:
@@ -92,11 +93,6 @@
 
 
 # reaper, download a certain version and run the install?
-
-# Install tailscale from lines found in https://tailscale.com/download/linux/fedora-2
-
-# For jellyfin:
-# /etc/containers/systemd/jellyfin.container
 
 # Reaper was installed to ~/.local/opt/REAPER
 # It added a desktop file in ~/.local/share/applications/cockos-reaper.desktop
