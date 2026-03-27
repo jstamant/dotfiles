@@ -1,12 +1,12 @@
 - name: Add Tailscale repo
   become: yes
-  get_url:
+  ansible.builtin.get_url:
     url: https://pkgs.tailscale.com/stable/fedora/tailscale.repo
     dest: /etc/yum.repos.d/tailscale.repo
 
 - name: Install Tailscale
   become: yes
-  package:
+  ansible.builtin.package:
     name: tailscale
     state: present
 

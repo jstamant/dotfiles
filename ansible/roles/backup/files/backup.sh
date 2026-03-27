@@ -55,6 +55,7 @@ restic backup \
        "/home/jstamant" \
        "/srv" \
        --exclude ".cache" \
+       --exclude ".local/share/Steam" \
        --exclude ".local/share/Trash" \
        --exclude ".var"
 
