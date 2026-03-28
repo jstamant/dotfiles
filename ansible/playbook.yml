@@ -56,10 +56,32 @@
     - name: Enable Syncthing
       become: yes
       become_user: "{{ my_user }}"
-      systemd:
+      ansible.builtin.systemd:
         name: syncthing.service
         enabled: true
         scope: user
+
+    - name: Add Insync repo
+      become: yes
+      ansible.builtin.copy:
+        dest: /etc/yum.repos.d/insync.repo
+        content: |
+          [insync]
+          name=insync repo
+          baseurl=http://yum.insync.io/fedora/$releasever/
+          gpgcheck=1
+          gpgkey=https://d2t3ff60b2tol4.cloudfront.net/repomd.xml.key
+          enabled=1
+          metadata_expire=120m
+        owner: root
+        group: root
+        mode: '644'
+
+    - name: Install Insync
+      become: yes
+      ansible.builtin.dnf:
+        name: https://cdn.insynchq.com/builds/linux/3.9.8.60034/insync-3.9.8.60034-fc43.x86_64.rpm
+        state: present
 
 
 
