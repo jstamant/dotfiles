@@ -57,7 +57,8 @@ restic backup \
        --exclude ".cache" \
        --exclude ".local/share/Steam" \
        --exclude ".local/share/Trash" \
-       --exclude ".var"
+       --exclude ".var" \
+       --exclude "/home/jstamant/Games"
 
 restic forget --prune \
        --keep-daily "$DAILY" \
